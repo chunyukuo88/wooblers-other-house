@@ -10,15 +10,15 @@ jest.mock('aws-amplify/auth', () => ({
 describe("signInUser()", () => {
   describe("GIVEN: a valid username and correct password", () => {
     describe("WHEN: the function is executed", () => {
-      test("THEN: it returns a Promise that resolves to AuthUser.", async () => {
-        const mockSignInResult = { isSignedIn: true, username: 'testuser' };
+      test("THEN: it returns a Promise that resolves to an AuthUser object.", async () => {
+        const mockSignInResult = { isSignedIn: true, nextStep: 'some next step' };
         (signIn as jest.Mock).mockResolvedValue(mockSignInResult);
 
         const [username, password] = ["username", "password"];
         const result = await signInUser(username, password);
 
         expect(signIn).toBeCalledWith({username, password});
-        expect(result).toBe(true);
+        expect(result).toEqual(mockSignInResult);
       });
     });
   });
