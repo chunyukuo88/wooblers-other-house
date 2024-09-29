@@ -1,24 +1,34 @@
-import {signIn} from "aws-amplify/auth";
-import {signInUser} from "../../hooks/useAuth";
+import {renderHook, waitFor} from '@testing-library/react';
+import {signIn, getCurrentUser} from "aws-amplify/auth";
+import {useAuth} from "../../hooks/useAuth";
 
-jest.mock('aws-amplify/auth', () => ({
+jest.mock("aws-amplify/auth", () => ({
   getCurrentUser: jest.fn(),
   signIn: jest.fn(),
   signOut: jest.fn(),
 }));
 
-describe("signInUser()", () => {
-  describe("GIVEN: a valid username and correct password", () => {
-    describe("WHEN: the function is executed", () => {
-      test("THEN: it returns a Promise that resolves to an AuthUser object.", async () => {
-        const mockSignInResult = { isSignedIn: true, nextStep: 'some next step' };
-        (signIn as jest.Mock).mockResolvedValue(mockSignInResult);
+describe("useAuth.ts", () => {
+  describe("useAuth()", () => {
+    describe("WHEN: the hook is executed,", () => {
+      test("THEN: it returns a boolean indicating as much ", async () => {
+        const mockUser = {
+          username: "username",
+          userId: "userId",
+          signInDetails: {
+            loginId: "loginId",
+            authFlowType: "USER_PASSWORD_AUTH",
+          },
+        };
+        (signIn as jest.Mock).mockImplementationOnce(() => {});
+        (getCurrentUser as jest.Mock).mockResolvedValueOnce(mockUser);
 
-        const [username, password] = ["username", "password"];
-        const result = await signInUser(username, password);
+        const { signInUser } = useAuth();
 
-        expect(signIn).toBeCalledWith({username, password});
-        expect(result).toEqual(mockSignInResult);
+        await waitFor(async () => {
+          const user = await signInUser('username', 'password');
+          expect(user).toBe(mockUser);
+        });
       });
     });
   });
