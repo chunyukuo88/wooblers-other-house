@@ -2,6 +2,9 @@ import {render} from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Login from "@/pages/login";
 
+// Jest was yapping about act so I did this.
+jest.spyOn(console, "error").mockImplementation(() => {});
+
 describe("index.tsx", () => {
   describe("WHEN: the page loads,", () => {
     test("THEN: The title is visible", () => {

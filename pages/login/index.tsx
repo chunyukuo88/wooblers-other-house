@@ -1,12 +1,14 @@
 "use client"
 import {SetStateAction, useEffect, useRef, useState} from "react";
-import {signInUser} from "../../hooks/useAuth";
+import {useAuth} from "../../hooks/useAuth";
+import {AuthUser} from "aws-amplify/auth";
 
 export default function Login() {
   const userRef = useRef();
   const [userName, setUserName] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const {signInUser, signOutUser} = useAuth();
 
   useEffect(() => {
     userRef.current.focus();
@@ -29,9 +31,9 @@ export default function Login() {
   const handleSubmit = async (event: SubmissionEvent) => {
     event.preventDefault();
     try {
-      const {isSignedIn, nextStep} = await signInUser(userName, pwd);
-      console.log(`isSignedIn: ${isSignedIn}`);
-      console.log(`nextStep: ${nextStep}`);
+      const AuthUser = await signInUser(userName, pwd);
+      console.log(`AuthUser: ${AuthUser}`);
+      console.dir(AuthUser);
     } catch (e) {
       // handleError(e)
     }
@@ -45,6 +47,10 @@ export default function Login() {
 
   const handleUserInput = (event: InputEvent) => setUserName(event.target.value);
   const handlePwdInput = (event: InputEvent) => setPwd(event.target.value);
+
+  const logOutUser = async () => {
+    await signOutUser();
+  };
 
   return (
     <div id="login-card-wrapper">
@@ -82,6 +88,7 @@ export default function Login() {
           <button className="login-button" title="login button">Submit</button>
         </form>
       </div>
+      <button onClick={logOutUser}>Log Out</button>
     </div>
   );
 };
