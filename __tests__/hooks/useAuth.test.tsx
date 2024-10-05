@@ -1,5 +1,5 @@
 import {renderHook, waitFor} from '@testing-library/react';
-import {signIn, getCurrentUser} from "aws-amplify/auth";
+import {signIn, signOut, getCurrentUser} from "aws-amplify/auth";
 import {useAuth} from "../../hooks/useAuth";
 
 jest.mock("aws-amplify/auth", () => ({
@@ -43,13 +43,23 @@ describe("useAuth.ts", () => {
           (signIn as jest.Mock).mockImplementationOnce(() => {});
           (getCurrentUser as jest.Mock).mockRejectedValue(error);
 
-          const { signInUser } = useAuth();
+          const {signInUser} = useAuth();
 
           await waitFor(async () => {
             await signInUser('invalid username', 'wrong password');
             expect(spy).toBeCalledTimes(1);
             expect(spy).toBeCalledWith(error);
           });
+        });
+      });
+      describe('AND: the signOutUser() HOC is executed', () => {
+        test('THEN: the signOut callback from aws-amplify/auth is invoked', async () => {
+          (signOut as jest.Mock).mockImplementationOnce(() => {});
+          const {signOutUser} = useAuth();
+
+          await signOutUser();
+
+          expect(signOut).toBeCalledTimes(1);
         });
       });
     });

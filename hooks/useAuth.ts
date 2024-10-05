@@ -1,4 +1,4 @@
-import {signIn, getCurrentUser, AuthUser} from "aws-amplify/auth";
+import {signIn, signOut, getCurrentUser, AuthUser} from "aws-amplify/auth";
 import {awsConfig} from "../config/aws-exports";
 import {Amplify} from "aws-amplify"
 
@@ -20,8 +20,12 @@ export function useAuth() {
       } catch (e) {
         console.error(e);
       }
-    }
+    };
 
-    return {signInUser};
+    const signOutUser = async (): Promise<void> => {
+      await signOut();
+    };
+
+    return {signInUser, signOutUser};
 }
 
