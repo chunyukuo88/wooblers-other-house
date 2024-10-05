@@ -1,7 +1,6 @@
 "use client"
 import {SetStateAction, useEffect, useRef, useState} from "react";
 import {useAuth} from "../../hooks/useAuth";
-import {AuthUser} from "aws-amplify/auth";
 
 export default function Login() {
   const userRef = useRef();

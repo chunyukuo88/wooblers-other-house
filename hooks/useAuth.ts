@@ -1,16 +1,11 @@
-import {signIn, signOut, getCurrentUser, AuthUser} from "aws-amplify/auth";
+import {signIn, signOut, getCurrentUser} from "aws-amplify/auth";
 import {awsConfig} from "../config/aws-exports";
 import {Amplify} from "aws-amplify"
 
 Amplify.configure(awsConfig)
 
-interface UseAuthResult {
-  isAuthenticated: boolean;
-  isLoading: boolean;
-}
-
 export function useAuth() {
-    const signInUser = async (username: string, password: string): Promise<AuthUser> => {
+  const signInUser = async (username: string, password: string) => {
       try {
         await signIn({
           username,
