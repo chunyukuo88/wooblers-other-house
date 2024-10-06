@@ -5,12 +5,15 @@ import {allPaths, protectedPaths} from "./allPaths";
 
 export async function middleware(request: NextRequest) {
   if (protectedPaths.some(path => request.nextUrl.pathname.startsWith(path))) {
+    const loginUrl = new URL(allPaths.LOGIN, request.url);
+
     try {
-      await getCurrentUser();
-      return NextResponse.next();
+      const user = await getCurrentUser();
+      if (user) {
+        return NextResponse.next();
+      }
+      return NextResponse.redirect(loginUrl);
     } catch (error) {
-      const { LOGIN } = allPaths;
-      const loginUrl = new URL(LOGIN, request.url);
       loginUrl.searchParams.set("from", request.nextUrl.pathname);
       return NextResponse.redirect(loginUrl);
     }
@@ -19,10 +22,11 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
+// Template literals within the `matcher` array are not yet supported by NextJS.
 export const config = {
   matcher: [
-    `${allPaths.DASHBOARD}:path*`,
-    `${allPaths.PROFILE}:path*`,
-    `${allPaths.SETTINGS}:path*`
+    "/dashboard/:path*",
+    "/profile/:path*",
+    "/settings/:path*",
   ],
 };
