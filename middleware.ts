@@ -1,15 +1,17 @@
 import {NextResponse} from "next/server";
 import type {NextRequest} from "next/server";
-import {getCurrentUser} from "aws-amplify/auth";
 import {allPaths, protectedPaths} from "./allPaths";
+import {getCurrentUser} from "aws-amplify/auth";
+import {getServerSession} from "next-auth";
 
 export async function middleware(request: NextRequest) {
   if (protectedPaths.some(path => request.nextUrl.pathname.startsWith(path))) {
     const loginUrl = new URL(allPaths.LOGIN, request.url);
 
     try {
-      const user = await getCurrentUser();
-      if (user) {
+      const token = request.cookies.get("next-auth.session-token");
+
+      if (token) {
         return NextResponse.next();
       }
       return NextResponse.redirect(loginUrl);
@@ -27,6 +29,7 @@ export const config = {
   matcher: [
     "/dashboard/:path*",
     "/profile/:path*",
+    "/protected/:path*",
     "/settings/:path*",
   ],
 };

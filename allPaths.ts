@@ -7,7 +7,7 @@ const protectedPaths = [DASHBOARD, PROFILE, SETTINGS];
 const allPaths = {
   DASHBOARD,
   HOME: "/",
-  LOGIN: "/login",
+  LOGIN: "/api/auth/signin",
   PROFILE,
   SETTINGS,
 };

@@ -1,6 +1,6 @@
-'use client'
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+"use client"
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface ImageData {
   url: string;
@@ -11,16 +11,18 @@ const ImageGallery: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const bucket = "https://7903vki5qk.execute-api.us-east-1.amazonaws.com/dev/src/getImagesAll";
+  
   const fetchImages = async () => {
     try {
-      const response = await fetch('https://7903vki5qk.execute-api.us-east-1.amazonaws.com/dev/src/getImagesAll');
+      const response = await fetch(bucket);
       if (!response.ok) {
-        throw new Error('Failed to fetch images');
+        throw new Error("Failed to fetch images");
       }
       const data = await response.json();
       setImages(data.photos);
     } catch (err) {
-      setError('Error fetching images. Please try again later.');
+      setError("Error fetching images. Please try again later.");
       console.error(err);
     } finally {
       setIsLoading(false);
