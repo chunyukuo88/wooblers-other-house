@@ -1,8 +1,6 @@
 import {NextResponse} from "next/server";
 import type {NextRequest} from "next/server";
 import {allPaths, protectedPaths} from "./allPaths";
-// import {getCurrentUser} from "aws-amplify/auth";
-// import {getServerSession} from "next-auth";
 
 export async function middleware(request: NextRequest) {
   if (protectedPaths.some(path => request.nextUrl.pathname.startsWith(path))) {
