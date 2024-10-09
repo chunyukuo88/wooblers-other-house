@@ -1,5 +1,7 @@
 "use client";
 import {signIn, signOut, useSession} from "next-auth/react";
+import Link from 'next/link';
+import {allPaths} from "../../allPaths";
 
 function AuthButton() {
   const {data: session} = useSession();
@@ -15,7 +17,9 @@ function AuthButton() {
   return (
     <>
       Not signed in<br/>
-      <button onClick={() => signIn("credentials")}>Sign In</button>
+      <Link href={allPaths.LOGIN}>
+        <button onClick={() => signIn("credentials")}>Login In</button>
+      </Link>
     </>
   )
 }
