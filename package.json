@@ -10,7 +10,7 @@
     "test:ci": "jest --ci"
   },
   "dependencies": {
-    "aws-amplify": "^6.6.2",
+    "@aws-sdk/client-cognito-identity-provider": "^3.667.0",
     "next": "latest",
     "next-auth": "^4.24.8",
     "react": "^18.2.0",
