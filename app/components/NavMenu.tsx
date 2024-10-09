@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import {signIn, signOut, useSession} from "next-auth/react";
 
 function AuthButton() {
@@ -16,7 +15,7 @@ function AuthButton() {
   return (
     <>
       Not signed in<br/>
-      <button onClick={() => signIn()}>Sign In</button>
+      <button onClick={() => signIn("credentials")}>Sign In</button>
     </>
   )
 }
