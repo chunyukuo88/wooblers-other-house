@@ -43,7 +43,6 @@ const ImageGallery: React.FC = () => {
 
   return (
     <div className="image-gallery">
-      <h1>Image Gallery</h1>
       <div className="image-grid">
         {images.map((image, index) => (
           <div key={index} className="image-item hover:cursor-pointer">

@@ -1,15 +1,14 @@
 const DASHBOARD = "/dashboard";
 const PROFILE = "/profile";
-const SETTINGS = "/settings";
 
-const protectedPaths = [DASHBOARD, PROFILE, SETTINGS];
+const protectedPaths = [DASHBOARD, PROFILE];
 
 const allPaths = {
   DASHBOARD,
   HOME: "/",
   LOGIN: "/login",
   PROFILE,
-  SETTINGS,
+  SETTINGS: "/settings",
 };
 
 export {protectedPaths, allPaths};
