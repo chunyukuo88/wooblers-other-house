@@ -9,7 +9,6 @@ export const metadata = {
 export default function Page() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Woobler's Other House</h1>
       <ImageGallery />
     </>
 

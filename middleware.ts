@@ -28,6 +28,5 @@ export const config = {
     "/dashboard/:path*",
     "/profile/:path*",
     "/protected/:path*",
-    "/settings/:path*",
   ],
 };
