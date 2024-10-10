@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {allPaths} from "../../allPaths";
+import {allPaths} from "../allPaths";
 
 export default function NavBar() {
   return (
