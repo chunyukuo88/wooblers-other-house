@@ -3,38 +3,51 @@ import Link from "next/link";
 import {allPaths} from "../../allPaths";
 import "./nav-bar.css"
 import {usePathname} from "next/navigation";
-import {useSession} from "next-auth/react";
+import {signOut, useSession} from "next-auth/react";
 
 function ProtectedPaths(){
   const {data: session} = useSession();
+  const pathname = usePathname();
+
   return session ? <>
     <div className="woh__nav-bar-string">
-      <Link href={allPaths.HOME}>
-        Dashboard
-      </Link>
+      {pathname === allPaths.DASHBOARD
+        ? null
+        : <Link href={allPaths.DASHBOARD}>Dashboard</Link>
+      }
     </div>
     <div className="woh__nav-bar-string">
-      <Link href={allPaths.HOME}>
-        Profile
-      </Link>
+      {pathname === allPaths.PROFILE
+        ? null
+        : <Link href={allPaths.PROFILE}>Profile</Link>
+      }
+
     </div>
   </> : null;
 }
 
 export default function NavBar() {
   const pathname = usePathname();
+  const {data: session} = useSession();
+
+  const shouldShowLogin = (!session && pathname !== allPaths.LOGIN);
+  const LogoutOrHome = () => session
+    ? <a onClick={() => signOut()}>Logout</a>
+    : <Link href={allPaths.HOME}>Home</Link>;
+
   return (
     <div className="woh__nav-bar">
       <div className="woh__nav-bar-string">
-        {pathname !== allPaths.LOGIN
+        {shouldShowLogin
           ? <Link href={allPaths.LOGIN}>Login</Link>
-          : <Link href={allPaths.HOME}>Home</Link>
+          : <LogoutOrHome/>
         }
       </div>
       <div className="woh__nav-bar-string">
-        <Link href={allPaths.SETTINGS}>
-          Settings
-        </Link>
+        {pathname === allPaths.SETTINGS
+          ? null
+          : <Link href={allPaths.SETTINGS}>Settings</Link>
+        }
       </div>
       <ProtectedPaths/>
     </div>
