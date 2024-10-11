@@ -1,0 +1,15 @@
+.woh__login-page {
+    padding: 2rem;
+    margin-top: 1rem;
+}
+
+.woh__login-page form {
+    display: flex;
+    flex-direction: column;
+}
+
+.woh__login-page form input,
+.woh__login-page form button {
+    margin: 0.25rem;
+    width: 10rem;
+}
