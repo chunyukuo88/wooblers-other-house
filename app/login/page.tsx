@@ -5,7 +5,7 @@ import {useRouter} from "next/navigation";
 import {allPaths} from "../../allPaths";
 
 export default function Login() {
-  const [username, setUsername] = useState("alexgochenour@gmail.com");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
