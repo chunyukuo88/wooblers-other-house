@@ -2,11 +2,12 @@ import {getServerSession} from "next-auth";
 import Providers from "../components/SessionProvider";
 import "../styles/global.css";
 import NavBar from "@/components/navigation/nav-bar";
-// import "./layout.css";
+import SiteTitleString from "@/components/navigation/site-title-string";
 
 interface Children {
   children: React.ReactNode;
 }
+
 
 export default async function RootLayout({ children }: Children) {
   return (
@@ -14,7 +15,7 @@ export default async function RootLayout({ children }: Children) {
       <body className="h-full">
         <Providers>
           <main className="woh__site-content">
-            <h1>Woobler's Other House</h1>
+            <SiteTitleString />
             <NavBar />
             {children}
           </main>
