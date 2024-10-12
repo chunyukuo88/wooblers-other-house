@@ -2,7 +2,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import {CognitoIdentityProviderClient, InitiateAuthCommand} from "@aws-sdk/client-cognito-identity-provider";
 import {allPaths} from "../../../../allPaths";
 
-const cognitoClient = new CognitoIdentityProviderClient({ region: process.env.AWS_REGION });
+const cognitoClient = new CognitoIdentityProviderClient({ region: process.env.REGION });
 
 export const authOptions = {
   providers: [
@@ -20,7 +20,7 @@ export const authOptions = {
         try {
           const command = new InitiateAuthCommand({
             AuthFlow: "USER_PASSWORD_AUTH",
-            ClientId: process.env.AWS_USER_POOL_WEB_CLIENT_ID,
+            ClientId: process.env.USER_POOL_WEB_CLIENT_ID,
             AuthParameters: {
               USERNAME: credentials.username,
               PASSWORD: credentials.password,
