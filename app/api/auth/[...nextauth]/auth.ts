@@ -22,11 +22,10 @@ const prodCookies = {
 const {log, error} = console;
 
 export const authOptions: NextAuthOptions = {
-  // debug: process.env.NODE_ENV === 'development',
-  debug: true,
+  debug: process.env.NODE_ENV === 'development',
   secret: process.env.NEXTAUTH_SECRET,
   useSecureCookies: isProduction,
-  // cookies: isProduction ? prodCookies : undefined,
+  cookies: isProduction ? prodCookies : undefined,
   providers: [
     CredentialsProvider({
       name: "Cognito",
