@@ -5,6 +5,7 @@ import {allPaths} from "../../../../allPaths";
 const cognitoClient = new CognitoIdentityProviderClient({ region: process.env.REGION });
 
 export const authOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
       name: "Cognito",
