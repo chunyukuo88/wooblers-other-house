@@ -19,6 +19,8 @@ const prodCookies = {
   },
 };
 
+const {log, error} = console;
+
 export const authOptions: NextAuthOptions = {
   debug: process.env.NODE_ENV === 'development',
   secret: process.env.NEXTAUTH_SECRET,
@@ -33,7 +35,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.username || !credentials?.password) {
-          console.error("Missing credentials");
+          error("Missing credentials");
           return null;
         }
 
@@ -58,11 +60,11 @@ export const authOptions: NextAuthOptions = {
             };
           }
         } catch (error) {
-          console.error("Authentication error:", error);
+          error("Authentication error:", error);
           if (error instanceof Error) {
-            console.error("Error name:", error.name);
-            console.error("Error message:", error.message);
-            console.error("Error stack:", error.stack);
+            log(error.name);
+            log(error.message);
+            log(error.stack);
           }
         }
 
@@ -76,12 +78,16 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
+        log("jwt 1", user);
         //@ts-ignore
         token.accessToken = user.accessToken;
       }
+      log("jwt 2", token);
       return token;
     },
     async session({ session, token }) {
+      log("session 1", session);
+      log("session 2", token);
       //@ts-ignore
       session.accessToken = token.accessToken;
       return session;
