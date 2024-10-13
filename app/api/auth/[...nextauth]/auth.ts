@@ -5,7 +5,20 @@ import {allPaths} from "../../../../allPaths";
 const cognitoClient = new CognitoIdentityProviderClient({ region: process.env.REGION });
 
 export const authOptions = {
+  debug: process.env.NODE_ENV === 'development',
   secret: process.env.NEXTAUTH_SECRET,
+  useSecureCookies: process.env.NODE_ENV === "production",
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
+  },
   providers: [
     CredentialsProvider({
       name: "Cognito",
