@@ -2,26 +2,28 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import {CognitoIdentityProviderClient, InitiateAuthCommand} from "@aws-sdk/client-cognito-identity-provider";
 import {allPaths} from "../../../../allPaths";
 import {NextAuthOptions} from "next-auth";
-// import {AuthOptions} from "next-auth";
 
 const cognitoClient = new CognitoIdentityProviderClient({ region: process.env.REGION });
+const isProduction = process.env.NODE_ENV === "production";
+
+const prodCookies = {
+  sessionToken: {
+    name: `__Secure-next-auth.session-token`,
+    options: {
+      httpOnly: true,
+      sameSite: "lax",
+      path: "/",
+      secure: true,
+      domain: "wooblers-other-house.com"
+    },
+  },
+};
 
 export const authOptions: NextAuthOptions = {
   debug: process.env.NODE_ENV === 'development',
   secret: process.env.NEXTAUTH_SECRET,
-  useSecureCookies: process.env.NODE_ENV === "production",
-  // cookies: {
-  //   sessionToken: {
-  //     name: `__Secure-next-auth.session-token`,
-  //     options: {
-  //       httpOnly: true,
-  //       sameSite: "lax",
-  //       path: "/",
-  //       secure: process.env.NODE_ENV === "production",
-  //       domain: process.env.NODE_ENV === "production" ? "wooblers-other-house.com" : "localhost"
-  //     },
-  //   },
-  // },
+  useSecureCookies: isProduction,
+  cookies: isProduction ? prodCookies : undefined,
   providers: [
     CredentialsProvider({
       name: "Cognito",
@@ -31,6 +33,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.username || !credentials?.password) {
+          console.error("Missing credentials");
           return null;
         }
 
@@ -56,6 +59,11 @@ export const authOptions: NextAuthOptions = {
           }
         } catch (error) {
           console.error("Authentication error:", error);
+          if (error instanceof Error) {
+            console.error("Error name:", error.name);
+            console.error("Error message:", error.message);
+            console.error("Error stack:", error.stack);
+          }
         }
 
         return null;
