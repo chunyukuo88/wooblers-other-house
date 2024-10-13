@@ -7,7 +7,9 @@ interface Children {
   children: React.ReactNode;
 }
 
-export default function Providers({children}: Children, pageProps: { session: Session | null | undefined; } ) {
+type PageProps = { session: Session | null | undefined; }
+
+export default function Providers({children}: Children, pageProps: PageProps) {
   return (
     <SessionProvider session={pageProps.session}>
       {children}
