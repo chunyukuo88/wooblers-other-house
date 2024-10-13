@@ -60,6 +60,7 @@ export const authOptions: NextAuthOptions = {
             };
           }
         } catch (error) {
+          // @ts-ignore
           error("Authentication error:", error);
           if (error instanceof Error) {
             log(error.name);
