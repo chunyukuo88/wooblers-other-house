@@ -1,7 +1,7 @@
 import ImageGallery from "@/components/image-gallery/image-gallery";
 
 export const metadata = {
-  title: "Vrooooooom!",
+  title: process.env.NODE_ENV === "production" ? "Vrooooooom!" : "小巫之另一個屋",
 };
 
 export default function Page() {

@@ -1,6 +1,7 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import {CognitoIdentityProviderClient, InitiateAuthCommand} from "@aws-sdk/client-cognito-identity-provider";
 import {allPaths} from "../../../../allPaths";
+// import {AuthOptions} from "next-auth";
 
 const cognitoClient = new CognitoIdentityProviderClient({ region: process.env.REGION });
 
@@ -16,6 +17,7 @@ export const authOptions = {
         sameSite: "lax",
         path: "/",
         secure: process.env.NODE_ENV === "production",
+        domain: process.env.NODE_ENV === "production" ? "wooblers-other-house.com" : "localhost"
       },
     },
   },
@@ -60,7 +62,7 @@ export const authOptions = {
     }),
   ],
   pages: {
-    login: allPaths.LOGIN,
+    signIn: allPaths.LOGIN,
   },
   callbacks: {
     //@ts-ignore
@@ -76,5 +78,4 @@ export const authOptions = {
       return session;
     },
   },
-  url: process.env.NEXTAUTH_URL,
 };
