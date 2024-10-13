@@ -10,18 +10,18 @@ export const authOptions: NextAuthOptions = {
   debug: process.env.NODE_ENV === 'development',
   secret: process.env.NEXTAUTH_SECRET,
   useSecureCookies: process.env.NODE_ENV === "production",
-  cookies: {
-    sessionToken: {
-      name: `__Secure-next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: process.env.NODE_ENV === "production",
-        domain: process.env.NODE_ENV === "production" ? "wooblers-other-house.com" : "localhost"
-      },
-    },
-  },
+  // cookies: {
+  //   sessionToken: {
+  //     name: `__Secure-next-auth.session-token`,
+  //     options: {
+  //       httpOnly: true,
+  //       sameSite: "lax",
+  //       path: "/",
+  //       secure: process.env.NODE_ENV === "production",
+  //       domain: process.env.NODE_ENV === "production" ? "wooblers-other-house.com" : "localhost"
+  //     },
+  //   },
+  // },
   providers: [
     CredentialsProvider({
       name: "Cognito",
@@ -68,12 +68,9 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        console.log("user!");
         //@ts-ignore
         token.accessToken = user.accessToken;
       }
-      console.log("token: ", token);
-      console.dir(token);
       return token;
     },
     async session({ session, token }) {
