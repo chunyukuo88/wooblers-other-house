@@ -1,18 +1,5 @@
-import "next-auth";
-import { JWT } from "next-auth/jwt";
+/// <reference types="next" />
+/// <reference types="next/image-types/global" />
 
-declare module "next-auth" {
-  interface Session {
-    accessToken?: string;
-  }
-
-  interface User {
-    accessToken?: string;
-  }
-}
-
-declare module "next-auth/jwt" {
-  interface JWT {
-    accessToken?: string;
-  }
-}
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/app/building-your-application/configuring/typescript for more information.

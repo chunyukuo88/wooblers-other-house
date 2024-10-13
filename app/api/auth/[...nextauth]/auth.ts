@@ -2,6 +2,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import {CognitoIdentityProviderClient, InitiateAuthCommand} from "@aws-sdk/client-cognito-identity-provider";
 import {allPaths} from "../../../../allPaths";
 import {NextAuthOptions} from "next-auth";
+// import {AuthOptions} from "next-auth";
 
 const cognitoClient = new CognitoIdentityProviderClient({ region: process.env.REGION });
 
@@ -65,18 +66,20 @@ export const authOptions: NextAuthOptions = {
     signIn: allPaths.LOGIN,
   },
   callbacks: {
-    //@ts-ignore
     async jwt({ token, user }) {
       if (user) {
+        console.log("user!");
+        //@ts-ignore
         token.accessToken = user.accessToken;
       }
+      console.log("token: ", token);
+      console.dir(token);
       return token;
     },
-    //@ts-ignore
     async session({ session, token }) {
+      //@ts-ignore
       session.accessToken = token.accessToken;
       return session;
     },
   },
-  url: process.env.NEXTAUTH_URL,
 };
