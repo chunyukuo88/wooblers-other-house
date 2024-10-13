@@ -30,8 +30,6 @@ export default function NavBar() {
   const pathname = usePathname();
   const {data: session} = useSession();
 
-  console.log(`~~~~~~~~~~~~~~~~ session ~~~~~~~~~~~~~~~~`)
-  console.log(session);
   const shouldShowLogin = (!session && pathname !== allPaths.LOGIN);
   const LogoutOrHome = () => session
     ? <a onClick={() => signOut()}>Logout</a>

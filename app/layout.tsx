@@ -1,4 +1,3 @@
-import {getServerSession} from "next-auth";
 import Providers from "../components/SessionProvider";
 import "../styles/global.css";
 import NavBar from "@/components/navigation/nav-bar";

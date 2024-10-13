@@ -5,13 +5,10 @@ import {allPaths} from "../../allPaths";
 
 export default async function Dashboard() {
   const session = await getServerSession();
-  console.log(session);
   if (!session || !session.user) {
-    console.log("no session ._.");
     redirect(allPaths.LOGIN);
   }
 
-  console.log("Yay! Dashboard");
   return (
     <>
       Welcome to the Dashboard ~
