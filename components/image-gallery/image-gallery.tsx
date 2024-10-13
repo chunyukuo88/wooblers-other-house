@@ -48,7 +48,7 @@ const ImageGallery: React.FC = () => {
           <div key={index} className="image-item hover:cursor-pointer">
             <Image
               src={image.url}
-              alt={`Image ${index + 1}`}
+              alt={`Image #${index + 1}`}
               width={300}
               height={200}
               layout="responsive"
