@@ -7,7 +7,9 @@ export async function middleware(request: NextRequest) {
     const loginUrl = new URL(allPaths.LOGIN, request.url);
 
     try {
-      const token = request.cookies.get("next-auth.session-token");
+      const token = process.env.NODE_ENV === "production"
+        ? request.cookies.get("__Secure-next-auth.session-token")
+        : request.cookies.get("next-auth.session-token");
 
       if (token) {
         return NextResponse.next();
