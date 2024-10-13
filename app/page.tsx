@@ -5,5 +5,6 @@ export const metadata = {
 };
 
 export default function Page() {
+  console.log(`oink: ${process.env.NEXTAUTH_URL}`);
   return <ImageGallery />;
 }
