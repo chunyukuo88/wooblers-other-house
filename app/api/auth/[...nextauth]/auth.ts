@@ -23,7 +23,6 @@ const {log, error} = console;
 
 export const authOptions: NextAuthOptions = {
   debug: process.env.NODE_ENV === 'development',
-  secret: process.env.NEXTAUTH_SECRET,
   useSecureCookies: isProduction,
   cookies: isProduction ? prodCookies : undefined,
   providers: [
