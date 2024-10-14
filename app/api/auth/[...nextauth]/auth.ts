@@ -21,8 +21,11 @@ const prodCookies = {
 
 const {log, error} = console;
 
+console.log("oink");
+console.log(`process.env.NEXTAUTH_SECRET: ${process.env.NEXTAUTH_SECRET}`);
+
 export const authOptions: NextAuthOptions = {
-  debug: process.env.NODE_ENV === 'development',
+  debug: true,
   useSecureCookies: isProduction,
   cookies: isProduction ? prodCookies : undefined,
   secret: process.env.NEXTAUTH_SECRET,
