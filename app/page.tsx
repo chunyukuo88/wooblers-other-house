@@ -5,9 +5,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  console.log(`REGION: ${process.env.REGION}`);
-  console.log(`USER_POOL_WEB_CLIENT_ID: ${process.env.USER_POOL_WEB_CLIENT_ID}`);
-  console.log(`NEXTAUTH_SECRET: ${process.env.NEXTAUTH_SECRET}`);
-  console.log(`NEXTAUTH_URL: ${process.env.NEXTAUTH_URL}`);
   return <ImageGallery />;
 }
