@@ -6,7 +6,6 @@ frontend:
         - npm ci
     build:
       commands:
-        - echo "bread"
         - echo "REGION=$REGION" >> .env.production
         - echo "USER_POOL_WEB_CLIENT_ID=$USER_POOL_WEB_CLIENT_ID" >> .env.production
         - echo "NEXTAUTH_SECRET=$NEXTAUTH_SECRET" >> .env.production

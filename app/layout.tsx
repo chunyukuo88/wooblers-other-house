@@ -9,12 +9,6 @@ interface Children {
 
 
 export default async function RootLayout({ children }: Children) {
-  console.log("meow");
-  console.log(`RootLayout process.env.REGION: ${process.env.NEXTAUTH_SECRET}`);
-  console.log(`RootLayout process.env.USER_POOL_WEB_CLIENT_ID: ${process.env.NEXTAUTH_SECRET}`);
-  console.log(`RootLayout process.env.NEXTAUTH_URL: ${process.env.NEXTAUTH_SECRET}`);
-  console.log(`RootLayout process.env.NEXTAUTH_SECRET: ${process.env.NEXTAUTH_SECRET}`);
-
   return (
     <html lang="en" className="h-full bg-gray-100">
       <body className="h-full">
