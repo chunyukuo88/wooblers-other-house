@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import Image from "next/image";
 import "./scroll-to-top-button.css";
 
-const BackToTopButton = () => {
+const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -42,4 +42,4 @@ const BackToTopButton = () => {
     : null;
 };
 
-export default BackToTopButton;
+export default ScrollToTopButton;
