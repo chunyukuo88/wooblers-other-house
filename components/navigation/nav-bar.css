@@ -1,3 +1,7 @@
+.woh__logout-button {
+    cursor: pointer;
+}
+
 .woh__nav-bar {
     display: flex;
 }

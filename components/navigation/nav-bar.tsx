@@ -1,9 +1,9 @@
 "use client"
 import Link from "next/link";
 import {allPaths} from "../../allPaths";
-import "./nav-bar.css"
 import {usePathname} from "next/navigation";
 import {signOut, useSession} from "next-auth/react";
+import "./nav-bar.css"
 
 function ProtectedPaths(){
   const {data: session} = useSession();
@@ -32,7 +32,7 @@ export default function NavBar() {
 
   const shouldShowLogin = (!session && pathname !== allPaths.LOGIN);
   const LogoutOrHome = () => session
-    ? <a onClick={() => signOut()}>Logout</a>
+    ? <a className="woh__logout-button" onClick={() => signOut()}>Logout</a>
     : <Link href={allPaths.HOME}>Home</Link>;
 
   return (
