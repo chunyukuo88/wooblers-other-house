@@ -1,4 +1,4 @@
-import Providers from "../components/SessionProvider";
+import Providers from "../store/providers";
 import "../styles/global.css";
 import NavBar from "@/components/navigation/nav-bar";
 import SiteTitleString from "@/components/navigation/site-title-string";
