@@ -1,0 +1,18 @@
+.woh__image-gallery {
+    padding: 20px;
+}
+
+.woh__image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.woh__image-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background: #4f4848;
+}

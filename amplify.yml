@@ -10,6 +10,7 @@ frontend:
         - echo "USER_POOL_WEB_CLIENT_ID=$USER_POOL_WEB_CLIENT_ID" >> .env.production
         - echo "NEXTAUTH_SECRET=$NEXTAUTH_SECRET" >> .env.production
         - echo "NEXTAUTH_URL=$NEXTAUTH_URL" >> .env.production
+        - echo "NEXT_PUBLIC_IMAGE_SOURCE=NEXT_PUBLIC_IMAGE_SOURCE" >> .env.production
         - npm run build
   artifacts:
     baseDirectory: .next
