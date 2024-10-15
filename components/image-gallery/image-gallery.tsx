@@ -2,6 +2,7 @@
 import React, {useContext, useState, useEffect} from "react";
 import {FetchedImagesContext as context} from "../../store/fetched-images-context"
 import Image from "next/image";
+import BackToTopButton from "@/components/navigation/scroll-to-top-button";
 import "./image-gallery.css";
 
 interface ImageData {
@@ -52,6 +53,7 @@ const ImageGallery: React.FC = () => {
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
+        <BackToTopButton />
         {fetchedImageObjects.map((image, index) => (
           <div key={index} className="woh__image-item">
             <Image
