@@ -1,5 +1,6 @@
 "use client";
 import {useEffect, useState} from "react";
+import Image from "next/image";
 import "./scroll-to-top-button.css";
 
 const BackToTopButton = () => {
@@ -30,9 +31,14 @@ const BackToTopButton = () => {
   };
 
   return isVisible
-    ? (<button onClick={scrollToTop} className="woh__scroll-to-top-button">
-        ↑
-      </button>)
+    ? (<div role="button" onClick={scrollToTop} className="woh__scroll-to-top-button">
+        <Image
+          alt="woobler pointing"
+          src="/images/woobler-pointing.png"
+          width={98}
+          height={102}
+        />
+      </div>)
     : null;
 };
 

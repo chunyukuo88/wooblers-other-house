@@ -1,28 +1,12 @@
 .woh__scroll-to-top-button {
     position: fixed;
-    bottom: 20px;
+    bottom: 0;
     right: 20px;
-    background-color: #0070f3;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
     transition: background-color 0.3s, transform 0.3s;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .woh__scroll-to-top-button:hover {
-    background-color: #0051bb;
     transform: translateY(-3px);
-}
-
-.woh__scroll-to-top-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.5);
 }
