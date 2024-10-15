@@ -1,5 +1,6 @@
 "use client"
-import React, { useState, useEffect } from "react";
+import React, {useContext, useState, useEffect} from "react";
+import {FetchedImagesContext as context} from "../../store/fetched-images-context"
 import Image from "next/image";
 import "./image-gallery.css";
 
@@ -8,7 +9,7 @@ interface ImageData {
 }
 
 const ImageGallery: React.FC = () => {
-  const [images, setImages] = useState<ImageData[]>([]);
+  const {updateFetchedImages, fetchedImageObjects} = useContext(context);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -22,7 +23,7 @@ const ImageGallery: React.FC = () => {
         throw new Error("Failed to fetch images");
       }
       const data = await response.json();
-      setImages(data.photos);
+      return data.photos;
     } catch (err) {
       setError("Error fetching images. Please try again later.");
       console.error(err);
@@ -32,7 +33,12 @@ const ImageGallery: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchImages();
+    if (fetchedImageObjects.length < 1) {
+      fetchImages().then(image => {
+        updateFetchedImages(image);
+      });
+    }
+    setIsLoading(false);
   }, []);
 
   if (isLoading) {
@@ -46,9 +52,10 @@ const ImageGallery: React.FC = () => {
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
-        {images.map((image, index) => (
+        {fetchedImageObjects.map((image, index) => (
           <div key={index} className="woh__image-item">
             <Image
+              // @ts-ignore
               src={image.url}
               alt={`Image #${index + 1}`}
               width={300}
