@@ -21,9 +21,6 @@ const prodCookies = {
 
 const {log, error} = console;
 
-console.log("oink");
-console.log(`process.env.NEXTAUTH_SECRET: ${process.env.NEXTAUTH_SECRET}`);
-
 export const authOptions: NextAuthOptions = {
   debug: true,
   useSecureCookies: isProduction,
@@ -82,16 +79,12 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        log("jwt 1", user);
         //@ts-ignore
         token.accessToken = user.accessToken;
       }
-      log("jwt 2", token);
       return token;
     },
     async session({ session, token }) {
-      log("session 1", session);
-      log("session 2", token);
       //@ts-ignore
       session.accessToken = token.accessToken;
       return session;
