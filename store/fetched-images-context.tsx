@@ -1,23 +1,17 @@
 "use client";
 
 import { createContext, useState, type PropsWithChildren } from 'react';
-
-type Image= {
-  key: string;
-  lastModified: string;
-  size: number;
-  url: string;
-}
+import {BucketItem} from "./types";
 
 export const FetchedImagesContext = createContext({
   fetchedImageObjects: [],
-  updateFetchedImages: function(images: Image[]){},
+  updateFetchedImages: function(images: BucketItem[]){},
 });
 
 export function FetchedImagesProvider(props: PropsWithChildren){
-  const [fetchedImages, setImages] = useState<Image[]>([]);
+  const [fetchedImages, setImages] = useState<BucketItem[]>([]);
 
-  function handler(result: Image[]) {
+  function handler(result: BucketItem[]) {
     setImages(result);
   }
 

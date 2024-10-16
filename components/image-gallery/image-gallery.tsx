@@ -1,13 +1,10 @@
 "use client"
 import React, {useContext, useState, useEffect} from "react";
 import {FetchedImagesContext as context} from "../../store/fetched-images-context"
-import Image from "next/image";
 import ScrollToTopButton from "@/components/navigation/scroll-to-top-button";
 import "./image-gallery.css";
-
-interface ImageData {
-  url: string;
-}
+import {BucketItem} from "../../store/types";
+import {ImageCard} from "@/components/image-gallery/image-card";
 
 const ImageGallery: React.FC = () => {
   const {updateFetchedImages, fetchedImageObjects} = useContext(context);
@@ -54,21 +51,8 @@ const ImageGallery: React.FC = () => {
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
         <ScrollToTopButton />
-        {fetchedImageObjects.map((file, index) => {
-          // @ts-ignore
-          const isImage = file.key.split(".")[1] !== "txt";
-          return isImage ? (
-          <div key={index} className="woh__image-item">
-            <Image
-              // @ts-ignore
-              src={file.url}
-              alt={`Image #${index + 1}`}
-              width={300}
-              height={200}
-              layout="responsive"
-            />
-          </div>
-          ) : null;
+        {fetchedImageObjects.map((file: BucketItem, index: number) => {
+          return <ImageCard file={file} index={index}/>;
         })}
       </div>
     </div>
