@@ -54,18 +54,21 @@ const ImageGallery: React.FC = () => {
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
         <ScrollToTopButton />
-        {fetchedImageObjects.map((image, index) => (
+        {fetchedImageObjects.map((file, index) => {
+          const isImage = file.key.split(".")[1] !== "txt";
+          return isImage ? (
           <div key={index} className="woh__image-item">
             <Image
               // @ts-ignore
-              src={image.url}
+              src={file.url}
               alt={`Image #${index + 1}`}
               width={300}
               height={200}
               layout="responsive"
             />
           </div>
-        ))}
+          ) : null;
+        })}
       </div>
     </div>
   );
