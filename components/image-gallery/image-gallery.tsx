@@ -55,6 +55,7 @@ const ImageGallery: React.FC = () => {
       <div className="woh__image-grid">
         <ScrollToTopButton />
         {fetchedImageObjects.map((file, index) => {
+          // @ts-ignore
           const isImage = file.key.split(".")[1] !== "txt";
           return isImage ? (
           <div key={index} className="woh__image-item">
