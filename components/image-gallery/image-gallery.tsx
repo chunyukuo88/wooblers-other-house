@@ -7,7 +7,13 @@ import {BucketItem} from "../../store/types";
 import {ImageCard} from "@/components/image-gallery/image-card";
 
 const ImageGallery: React.FC = () => {
-  const {updateFetchedImages, fetchedImageObjects} = useContext(context);
+  const {
+    updateFetchedImages,
+    fetchedImageObjects,
+    updateFetchedCaptions,
+    fetchedCaptionStrings,
+  } = useContext(context);
+
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -18,10 +24,9 @@ const ImageGallery: React.FC = () => {
       // @ts-ignore
       const response = await fetch(imageSource);
       if (!response.ok) {
-        throw new Error("Failed to fetch images");
+        return new Error("Failed to fetch images");
       }
-      const data = await response.json();
-      return data.photos;
+      return await response.json();
     } catch (err) {
       setError("Error fetching images. Please try again later.");
       console.error(err);
@@ -32,8 +37,10 @@ const ImageGallery: React.FC = () => {
 
   useEffect(() => {
     if (fetchedImageObjects.length < 1) {
-      fetchImages().then(image => {
-        updateFetchedImages(image);
+      fetchImages().then(data => {
+        updateFetchedImages(data.photos);
+        data.captions.pop();
+        updateFetchedCaptions(data.captions);
       });
     }
     setIsLoading(false);
@@ -47,12 +54,14 @@ const ImageGallery: React.FC = () => {
     return <div>{error}</div>;
   }
 
+
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
         <ScrollToTopButton />
         {fetchedImageObjects.map((file: BucketItem, index: number) => {
-          return <ImageCard file={file} index={index}/>;
+          const caption = fetchedCaptionStrings[index];
+          return <ImageCard file={file} index={index} caption={caption}/>;
         })}
       </div>
     </div>

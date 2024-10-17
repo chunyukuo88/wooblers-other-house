@@ -5,10 +5,14 @@ import React from "react";
 type ImageCardProps = {
   file: BucketItem;
   index: number;
+  caption?: string;
 };
 
 export function ImageCard(props: ImageCardProps) {
-  const {file, index} = props;
+  const {caption, file, index} = props;
+  const displayCaption = caption
+    ? caption.split("@")[1]
+    : "";
   const isImage = file.key.split(".")[1] !== "txt";
   return isImage ? (
     <div key={index} className="woh__image-item">
@@ -19,6 +23,7 @@ export function ImageCard(props: ImageCardProps) {
         height={200}
         layout="responsive"
       />
+      <p>{displayCaption}</p>
     </div>
   ) : null;
 }
