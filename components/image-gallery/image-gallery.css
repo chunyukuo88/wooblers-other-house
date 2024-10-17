@@ -13,6 +13,13 @@
     border-radius: 8px;
     overflow: hidden;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     background: #4f4848;
+}
+
+.woh__image-item p {
+    padding: 0 0.5rem;
+    color: white;
 }
