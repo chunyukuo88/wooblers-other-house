@@ -9,21 +9,16 @@ const ScrollToTopButton = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(!entry.isIntersecting);
-      },
-      { threshold: 0.1 }
+        setIsVisible(entry.isIntersecting);
+      }
     );
 
-    const target = document.createElement("div");
-    target.style.height = "1px";
-    document.body.prepend(target);
+    const target = document.querySelector(".woh__scroll-to-top-trigger");
+    if (target) {
+      observer.observe(target);
+    }
 
-    observer.observe(target);
-
-    return () => {
-      observer.disconnect();
-      target.remove();
-    };
+    return () => observer.disconnect();
   }, []);
 
   const scrollToTop = () => {
