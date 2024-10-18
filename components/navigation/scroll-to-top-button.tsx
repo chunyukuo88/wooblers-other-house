@@ -1,7 +1,6 @@
 "use client";
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import Image from "next/image";
-import {FetchedImagesContext as context} from "../../store/fetched-images-context";
 import "./scroll-to-top-button.css";
 
 const ScrollToTopButton = () => {
