@@ -1,6 +1,7 @@
 "use client";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Image from "next/image";
+import {FetchedImagesContext as context} from "../../store/fetched-images-context";
 import "./scroll-to-top-button.css";
 
 const ScrollToTopButton = () => {
@@ -9,14 +10,15 @@ const ScrollToTopButton = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(!entry.isIntersecting);
+        setIsVisible(entry.isIntersecting);
       },
       { threshold: 0.1 }
     );
 
     const target = document.createElement("div");
-    target.style.height = "1px";
-    document.body.prepend(target);
+    target.style.height = "0px";
+    target.style.width = "0px";
+    document.querySelector(".woh__scroll-to-top-trigger")?.prepend(target);
 
     observer.observe(target);
 

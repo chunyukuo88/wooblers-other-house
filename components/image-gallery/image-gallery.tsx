@@ -2,9 +2,9 @@
 import React, {useContext, useState, useEffect} from "react";
 import {FetchedImagesContext as context} from "../../store/fetched-images-context"
 import ScrollToTopButton from "@/components/navigation/scroll-to-top-button";
-import "./image-gallery.css";
-import {BucketItem} from "../../store/types";
 import {ImageCard} from "@/components/image-gallery/image-card";
+import {BucketItem} from "../../store/types";
+import "./image-gallery.css";
 
 const ImageGallery: React.FC = () => {
   const {
@@ -54,16 +54,21 @@ const ImageGallery: React.FC = () => {
     return <div>{error}</div>;
   }
 
+  const WrappedButton = () => (
+    <div style={{height: "0px"}} className="woh__scroll-to-top-trigger">
+      <ScrollToTopButton/>
+    </div>
+  );
 
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
-        <ScrollToTopButton />
         {fetchedImageObjects.map((file: BucketItem, index: number) => {
           const caption = fetchedCaptionStrings[index];
           return <ImageCard file={file} index={index} caption={caption}/>;
         })}
       </div>
+      {(fetchedImageObjects.length > 0) ? <WrappedButton /> : null}
     </div>
   );
 };
