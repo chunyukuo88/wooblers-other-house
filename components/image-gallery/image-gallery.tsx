@@ -6,6 +6,8 @@ import {ImageCard} from "@/components/image-gallery/image-card";
 import {BucketItem} from "../../store/types";
 import "./image-gallery.css";
 
+const imageSource = process.env.NEXT_PUBLIC_IMAGE_SOURCE;
+
 const ImageGallery: React.FC = () => {
   const {
     updateFetchedImages,
@@ -13,12 +15,9 @@ const ImageGallery: React.FC = () => {
     updateFetchedCaptions,
     fetchedCaptionStrings,
   } = useContext(context);
-
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const imageSource = process.env.NEXT_PUBLIC_IMAGE_SOURCE;
-  
   const fetchImages = async () => {
     try {
       // @ts-ignore
@@ -36,13 +35,12 @@ const ImageGallery: React.FC = () => {
   };
 
   useEffect(() => {
-    if (fetchedImageObjects.length < 1) {
-      fetchImages().then(data => {
-        updateFetchedImages(data.photos);
-        data.captions.pop();
-        updateFetchedCaptions(data.captions);
-      });
-    }
+    fetchImages().then(data => {
+      updateFetchedImages(data.photos);
+      data.captions.pop();
+      updateFetchedCaptions(data.captions);
+    });
+
     setIsLoading(false);
   }, []);
 
@@ -65,7 +63,11 @@ const ImageGallery: React.FC = () => {
       <div className="woh__image-grid">
         {fetchedImageObjects.map((file: BucketItem, index: number) => {
           const caption = fetchedCaptionStrings[index];
-          return <ImageCard file={file} index={index} caption={caption}/>;
+          return (
+            <div className={`woh__image-${index}`} key={index}>
+              <ImageCard file={file} index={index} caption={caption}/>
+            </div>
+          );
         })}
       </div>
       {(fetchedImageObjects.length > 0) ? <WrappedButton /> : null}

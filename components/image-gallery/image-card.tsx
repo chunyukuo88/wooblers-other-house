@@ -19,7 +19,11 @@ export function ImageCard(props: ImageCardProps) {
     : "";
   const isImage = file.key.split(".")[1] !== "txt";
   return isImage ? (
-    <div data-testid="image-item" key={index} className="woh__image-item">
+    <div
+      data-testid="image-item"
+      key={index}
+      className={`woh__image-item woh__image-index-${index}`}
+    >
       <Image
         src={file.url}
         alt={`Image #${index + 1}`}
