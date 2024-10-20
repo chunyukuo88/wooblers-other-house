@@ -64,7 +64,7 @@ const ImageGallery: React.FC = () => {
         {fetchedImageObjects.map((file: BucketItem, index: number) => {
           const caption = fetchedCaptionStrings[index];
           return (
-            <div>
+            <div className={`woh__image-${index}`} key={index}>
               <ImageCard file={file} index={index} caption={caption}/>
             </div>
           );
