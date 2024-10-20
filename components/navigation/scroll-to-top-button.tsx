@@ -13,9 +13,9 @@ const ScrollToTopButton = () => {
       }
     );
 
-    const target = document.querySelector(".woh__scroll-to-top-trigger");
-    if (target) {
-      observer.observe(target);
+    const trigger = document.querySelector(".woh__scroll-to-top-trigger");
+    if (trigger) {
+      observer.observe(trigger);
     }
 
     return () => observer.disconnect();
