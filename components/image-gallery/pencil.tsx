@@ -1,18 +1,23 @@
 import {useState} from "react";
 
-function Modal() {
-  return (
-    <div data-testid="pencil-triggered-modal">
-      yay
-    </div>
-  );
+type PencilProps = {
+  caption: string;
+  index: number;
 }
 
-export default function Pencil() {
+export default function Pencil(props: PencilProps) {
   const [modalIsVisible, setModalIsVisible] = useState(false);
-
+  const {caption} = props;
   const openModal = () => setModalIsVisible(true);
   const closeModal = () => setModalIsVisible(false);
+
+  function Modal() {
+    return (
+      <div data-testid="pencil-triggered-modal">
+        Original caption: {caption}
+      </div>
+    );
+  }
 
   return (
     <>
@@ -23,7 +28,7 @@ export default function Pencil() {
         ✏
       </button>
       {modalIsVisible
-        ? <Modal />
+        ? <Modal caption={caption}/>
         : null
       }
     </>
