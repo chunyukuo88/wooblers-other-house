@@ -6,19 +6,20 @@ import {
   waitFor
 } from "@testing-library/react";
 
-
+const captions = [
+  "Nice day",
+  "Woobler playing with cars",
+  "Bread times"
+];
+const index = 2;
 
 describe('<Pencil />', () => {
   describe('WHEN: the user clicks it', () => {
     test('THEN: it triggers a modal', async () => {
-      const captions = [
-        "Nice day",
-        "Woobler playing with cars",
-        "Bread times"
-      ];
-      const index = 2;
+
 
       render(<Pencil captions={captions} index={index}/>);
+
       const pencilButton = screen.getByTestId("pencil-button");
       let modal = screen.queryByTestId("pencil-triggered-modal");
 
@@ -37,10 +38,8 @@ describe('<Pencil />', () => {
   describe('WHEN: the user clicks the pencil,', () => {
     describe('AND: the modal appears and clicks the cancel button,', () => {
       test('THEN: modal closes.', async () => {
-        const caption = "Woobler playing with cars";
-        const index = 3;
 
-        render(<Pencil captions={caption} index={index}/>);
+        render(<Pencil captions={captions} index={index}/>);
         const pencilButton = screen.getByTestId("pencil-button");
         let modal = document.querySelector(".woh__pencil-triggered-modal");
 
@@ -52,7 +51,7 @@ describe('<Pencil />', () => {
         fireEvent.click(modalCancelBtn);
 
         await waitFor(() => {
-          modal = screen.getByText(`Original caption: ${caption}`);
+          modal = screen.getByText(`Original caption: ${captions[2]}`);
           expect(modal).toBeNull();
         });
       });
