@@ -1,20 +1,42 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 
 type PencilProps = {
-  caption: string;
+  captions: string[];
   index: number;
 }
 
-export default function Pencil(props: PencilProps) {
+export default function Pencil({captions, index}: PencilProps) {
   const [modalIsVisible, setModalIsVisible] = useState(false);
-  const {caption} = props;
+  const inputRef = useRef(null);
+  const originalCaption = captions[index].split("@")[1];
   const openModal = () => setModalIsVisible(true);
   const closeModal = () => setModalIsVisible(false);
 
+  const confirmationHandler = () => {
+    // @ts-ignore
+    const newText = inputRef.current.value;
+    console.log(`newText: ${newText}`);
+    closeModal();
+  };
+
+  const cancellationHandler = () => closeModal();
+
   function Modal() {
     return (
-      <div data-testid="pencil-triggered-modal">
-        Original caption: {caption}
+      <div className="woh__pencil-triggered-modal">
+        <p>Original caption: {originalCaption}</p>
+        <textarea ref={originalCaption} />
+        <button
+          onClick={confirmationHandler}
+        >
+          Confirm
+        </button>
+        <button
+          className="woh__modal-cancel-button"
+          onClick={cancellationHandler}
+        >
+          Cancel
+        </button>
       </div>
     );
   }
@@ -28,7 +50,7 @@ export default function Pencil(props: PencilProps) {
         ✏
       </button>
       {modalIsVisible
-        ? <Modal caption={caption}/>
+        ? <Modal/>
         : null
       }
     </>
