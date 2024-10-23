@@ -57,6 +57,7 @@ export const authOptions: NextAuthOptions = {
               name: credentials.username,
               email: credentials.username,
               accessToken: response.AuthenticationResult.AccessToken,
+              idToken: response.AuthenticationResult.IdToken,
             };
           }
         } catch (error) {
@@ -81,12 +82,16 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         //@ts-ignore
         token.accessToken = user.accessToken;
+        //@ts-ignore
+        token.idToken = user.idToken;
       }
       return token;
     },
     async session({ session, token }) {
       //@ts-ignore
       session.accessToken = token.accessToken;
+      //@ts-ignore
+      session.idToken = token.idToken;
       return session;
     },
   },
