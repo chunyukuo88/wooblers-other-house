@@ -8,7 +8,8 @@ type PencilProps = {
 export default function Pencil({captions, index}: PencilProps) {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const inputRef = useRef(null);
-  const originalCaption = captions[index].split("@")[1];
+  // const originalCaption = captions[index].split("@")[1];
+  const originalCaption = captions[index];
   const openModal = () => setModalIsVisible(true);
   const closeModal = () => setModalIsVisible(false);
 
@@ -24,8 +25,8 @@ export default function Pencil({captions, index}: PencilProps) {
   function Modal() {
     return (
       <div className="woh__pencil-triggered-modal">
-        <p>Original caption: {originalCaption}</p>
-        <textarea ref={originalCaption} />
+        <div>New caption:</div>
+        <textarea ref={inputRef} />
         <button
           onClick={confirmationHandler}
         >

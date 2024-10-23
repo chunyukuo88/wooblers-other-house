@@ -1,10 +1,12 @@
 "use client"
 import React, {useContext, useState, useEffect} from "react";
+import {useSession} from "next-auth/react";
 import {FetchedImagesContext as context} from "../../store/fetched-images-context"
 import ScrollToTopButton from "@/components/navigation/scroll-to-top-button";
 import {ImageCard} from "@/components/image-gallery/image-card";
 import {BucketItem} from "../../store/types";
 import "./image-gallery.css";
+import Pencil from "@/components/image-gallery/pencil";
 
 const imageSource = process.env.NEXT_PUBLIC_IMAGE_SOURCE;
 
@@ -17,6 +19,7 @@ const ImageGallery: React.FC = () => {
   } = useContext(context);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const {data: session} = useSession();
 
   const fetchImages = async () => {
     try {
@@ -63,9 +66,26 @@ const ImageGallery: React.FC = () => {
       <div className="woh__image-grid">
         {fetchedImageObjects.map((file: BucketItem, index: number) => {
           const caption = fetchedCaptionStrings[index];
+          const x = [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "8",
+            "8",
+            "8",
+            "8",
+            "8",
+            "8",
+          ]
           return (
             <div className={`woh__image-${index}`} key={index}>
               <ImageCard file={file} index={index} caption={caption}/>
+              {session ? <Pencil captions={x} index={index} /> : null}
             </div>
           );
         })}
