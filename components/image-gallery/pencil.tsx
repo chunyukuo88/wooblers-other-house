@@ -6,11 +6,9 @@ type PencilProps = {
   index: number;
 }
 
-
 export default function Pencil({captions, index}: PencilProps) {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const inputRef = useRef(null);
-  const originalCaption = captions[index];
   const openModal = () => setModalIsVisible(true);
   const closeModal = () => setModalIsVisible(false);
 
