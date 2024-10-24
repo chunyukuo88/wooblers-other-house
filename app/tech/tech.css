@@ -1,17 +1,18 @@
-#tech-page {}
-
-.woh__tech-page__next-logo{
+#tech-page {
 
 }
 
-.woh__tech-page__vercel-logo{
-
+.woh__tech-page-image {
+    background: red;
+    /*width: 100%;*/
+    /*transform: translateX(50%);*/
+    /*opacity: 0;*/
+    /*transition: all 500ms;*/
 }
 
-.woh__tech-page__aws-logo{
-
-}
-
-.woh__tech-page__amplify-logo{
-
+.woh__tech-page-image.fade-in {
+    background: green;
+    /*transform: translateX(0);*/
+    /*opacity: 1;*/
+    /*transition: all 500ms;*/
 }

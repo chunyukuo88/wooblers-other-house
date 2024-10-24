@@ -1,8 +1,27 @@
 "use client";
 import {useEffect, useState} from "react";
 import Image from "next/image";
+import "./tech.css";
 
 export default function Page() {
+  // Starts with image2 -- the first image is "above the fold".
+  const [image2Visible, setImage2] = useState<boolean | null>(false);
+  const [image3Visible, setImage3] = useState<boolean | null>(false);
+  const [image4Visible, setImage4] = useState<boolean | null>(false);
+
+  useEffect(() => {
+    const img2Observer = new IntersectionObserver(
+      ([entry]) => {
+        setImage2(entry.isIntersecting);
+      }
+    );
+    const image2Wrapper = document.querySelectorAll(".woh__tech-page-image")[0]!;
+    img2Observer.observe(image2Wrapper);
+
+    return () => {
+      img2Observer.disconnect();
+    };
+  }, []);
 
   return (
     <main id="tech-page">
@@ -18,7 +37,7 @@ export default function Page() {
         the <code>IntersectionObserver</code> API or NextAuth.
         This app would be a meaningful place to maintain them and see how they evolve along with Next.js.
       </p>
-      <div className="woh__tech-page__next-logo">
+      <div className="woh__tech-page-image-visible">
         <Image
           alt="Next.js logo"
           src="/images/woobler-pointing.png"
@@ -60,7 +79,7 @@ export default function Page() {
         earum error ex, in libero maxime minima minus natus necessitatibus obcaecati pariatur provident quasi ratione
         repellat repellendus reprehenderit tempora, tempore tenetur ullam vero voluptas voluptatum. Atque, ipsum
         molestias?</p>
-      <div className="woh__tech-page__vercel-logo">
+      <div className={`woh__tech-page-image ${image2Visible ? "fade-in" : ""}`}>
         <Image
           alt="Vercel logo"
           src="/images/woobler-pointing.png"
@@ -87,7 +106,7 @@ export default function Page() {
         inventore iste iusto laborum laudantium magnam neque nihil placeat praesentium quas quasi quod ratione rem,
         repellat reprehenderit sequi sit sunt vel vero? Impedit libero molestiae quaerat temporibus tenetur veritatis
         voluptatem! Ab quaerat rerum voluptatem voluptatum!</p>
-      <div className="woh__tech-page__aws-logo">
+      <div className="woh__tech-page-image">
         <Image
           alt="AWS logo"
           src="/images/woobler-pointing.png"
@@ -95,7 +114,7 @@ export default function Page() {
           height={200}
         />
       </div>
-      <div className="woh__tech-page__amplify-logo">
+      <div className="woh__tech-page-image">
         <Image
           alt="Amplify logo"
           src="/images/woobler-pointing.png"
