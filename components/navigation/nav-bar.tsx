@@ -9,27 +9,30 @@ function ProtectedPaths(){
   const {data: session} = useSession();
   const pathname = usePathname();
 
-  return session ? <>
-    <div className="woh__nav-bar-string">
-      {pathname === allPaths.DASHBOARD
-        ? null
-        : <Link href={allPaths.DASHBOARD}>Dashboard</Link>
-      }
-    </div>
-    <div className="woh__nav-bar-string">
-      {pathname === allPaths.PROFILE
-        ? null
-        : <Link href={allPaths.PROFILE}>Profile</Link>
-      }
+  return session
+    ? (
+      <>
+      <div className="woh__nav-bar-string">
+        {pathname === allPaths.DASHBOARD
+          ? null
+          : <Link href={allPaths.DASHBOARD}>Dashboard</Link>
+        }
+      </div>
+      <div className="woh__nav-bar-string">
+        {pathname === allPaths.PROFILE
+          ? null
+          : <Link href={allPaths.PROFILE}>Profile</Link>
+        }
 
-    </div>
-  </> : null;
+      </div>
+    </>
+  )
+  : null;
 }
 
 export default function NavBar() {
   const pathname = usePathname();
   const {data: session} = useSession();
-
   const shouldShowLogin = (!session && pathname !== allPaths.LOGIN);
   const LogoutOrHome = () => session
     ? <a className="woh__logout-button" onClick={() => signOut()}>Logout</a>

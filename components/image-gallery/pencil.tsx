@@ -9,7 +9,6 @@ type PencilProps = {
   index: number;
 }
 
-
 export default function Pencil({captions, index}: PencilProps) {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const {data: session} = useSession();
