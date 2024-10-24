@@ -7,7 +7,8 @@
     "start": "next start",
     "tailwind:watch": "npx tailwindcss -i ./styles/global.css -o ./styles/output.css --watch",
     "test": "jest --colors --verbose --coverage",
-    "test:ci": "jest --ci"
+    "test:ci": "jest --ci",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@aws-sdk/client-cognito-identity-provider": "^3.667.0",

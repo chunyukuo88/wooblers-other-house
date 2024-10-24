@@ -30,7 +30,6 @@ export default function Pencil({captions, index}: PencilProps) {
       await putData(url, httpRequest);
     } catch (error) {
       console.error(error);
-      alert(`Failed to update caption: ${error.message}`);
     }
     closeModal();
   };
