@@ -2,29 +2,35 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import {CognitoIdentityProviderClient, InitiateAuthCommand} from "@aws-sdk/client-cognito-identity-provider";
 import {allPaths} from "../../../../allPaths";
 import {NextAuthOptions} from "next-auth";
+import {is} from "@babel/types";
 
 const cognitoClient = new CognitoIdentityProviderClient({ region: process.env.REGION });
 const isProduction = process.env.NODE_ENV === "production";
 
-const prodCookies = {
-  sessionToken: {
-    name: `__Secure-next-auth.session-token`,
-    options: {
-      httpOnly: true,
-      sameSite: "lax",
-      path: "/",
-      secure: true,
-      domain: "wooblers-other-house.com"
+const cookies = (isProduction)
+  ? {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: true,
+        domain: "wooblers-other-house.com"
+      },
     },
-  },
-};
+  }
+  : undefined;
 
 const {log, error} = console;
+
+log("cookies:")
+log(cookies)
 
 export const authOptions: NextAuthOptions = {
   debug: true,
   useSecureCookies: isProduction,
-  cookies: isProduction ? prodCookies : undefined,
+  cookies,
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
@@ -76,6 +82,7 @@ export const authOptions: NextAuthOptions = {
   ],
   pages: {
     signIn: allPaths.LOGIN,
+    signOut: allPaths.HOME,
   },
   callbacks: {
     async jwt({ token, user }) {
