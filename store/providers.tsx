@@ -19,4 +19,3 @@ export default function Providers({children}: Children, pageProps: PageProps) {
     </SessionProvider>
   );
 };
-

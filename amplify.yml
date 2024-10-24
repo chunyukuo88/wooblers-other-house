@@ -11,6 +11,7 @@ frontend:
         - echo "NEXTAUTH_SECRET=$NEXTAUTH_SECRET" >> .env.production
         - echo "NEXTAUTH_URL=$NEXTAUTH_URL" >> .env.production
         - echo "NEXT_PUBLIC_IMAGE_SOURCE=NEXT_PUBLIC_IMAGE_SOURCE" >> .env.production
+        - echo "NEXT_PUBLIC_PUT_DATA=NEXT_PUBLIC_PUT_DATA" >> .env.production
         - npm run build
   artifacts:
     baseDirectory: .next
