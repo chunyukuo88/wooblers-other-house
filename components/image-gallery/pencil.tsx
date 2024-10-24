@@ -9,6 +9,7 @@ type PencilProps = {
   index: number;
 }
 
+
 export default function Pencil({captions, index}: PencilProps) {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const {data: session} = useSession();
@@ -25,6 +26,7 @@ export default function Pencil({captions, index}: PencilProps) {
       // @ts-ignore
       const httpRequest = createHttpRequest("PUT", session.idToken, updatedCaptions);
       const url = process.env.NEXT_PUBLIC_PUT_DATA;
+      // @ts-ignore
       await putData(url, httpRequest);
     } catch (error) {
       console.error(error);
