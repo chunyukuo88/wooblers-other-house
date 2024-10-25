@@ -7,7 +7,6 @@ export default function Page() {
   // Starts with image2 -- the first image is "above the fold".
   const [image2Visible, setImage2] = useState<boolean | null>(false);
   const [image3Visible, setImage3] = useState<boolean | null>(false);
-  const [image4Visible, setImage4] = useState<boolean | null>(false);
 
   useEffect(() => {
     const img2Observer = new IntersectionObserver(
@@ -17,74 +16,71 @@ export default function Page() {
     );
     const image2Wrapper = document.querySelectorAll(".woh__tech-page-image")[0]!;
     img2Observer.observe(image2Wrapper);
+    const img3Observer = new IntersectionObserver(
+      ([entry]) => {
+        setImage3(entry.isIntersecting);
+      }
+    );
+    const image3Wrapper = document.querySelectorAll(".woh__tech-page-image")[1]!;
+    img3Observer.observe(image3Wrapper);
 
     return () => {
       img2Observer.disconnect();
+      img3Observer.disconnect();
     };
   }, []);
 
   return (
     <main id="tech-page">
-      <h1>How this web app was made</h1>
-      <h2>A dev diary showcasing the technologies that went into Woobler's Other House</h2>
+      <h3>Dev Diary: Creating This App</h3>
       <p>
-        I created this Next.js app as a sort of sandbox to try new things. Working for Gap Inc., I led the Product
-        Listing Page team's migration from being one of a constellation of React SPAs to being a part within a massive
-        Next.js monorepo.
+        Fun fact: I'm an engineer at Gap Inc. Woobler is my younger son.
+      </p>
+      <h5>August 2024</h5>
+      <p>
+        I am leading my team's apps from being two of a constellation of React
+        SPAs to just another set of packages within a massive Next.js monorepo.
       </p>
       <p>
-        There were a few technologies I'd not played with much in my own applications, such as
-        the <code>IntersectionObserver</code> API or NextAuth.
-        This app would be a meaningful place to maintain them and see how they evolve along with Next.js.
+        A lot of the architecture and setup was done by a designated architecture team, however; my
+        team concerns itself with colossal leaf nodes. If that seems overly specialized, consider that our site is essentially the same code for many brands: Gap, Old Navy, Banana Republic, and Athleta.
+        Then add additional complexity with our international sites, our commitment to accessibility, and the myriad considerations required to make a pleasant e-commerce experience; this is one of the world's largest clothing brands, after all!
+      </p>
+      <p>
+        My team was left out of the foundational work. I wanted to know what setting up a proper, complex Next.js was all about, so here we are!
       </p>
       <div className="woh__tech-page-image-visible">
         <Image
           alt="Next.js logo"
-          src="/images/woobler-pointing.png"
-          width={200}
-          height={200}
+          src="/images/logo_NextJS.png"
+          width={100}
+          height={100}
         />
       </div>
-      <p>In past jobs I used React Router, Tanstack Router, and SvelteKit routing. The latter felt the most like the
+      <h5>September 2024</h5>
+      <p>
+        This month I'm hoping to learn about the <code>IntersectionObserver</code> API, aggressive preloading, and NextAuth. Questions of authentication and authorization are now a
+        bit more complicated than in SPAs! This is a meaningful place to maintain them and see how they evolve along with Next.js.
+      </p>
+      <div className="woh__tech-page-image-visible">
+        <Image
+          alt="NextAuth logo"
+          src="/images/logo_NextAuth.png"
+          width={100}
+          height={100}
+        />
+      </div>
+      <p>
+        In past jobs I used React Router, Tanstack Router, and SvelteKit routing. The latter felt the most like the
         app-based routing of Next.js, at least in version 14. I then learned that Vercel manages both technologies. They
-        hired Rich Harris in 2023!</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid amet aperiam consectetur hic itaque
-        necessitatibus nihil! Alias at consectetur cumque eos in laborum neque nulla, officiis quam sit tempora veniam
-        veritatis voluptate. Accusamus dicta dolore dolorum expedita natus non odio provident sed voluptas. Blanditiis
-        cum dolor earum eos facere, ipsum libero natus provident quasi, qui saepe sequi similique tempora ut velit? Ad
-        animi error fuga hic in, inventore ipsam itaque nam repellendus tempora vel velit. Eaque ex excepturi, facilis
-        hic laudantium nostrum nulla odit rerum ut! Aperiam atque culpa cumque debitis deleniti dicta, dignissimos
-        dolorem doloremque doloribus eligendi enim eos error facere fugiat harum id ipsum laboriosam laborum maiores
-        minus, nisi officiis omnis optio, perferendis perspiciatis possimus quae qui quia quibusdam quod repellendus
-        totam veritatis voluptates! Aliquam, asperiores at atque blanditiis debitis, dignissimos earum eligendi facilis
-        illo minus molestiae necessitatibus numquam optio perspiciatis placeat provident sed! Animi asperiores
-        blanditiis commodi cumque debitis dignissimos facilis id, illum laborum magni quisquam recusandae? Fuga, numquam
-        perferendis. Aperiam assumenda, consectetur ducimus excepturi id numquam officia optio repellendus sapiente
-        voluptate. Alias architecto, debitis dolorem eum, hic omnis sapiente sint tempora tempore, unde ut veritatis!
-        Asperiores autem corporis, nisi odit quae qui sequi. Amet, ex molestiae non nulla numquam possimus quasi qui
-        rerum sunt voluptatum. Maxime minima natus unde. Assumenda dolorem est eveniet fugiat iure magnam nihil sed
-        voluptatum. Ab ad architecto aspernatur consequuntur corporis cumque dicta dolor eligendi enim eos facere fuga
-        harum id illo, incidunt ipsum libero magnam modi, nam nesciunt nulla, odio officiis omnis perspiciatis possimus
-        mollitia nisi numquam optio reprehenderit voluptatem. Excepturi, fugiat iste laudantium magnam odio porro quam
-        quos sapiente. Ab consequuntur cupiditate dolores eveniet facere harum id labore, magnam modi molestias mollitia
-        nisi, possimus quam quis repudiandae sequi tempore unde ut velit vitae. Dolore enim facilis magni nam
-        necessitatibus pariatur sed. Adipisci assumenda aut cumque eius eum fugiat magni, natus, nisi porro provident
-        quisquam saepe suscipit tempore, tenetur ullam? Delectus dolor doloremque doloribus est impedit itaque, labore
-        pariatur quaerat quidem sed. A accusamus alias, aliquam animi cumque deserunt facilis fugiat hic, inventore ipsa
-        non pariatur provident vitae! Autem commodi doloremque dolores eius eveniet perspiciatis quo sint temporibus
-        veritatis voluptate. Accusamus adipisci enim impedit ipsam laborum magni necessitatibus nulla numquam placeat
-        quasi recusandae reiciendis repellat, reprehenderit sunt ullam? Corporis dolor eligendi esse obcaecati tenetur?
-        A aliquid aut debitis delectus distinctio error ex explicabo, facere harum illum impedit, inventore magni maxime
-        officia, quae quam saepe sunt vero vitae voluptatem. Adipisci amet animi assumenda delectus deleniti dolore
-        earum error ex, in libero maxime minima minus natus necessitatibus obcaecati pariatur provident quasi ratione
-        repellat repellendus reprehenderit tempora, tempore tenetur ullam vero voluptas voluptatum. Atque, ipsum
-        molestias?</p>
+        hired Rich Harris in 2021!
+      </p>
       <div className={`woh__tech-page-image ${image2Visible ? "fade-in" : ""}`}>
         <Image
           alt="Vercel logo"
           src="/images/woobler-pointing.png"
-          width={200}
-          height={200}
+          width={100}
+          height={100}
         />
       </div>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad alias aliquid amet autem commodi culpa, distinctio
@@ -106,20 +102,12 @@ export default function Page() {
         inventore iste iusto laborum laudantium magnam neque nihil placeat praesentium quas quasi quod ratione rem,
         repellat reprehenderit sequi sit sunt vel vero? Impedit libero molestiae quaerat temporibus tenetur veritatis
         voluptatem! Ab quaerat rerum voluptatem voluptatum!</p>
-      <div className="woh__tech-page-image">
+      <div className={`woh__tech-page-image ${image3Visible ? "fade-in" : ""}`}>
         <Image
           alt="AWS logo"
           src="/images/woobler-pointing.png"
-          width={200}
-          height={200}
-        />
-      </div>
-      <div className="woh__tech-page-image">
-        <Image
-          alt="Amplify logo"
-          src="/images/woobler-pointing.png"
-          width={200}
-          height={200}
+          width={100}
+          height={100}
         />
       </div>
     </main>
