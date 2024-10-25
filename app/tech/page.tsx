@@ -42,9 +42,9 @@ export default function Page() {
         SPAs to just another set of packages within a massive Next.js monorepo.
       </p>
       <p>
-        A lot of the architecture and setup was done by a designated architecture team, however; my
-        team concerns itself with colossal leaf nodes. If that seems overly specialized, consider that our site is essentially the same code for many brands: Gap, Old Navy, Banana Republic, and Athleta.
-        Then add additional complexity with our international sites, our commitment to accessibility, and the myriad considerations required to make a pleasant e-commerce experience; this is one of the world's largest clothing brands, after all!
+        Routing, auth, global state and CI/CD was done by a designated architecture team, however; my
+        team of about a dozen people concerns itself with colossal leaf nodes on product display pages. If that seems overly specialized, consider that our site is essentially the same code for many brands: Gap, Old Navy, Banana Republic, and Athleta.
+        Then add additional complexity with our international sites, our commitment to accessibility, and the myriad considerations required to make a pleasant e-commerce experience; this is one of the world's largest clothing giants, after all!
       </p>
       <p>
         My team was left out of the foundational work. I wanted to know what setting up a proper, complex Next.js was all about, so here we are!
