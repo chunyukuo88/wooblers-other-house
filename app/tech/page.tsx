@@ -7,6 +7,7 @@ export default function Page() {
   // Starts with image2 -- the first image is "above the fold".
   const [image2Visible, setImage2] = useState<boolean | null>(false);
   const [image3Visible, setImage3] = useState<boolean | null>(false);
+  const [image4Visible, setImage4] = useState<boolean | null>(false);
 
   useEffect(() => {
     const img2Observer = new IntersectionObserver(
@@ -23,6 +24,13 @@ export default function Page() {
     );
     const image3Wrapper = document.querySelectorAll(".woh__tech-page-image")[1]!;
     img3Observer.observe(image3Wrapper);
+    const img4Observer = new IntersectionObserver(
+      ([entry]) => {
+        setImage4(entry.isIntersecting);
+      }
+    );
+    const image4Wrapper = document.querySelectorAll(".woh__tech-page-image")[2]!;
+    img4Observer.observe(image4Wrapper);
 
     return () => {
       img2Observer.disconnect();
@@ -33,36 +41,44 @@ export default function Page() {
   return (
     <main id="tech-page">
       <h3>Dev Diary: Creating This App</h3>
-      <p>
-        Fun fact: I'm an engineer at Gap Inc. Woobler is my younger son.
-      </p>
-      <h5>August 2024</h5>
+      <h5>
+        I'm an engineer at Gap Inc., and Woobler is my younger son, to whom this site is dedicated. We like serifs.
+      </h5>
+      <h4>August 2024</h4>
       <p>
         I am leading my team's apps from being two of a constellation of React
         SPAs to just another set of packages within a massive Next.js monorepo.
       </p>
-      <p>
+      <div className="woh__has-drop-letter">
         Routing, auth, global state and CI/CD was done by a designated architecture team, however; my
-        team of about a dozen people concerns itself with colossal leaf nodes on product display pages. If that seems overly specialized, consider that our site is essentially the same code for many brands: Gap, Old Navy, Banana Republic, and Athleta.
-        Then add additional complexity with our international sites, our commitment to accessibility, and the myriad considerations required to make a pleasant e-commerce experience; this is one of the world's largest clothing giants, after all!
-      </p>
-      <p>
-        My team was left out of the foundational work. I wanted to know what setting up a proper, complex Next.js was all about, so here we are!
-      </p>
-      <div className="woh__tech-page-image-visible">
-        <Image
-          alt="Next.js logo"
-          src="/images/logo_NextJS.png"
-          width={100}
-          height={100}
-        />
+        team of about a dozen people concerns itself with colossal leaf nodes on product display pages.
+        If that seems overly specialized, consider that our site is essentially the same code
+        <span>
+          <div className="woh__tech-page-image-visible">
+            <Image
+              alt="Next.js logo"
+              src="/images/logo_NextJS.png"
+              width={100}
+              height={100}
+            />
+          </div>
+        </span>
+        for many brands: Gap, Old Navy, Banana Republic, and Athleta.
+        Then add additional complexity of our sites for other countries, our commitment to accessibility, and the myriad
+        subtle features required to make a pleasant e-commerce experience; this is one of the world's largest clothing
+        giants, after all!
       </div>
+      <p>
+        My team was left out of the foundational work. I wanted to know what setting up a proper, complex Next.js was
+        all about, so here we are!
+      </p>
+
       <h5>September 2024</h5>
       <p>
         This month I'm hoping to learn about the <code>IntersectionObserver</code> API, aggressive preloading, and NextAuth. Questions of authentication and authorization are now a
         bit more complicated than in SPAs! This is a meaningful place to maintain them and see how they evolve along with Next.js.
       </p>
-      <div className="woh__tech-page-image-visible">
+      <div className={`woh__tech-page-image ${image2Visible ? "fade-in" : ""}`}>
         <Image
           alt="NextAuth logo"
           src="/images/logo_NextAuth.png"
@@ -75,7 +91,7 @@ export default function Page() {
         app-based routing of Next.js, at least in version 14. I then learned that Vercel manages both technologies. They
         hired Rich Harris in 2021!
       </p>
-      <div className={`woh__tech-page-image ${image2Visible ? "fade-in" : ""}`}>
+      <div className={`woh__tech-page-image ${image3Visible ? "fade-in" : ""}`}>
         <Image
           alt="Vercel logo"
           src="/images/woobler-pointing.png"
@@ -102,7 +118,7 @@ export default function Page() {
         inventore iste iusto laborum laudantium magnam neque nihil placeat praesentium quas quasi quod ratione rem,
         repellat reprehenderit sequi sit sunt vel vero? Impedit libero molestiae quaerat temporibus tenetur veritatis
         voluptatem! Ab quaerat rerum voluptatem voluptatum!</p>
-      <div className={`woh__tech-page-image ${image3Visible ? "fade-in" : ""}`}>
+      <div className={`woh__tech-page-image ${image4Visible ? "fade-in" : ""}`}>
         <Image
           alt="AWS logo"
           src="/images/woobler-pointing.png"
