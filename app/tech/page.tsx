@@ -7,7 +7,7 @@ type FadeInImageProps = {
   alt: string;
   fadeInFromThe: "left" | "right";
   height: number;
-  isVisible: boolean;
+  isVisible: boolean | null;
   src: string;
   width: number;
 }
@@ -21,13 +21,13 @@ const FadeInImage = ({
    width,
  }: FadeInImageProps) => {
   return (
-    <span className="woh__fade-in-container-left">
-      <div className={`woh__tech-page-image ${isVisible ? "fade-in" : ""}`}>
+    <span className={`woh__fade-in-container-${fadeInFromThe}`}>
+      <div className={`woh__tech-page-image-${fadeInFromThe} ${isVisible ? "fade-in" : ""}`}>
         <Image
-          alt="Amplify logo"
-          src="/images/woobler-pointing.png"
-          width={100}
-          height={100}
+          alt={alt}
+          src={src}
+          width={width}
+          height={height}
         />
       </div>
     </span>
@@ -46,21 +46,21 @@ export default function Page() {
         setImage2(entry.isIntersecting);
       }
     );
-    const image2Wrapper = document.querySelectorAll(".woh__tech-page-image")[0]!;
+    const image2Wrapper = document.querySelectorAll(".woh__tech-page-image-right")[0]!;
     img2Observer.observe(image2Wrapper);
     const img3Observer = new IntersectionObserver(
       ([entry]) => {
         setImage3(entry.isIntersecting);
       }
     );
-    const image3Wrapper = document.querySelectorAll(".woh__tech-page-image")[1]!;
+    const image3Wrapper = document.querySelectorAll(".woh__tech-page-image-left")[0]!;
     img3Observer.observe(image3Wrapper);
     const img4Observer = new IntersectionObserver(
       ([entry]) => {
         setImage4(entry.isIntersecting);
       }
     );
-    const image4Wrapper = document.querySelectorAll(".woh__tech-page-image")[2]!;
+    const image4Wrapper = document.querySelectorAll(".woh__tech-page-image")[0]!;
     img4Observer.observe(image4Wrapper);
 
     return () => {
@@ -107,16 +107,14 @@ export default function Page() {
       <div className="woh__has-drop-letter">
         This month I'm hoping to learn about the <code>IntersectionObserver</code> API, aggressive preloading, and
         NextAuth.
-        <span className="woh__fade-in-container">
-          <div className={`woh__tech-page-image ${image2Visible ? "fade-in" : ""}`}>
-            <Image
-              alt="NextAuth logo"
-              src="/images/logo_NextAuth.png"
-              width={100}
-              height={100}
-            />
-          </div>
-        </span>
+        <FadeInImage
+          alt="NextAuth logo"
+          fadeInFromThe={"right"}
+          isVisible={image2Visible}
+          height={100}
+          src="/images/logo_NextAuth.png"
+          width={100}
+        />
         Questions of authentication and authorization are now a bit more complicated than in SPAs! This is a meaningful
         place to maintain them and see how they evolve along
         with Next.js.
@@ -130,16 +128,14 @@ export default function Page() {
         Probably the trickiest bit so far was getting AWS Amplify + Cognito + NextAuth to work harmoniously together.
         Amplify wants environment variables in the web console, NextAuth wants a <code>secret</code> attribute in the
         auth configuration object,
-          <span className="woh__fade-in-container-left">
-            <div className={`woh__tech-page-image ${image3Visible ? "fade-in" : ""}`}>
-              <Image
-                alt="Amplify logo"
-                src="/images/woobler-pointing.png"
-                width={100}
-                height={100}
-              />
-            </div>
-          </span>
+        <FadeInImage
+          alt="Amplify logo"
+          fadeInFromThe={"left"}
+          height={100}
+          isVisible={image3Visible}
+          src="/images/logo_Amplify.png"
+          width={100}
+        />
         and Cognito has options for everything under the sun. The final solution, not mentioned in the Amplify
         configuration, was to write the environment variables to an inaccessible production .env document at build time.
         That's something I had to figure out on my own. Google, Stack Overflow and ChatGPT just regurgitated the

@@ -24,33 +24,33 @@ h4 {
     padding-left: 0.25rem;
 }
 
-.woh__tech-page-image-visible,
-.woh__fade-in-container {
+.woh__fade-in-container-right {
     float: right;
     margin: 1rem auto 0.75rem 1rem;
 }
 
+.woh__tech-page-image-visible,
 .woh__fade-in-container-left {
     float: left;
     margin: 1rem 1rem 0.75rem auto;
 }
 
-.woh__tech-page-image {
+.woh__tech-page-image-left {
+    width: 100%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: all 500ms;
+}
+
+.woh__tech-page-image-right {
     width: 100%;
     transform: translateX(50%);
     opacity: 0;
     transition: all 500ms;
 }
 
-/*.woh__tech-page-image {*/
-/*    transform: translateX(-50%);*/
-/*    width: 100%;*/
-/*    transform: translateX(50%);*/
-/*    opacity: 0;*/
-/*    transition: all 500ms;*/
-/*}*/
-
-.woh__tech-page-image.fade-in {
+.woh__tech-page-image-left.fade-in,
+.woh__tech-page-image-right.fade-in {
     transform: translateX(0);
     opacity: 1;
     transition: all 500ms;
