@@ -1,69 +1,39 @@
 "use client";
 import {useEffect, useState} from "react";
-import Image from "next/image";
+import FadeInImage from "./fade-in-image";
 import "./tech.css";
 
-type FadeInImageProps = {
-  alt: string;
-  fadeInFromThe: "left" | "right";
-  height: number;
-  isVisible: boolean | null;
-  src: string;
-  width: number;
+type ObservableArgs = {
+  justify: "left" | "right";
+  index: number
+  callback: Function;
 }
 
-const FadeInImage = ({
-   alt,
-   fadeInFromThe,
-   height,
-   isVisible,
-   src,
-   width,
- }: FadeInImageProps) => {
-  return (
-    <span className={`woh__fade-in-container-${fadeInFromThe}`}>
-      <div className={`woh__tech-page-image-${fadeInFromThe} ${isVisible ? "fade-in" : ""}`}>
-        <Image
-          alt={alt}
-          src={src}
-          width={width}
-          height={height}
-        />
-      </div>
-    </span>
-  );
+const buildObservable = (args: ObservableArgs) => {
+  const {justify, index, callback} = args;
+  const observer = new IntersectionObserver(([entry]) => callback(entry.isIntersecting));
+  const image = document.querySelectorAll(`.woh__tech-page-image-${justify}`)[index]!;
+  return {observer, image};
 };
 
 export default function Page() {
-  // Starts with image2 -- the first image is "above the fold".
+  const [image1Visible, setImage1] = useState<boolean | null>(false);
   const [image2Visible, setImage2] = useState<boolean | null>(false);
   const [image3Visible, setImage3] = useState<boolean | null>(false);
   const [image4Visible, setImage4] = useState<boolean | null>(false);
 
   useEffect(() => {
-    const img2Observer = new IntersectionObserver(
-      ([entry]) => {
-        setImage2(entry.isIntersecting);
-      }
-    );
-    const image2Wrapper = document.querySelectorAll(".woh__tech-page-image-right")[0]!;
-    img2Observer.observe(image2Wrapper);
-    const img3Observer = new IntersectionObserver(
-      ([entry]) => {
-        setImage3(entry.isIntersecting);
-      }
-    );
-    const image3Wrapper = document.querySelectorAll(".woh__tech-page-image-left")[0]!;
-    img3Observer.observe(image3Wrapper);
-    const img4Observer = new IntersectionObserver(
-      ([entry]) => {
-        setImage4(entry.isIntersecting);
-      }
-    );
-    const image4Wrapper = document.querySelectorAll(".woh__tech-page-image")[0]!;
-    img4Observer.observe(image4Wrapper);
+    const {observer: img1Observer, image: image1} = buildObservable({justify: "left", index: 0, callback: setImage1});
+    const {observer: img2Observer, image: image2} = buildObservable({justify: "right", index: 0, callback: setImage2});
+    const {observer: img3Observer, image: image3} = buildObservable({justify: "left", index: 1, callback: setImage3});
+    const {observer: img4Observer, image: image4} = buildObservable({justify: "right", index: 1, callback: setImage4});
+    img1Observer.observe(image1);
+    img2Observer.observe(image2);
+    img3Observer.observe(image3);
+    img4Observer.observe(image4);
 
     return () => {
+      img1Observer.disconnect();
       img2Observer.disconnect();
       img3Observer.disconnect();
       img4Observer.disconnect();
@@ -76,7 +46,7 @@ export default function Page() {
       <h5>
         I'm an engineer at Gap Inc., and Woobler is my younger son, to whom this site is dedicated. We like serifs.
       </h5>
-      <h4>August 2024</h4>
+      <h4 className="woh__dev-diary-date">August 2024</h4>
       <p className="woh__has-drop-letter">
         I am leading my team's apps from being two of a constellation of React
         SPAs to just another set of packages within a massive Next.js monorepo.
@@ -85,16 +55,14 @@ export default function Page() {
         Routing, auth, global state and CI/CD was done by a designated architecture team, however; my
         team of about a dozen people concerns itself with colossal leaf nodes on product display pages.
         If that seems overly specialized, consider that our site is essentially the same code
-        <span>
-          <div className="woh__tech-page-image-visible">
-            <Image
-              alt="Next.js logo"
-              src="/images/logo_NextJS.png"
-              width={100}
-              height={100}
-            />
-          </div>
-        </span>
+        <FadeInImage
+          alt="Next.js logo"
+          fadeInFromThe="left"
+          isVisible={image1Visible}
+          src="/images/logo_NextJS.png"
+          height={100}
+          width={100}
+        />
         for many brands: Gap, Old Navy, Banana Republic, and Athleta. Then add additional complexity of our sites for
         other countries, our commitment to accessibility, and the myriad subtle features required to make a pleasant
         e-commerce experience; this is one of the world's largest clothing giants, after all!
@@ -103,7 +71,7 @@ export default function Page() {
         My team was left out of the foundational work. I wanted to know what setting up a proper, complex Next.js was
         all about, so here we are!
       </p>
-      <h4>September 2024</h4>
+      <h4 className="woh__dev-diary-date">September 2024</h4>
       <div className="woh__has-drop-letter">
         This month I'm hoping to learn about the <code>IntersectionObserver</code> API, aggressive preloading, and
         NextAuth.
@@ -124,6 +92,7 @@ export default function Page() {
         app-based routing of Next.js, at least in version 14. I then learned that Vercel manages both technologies. They
         hired Rich Harris in 2021!
       </p>
+      <h4 className="woh__dev-diary-date">October 2024</h4>
       <div className="woh__has-drop-letter">
         Probably the trickiest bit so far was getting AWS Amplify + Cognito + NextAuth to work harmoniously together.
         Amplify wants environment variables in the web console, NextAuth wants a <code>secret</code> attribute in the
@@ -140,14 +109,23 @@ export default function Page() {
         configuration, was to write the environment variables to an inaccessible production .env document at build time.
         That's something I had to figure out on my own. Google, Stack Overflow and ChatGPT just regurgitated the
         NextAuth documentation.
-      </div>
-      <div className={`woh__tech-page-image ${image4Visible ? "fade-in" : ""}`}>
-        <Image
-          alt="AWS logo"
-          src="/images/woobler-pointing.png"
-          width={100}
+        <br/>
+        <br/>
+        Another subtle thing that took me a while to figure out was that because NextAuth supports a
+        wide variety of auth providers, it is not configured to return the given JWT token of a given
+        provider by default. How could it? They label them differently. This took a while to figure out
+        <FadeInImage
+          alt="Cognito logo"
+          fadeInFromThe={"right"}
           height={100}
+          isVisible={image4Visible}
+          src="/images/logo_Cognito.png"
+          width={100}
         />
+        because for years I had used Cognito JavaScript APIs for both React SPA front ends and Node.js
+        back ends. So testing in Bruno, a fine alternative to Postman, I kept getting 401s because the
+        token I plucked out of browser cookies following a successful login was not actually from Cognito.
+        A quick tweak to the NextAuth configuration object fixed that.
       </div>
     </main>
   );
