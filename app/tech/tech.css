@@ -3,12 +3,17 @@
     max-width: 25rem;
 }
 
-p, .woh__has-drop-letter {
+.woh__has-drop-letter {
     text-align: justify;
     font-size: 1.2rem;
 }
 
-p:first-letter,
+h4 {
+    padding: 0.5rem;
+    background: #903;
+    color: #fff;
+}
+
 .woh__has-drop-letter:first-letter {
     color: #903;
     float: left;
@@ -19,9 +24,15 @@ p:first-letter,
     padding-left: 0.25rem;
 }
 
-.woh__tech-page-image-visible {
+.woh__tech-page-image-visible,
+.woh__fade-in-container {
     float: right;
     margin: 1rem auto 0.75rem 1rem;
+}
+
+.woh__fade-in-container-left {
+    float: left;
+    margin: 1rem 1rem 0.75rem auto;
 }
 
 .woh__tech-page-image {
@@ -29,8 +40,15 @@ p:first-letter,
     transform: translateX(50%);
     opacity: 0;
     transition: all 500ms;
-
 }
+
+/*.woh__tech-page-image {*/
+/*    transform: translateX(-50%);*/
+/*    width: 100%;*/
+/*    transform: translateX(50%);*/
+/*    opacity: 0;*/
+/*    transition: all 500ms;*/
+/*}*/
 
 .woh__tech-page-image.fade-in {
     transform: translateX(0);
