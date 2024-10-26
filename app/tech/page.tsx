@@ -47,11 +47,12 @@ export default function Page() {
         I'm an engineer at Gap Inc., and Woobler is my younger son, to whom this site is dedicated. We like serifs.
       </h5>
       <h4 className="woh__dev-diary-date">August 2024</h4>
-      <p className="woh__has-drop-letter">
+      <div className="woh__has-drop-letter">
         I am leading my team's apps from being two of a constellation of React
         SPAs to just another set of packages within a massive Next.js monorepo.
-      </p>
-      <div className="woh__has-drop-letter">
+      </div>
+      <br/>
+      <div className="woh__ensuing-paragraph">
         Routing, auth, global state and CI/CD was done by a designated architecture team, however; my
         team of about a dozen people concerns itself with colossal leaf nodes on product display pages.
         If that seems overly specialized, consider that our site is essentially the same code
@@ -66,11 +67,10 @@ export default function Page() {
         for many brands: Gap, Old Navy, Banana Republic, and Athleta. Then add additional complexity of our sites for
         other countries, our commitment to accessibility, and the myriad subtle features required to make a pleasant
         e-commerce experience; this is one of the world's largest clothing giants, after all!
-      </div>
-      <p className="woh__has-drop-letter">
+      <br/>
         My team was left out of the foundational work. I wanted to know what setting up a proper, complex Next.js was
         all about, so here we are!
-      </p>
+      </div>
       <h4 className="woh__dev-diary-date">September 2024</h4>
       <div className="woh__has-drop-letter">
         This month I'm hoping to learn about the <code>IntersectionObserver</code> API, aggressive preloading, and
@@ -87,11 +87,12 @@ export default function Page() {
         place to maintain them and see how they evolve along
         with Next.js.
       </div>
-      <p className="woh__has-drop-letter">
+      <br/>
+      <div className="woh__ensuing-paragraph">
         In past jobs I used React Router, Tanstack Router, and SvelteKit routing. The latter felt the most like the
         app-based routing of Next.js, at least in version 14. I then learned that Vercel manages both technologies. They
         hired Rich Harris in 2021!
-      </p>
+      </div>
       <h4 className="woh__dev-diary-date">October 2024</h4>
       <div className="woh__has-drop-letter">
         Probably the trickiest bit so far was getting AWS Amplify + Cognito + NextAuth to work harmoniously together.
