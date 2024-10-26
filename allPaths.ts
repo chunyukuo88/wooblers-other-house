@@ -9,6 +9,7 @@ const allPaths = {
   LOGIN: "/login",
   PROFILE,
   SETTINGS: "/settings",
+  TECH: "/tech",
 };
 
 export {protectedPaths, allPaths};

@@ -49,6 +49,12 @@ export default function NavBar() {
           : <Link href={allPaths.SETTINGS}>Settings</Link>
         }
       </div>
+      <div className="woh__nav-bar-string">
+        {pathname === allPaths.TECH
+          ? null
+          : <Link href={allPaths.TECH}>Tech</Link>
+        }
+      </div>
       <ProtectedPaths/>
     </div>
   );

@@ -1,0 +1,57 @@
+#tech-page {
+    margin: 1rem;
+    max-width: 25rem;
+}
+
+.woh__has-drop-letter {
+    text-align: justify;
+    font-size: 1.2rem;
+}
+
+h4.woh__dev-diary-date {
+    padding: 0.5rem;
+    background: #903;
+    color: #fff;
+}
+
+.woh__has-drop-letter:first-letter {
+    color: #903;
+    float: left;
+    font-size: 3.5rem;
+    line-height: 2rem;
+    padding-top: 0.25rem;
+    padding-right: 0.5rem;
+    padding-left: 0.25rem;
+}
+
+.woh__fade-in-container-right {
+    float: right;
+    margin: 1rem auto 0.75rem 1rem;
+}
+
+.woh__tech-page-image-visible,
+.woh__fade-in-container-left {
+    float: left;
+    margin: 1rem 1rem 0.75rem auto;
+}
+
+.woh__tech-page-image-left {
+    width: 100%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: all 500ms;
+}
+
+.woh__tech-page-image-right {
+    width: 100%;
+    transform: translateX(50%);
+    opacity: 0;
+    transition: all 500ms;
+}
+
+.woh__tech-page-image-left.fade-in,
+.woh__tech-page-image-right.fade-in {
+    transform: translateX(0);
+    opacity: 1;
+    transition: all 500ms;
+}
