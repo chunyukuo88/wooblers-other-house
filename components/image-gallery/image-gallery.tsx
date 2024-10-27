@@ -5,8 +5,8 @@ import {FetchedImagesContext as context} from "../../store/fetched-images-contex
 import ScrollToTopButton from "@/components/navigation/scroll-to-top-button";
 import {ImageCard} from "@/components/image-gallery/image-card";
 import {BucketItem} from "../../store/types";
-import "./image-gallery.css";
 import Pencil from "@/components/image-gallery/pencil";
+import "./image-gallery.css";
 
 const imageSource = process.env.NEXT_PUBLIC_IMAGE_SOURCE;
 
@@ -20,7 +20,6 @@ const ImageGallery: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const {data: session} = useSession();
-
   const fetchImages = async () => {
     try {
       // @ts-ignore
@@ -40,7 +39,6 @@ const ImageGallery: React.FC = () => {
   useEffect(() => {
     fetchImages().then(data => {
       updateFetchedImages(data.photos);
-      data.captions.pop();
       updateFetchedCaptions(data.captions);
     });
 
