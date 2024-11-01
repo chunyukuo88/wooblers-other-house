@@ -12,27 +12,33 @@ export const BackgroundColorContext = createContext({
   updateBackgroundColor_R: function(colorInteger_R: number) {},
   updateBackgroundColor_G: function(colorInteger_G: number) {},
   updateBackgroundColor_B: function(colorInteger_B: number) {},
+  sumOfColors: (255 * 3),
 });
 
 export function CaptionColorProvider(props: PropsWithChildren){
   const [color_R, setColor_R] = useState(defaultColorInteger_R);
   const [color_G, setColor_G] = useState(defaultColorInteger_G);
   const [color_B, setColor_B] = useState(defaultColorInteger_B);
+  const [sum, setSum] = useState((color_R + color_G + color_B));
 
   function updateTheColor_R(newColor_R: number){
     setColor_R(newColor_R);
+    setSum((color_R + color_G + color_B));
   }
   function updateTheColor_G(newColor_G: number){
     setColor_G(newColor_G);
+    setSum((color_R + color_G + color_B));
   }
   function updateTheColor_B(newColor_B: number){
     setColor_B(newColor_B);
+    setSum((color_R + color_G + color_B));
   }
 
   const context = {
     backgroundColor_R: color_R,
     backgroundColor_G: color_G,
     backgroundColor_B: color_B,
+    sumOfColors: sum,
     updateBackgroundColor_R: updateTheColor_R,
     updateBackgroundColor_G: updateTheColor_G,
     updateBackgroundColor_B: updateTheColor_B,
