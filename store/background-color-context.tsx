@@ -1,17 +1,17 @@
 "use client";
 import { createContext, useState, type PropsWithChildren } from 'react';
 
-const defaultColor = "rgb(255, 255, 255)";
+const defaultColorInteger = 0;
 
 export const BackgroundColorContext = createContext({
-  backgroundColor: defaultColor,
-  updateBackgroundColor: function(color: string) {},
+  backgroundColor: defaultColorInteger,
+  updateBackgroundColor: function(colorInteger: number) {},
 });
 
 export function CaptionColorProvider(props: PropsWithChildren){
-  const [color, setColor] = useState<string>(defaultColor);
+  const [color, setColor] = useState(defaultColorInteger);
 
-  function updateTheColor(newColor: string){
+  function updateTheColor(newColor: number){
     setColor(newColor);
   }
 

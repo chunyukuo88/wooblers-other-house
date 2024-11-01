@@ -11,8 +11,10 @@ interface Children {
 export function Content({children}: Children){
   const {backgroundColor} = useContext(context);
 
+  const resolvedColor = `rgb(${backgroundColor}, ${backgroundColor}, ${backgroundColor}`;
+
   return (
-    <main className="woh__site-content" style={{ backgroundColor }}>
+    <main className="woh__site-content" style={{ backgroundColor: resolvedColor }}>
       <SiteTitleString/>
       <NavBar/>
       {children}
