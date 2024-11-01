@@ -4,13 +4,16 @@ import {BackgroundColorContext as context} from "../../store/background-color-co
 
 export default function ColorPicker(){
   const {
+    backgroundColor_R,
     updateBackgroundColor_R,
+    backgroundColor_G,
     updateBackgroundColor_G,
+    backgroundColor_B,
     updateBackgroundColor_B,
   } = useContext(context);
-  const [hue_R, setHue_R] = useState<number>(255);
-  const [hue_G, setHue_G] = useState<number>(255);
-  const [hue_B, setHue_B] = useState<number>(255);
+  const [hue_R, setHue_R] = useState<number>(backgroundColor_R);
+  const [hue_G, setHue_G] = useState<number>(backgroundColor_G);
+  const [hue_B, setHue_B] = useState<number>(backgroundColor_B);
 
   useEffect(() => {
     updateBackgroundColor_R(hue_R);
@@ -32,47 +35,42 @@ export default function ColorPicker(){
     setHue_B(Number(event.target.value));
   };
 
-  const sliderStyles: React.CSSProperties = {
-    width: '100%',
-    margin: '10px 0',
-  };
-
   return (
     <>
       <h2>Change the Color!</h2>
-      <div className="woh_color-picker">
+      <div className="woh__color-picker">
         <span>Red</span>
         <input
+          className="woh__color-input"
           type="range"
           min="0"
           max="255"
           value={hue_R}
           onChange={handleHueChange_R}
-          style={sliderStyles}
         />
         <div>Hue: {hue_R}°</div>
       </div>
-      <div className="woh_color-picker">
+      <div className="woh__color-picker">
         <span>Green</span>
         <input
+          className="woh__color-input"
           type="range"
           min="0"
           max="255"
           value={hue_G}
           onChange={handleHueChange_G}
-          style={sliderStyles}
         />
         <div>Hue: {hue_G}°</div>
       </div>
-      <div className="woh_color-picker">
+      <div className="woh__color-picker">
         <span>Blue</span>
         <input
+          className="woh__color-input"
           type="range"
           min="0"
           max="255"
           value={hue_B}
           onChange={handleHueChange_B}
-          style={sliderStyles}
         />
         <div>Hue: {hue_B}°</div>
       </div>
