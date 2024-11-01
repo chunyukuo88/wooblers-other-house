@@ -15,10 +15,13 @@ export function Content({children}: Children){
     backgroundColor_B,
   } = useContext(context);
 
-  const resolvedColor = `rgb(${backgroundColor_R}, ${backgroundColor_G}, ${backgroundColor_B}`;
+  const resolvedColor = `rgb(${backgroundColor_R}, ${backgroundColor_G}, ${backgroundColor_B})`;
+  const style = {
+    backgroundImage: `linear-gradient(${resolvedColor}, white)`
+  };
 
   return (
-    <main className="woh__site-content" style={{ backgroundColor: resolvedColor }}>
+    <main className="woh__site-content" style={style}>
       <SiteTitleString/>
       <NavBar/>
       {children}

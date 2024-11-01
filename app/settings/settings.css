@@ -1,5 +1,10 @@
 .woh___settings-page {
     margin-top: 1rem;
+    width: 100vw;
+}
+
+#color-picker-section {
+    height: 79vh;
 }
 
 .woh__color-picker {

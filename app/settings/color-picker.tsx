@@ -36,7 +36,7 @@ export default function ColorPicker(){
   };
 
   return (
-    <>
+    <div id="color-picker-section">
       <h2>Change the Color!</h2>
       <div className="woh__color-picker">
         <span>Red</span>
@@ -74,6 +74,6 @@ export default function ColorPicker(){
         />
         <div>Hue: {hue_B}°</div>
       </div>
-    </>
+    </div>
   );
 }
