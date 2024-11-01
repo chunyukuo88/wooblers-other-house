@@ -1,23 +1,18 @@
+import React from "react";
 import Providers from "../store/providers";
-import NavBar from "@/components/navigation/nav-bar";
-import SiteTitleString from "@/components/navigation/site-title-string";
+import {Content} from "./content";
 import "../styles/global.css";
 
 interface Children {
   children: React.ReactNode;
 }
 
-
-export default async function RootLayout({ children }: Children) {
+export default async function RootLayout({children}: Children) {
   return (
     <html lang="en" className="h-full bg-gray-100">
       <body className="h-full">
         <Providers>
-          <main className="woh__site-content">
-            <SiteTitleString />
-            <NavBar />
-            {children}
-          </main>
+          <Content children={children}/>
         </Providers>
       </body>
     </html>
