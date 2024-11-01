@@ -1,17 +1,17 @@
 "use client";
 import React, {useContext, useEffect, useState} from "react";
-import {BackgroundColorContext as context, BackgroundColorContext} from "../../store/background-color-context";
+import {BackgroundColorContext as context} from "../../store/background-color-context";
 
 export default function ColorPicker(){
-  const {updateBackgroundColor} = useContext(context);
-  const [hue, setHue] = useState<number>(255);
+  const {updateBackgroundColor_R} = useContext(context);
+  const [hue_R, setHue_R] = useState<number>(255);
 
   useEffect(() => {
-    updateBackgroundColor(hue);
-  }, [hue]);
+    updateBackgroundColor_R(hue_R);
+  }, [hue_R]);
 
   const handleHueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setHue(Number(event.target.value));
+    setHue_R(Number(event.target.value));
   };
 
   const sliderStyles: React.CSSProperties = {
@@ -22,15 +22,18 @@ export default function ColorPicker(){
   return (
     <>
       <h2>Change the Color!</h2>
-      <input
-        type="range"
-        min="0"
-        max="255"
-        value={hue}
-        onChange={handleHueChange}
-        style={sliderStyles}
-      />
-      <div>Hue: {hue}°</div>
+      <div className="woh_color-picker">
+        <span>Red</span>
+        <input
+          type="range"
+          min="0"
+          max="255"
+          value={hue_R}
+          onChange={handleHueChange}
+          style={sliderStyles}
+        />
+      </div>
+      <div>Hue: {hue_R}°</div>
     </>
   );
 }

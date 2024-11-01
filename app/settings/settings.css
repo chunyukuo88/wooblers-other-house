@@ -1,3 +1,10 @@
 .woh__settings-page {
     margin-top: 1rem;
+    height: 100%;
+}
+
+.woh_color-picker {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

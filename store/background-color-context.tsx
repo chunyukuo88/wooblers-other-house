@@ -1,23 +1,23 @@
 "use client";
-import { createContext, useState, type PropsWithChildren } from 'react';
+import {createContext, useState, type PropsWithChildren} from 'react';
 
-const defaultColorInteger = 0;
+const defaultColorInteger_R = 255;
 
 export const BackgroundColorContext = createContext({
-  backgroundColor: defaultColorInteger,
-  updateBackgroundColor: function(colorInteger: number) {},
+  backgroundColor_R: defaultColorInteger_R,
+  updateBackgroundColor_R: function(colorInteger_R: number) {},
 });
 
 export function CaptionColorProvider(props: PropsWithChildren){
-  const [color, setColor] = useState(defaultColorInteger);
+  const [color_R, setColor_R] = useState(defaultColorInteger_R);
 
-  function updateTheColor(newColor: number){
-    setColor(newColor);
+  function updateTheColor_R(newColor_R: number){
+    setColor_R(newColor_R);
   }
 
   const context = {
-    backgroundColor: color,
-    updateBackgroundColor: updateTheColor,
+    backgroundColor_R: color_R,
+    updateBackgroundColor_R: updateTheColor_R,
   };
 
   return (
