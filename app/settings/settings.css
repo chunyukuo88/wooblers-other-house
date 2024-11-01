@@ -6,5 +6,7 @@
 .woh_color-picker {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     align-items: center;
+    width: 40rem;
 }

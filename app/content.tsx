@@ -9,9 +9,13 @@ interface Children {
 }
 
 export function Content({children}: Children){
-  const {backgroundColor_R} = useContext(context);
+  const {
+    backgroundColor_R,
+    backgroundColor_G,
+    backgroundColor_B,
+  } = useContext(context);
 
-  const resolvedColor = `rgb(${backgroundColor_R}, 255, 255`;
+  const resolvedColor = `rgb(${backgroundColor_R}, ${backgroundColor_G}, ${backgroundColor_B}`;
 
   return (
     <main className="woh__site-content" style={{ backgroundColor: resolvedColor }}>
