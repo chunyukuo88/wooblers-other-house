@@ -8,9 +8,18 @@ type SiteTitleStringProps = {
 
 export default function SiteTitleString(props: SiteTitleStringProps) {
   const {fontColor} = props;
+  console.log(fontColor)
+  const shadowColor = (!fontColor)
+    ? "yellow"
+    : "black";
   const style = {
     color: fontColor,
-    transition: "1s",
+    transition: "2s ease-in",
+    textShadow:
+      `-1px -1px 0 ${shadowColor}, ` +
+      `1px -1px 0 ${shadowColor}, ` +
+      `-1px 1px 0 ${shadowColor}, ` +
+      `1px 1px 0 ${shadowColor}`
   }
   return (
     <h1 className="woh__site-title-string" style={style}>
