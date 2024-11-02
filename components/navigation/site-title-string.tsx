@@ -8,10 +8,7 @@ type SiteTitleStringProps = {
 
 export default function SiteTitleString(props: SiteTitleStringProps) {
   const {fontColor} = props;
-  console.log(fontColor)
-  const shadowColor = (!fontColor)
-    ? "yellow"
-    : "black";
+  const shadowColor = (!fontColor) ? "gray" : "black";
   const style = {
     color: fontColor,
     transition: "2s ease-in",
@@ -20,16 +17,17 @@ export default function SiteTitleString(props: SiteTitleStringProps) {
       `1px -1px 0 ${shadowColor}, ` +
       `-1px 1px 0 ${shadowColor}, ` +
       `1px 1px 0 ${shadowColor}`
-  }
+  };
+
   return (
     <h1 className="woh__site-title-string" style={style}>
-      <div className="woh__wiggling-cars">🚛 </div>
+      <div className="woh__wiggling-cars">🚛</div>
       <Link href={allPaths.HOME}>
-        <div className="woh_drop-in">Woobler's </div>
-        <div className="woh_drop-in">Other </div>
+        <div className="woh_drop-in">Woobler's</div>
+        <div className="woh_drop-in">Other</div>
         <div className="woh_eventual-slant">House</div>
       </Link>
-      <div className="woh__wiggling-cars"> 🚔</div>
+      <div className="woh__wiggling-cars">🚔</div>
     </h1>
   )
 }
