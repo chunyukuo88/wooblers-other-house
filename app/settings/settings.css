@@ -1,3 +1,28 @@
-.woh__settings-page {
+.woh___settings-page {
     margin-top: 1rem;
+    width: 100vw;
+}
+
+#color-picker-section {
+    height: 79vh;
+}
+
+.woh__color-picker {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 22rem;
+}
+
+.woh__color-picker > span {
+    width: 4rem;
+}
+
+.woh__color-input {
+    width: 8rem;
+}
+
+.woh__color-picker > div {
+    width: 8rem;
 }
