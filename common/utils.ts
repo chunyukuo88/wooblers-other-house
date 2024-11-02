@@ -12,4 +12,4 @@ const calculateFontColor = (args: FontCalculationArgs):string => {
     : "black";
 };
 
-export { calculateFontColor };
+export {calculateFontColor};
