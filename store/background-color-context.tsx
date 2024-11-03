@@ -7,10 +7,12 @@ enum COLORS {
   BLUE = "blue",
 }
 
+const maxColorIntensity = 255;
+
 export const BackgroundColorContext = createContext({
-  backgroundColor_R: 255,
-  backgroundColor_G: 255,
-  backgroundColor_B: 255,
+  backgroundColor_R: maxColorIntensity,
+  backgroundColor_G: maxColorIntensity,
+  backgroundColor_B: maxColorIntensity,
   updateBackgroundColor_R: (colorInteger_R: number) => {},
   updateBackgroundColor_G: (colorInteger_G: number) => {},
   updateBackgroundColor_B: (colorInteger_B: number) => {},
@@ -18,19 +20,19 @@ export const BackgroundColorContext = createContext({
 });
 
 export function CaptionColorProvider(props: PropsWithChildren) {
-  const [color_R, setColor_R] = useState(255);
-  const [color_G, setColor_G] = useState(255);
-  const [color_B, setColor_B] = useState(255);
+  const [color_R, setColor_R] = useState(maxColorIntensity);
+  const [color_G, setColor_G] = useState(maxColorIntensity);
+  const [color_B, setColor_B] = useState(maxColorIntensity);
   const [sum, setSum] = useState(765);
 
   const getDefaultColor = (color: string): number => {
     if (typeof window !== 'undefined' && window.localStorage) {
-      return 255;
+      return maxColorIntensity;
     }
     const storageResult = window.localStorage?.getItem(color);
     return (storageResult)
       ? parseInt(storageResult, 10)
-      : 255;
+      : maxColorIntensity;
   };
 
   useEffect(() => {
