@@ -67,7 +67,7 @@ export default function Page() {
         for many brands: Gap, Old Navy, Banana Republic, and Athleta. Then add additional complexity of our sites for
         other countries, our commitment to accessibility, and the myriad subtle features required to make a pleasant
         e-commerce experience; this is one of the world's largest clothing giants, after all!
-      <br/>
+        <br/>
         My team was left out of the foundational work. I wanted to know what setting up a proper, complex Next.js was
         all about, so here we are!
       </div>
@@ -128,6 +128,7 @@ export default function Page() {
         token I plucked out of browser cookies following a successful login was not actually from Cognito.
         A quick tweak to the NextAuth configuration object fixed that.
       </div>
+      <h4 className="woh__dev-diary-date">November 2024</h4>
     </main>
   );
 }
