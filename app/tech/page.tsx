@@ -129,6 +129,26 @@ export default function Page() {
         A quick tweak to the NextAuth configuration object fixed that.
       </div>
       <h4 className="woh__dev-diary-date">November 2024</h4>
+      <div className="woh__has-drop-letter">
+        I created a color picker feature, mostly as a math problem for my older son but also to see what the process
+        would
+        entail. Not much, I suppose. The trickiest bit was finding the best way to the user's color selection across
+        refreshes
+        without making an API call, since the feature should apply to users who have not logged in.
+        <FadeInImage
+          alt="Chrome logo"
+          fadeInFromThe={"left"}
+          height={100}
+          isVisible={image4Visible}
+          src="/images/logo_Chrome.png"
+          width={120}
+        />
+        {" "}In a React SPA, this is effortless. But in the case of a server-rendered page, it takes a bit of finessing to
+        prevent
+        the page from resetting to a default color if the user refreshes or visits in a new tab. Hence, a lot of time
+        spent
+        with the Chrome dev tools open.
+      </div>
     </main>
-  );
+);
 }
