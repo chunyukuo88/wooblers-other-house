@@ -9,6 +9,12 @@ type FadeInImageProps = {
   width: number;
 }
 
+const extractedCaption = (src: string): string => {
+  const removedFileType = src.split(".")[0];
+  const technologyNameOnly = removedFileType.split("_")[1];
+  return technologyNameOnly;
+};
+
 export default function FadeInImage(props: FadeInImageProps) {
   const {
     alt,
@@ -27,6 +33,7 @@ export default function FadeInImage(props: FadeInImageProps) {
           width={width}
           height={height}
         />
+        <div className="woh__technology-caption">{extractedCaption(src)}</div>
       </div>
     </span>
   );
