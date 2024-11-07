@@ -67,7 +67,7 @@ export default function Page() {
         for many brands: Gap, Old Navy, Banana Republic, and Athleta. Then add additional complexity of our sites for
         other countries, our commitment to accessibility, and the myriad subtle features required to make a pleasant
         e-commerce experience; this is one of the world's largest clothing giants, after all!
-      <br/>
+        <br/>
         My team was left out of the foundational work. I wanted to know what setting up a proper, complex Next.js was
         all about, so here we are!
       </div>
@@ -128,6 +128,27 @@ export default function Page() {
         token I plucked out of browser cookies following a successful login was not actually from Cognito.
         A quick tweak to the NextAuth configuration object fixed that.
       </div>
+      <h4 className="woh__dev-diary-date">November 2024</h4>
+      <div className="woh__has-drop-letter">
+        I created a color picker feature, mostly as a math problem for my older son but also to see what the process
+        would
+        entail. Not much, I suppose. The trickiest bit was finding the best way to the user's color selection across
+        refreshes
+        without making an API call, since the feature should apply to users who have not logged in.
+        <FadeInImage
+          alt="Chrome logo"
+          fadeInFromThe={"left"}
+          height={100}
+          isVisible={image4Visible}
+          src="/images/logo_Chrome.png"
+          width={120}
+        />
+        {" "}In a React SPA, this is effortless. But in the case of a server-rendered page, it takes a bit of finessing to
+        prevent
+        the page from resetting to a default color if the user refreshes or visits in a new tab. Hence, a lot of time
+        spent
+        with the Chrome dev tools open.
+      </div>
     </main>
-  );
+);
 }
