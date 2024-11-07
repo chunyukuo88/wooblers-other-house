@@ -49,9 +49,30 @@ function ProtectedPaths(){
   </> : null;
 }
 
-export default function NavBar() {
+type NavBarProps = {
+  fontColor: string;
+}
+
+export default function NavBar({fontColor}: NavBarProps) {
   const pathname = usePathname();
   const {data: session} = useSession();
+
+  const shadowColor = (!fontColor) ? "gray" : "black";
+
+  const textShadow = (fontColor !== "black")
+    ? `-1px -1px 0 ${shadowColor}, ` +
+    `1px -1px 0 ${shadowColor}, ` +
+    `-1px 1px 0 ${shadowColor}, ` +
+    `1px 1px 0 ${shadowColor}`
+    : undefined;
+
+  const style = {
+    color: fontColor,
+    transition: "2s ease-in",
+    fontSize: "1.25rem",
+    textShadow,
+    fontWeight: 700,
+  };
 
   const shouldShowLogin = (!session && pathname !== allPaths.LOGIN);
   const LogoutOrHome = () => session
@@ -59,7 +80,7 @@ export default function NavBar() {
     : <Link href={allPaths.HOME}>Home</Link>;
 
   return (
-    <div className="woh__nav-bar">
+    <div className="woh__nav-bar" style={style}>
       <div className="woh__nav-bar-string">
         {shouldShowLogin
           ? <NavLink href={allPaths.LOGIN}>Login</NavLink>
