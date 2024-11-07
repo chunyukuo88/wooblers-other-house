@@ -26,7 +26,7 @@ export function Content({children}: Children){
   return (
     <main className="woh__site-content" style={style}>
       <SiteTitleString fontColor={fontColor}/>
-      <NavBar/>
+      <NavBar fontColor={fontColor}/>
       {children}
     </main>
   );
