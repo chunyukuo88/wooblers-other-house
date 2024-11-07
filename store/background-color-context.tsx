@@ -16,24 +16,21 @@ export const BackgroundColorContext = createContext({
   updateBackgroundColor_R: (colorInteger_R: number) => {},
   updateBackgroundColor_G: (colorInteger_G: number) => {},
   updateBackgroundColor_B: (colorInteger_B: number) => {},
-  sumOfColors: 765, // 255 * 3
+  sumOfColors: 765, // === 255 * 3
 });
 
 export function CaptionColorProvider(props: PropsWithChildren) {
-  const [color_R, setColor_R] = useState(maxColorIntensity);
-  const [color_G, setColor_G] = useState(maxColorIntensity);
-  const [color_B, setColor_B] = useState(maxColorIntensity);
-  const [sum, setSum] = useState(765);
-
   const getDefaultColor = (color: string): number => {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      return maxColorIntensity;
-    }
     const storageResult = window.localStorage?.getItem(color);
     return (storageResult)
       ? parseInt(storageResult, 10)
       : maxColorIntensity;
   };
+
+  const [color_R, setColor_R] = useState(maxColorIntensity);
+  const [color_G, setColor_G] = useState(maxColorIntensity);
+  const [color_B, setColor_B] = useState(maxColorIntensity);
+  const [sum, setSum] = useState(765);
 
   useEffect(() => {
     const defaultColor_R = getDefaultColor(COLORS.RED);
