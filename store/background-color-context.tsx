@@ -1,11 +1,6 @@
 "use client";
 import {createContext, useState, type PropsWithChildren, useEffect} from "react";
-
-enum COLORS {
-  RED = "red",
-  GREEN = "green",
-  BLUE = "blue",
-}
+import {COLOR_LABELS} from "./types";
 
 const maxColorIntensity = 255;
 
@@ -33,9 +28,9 @@ export function CaptionColorProvider(props: PropsWithChildren) {
   const [sum, setSum] = useState(765);
 
   useEffect(() => {
-    const defaultColor_R = getDefaultColor(COLORS.RED);
-    const defaultColor_G = getDefaultColor(COLORS.GREEN);
-    const defaultColor_B = getDefaultColor(COLORS.BLUE);
+    const defaultColor_R = getDefaultColor(COLOR_LABELS.RED);
+    const defaultColor_G = getDefaultColor(COLOR_LABELS.GREEN);
+    const defaultColor_B = getDefaultColor(COLOR_LABELS.BLUE);
 
     setColor_R(defaultColor_R);
     setColor_G(defaultColor_G);
@@ -46,21 +41,21 @@ export function CaptionColorProvider(props: PropsWithChildren) {
   function updateTheColor_R(newColor_R: number){
     setColor_R(newColor_R);
     if (typeof window !== 'undefined' && window.localStorage) {
-      window.localStorage.setItem("red", newColor_R.toString());
+      window.localStorage.setItem(COLOR_LABELS.RED, newColor_R.toString());
     }
     setSum((color_R + color_G + color_B));
   }
   function updateTheColor_G(newColor_G: number){
     setColor_G(newColor_G);
     if (typeof window !== 'undefined' && window.localStorage) {
-      window.localStorage.setItem("green", newColor_G.toString());
+      window.localStorage.setItem(COLOR_LABELS.GREEN, newColor_G.toString());
     }
     setSum((color_R + color_G + color_B));
   }
   function updateTheColor_B(newColor_B: number){
     setColor_B(newColor_B);
     if (typeof window !== 'undefined' && window.localStorage) {
-      window.localStorage.setItem("blue", newColor_B.toString());
+      window.localStorage.setItem(COLOR_LABELS.BLUE, newColor_B.toString());
     }
     setSum((color_R + color_G + color_B));
   }
