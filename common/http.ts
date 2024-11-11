@@ -1,6 +1,17 @@
 export const logger = console.log;
 export const errorLogger = console.error;
 
+export const queryKeys = {
+  GET_IMAGES: "get_images",
+};
+
+export async function getImages(){
+  const imageSource = process.env.NEXT_PUBLIC_IMAGE_SOURCE;
+  // @ts-ignore
+  const response = await fetch(imageSource);
+  return response.json();
+}
+
 export async function putData(url: string, data: any){
   try {
     await fetch(url, data);

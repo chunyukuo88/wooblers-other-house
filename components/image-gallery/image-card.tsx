@@ -29,6 +29,8 @@ export function ImageCard(props: ImageCardProps) {
         alt={`Image #${index + 1}`}
         width={300}
         height={200}
+        placeholder="blur"
+        blurDataURL="/images/image_placeholder.png"
         layout="responsive"
       />
       {displayCaption

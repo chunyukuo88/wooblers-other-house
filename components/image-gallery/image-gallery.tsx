@@ -1,5 +1,7 @@
 "use client"
-import React, {useContext, useState, useEffect} from "react";
+import React, {useContext} from "react";
+import {useQuery} from "@tanstack/react-query";
+import {errorLogger, getImages, queryKeys} from "../../common/http";
 import {useSession} from "next-auth/react";
 import {FetchedImagesContext as context} from "../../store/fetched-images-context"
 import ScrollToTopButton from "@/components/navigation/scroll-to-top-button";
@@ -8,8 +10,6 @@ import {BucketItem} from "../../store/types";
 import Pencil from "@/components/image-gallery/pencil";
 import "./image-gallery.css";
 
-const imageSource = process.env.NEXT_PUBLIC_IMAGE_SOURCE;
-
 const ImageGallery: React.FC = () => {
   const {
     updateFetchedImages,
@@ -17,40 +17,24 @@ const ImageGallery: React.FC = () => {
     updateFetchedCaptions,
     fetchedCaptionStrings,
   } = useContext(context);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const {data: session} = useSession();
-  const fetchImages = async () => {
+  const queryResult = useQuery({
+    queryKey: [queryKeys.GET_IMAGES],
+    queryFn: getImages,
+  });
+
+  console.log("queryResult");
+  console.dir(queryResult);
+
+  if (queryResult.error) return <div>Failed to get images.</div>;
+  if (queryResult.isLoading) return <div>Loading...</div>;
+  if (queryResult.isSuccess) {
     try {
-      // @ts-ignore
-      const response = await fetch(imageSource);
-      if (!response.ok) {
-        return new Error("Failed to fetch images");
-      }
-      return await response.json();
-    } catch (err) {
-      setError("Error fetching images. Please try again later.");
-      console.error(err);
-    } finally {
-      setIsLoading(false);
+      updateFetchedImages(queryResult.data.photos);
+      updateFetchedCaptions(queryResult.data.captions);
+    } catch (e) {
+      errorLogger("Error parsing images: ", e);
     }
-  };
-
-  useEffect(() => {
-    fetchImages().then(data => {
-      updateFetchedImages(data.photos);
-      updateFetchedCaptions(data.captions);
-    });
-
-    setIsLoading(false);
-  }, []);
-
-  if (isLoading) {
-    return <div>Loading images...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
   }
 
   const WrappedButton = () => (
