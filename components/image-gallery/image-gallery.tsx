@@ -21,7 +21,7 @@ const ImageGallery: React.FC = () => {
   const queryResult = useQuery({
     queryKey: [queryKeys.GET_IMAGES],
     queryFn: getImages,
-    staleTime: 1000 * 60 * 120, // two hours
+    refetchOnMount: false,
   });
 
   if (queryResult.error) return <div>Failed to get images.</div>;
