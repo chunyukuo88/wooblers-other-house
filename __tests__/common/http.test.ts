@@ -92,7 +92,7 @@ describe("utils", () => {
           ["DELETE", "token4"],
         ])("Given HTTP method %s and token, When createHttpRequest is called, Then it should return a request object with correct method", (method, token) => {
 
-          const result = createHttpRequest(method, token);
+          const result = createHttpRequest(method as any, token);
 
           expect(result.method).toBe(method);
           expect(result.headers["Authorization"]).toBe(`Bearer ${token}`);
