@@ -21,22 +21,30 @@ export default function Page() {
   const [image2Visible, setImage2] = useState<boolean | null>(false);
   const [image3Visible, setImage3] = useState<boolean | null>(false);
   const [image4Visible, setImage4] = useState<boolean | null>(false);
+  const [image5Visible, setImage5] = useState<boolean | null>(false);
+  const [image6Visible, setImage6] = useState<boolean | null>(false);
 
   useEffect(() => {
     const {observer: img1Observer, image: image1} = buildObservable({justify: "left", index: 0, callback: setImage1});
     const {observer: img2Observer, image: image2} = buildObservable({justify: "right", index: 0, callback: setImage2});
     const {observer: img3Observer, image: image3} = buildObservable({justify: "left", index: 1, callback: setImage3});
     const {observer: img4Observer, image: image4} = buildObservable({justify: "right", index: 1, callback: setImage4});
+    const {observer: img5Observer, image: image5} = buildObservable({justify: "left", index: 2, callback: setImage5});
+    const {observer: img6Observer, image: image6} = buildObservable({justify: "right", index: 2, callback: setImage6});
     img1Observer.observe(image1);
     img2Observer.observe(image2);
     img3Observer.observe(image3);
     img4Observer.observe(image4);
+    img5Observer.observe(image5);
+    img6Observer.observe(image6);
 
     return () => {
       img1Observer.disconnect();
       img2Observer.disconnect();
       img3Observer.disconnect();
       img4Observer.disconnect();
+      img5Observer.disconnect();
+      img6Observer.disconnect();
     };
   }, []);
 
@@ -139,16 +147,36 @@ export default function Page() {
           alt="Chrome logo"
           fadeInFromThe={"left"}
           height={100}
-          isVisible={image4Visible}
+          isVisible={image5Visible}
           src="/images/logo_Chrome.png"
           width={120}
         />
-        {" "}In a React SPA, this is effortless. But in the case of a server-rendered page, it takes a bit of finessing to
+        {" "}In a React SPA, this is effortless. But in the case of a server-rendered page, it takes a bit of finessing
+        to
         prevent
         the page from resetting to a default color if the user refreshes or visits in a new tab. Hence, a lot of time
         spent
         with the Chrome dev tools open.
+        <br/>
+        <br/>
+        Of course the big excitement for this month was applying Tanstack Query, which I had used two years ago at Offor Health
+        and also for www.alexgochenour.xyz. What made it exciting was the simple resolution of a problem that I had always found
+        annoying to solve with React alone: preventing needless API calls. With Tanstack, it's a snap, and there are several ways to go about it.
+        If you want to prevent refetches on a page, you can pass the <code>refetchOnMount</code> key to the configuration object
+        <FadeInImage
+          alt="Tanstack logo"
+          fadeInFromThe={"right"}
+          height={100}
+          isVisible={image6Visible}
+          src="/images/logo_Tanstack.png"
+          width={100}
+        />
+        of `useQuery`. If you want to prevent refetches only for a specific interval, you can instead pass the <code>staleTime</code>
+        instead. And there's more, but this is all I have explored for now. As it is, if you navigate away from the man page and then back to it
+        with the Network tab open, you'll notice it doesn't make an API call to get the images again. Thanks, Tanstack!
+        <br/>
+        <br/>
       </div>
     </main>
-);
+  );
 }
