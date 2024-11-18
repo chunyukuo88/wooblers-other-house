@@ -1,11 +1,18 @@
 "use client";
 import Script from "next/script"
+import {useEffect, useState} from "react";
 
 type Props = {
   GA_MEASUREMENT_ID: string;
 }
 
 export default function GoogleAnalyticsObject({GA_MEASUREMENT_ID}: Props) {
+  const [initialized, setInitialized] = useState(false);
+
+  useEffect(() => {
+    setInitialized(true);
+  }, []);
+
   const script = {
     __html: `
     window.dataLayer = window.dataLayer || [];
@@ -18,7 +25,7 @@ export default function GoogleAnalyticsObject({GA_MEASUREMENT_ID}: Props) {
     `,
   }
 
-  return (
+  return initialized ? (
     <>
       <Script
         strategy="afterInteractive"
@@ -30,5 +37,5 @@ export default function GoogleAnalyticsObject({GA_MEASUREMENT_ID}: Props) {
         dangerouslySetInnerHTML={script}
       />
     </>
-  );
+  ) : null;
 }
