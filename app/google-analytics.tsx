@@ -8,8 +8,8 @@ type Props = {
 export default function GoogleAnalyticsObject({GA_MEASUREMENT_ID}: Props) {
   const script = {
     __html: `
-    window.datalayer = window.datalayer || {};
-    function gtag(){datalayer.push(arguments);}
+    window.dataLayer = window.dataLayer || {};
+    function gtag(){window.dataLayer.push(arguments);}
     gtag("js", new Date());
     
     gtag("config", '${GA_MEASUREMENT_ID}', {
