@@ -5,7 +5,7 @@ import {errorLogger, getBreadImages, getMainPageImages, queryKeys} from "../../.
 import {BreadImagesContext} from "../../../store/bread-images-context";
 import {ImageCard} from "@/components/galleries/image-card";
 import {BucketItem} from "../../../store/types";
-import "../image-gallery.css";
+import "../galleries.css";
 
 export default function BreadGallery(){
   const {fetchedBreadImages, updateBreadImages} = useContext(BreadImagesContext);
