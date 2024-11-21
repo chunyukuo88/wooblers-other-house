@@ -2,10 +2,15 @@ export const logger = console.log;
 export const errorLogger = console.error;
 
 export const queryKeys = {
-  GET_IMAGES: "get_images",
+  GET_MAIN_PAGE_IMAGES: "get_images",
+  GET_BREAD_IMAGES: "get_bread_images",
 };
 
-export async function getImages(){
+export async function getBreadImages(req: Request, res: Response) {
+
+}
+
+export async function getMainPageImages(){
   const imageSource = process.env.NEXT_PUBLIC_IMAGE_SOURCE;
   // @ts-ignore
   const response = await fetch(imageSource);

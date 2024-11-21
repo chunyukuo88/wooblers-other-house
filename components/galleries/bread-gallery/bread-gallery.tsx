@@ -6,5 +6,7 @@ import {BreadImagesContext as context} from "../../../store/bread-images-context
 import {ImageCard} from "@/components/galleries/image-card";
 
 export default function BreadGallery(){
+  const {fetchedBreadImages, updateBreadImages} = useContext(context);
+
   return <div>howzit oh boy bread</div>
 }
