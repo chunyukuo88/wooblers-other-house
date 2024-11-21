@@ -1,14 +1,14 @@
 "use client"
 import React, {useContext} from "react";
 import {useQuery} from "@tanstack/react-query";
-import {errorLogger, getImages, queryKeys} from "../../common/http";
+import {errorLogger, getMainPageImages, queryKeys} from "../../../common/http";
 import {useSession} from "next-auth/react";
-import {FetchedImagesContext as context} from "../../store/fetched-images-context"
+import {FetchedImagesContext as context} from "../../../store/fetched-images-context"
 import ScrollToTopButton from "@/components/navigation/scroll-to-top-button";
-import {ImageCard} from "@/components/image-gallery/image-card";
-import {BucketItem} from "../../store/types";
-import Pencil from "@/components/image-gallery/pencil";
-import "./image-gallery.css";
+import {ImageCard} from "@/components/galleries/image-card";
+import {BucketItem} from "../../../store/types";
+import Pencil from "@/components/galleries/main-gallery/pencil";
+import "../galleries.css";
 
 const ImageGallery: React.FC = () => {
   const {
@@ -19,8 +19,8 @@ const ImageGallery: React.FC = () => {
   } = useContext(context);
   const {data: session} = useSession();
   const queryResult = useQuery({
-    queryKey: [queryKeys.GET_IMAGES],
-    queryFn: getImages,
+    queryKey: [queryKeys.GET_MAIN_PAGE_IMAGES],
+    queryFn: getMainPageImages,
     refetchOnMount: false,
   });
 

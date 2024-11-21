@@ -1,4 +1,4 @@
-import Pencil from "@/components/image-gallery/pencil";
+import Pencil from "@/components/galleries/main-gallery/pencil";
 import {
   fireEvent,
   render,

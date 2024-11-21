@@ -99,6 +99,12 @@ export default function NavBar({fontColor}: NavBarProps) {
           : <NavLink href={allPaths.TECH}>Tech</NavLink>
         }
       </div>
+      <div className="woh__nav-bar-string">
+        {pathname === allPaths.BREAD
+          ? null
+          : <NavLink href={allPaths.BREAD}>Bread</NavLink>
+        }
+      </div>
       <ProtectedPaths/>
     </div>
   );

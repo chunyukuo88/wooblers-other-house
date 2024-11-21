@@ -1,4 +1,4 @@
-import {ImageCard, ImageCardProps, processRawCaption} from "@/components/image-gallery/image-card";
+import {ImageCard, ImageCardProps, processRawCaption} from "@/components/galleries/image-card";
 import {render, screen} from "@testing-library/react";
 
 describe('GIVEN: props of file, index, and caption', () => {

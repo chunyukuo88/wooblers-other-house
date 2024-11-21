@@ -1,7 +1,7 @@
 "use client";
 import {useRef, useState} from "react";
-import {updateWithNewCaption} from "@/components/image-gallery/utils";
-import {createHttpRequest, putData} from "../../common/http";
+import {updateWithNewCaption} from "@/components/galleries/main-gallery/utils";
+import {createHttpRequest, putData} from "../../../common/http";
 import {useSession} from "next-auth/react";
 
 type PencilProps = {

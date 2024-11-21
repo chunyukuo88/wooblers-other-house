@@ -1,4 +1,4 @@
-import ImageGallery from "@/components/image-gallery/image-gallery";
+import ImageGallery from "@/components/galleries/main-gallery/image-gallery";
 
 export const metadata = {
   //@ts-ignore
