@@ -1,4 +1,4 @@
-import {updateWithNewCaption} from "@/components/image-gallery/utils";
+import {updateWithNewCaption} from "@/components/galleries/main-gallery/utils";
 
 describe('GIVEN: an array of caption strings, a new caption, and an index,', () => {
   describe('WHEN: the function is executed,', () => {
