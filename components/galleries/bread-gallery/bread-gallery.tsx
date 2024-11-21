@@ -1,12 +1,39 @@
+"use client";
 import "./bread-gallery.css";
 import React, {useContext} from "react";
 import {useQuery} from "@tanstack/react-query";
-import {queryKeys} from "../../../common/http";
-import {BreadImagesContext as context} from "../../../store/bread-images-context";
+import {errorLogger, getBreadImages, getMainPageImages, queryKeys} from "../../../common/http";
+import {BreadImagesContext} from "../../../store/bread-images-context";
 import {ImageCard} from "@/components/galleries/image-card";
+import {BucketItem} from "../../../store/types";
 
 export default function BreadGallery(){
-  const {fetchedBreadImages, updateBreadImages} = useContext(context);
+  const {fetchedBreadImages, updateBreadImages} = useContext(BreadImagesContext);
+  const queryResult = useQuery({
+    queryKey: [queryKeys.GET_BREAD_IMAGES],
+    queryFn: getBreadImages,
+    refetchOnMount: false,
+  });
 
-  return <div>howzit oh boy bread</div>
+  if (queryResult.error) return <div>No bread today.</div>;
+  if (queryResult.isLoading) return <div>Baking those lovely loaves...</div>;
+  if (queryResult.isSuccess) {
+    try {
+      updateBreadImages(queryResult.data);
+    } catch (e) {
+      errorLogger("Error parsing images: ", e);
+    }
+  }
+
+  return (
+    <div className="woh__bread-gallery">
+      {fetchedBreadImages.map((file: BucketItem, index) => {
+        return (
+          <div className={`woh__image-${index}`} key={index}>
+            <ImageCard file={file} index={index}/>
+          </div>
+        );
+      })}
+    </div>
+  );
 }

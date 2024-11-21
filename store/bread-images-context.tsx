@@ -2,7 +2,12 @@
 import { createContext, useState, type PropsWithChildren } from 'react';
 import {BucketItem} from "./types";
 
-export const BreadImagesContext = createContext({
+type BreadImagesContextType = {
+  fetchedBreadImages: BucketItem[];
+  updateBreadImages: (images: BucketItem[]) => void;
+};
+
+export const BreadImagesContext = createContext<BreadImagesContextType>({
   fetchedBreadImages: [],
   updateBreadImages: function (images: BucketItem[]) {},
 });
@@ -20,6 +25,7 @@ export function BreadImagesProvider(props: PropsWithChildren){
   };
 
   return (
+    // @ts-ignore
     <BreadImagesContext.Provider value={context}>
       {props.children}
     </BreadImagesContext.Provider>

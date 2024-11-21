@@ -6,8 +6,11 @@ export const queryKeys = {
   GET_BREAD_IMAGES: "get_bread_images",
 };
 
-export async function getBreadImages(req: Request, res: Response) {
-
+export async function getBreadImages() {
+  const breadImageSource = process.env.NEXT_PUBLIC_BREAD_SOURCE;
+  // @ts-ignore
+  const response = await fetch(breadImageSource);
+  return await response.json();
 }
 
 export async function getMainPageImages(){
