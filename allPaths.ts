@@ -4,6 +4,7 @@ const PROFILE = "/profile";
 const protectedPaths = [DASHBOARD, PROFILE];
 
 const allPaths = {
+  BREAD: "/bread",
   DASHBOARD,
   HOME: "/",
   LOGIN: "/login",
