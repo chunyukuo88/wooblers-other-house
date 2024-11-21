@@ -8,7 +8,7 @@ import ScrollToTopButton from "@/components/navigation/scroll-to-top-button";
 import {ImageCard} from "@/components/galleries/image-card";
 import {BucketItem} from "../../../store/types";
 import Pencil from "@/components/galleries/main-gallery/pencil";
-import "./image-gallery.css";
+import "../image-gallery.css";
 
 const ImageGallery: React.FC = () => {
   const {
