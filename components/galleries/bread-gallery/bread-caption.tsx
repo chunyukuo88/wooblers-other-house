@@ -1,3 +1,5 @@
+import "./bread-caption.css";
+
 type BreadCaptionProps = {
   url: string;
 }
@@ -20,5 +22,5 @@ export default function BreadCaption(props: BreadCaptionProps){
   const caption = unifiedDelimiters.charAt(0).toUpperCase() + unifiedDelimiters.slice(1);
   const trimmed = trimLetterVariant(caption);
 
-  return <p>{trimmed}</p>;
+  return <p className="woh__bread-caption">{trimmed}</p>;
 }
