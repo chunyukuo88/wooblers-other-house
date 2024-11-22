@@ -46,4 +46,15 @@ describe("<BreadCaption />", () => {
       expect(expectedCaption).toBeVisible();
     });
   });
+  describe("WHEN: passed a bread image URL with several underscores,", () => {
+    it("THEN: displays a caption consisting of a single word", () => {
+      const url = "https://woobler-bread.s3.amazonaws.com/make_turkey_sandwiches_interesting.JPG";
+
+      render(<BreadCaption url={url} />);
+
+      const expectedCaption = screen.getByText("Make turkey sandwiches interesting");
+
+      expect(expectedCaption).toBeVisible();
+    });
+  });
 });

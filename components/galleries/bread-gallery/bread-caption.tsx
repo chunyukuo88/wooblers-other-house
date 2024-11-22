@@ -18,7 +18,7 @@ export default function BreadCaption(props: BreadCaptionProps){
   const split = props.url.split("/");
   const nameOfBread = split[split.length - 1];
   const removeExtension = nameOfBread.split(".")[0];
-  const unifiedDelimiters = removeExtension.replace("-", " ").replace("_", " ");
+  const unifiedDelimiters = removeExtension.replaceAll("-", " ").replaceAll("_", " ");
   const caption = unifiedDelimiters.charAt(0).toUpperCase() + unifiedDelimiters.slice(1);
   const trimmed = trimLetterVariant(caption);
 
