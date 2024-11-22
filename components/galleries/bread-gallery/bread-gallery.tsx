@@ -1,11 +1,12 @@
 "use client";
 import React, {useContext} from "react";
 import {useQuery} from "@tanstack/react-query";
-import {errorLogger, getBreadImages, getMainPageImages, queryKeys} from "../../../common/http";
+import {errorLogger, getBreadImages, queryKeys} from "../../../common/http";
 import {BreadImagesContext} from "../../../store/bread-images-context";
 import BreadCaption from "@/components/galleries/bread-gallery/bread-caption";
 import {ImageCard} from "@/components/galleries/image-card";
 import {BucketItem} from "../../../store/types";
+import "./bread-gallery.css";
 import "../galleries.css";
 
 export default function BreadGallery(){
@@ -30,7 +31,7 @@ export default function BreadGallery(){
       <div className="woh__image-grid">
         {fetchedBreadImages.map((file: BucketItem, index) => {
           return (
-            <div className={`woh__image-${index}`} key={index}>
+            <div className={`woh__image-${index} woh__bread-card`} key={index}>
               <ImageCard file={file} index={index}/>
               <BreadCaption url={file.url} />
             </div>

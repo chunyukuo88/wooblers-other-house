@@ -1,5 +1,3 @@
-import "./bread-caption.css";
-
 type BreadCaptionProps = {
   url: string;
 }
