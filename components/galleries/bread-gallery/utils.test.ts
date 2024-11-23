@@ -6,7 +6,7 @@ describe('groupByRepetition()', () => {
     describe('WHEN: there are NO duplicates', () => {
       test('THEN: returns an object with an array of image urls', () => {
         const [baguette, croissant, boule] = [
-          "https://the-bucket.s3.amazonaws.com/baguette.jpg","croissant.jpg","boule.jpg",
+          "https://the-bucket.s3.amazonaws.com/baguette.jpg",
           "https://the-bucket.s3.amazonaws.com/croissant.jpg",
           "https://the-bucket.s3.amazonaws.com/boule.jpg",
         ];
@@ -16,10 +16,7 @@ describe('groupByRepetition()', () => {
           {key: "boule.jpg", lastModified: "", size: 345, url: boule},
         ];
 
-        const expected = {
-          singles: [baguette, croissant, boule],
-          multiples: [],
-        };
+        const expected = [baguette, croissant, boule];
 
         const result = groupByRepetition(images);
 
@@ -27,17 +24,22 @@ describe('groupByRepetition()', () => {
       });
     });
     describe('WHEN: there ARE duplicates', () => {
-      test('THEN: returns an object with an array of image url arrays', () => {
+      test('THEN: returns an array of both url arrays and url strings', () => {
         const images: BucketItem[] = [
-          {key: "image1", lastModified: "", size: 123, url: "https://the-bucket.s3.amazonaws.com/baguette_a.jpg"},
-          {key: "image2", lastModified: "", size: 234, url: "https://the-bucket.s3.amazonaws.com/baguette_b.jpg"},
-          {key: "image3", lastModified: "", size: 345, url: "https://the-bucket.s3.amazonaws.com/boule.jpg"},
+          {key: "baguette_a.jpg", lastModified: "", size: 123, url: "https://the-bucket.s3.amazonaws.com/baguette_a.jpg"},
+          {key: "baguette_b.jpg", lastModified: "", size: 234, url: "https://the-bucket.s3.amazonaws.com/baguette_b.jpg"},
+          {key: "haunted_bread.jpg", lastModified: "", size: 345, url: "https://the-bucket.s3.amazonaws.com/haunted_bread.jpg"},
+          {key: "fun_croissant_a.jpg", lastModified: "", size: 456, url: "https://the-bucket.s3.amazonaws.com/fun_croissant_a.jpg"},
+          {key: "fun_croissant_b.jpg", lastModified: "", size: 567, url: "https://the-bucket.s3.amazonaws.com/fun_croissant_b.jpg"},
+          {key: "wochebrot.jpg", lastModified: "", size: 678, url: "https://the-bucket.s3.amazonaws.com/wochebrot.jpg"},
         ];
 
-        const expected = {
-          singles: ["https://the-bucket.s3.amazonaws.com/boule.jpg"],
-          multiples: [["https://the-bucket.s3.amazonaws.com/baguette_a.jpg", "https://the-bucket.s3.amazonaws.com/baguette_b.jpg"]],
-        };
+        const expected = [
+          "https://the-bucket.s3.amazonaws.com/haunted_bread.jpg",
+          "https://the-bucket.s3.amazonaws.com/wochebrot.jpg",
+          ["https://the-bucket.s3.amazonaws.com/baguette_a.jpg", "https://the-bucket.s3.amazonaws.com/baguette_b.jpg"],
+          ["https://the-bucket.s3.amazonaws.com/fun_croissant_a.jpg", "https://the-bucket.s3.amazonaws.com/fun_croissant_b.jpg"],
+        ];
 
         const result = groupByRepetition(images);
 

@@ -1,17 +1,12 @@
 import {BucketItem} from "../../../store/types";
 
-type GroupedImages = {
-  singles: string[];
-  multiples?: string[][];
-}
-
 const isVariantOfSameBread = (image: BucketItem, itemUrl: string) => {
   const nameExtractedFromImage = trimLetterVariant(extractBreadName(image.url));
   const nameExtractedFromItem = trimLetterVariant(extractBreadName(itemUrl));
   return (nameExtractedFromImage === nameExtractedFromItem);
-}
+};
 
-export function groupByRepetition(images: BucketItem[]):GroupedImages {
+export function groupByRepetition(images: BucketItem[]): string[][] {
   const result = { singles: [], multiples: [] };
   const counts: any[] = [];
 
@@ -28,10 +23,7 @@ export function groupByRepetition(images: BucketItem[]):GroupedImages {
     else { result.singles.push(arr) }
   });
 
-  return {
-    singles: result.singles.flat(),
-    multiples: result.multiples,
-  }
+  return [...result.singles.flat(), ...result.multiples];
 }
 
 export const trimLetterVariant = (breadNameWithVariant: string): string => {
