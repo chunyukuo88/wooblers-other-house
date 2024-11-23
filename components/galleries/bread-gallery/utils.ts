@@ -6,6 +6,15 @@ const isVariantOfSameBread = (image: BucketItem, itemUrl: string) => {
   return (nameExtractedFromImage === nameExtractedFromItem);
 };
 
+type CombinedItem = string | string[];
+function alphabetizeCombinedArrays(arr: string[][]): string[][] {
+  return arr.sort((itemA: CombinedItem, itemB: CombinedItem) => {
+    const a = (typeof itemA === "string") ? itemA : itemA[0];
+    const b = (typeof itemB === "string") ? itemB : itemB[0];
+    return a.localeCompare(b);
+  });
+}
+
 export function groupByRepetition(images: BucketItem[]): string[][] {
   const result = { singles: [], multiples: [] };
   const counts: any[] = [];
@@ -23,7 +32,9 @@ export function groupByRepetition(images: BucketItem[]): string[][] {
     else { result.singles.push(arr) }
   });
 
-  return [...result.singles.flat(), ...result.multiples];
+  const bothImagesAndImageArrays = [...result.singles.flat(), ...result.multiples];
+
+  return alphabetizeCombinedArrays(bothImagesAndImageArrays);
 }
 
 export const trimLetterVariant = (breadNameWithVariant: string): string => {
