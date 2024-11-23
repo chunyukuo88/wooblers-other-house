@@ -12,10 +12,33 @@ const isVariantOfSameBread = (image: BucketItem, item: BucketItem) => {
 }
 
 export function groupByRepetition(images: BucketItem[]):GroupedImages {
-  // const result: BucketItem[][] = [];
+  const result = { singles: [], multiples: [] };
+  const counts: any[] = [];
+
+  images.forEach(image => {
+    const match = counts.find(item => {
+      return item.find((url: string) => {
+        const sameBread = (trimLetterVariant(extractBreadName(url)) === trimLetterVariant(extractBreadName(image.url)));
+        return sameBread;
+      });
+    });
+    if (match) {
+      match.push(image.url)
+    } else {
+      counts.push([image.url]);
+    }
+  });
+  counts.forEach((arr) => {
+    if (arr.length > 1) {
+      result.multiples.push(arr);
+    } else {
+      result.singles.push(arr);
+    }
+  });
   return {
-    singles: images.map(item => item.key)
-  };
+    singles: result.singles.flat(),
+    multiples: result.multiples,
+  }
 }
 
 export const trimLetterVariant = (breadNameWithVariant: string): string => {

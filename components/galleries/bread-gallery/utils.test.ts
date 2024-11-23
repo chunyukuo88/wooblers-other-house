@@ -5,15 +5,20 @@ describe('groupByRepetition()', () => {
   describe('GIVEN: an array of image objects from the back end', () => {
     describe('WHEN: there are NO duplicates', () => {
       test('THEN: returns an object with an array of image urls', () => {
-        const [baguette, croissant, boule] = ["baguette.jpg","croissant.jpg","boule.jpg"];
+        const [baguette, croissant, boule] = [
+          "https://the-bucket.s3.amazonaws.com/baguette.jpg","croissant.jpg","boule.jpg",
+          "https://the-bucket.s3.amazonaws.com/croissant.jpg",
+          "https://the-bucket.s3.amazonaws.com/boule.jpg",
+        ];
         const images: BucketItem[] = [
-          {key: "baguette.jpg", lastModified: "", size: 123, url: "https://the-bucket.s3.amazonaws.com/baguette.jpg"},
-          {key: "croissant.jpg", lastModified: "", size: 234, url: "https://the-bucket.s3.amazonaws.com/croissant.jpg"},
-          {key: "boule.jpg", lastModified: "", size: 345, url: "https://the-bucket.s3.amazonaws.com/boule.jpg"},
+          {key: "baguette.jpg", lastModified: "", size: 123, url: baguette},
+          {key: "croissant.jpg", lastModified: "", size: 234, url: croissant},
+          {key: "boule.jpg", lastModified: "", size: 345, url: boule},
         ];
 
         const expected = {
-          singles: [baguette, croissant, boule]
+          singles: [baguette, croissant, boule],
+          multiples: [],
         };
 
         const result = groupByRepetition(images);
@@ -30,8 +35,8 @@ describe('groupByRepetition()', () => {
         ];
 
         const expected = {
-          singles: ["boule.jpg"],
-          multiples: ["baguette_a.jpg", "baguette_b.jpg"],
+          singles: ["https://the-bucket.s3.amazonaws.com/boule.jpg"],
+          multiples: [["https://the-bucket.s3.amazonaws.com/baguette_a.jpg", "https://the-bucket.s3.amazonaws.com/baguette_b.jpg"]],
         };
 
         const result = groupByRepetition(images);
