@@ -5,9 +5,9 @@ type GroupedImages = {
   multiples?: string[][];
 }
 
-const isVariantOfSameBread = (image: BucketItem, item: BucketItem) => {
+const isVariantOfSameBread = (image: BucketItem, itemUrl: string) => {
   const nameExtractedFromImage = trimLetterVariant(extractBreadName(image.url));
-  const nameExtractedFromItem = trimLetterVariant(extractBreadName(item.url));
+  const nameExtractedFromItem = trimLetterVariant(extractBreadName(itemUrl));
   return (nameExtractedFromImage === nameExtractedFromItem);
 }
 
@@ -17,24 +17,17 @@ export function groupByRepetition(images: BucketItem[]):GroupedImages {
 
   images.forEach(image => {
     const match = counts.find(item => {
-      return item.find((url: string) => {
-        const sameBread = (trimLetterVariant(extractBreadName(url)) === trimLetterVariant(extractBreadName(image.url)));
-        return sameBread;
-      });
+      return item.find((itemUrl: string) => isVariantOfSameBread(image, itemUrl));
     });
-    if (match) {
-      match.push(image.url)
-    } else {
-      counts.push([image.url]);
-    }
+    if (match) { match.push(image.url) }
+    else { counts.push([image.url]) }
   });
+
   counts.forEach((arr) => {
-    if (arr.length > 1) {
-      result.multiples.push(arr);
-    } else {
-      result.singles.push(arr);
-    }
+    if (arr.length > 1) { result.multiples.push(arr) }
+    else { result.singles.push(arr) }
   });
+
   return {
     singles: result.singles.flat(),
     multiples: result.multiples,
