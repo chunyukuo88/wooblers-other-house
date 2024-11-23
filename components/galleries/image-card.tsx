@@ -31,7 +31,7 @@ export function ImageCard(props: ImageCardProps) {
         height={200}
         placeholder="blur"
         blurDataURL="/images/image_placeholder.png"
-        layout="responsive"
+        layout="intrinsic"
       />
       {displayCaption
         ? <p data-testid="display-caption">{displayCaption}</p>
