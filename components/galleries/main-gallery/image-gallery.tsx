@@ -48,7 +48,7 @@ const ImageGallery: React.FC = () => {
           const caption = fetchedCaptionStrings[index];
           return (
             <div className={`woh__image-${index}`} key={index}>
-              <ImageCard file={file} index={index} caption={caption}/>
+              <ImageCard file={file} index={index} caption={caption} layoutType={"responsive"}/>
               {session ? <Pencil captions={fetchedCaptionStrings} index={index} /> : null}
             </div>
           );

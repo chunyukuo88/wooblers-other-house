@@ -6,6 +6,7 @@ export type ImageCardProps = {
   file: BucketItem;
   index: number;
   caption?: string;
+  layoutType?: string;
 };
 
 export function processRawCaption(rawCaption: string):string {
@@ -13,7 +14,7 @@ export function processRawCaption(rawCaption: string):string {
 }
 
 export function ImageCard(props: ImageCardProps) {
-  const {caption, file, index} = props;
+  const {caption, file, index, layoutType} = props;
   const displayCaption = caption
     ? processRawCaption(caption)
     : "";
@@ -31,7 +32,7 @@ export function ImageCard(props: ImageCardProps) {
         height={200}
         placeholder="blur"
         blurDataURL="/images/image_placeholder.png"
-        layout="intrinsic"
+        layout={layoutType || "intrinsic"}
       />
       {displayCaption
         ? <p data-testid="display-caption">{displayCaption}</p>
