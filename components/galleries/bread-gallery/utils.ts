@@ -14,7 +14,7 @@ const isVariantOfSameBread = (image: BucketItem, item: BucketItem) => {
 export function groupByRepetition(images: BucketItem[]):GroupedImages {
   // const result: BucketItem[][] = [];
   return {
-    singles: images.map(item => item.url)
+    singles: images.map(item => item.key)
   };
 }
 

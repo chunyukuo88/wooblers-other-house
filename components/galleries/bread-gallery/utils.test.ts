@@ -7,9 +7,9 @@ describe('groupByRepetition()', () => {
       test('THEN: returns an object with an array of image urls', () => {
         const [baguette, croissant, boule] = ["baguette.jpg","croissant.jpg","boule.jpg"];
         const images: BucketItem[] = [
-          {key: "image1", lastModified: "", size: 123, url: "baguette.jpg"},
-          {key: "image2", lastModified: "", size: 234, url: "croissant.jpg"},
-          {key: "image3", lastModified: "", size: 345, url: "boule.jpg"},
+          {key: "baguette.jpg", lastModified: "", size: 123, url: "https://the-bucket.s3.amazonaws.com/baguette.jpg"},
+          {key: "croissant.jpg", lastModified: "", size: 234, url: "https://the-bucket.s3.amazonaws.com/croissant.jpg"},
+          {key: "boule.jpg", lastModified: "", size: 345, url: "https://the-bucket.s3.amazonaws.com/boule.jpg"},
         ];
 
         const expected = {
@@ -23,7 +23,20 @@ describe('groupByRepetition()', () => {
     });
     describe('WHEN: there ARE duplicates', () => {
       test('THEN: returns an object with an array of image url arrays', () => {
+        const images: BucketItem[] = [
+          {key: "image1", lastModified: "", size: 123, url: "https://the-bucket.s3.amazonaws.com/baguette_a.jpg"},
+          {key: "image2", lastModified: "", size: 234, url: "https://the-bucket.s3.amazonaws.com/baguette_b.jpg"},
+          {key: "image3", lastModified: "", size: 345, url: "https://the-bucket.s3.amazonaws.com/boule.jpg"},
+        ];
 
+        const expected = {
+          singles: ["boule.jpg"],
+          multiples: ["baguette_a.jpg", "baguette_b.jpg"],
+        };
+
+        const result = groupByRepetition(images);
+
+        expect(result).toEqual(expected);
       });
     });
   });
