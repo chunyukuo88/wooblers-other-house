@@ -12,7 +12,9 @@ describe('groupByRepetition()', () => {
           {key: "image3", lastModified: "", size: 345, url: "boule.jpg"},
         ];
 
-        const expected = [baguette, croissant, boule];
+        const expected = {
+          singles: [baguette, croissant, boule]
+        };
 
         const result = groupByRepetition(images);
 
