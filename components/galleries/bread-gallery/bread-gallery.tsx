@@ -20,7 +20,10 @@ export default function BreadGallery(){
   if (queryResult.error) return <div>No bread today.</div>;
   if (queryResult.isLoading) return <div>Baking those lovely loaves...</div>;
   if (queryResult.isSuccess) {
-    try { updateBreadImages(queryResult.data);
+    try {
+      console.log("queryResult.data");
+      console.dir(queryResult.data);
+      updateBreadImages(queryResult.data);
     } catch (e) {
       errorLogger("Error parsing images: ", e);
     }
