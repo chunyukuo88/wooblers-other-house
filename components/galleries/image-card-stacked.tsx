@@ -1,7 +1,8 @@
 import Image from "next/image";
+import {BucketItem} from "../../store/types";
 
 type StackedCardProps = {
-  arrayOfUrls: string[],
+  arrayOfUrls: BucketItem[],
   index: number,
 }
 
@@ -18,14 +19,12 @@ export default function ImageCardStacked(props: StackedCardProps) {
     {transform: "rotate(10deg)", position: "absolute"},
   ];
 
-  console.log("arrayOfUrls");
-  console.dir(arrayOfUrls);
   return (
     <div className="woh__card-fan">
-      {arrayOfUrls.map((url, index) => (
+      {arrayOfUrls.map((bucketItem, index) => (
         <div className="woh__card-fan-member" style={styles[index - 1]}>
           <Image
-            src={url}
+            src={bucketItem.url}
             alt={`Image #${index + 1}`}
             width={240}
             height={160}

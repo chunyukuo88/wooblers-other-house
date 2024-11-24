@@ -1,10 +1,8 @@
 import {BucketItem} from "../../../store/types";
 
 const isVariantOfSameBread = (image: BucketItem, item: BucketItem) => {
-  const extractedA = extractBreadName(image.url);
-  const nameExtractedFromImage = trimLetterVariant(extractedA);
-  const extractedB = extractBreadName(item.url);
-  const nameExtractedFromItem = trimLetterVariant(extractedB);
+  const nameExtractedFromImage = trimLetterVariant(extractBreadName(image.url));
+  const nameExtractedFromItem = trimLetterVariant(extractBreadName(item.url));
   return (nameExtractedFromImage === nameExtractedFromItem);
 };
 
@@ -13,7 +11,7 @@ function alphabetizeCombinedArrays(arr: string[][]): string[][] {
   return arr.sort((itemA: CombinedItem, itemB: CombinedItem) => {
     const a = (Array.isArray(itemA)) ? itemA[0] : itemA;
     const b = (Array.isArray(itemB)) ? itemB[0] : itemB;
-
+    // @ts-ignore
     return a.url.localeCompare(b.url);
   });
 }
@@ -26,28 +24,19 @@ export function groupByRepetition(images: BucketItem[]): string[][] {
   const counts: any[] = [];
 
   images.forEach(image => {
-    const match = counts.find(item => {
-      return (Array.isArray(item))
-        ? item.find((img) => isVariantOfSameBread(img, image))
-        : isVariantOfSameBread(item, image);
-    });
+    const match = counts.find(item => (Array.isArray(item))
+      ? item.find((img) => isVariantOfSameBread(img, image))
+      : isVariantOfSameBread(item, image)
+    );
 
-    if (match) {
-      match.push(image);
-    }
-    else {
-      counts.push([image]);
-    }
+    (match)
+      ? match.push(image)
+      : counts.push([image]);
   });
 
-  counts.forEach((arr) => {
-    if (arr.length > 1) {
-      result.multiples.push(arr);
-    }
-    else {
-      result.singles.push(arr);
-    }
-  });
+  counts.forEach((arr) => (arr.length > 1)
+    ? result.multiples.push(arr)
+    : result.singles.push(arr));
 
   const bothImagesAndImageArrays = [...result.singles.flat(), ...result.multiples];
 

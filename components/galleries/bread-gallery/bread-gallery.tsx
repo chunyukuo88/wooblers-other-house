@@ -34,12 +34,12 @@ export default function BreadGallery(){
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
-        {groupedAndSorted.map((item: string | string[], index) => {
+        {groupedAndSorted.map((item: BucketItem | BucketItem[], index) => {
           return (
             <div className={`woh__image-${index} woh__bread-card`} key={index}>
-              {(typeof item === "string")
-                ? <ImageCard file={item} index={index}/>
-                : <ImageCardStacked arrayOfUrls={item} index={index}/>
+              {(Array.isArray(item))
+                ? <ImageCardStacked arrayOfUrls={item} index={index}/>
+                : <ImageCard file={item} index={index}/>
               }
 
               {/*<BreadCaption url={file.url} />*/}
