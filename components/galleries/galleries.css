@@ -35,4 +35,19 @@
 
 .woh__card-fan-member {
     transform-origin: bottom center;
+    border: 0.75rem solid #ddd;
+    background: purple;
+    border-radius: 5px;
+}
+
+.woh__card-fan-member:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    opacity: 0.6;
+    border-radius: inherit;
+    box-shadow: 0 0 1em 0.5em red;
+    transition: 250ms ease-in-out;
+    transition-property: opacity;
 }

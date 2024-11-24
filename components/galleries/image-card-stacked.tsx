@@ -12,10 +12,31 @@ export default function ImageCardStacked(props: StackedCardProps) {
   const rotationBase = -25;
 
   const calculateStyle = (i: number) => {
-    const rotation = (i === 1) ? 15 : -15;
-    return (arrayOfUrls.length === 2)
-      ? { transform:  `rotate(${rotation}deg)`}
-      : { transform: `rotate(${rotationBase + (9*index)}deg)`};
+
+    if (arrayOfUrls.length === 2) {
+      const rotation = (i === 1) ? 15 : -15;
+      return { transform:  `rotate(${rotation}deg)`, marginRight: "-200px", justifySelf: "center" };
+    }
+    if (arrayOfUrls.length === 3) {
+      const rotations = [-15, 1, 15];
+      return { transform:  `rotate(${rotations[i]}deg)`, marginRight: "-200px", justifySelf: "center" };
+    }
+    if (arrayOfUrls.length === 4) {
+      const rotations = [-15, -5, 5, 15];
+      return { transform:  `rotate(${rotations[i]}deg)`, marginRight: "-200px", justifySelf: "center" };
+    }
+    if (arrayOfUrls.length === 5) {
+      const rotations = [-15, -5, 0, 5, 15];
+      return { transform:  `rotate(${rotations[i]}deg)`, marginRight: "-200px", justifySelf: "center" };
+    }
+    if (arrayOfUrls.length === 6) {
+      const rotations = [-20, -10, -5, 5, 10, 20];
+      return { transform:  `rotate(${rotations[i]}deg)`, marginRight: "-200px", justifySelf: "center" };
+    }
+    if (arrayOfUrls.length === 7) {
+      const rotations = [-20, -10, -5, 0, 5, 10, 20];
+      return { transform:  `rotate(${rotations[i]}deg)`, marginRight: "-200px", justifySelf: "center" };
+    }
   };
 
   return (
@@ -24,17 +45,14 @@ export default function ImageCardStacked(props: StackedCardProps) {
         {arrayOfUrls.map((bucketItem, index) => {
           return (
             <div className="woh__card-fan-member" style={calculateStyle(index)} key={index}>
-              <Image
+              <img
                 src={bucketItem.url}
                 alt={`Image #${index + 1}`}
                 width={270}
-                height={180}
-                placeholder="blur"
-                blurDataURL="/images/image_placeholder.png"
-                layout="intrinsic"
+                height={"auto"}
               />
             </div>
-          )
+          );
         })}
       </div>
       <p className="woh__caption">{caption}</p>
