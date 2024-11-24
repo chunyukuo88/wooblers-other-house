@@ -33,10 +33,7 @@ export function ImageCard(props: ImageCardProps) {
         blurDataURL="/images/image_placeholder.png"
         layout={layoutType || "intrinsic"}
       />
-      {displayCaption
-        ? <p data-testid="display-caption">{displayCaption}</p>
-        : null
-      }
+      {displayCaption ? <p className="woh__caption" data-testid="display-caption">{displayCaption}</p> : null}
     </div>
   );
 }

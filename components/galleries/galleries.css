@@ -20,20 +20,19 @@
     margin: 1rem 0 1rem 0;
 }
 
-.woh__image-item p {
-    padding: 0 0.5rem;
-    color: white;
-}
-
 .woh__bread-loading {
     margin: 4rem;
 }
 
-.woh__card-fan {
-    position: relative;
-    transition: all .6s linear;
+.woh__card-fan-frame {
+    display: flex;
+}
+
+.woh__caption {
+    padding: 0 0.5rem;
+    color: white;
 }
 
 .woh__card-fan-member {
-    margin: 1rem 0 1rem 0;
+    transform-origin: bottom center;
 }
