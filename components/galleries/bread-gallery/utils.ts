@@ -16,20 +16,33 @@ function alphabetizeCombinedArrays(arr: string[][]): string[][] {
 }
 
 export function groupByRepetition(images: BucketItem[]): string[][] {
-  const result = { singles: [], multiples: [] };
+  const result = {
+    singles: [],
+    multiples: [],
+  };
   const counts: any[] = [];
 
   images.forEach(image => {
     const match = counts.find(item => {
-      return item.find((itemUrl: string) => isVariantOfSameBread(image, itemUrl));
+      return item.find((itemUrl: string) => {
+        return isVariantOfSameBread(image, itemUrl);
+      });
     });
-    if (match) { match.push(image.url) }
-    else { counts.push([image.url]) }
+    if (match) {
+      match.push(image.url);
+    }
+    else {
+      counts.push([image.url]);
+    }
   });
 
   counts.forEach((arr) => {
-    if (arr.length > 1) { result.multiples.push(arr) }
-    else { result.singles.push(arr) }
+    if (arr.length > 1) {
+      result.multiples.push(arr);
+    }
+    else {
+      result.singles.push(arr);
+    }
   });
 
   const bothImagesAndImageArrays = [...result.singles.flat(), ...result.multiples];

@@ -36,11 +36,17 @@ describe('groupByRepetition()', () => {
         ];
 
         const expected = [
-          "https://the-bucket.s3.amazonaws.com/apple_pie.jpg",
-          ["https://the-bucket.s3.amazonaws.com/baguette_a.jpg", "https://the-bucket.s3.amazonaws.com/baguette_b.jpg"],
-          ["https://the-bucket.s3.amazonaws.com/fun_croissant_a.jpg", "https://the-bucket.s3.amazonaws.com/fun_croissant_b.jpg"],
-          "https://the-bucket.s3.amazonaws.com/haunted_bread.jpg",
-          "https://the-bucket.s3.amazonaws.com/wochebrot.jpg",
+          {key: "apple_pie.jpg", lastModified: "", size: 1, url: "https://the-bucket.s3.amazonaws.com/apple_pie.jpg"},
+          [
+            {key: "baguette_a.jpg", lastModified: "", size: 1, url: "https://the-bucket.s3.amazonaws.com/baguette_a.jpg"},
+            {key: "baguette_b.jpg", lastModified: "", size: 1, url: "https://the-bucket.s3.amazonaws.com/baguette_b.jpg"},
+          ],
+          [
+            {key: "fun_croissant_a.jpg", lastModified: "", size: 1, url: "https://the-bucket.s3.amazonaws.com/fun_croissant_a.jpg"},
+            {key: "fun_croissant_b.jpg", lastModified: "", size: 1, url: "https://the-bucket.s3.amazonaws.com/fun_croissant_b.jpg"},
+          ],
+          {key: "haunted_bread.jpg", lastModified: "", size: 1, url: "https://the-bucket.s3.amazonaws.com/haunted_bread.jpg"},
+          {key: "wochebrot.jpg", lastModified: "", size: 1, url: "https://the-bucket.s3.amazonaws.com/wochebrot.jpg"},
         ];
 
         const result = groupByRepetition(images);

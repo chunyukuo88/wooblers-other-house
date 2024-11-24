@@ -17,9 +17,19 @@
     align-items: center;
     justify-content: center;
     background: #4f4848;
+    margin: 1rem 0 1rem 0;
 }
 
 .woh__image-item p {
     padding: 0 0.5rem;
     color: white;
+}
+
+.woh__card-fan {
+    /*position: relative;*/
+    transition: all .6s linear;
+}
+
+.woh__card-fan-member {
+    margin: 1rem 0 1rem 0;
 }
