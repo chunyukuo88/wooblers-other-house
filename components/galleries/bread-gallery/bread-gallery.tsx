@@ -5,7 +5,6 @@ import {ImageCard} from "@/components/galleries/image-card";
 import {groupByRepetition} from "@/components/galleries/bread-gallery/utils";
 import ImageCardStacked from "@/components/galleries/image-card-stacked";
 import {BucketItem} from "../../../store/types";
-import "./bread-gallery.css";
 import "../galleries.css";
 
 export default function BreadGallery(){
@@ -25,7 +24,7 @@ export default function BreadGallery(){
       <div className="woh__image-grid">
         {groupedAndSorted.map((item: BucketItem | BucketItem[], index) => {
           return (
-            <div className={`woh__image-${index} woh__bread-card`} key={index}>
+            <div className={`woh__image-${index}`} key={index}>
               {(Array.isArray(item))
                 ? <ImageCardStacked arrayOfUrls={item} index={index}/>
                 : <ImageCard file={item} index={index} caption={"item.url"}/>
