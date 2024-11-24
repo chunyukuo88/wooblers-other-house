@@ -1,8 +1,6 @@
 "use client";
-import {useContext} from "react";
 import {useQuery} from "@tanstack/react-query";
-import {errorLogger, getBreadImages, queryKeys} from "../../../common/http";
-import {BreadImagesContext} from "../../../store/bread-images-context";
+import {getBreadImages, queryKeys} from "../../../common/http";
 import {ImageCard} from "@/components/galleries/image-card";
 import {groupByRepetition} from "@/components/galleries/bread-gallery/utils";
 import ImageCardStacked from "@/components/galleries/image-card-stacked";
@@ -11,7 +9,6 @@ import "./bread-gallery.css";
 import "../galleries.css";
 
 export default function BreadGallery(){
-  const {fetchedBreadImages, updateBreadImages} = useContext(BreadImagesContext);
   const queryResult = useQuery({
     queryKey: [queryKeys.GET_BREAD_IMAGES],
     queryFn: getBreadImages,
@@ -20,13 +17,6 @@ export default function BreadGallery(){
 
   if (queryResult.error) return <div>No bread today.</div>;
   if (queryResult.isLoading) return <div>Baking those lovely loaves...</div>;
-  if (queryResult.isSuccess) {
-    try {
-      updateBreadImages(queryResult.data);
-    } catch (e) {
-      errorLogger("Error parsing images: ", e);
-    }
-  }
 
   const groupedAndSorted = groupByRepetition(queryResult.data);
 
