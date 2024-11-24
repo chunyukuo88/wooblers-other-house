@@ -6,15 +6,26 @@ describe('groupByRepetition()', () => {
     describe('WHEN: there are NO duplicates', () => {
       test('THEN: returns an alphabetized array of image urls', () => {
         const [baguette, croissant, boule] = [
-          "https://the-bucket.s3.amazonaws.com/baguette.jpg",
-          "https://the-bucket.s3.amazonaws.com/croissant.jpg",
-          "https://the-bucket.s3.amazonaws.com/boule.jpg",
+          {
+            "key": "baguette.jpg",
+            "lastModified": "",
+            "size": 123,
+            "url": "https://the-bucket.s3.amazonaws.com/baguette.jpg"
+          },
+          {
+            "key": "croissant.jpg",
+            "lastModified": "",
+            "size": 234,
+            "url": "https://the-bucket.s3.amazonaws.com/croissant.jpg"
+          },
+          {
+            "key": "boule.jpg",
+            "lastModified": "",
+            "size": 345,
+            "url": "https://the-bucket.s3.amazonaws.com/boule.jpg"
+          },
         ];
-        const images: BucketItem[] = [
-          {key: "baguette.jpg", lastModified: "", size: 123, url: baguette},
-          {key: "croissant.jpg", lastModified: "", size: 234, url: croissant},
-          {key: "boule.jpg", lastModified: "", size: 345, url: boule},
-        ];
+        const images: BucketItem[] = [baguette, croissant, boule];
 
         const expected = [baguette, boule, croissant];
 

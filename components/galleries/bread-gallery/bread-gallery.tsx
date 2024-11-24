@@ -8,6 +8,8 @@ import {ImageCard} from "@/components/galleries/image-card";
 import {BucketItem} from "../../../store/types";
 import "./bread-gallery.css";
 import "../galleries.css";
+import {groupByRepetition} from "@/components/galleries/bread-gallery/utils";
+import ImageCardStacked from "@/components/galleries/image-card-stacked";
 
 export default function BreadGallery(){
   const {fetchedBreadImages, updateBreadImages} = useContext(BreadImagesContext);
@@ -21,22 +23,26 @@ export default function BreadGallery(){
   if (queryResult.isLoading) return <div>Baking those lovely loaves...</div>;
   if (queryResult.isSuccess) {
     try {
-      console.log("queryResult.data");
-      console.dir(queryResult.data);
       updateBreadImages(queryResult.data);
     } catch (e) {
       errorLogger("Error parsing images: ", e);
     }
   }
 
+  const groupedAndSorted = groupByRepetition(queryResult.data);
+
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
-        {fetchedBreadImages.map((file: BucketItem, index) => {
+        {groupedAndSorted.map((item: string | string[], index) => {
           return (
             <div className={`woh__image-${index} woh__bread-card`} key={index}>
-              <ImageCard file={file} index={index}/>
-              <BreadCaption url={file.url} />
+              {(typeof item === "string")
+                ? <ImageCard file={item} index={index}/>
+                : <ImageCardStacked arrayOfUrls={item} index={index}/>
+              }
+
+              {/*<BreadCaption url={file.url} />*/}
             </div>
           );
         })}

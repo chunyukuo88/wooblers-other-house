@@ -1,17 +1,20 @@
 import {BucketItem} from "../../../store/types";
 
-const isVariantOfSameBread = (image: BucketItem, itemUrl: string) => {
-  const nameExtractedFromImage = trimLetterVariant(extractBreadName(image.url));
-  const nameExtractedFromItem = trimLetterVariant(extractBreadName(itemUrl));
+const isVariantOfSameBread = (image: BucketItem, item: BucketItem) => {
+  const extractedA = extractBreadName(image.url);
+  const nameExtractedFromImage = trimLetterVariant(extractedA);
+  const extractedB = extractBreadName(item.url);
+  const nameExtractedFromItem = trimLetterVariant(extractedB);
   return (nameExtractedFromImage === nameExtractedFromItem);
 };
 
 type CombinedItem = string | string[];
 function alphabetizeCombinedArrays(arr: string[][]): string[][] {
   return arr.sort((itemA: CombinedItem, itemB: CombinedItem) => {
-    const a = (typeof itemA === "string") ? itemA : itemA[0];
-    const b = (typeof itemB === "string") ? itemB : itemB[0];
-    return a.localeCompare(b);
+    const a = (Array.isArray(itemA)) ? itemA[0] : itemA;
+    const b = (Array.isArray(itemB)) ? itemB[0] : itemB;
+
+    return a.url.localeCompare(b.url);
   });
 }
 
@@ -24,15 +27,16 @@ export function groupByRepetition(images: BucketItem[]): string[][] {
 
   images.forEach(image => {
     const match = counts.find(item => {
-      return item.find((itemUrl: string) => {
-        return isVariantOfSameBread(image, itemUrl);
-      });
+      return (Array.isArray(item))
+        ? item.find((img) => isVariantOfSameBread(img, image))
+        : isVariantOfSameBread(item, image);
     });
+
     if (match) {
-      match.push(image.url);
+      match.push(image);
     }
     else {
-      counts.push([image.url]);
+      counts.push([image]);
     }
   });
 

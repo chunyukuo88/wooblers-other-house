@@ -18,15 +18,16 @@ export function ImageCard(props: ImageCardProps) {
   const displayCaption = caption
     ? processRawCaption(caption)
     : "";
-  const isImage = file.key.split(".")[1] !== "txt";
-  return isImage ? (
+  // const isImage = file.key.split(".")[1] !== "txt";
+  // return isImage ? (
+  return (
     <div
       data-testid="image-item"
       key={index}
       className={`woh__image-item woh__image-index-${index}`}
     >
       <Image
-        src={file.url}
+        src={file}
         alt={`Image #${index + 1}`}
         width={300}
         height={200}
@@ -39,5 +40,5 @@ export function ImageCard(props: ImageCardProps) {
         : null
       }
     </div>
-  ) : null;
+  );
 }
