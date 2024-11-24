@@ -1,6 +1,5 @@
 import {BucketItem} from "../../store/types";
 import Image from "next/image";
-import React from "react";
 
 export type ImageCardProps = {
   file: BucketItem;
@@ -18,8 +17,6 @@ export function ImageCard(props: ImageCardProps) {
   const displayCaption = caption
     ? processRawCaption(caption)
     : "";
-  // const isImage = file.key.split(".")[1] !== "txt";
-  // return isImage ? (
   return (
     <div
       data-testid="image-item"
@@ -27,7 +24,7 @@ export function ImageCard(props: ImageCardProps) {
       className={`woh__image-item woh__image-index-${index}`}
     >
       <Image
-        src={file}
+        src={file.url}
         alt={`Image #${index + 1}`}
         width={300}
         height={200}

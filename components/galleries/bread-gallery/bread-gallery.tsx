@@ -1,15 +1,14 @@
 "use client";
-import React, {useContext} from "react";
+import {useContext} from "react";
 import {useQuery} from "@tanstack/react-query";
 import {errorLogger, getBreadImages, queryKeys} from "../../../common/http";
 import {BreadImagesContext} from "../../../store/bread-images-context";
-import BreadCaption from "@/components/galleries/bread-gallery/bread-caption";
 import {ImageCard} from "@/components/galleries/image-card";
+import {groupByRepetition} from "@/components/galleries/bread-gallery/utils";
+import ImageCardStacked from "@/components/galleries/image-card-stacked";
 import {BucketItem} from "../../../store/types";
 import "./bread-gallery.css";
 import "../galleries.css";
-import {groupByRepetition} from "@/components/galleries/bread-gallery/utils";
-import ImageCardStacked from "@/components/galleries/image-card-stacked";
 
 export default function BreadGallery(){
   const {fetchedBreadImages, updateBreadImages} = useContext(BreadImagesContext);
@@ -39,10 +38,8 @@ export default function BreadGallery(){
             <div className={`woh__image-${index} woh__bread-card`} key={index}>
               {(Array.isArray(item))
                 ? <ImageCardStacked arrayOfUrls={item} index={index}/>
-                : <ImageCard file={item} index={index}/>
+                : <ImageCard file={item} index={index} caption={"item.url"}/>
               }
-
-              {/*<BreadCaption url={file.url} />*/}
             </div>
           );
         })}
