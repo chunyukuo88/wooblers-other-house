@@ -4,12 +4,13 @@ import {BucketItem} from "../../store/types";
 type StackedCardProps = {
   arrayOfUrls: BucketItem[],
   index: number,
+  caption: string,
 }
 
 export default function ImageCardStacked(props: StackedCardProps) {
-  const {arrayOfUrls, index} = props;
+  const {arrayOfUrls, caption, index} = props;
   return (
-    <div className="woh__card-fan" key={index}>
+    <div className="woh__card-fan-frame" key={index}>
       {arrayOfUrls.map((bucketItem, index) => {
         const rotationBase = -25;
         const translationBase = -30;
@@ -31,6 +32,7 @@ export default function ImageCardStacked(props: StackedCardProps) {
           </div>
         )
       })}
+      <p>{caption}</p>
     </div>
   )
 };

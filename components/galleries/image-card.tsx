@@ -9,14 +9,18 @@ export type ImageCardProps = {
 };
 
 export function processRawCaption(rawCaption: string):string {
-  return rawCaption.split("@")[1];
+  const delimiter = "@";
+  console.log("rawCaption");
+  console.log(typeof rawCaption);
+  console.log(rawCaption);
+  return (rawCaption.split("").find(x => x === delimiter))
+    ? rawCaption.split("@")[1]
+    : rawCaption;
 }
 
 export function ImageCard(props: ImageCardProps) {
   const {caption, file, index, layoutType} = props;
-  const displayCaption = caption
-    ? processRawCaption(caption)
-    : "";
+  const displayCaption = caption ? processRawCaption(caption) : "";
   return (
     <div
       data-testid="image-item"

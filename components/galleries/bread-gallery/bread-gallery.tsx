@@ -2,7 +2,7 @@
 import {useQuery} from "@tanstack/react-query";
 import {getBreadImages, queryKeys} from "../../../common/http";
 import {ImageCard} from "@/components/galleries/image-card";
-import {groupByRepetition} from "@/components/galleries/bread-gallery/utils";
+import {extractBreadName, groupByRepetition, trimLetterVariant} from "@/components/galleries/bread-gallery/utils";
 import ImageCardStacked from "@/components/galleries/image-card-stacked";
 import {BucketItem} from "../../../store/types";
 import "../galleries.css";
@@ -19,15 +19,22 @@ export default function BreadGallery(){
 
   const groupedAndSorted = groupByRepetition(queryResult.data);
 
+  const getClassName = (item: BucketItem | BucketItem[], index: number) =>
+    (Array.isArray(item))
+      ? `woh__bread-card-fan-${index}`
+      : `woh__bread-image-${index}`;
+
+  const caption = (item: BucketItem) => trimLetterVariant(extractBreadName(item.url));
+
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
         {groupedAndSorted.map((item: BucketItem | BucketItem[], index) => {
           return (
-            <div className={`woh__image-${index}`} key={index}>
+            <div className={getClassName(item, index)} key={index}>
               {(Array.isArray(item))
-                ? <ImageCardStacked arrayOfUrls={item} index={index}/>
-                : <ImageCard file={item} index={index} caption={"item.url"}/>
+                ? <ImageCardStacked arrayOfUrls={item} index={index} caption={caption(item[0])}/>
+                : <ImageCard file={item} index={index} caption={caption(item)}/>
               }
             </div>
           );
