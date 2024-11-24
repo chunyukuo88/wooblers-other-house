@@ -25,6 +25,10 @@
     color: white;
 }
 
+.woh__bread-loading {
+    margin: 4rem;
+}
+
 .woh__card-fan {
     position: relative;
     transition: all .6s linear;

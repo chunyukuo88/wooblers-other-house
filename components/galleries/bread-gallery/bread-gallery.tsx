@@ -15,7 +15,7 @@ export default function BreadGallery(){
   });
 
   if (queryResult.error) return <div>No bread today.</div>;
-  if (queryResult.isLoading) return <div>Baking those lovely loaves...</div>;
+  if (queryResult.isLoading) return <div className="woh__bread-loading">Baking those lovely loaves...</div>;
 
   const groupedAndSorted = groupByRepetition(queryResult.data);
 

@@ -10,10 +10,7 @@ export type ImageCardProps = {
 
 export function processRawCaption(rawCaption: string):string {
   const delimiter = "@";
-  console.log("rawCaption");
-  console.log(typeof rawCaption);
-  console.log(rawCaption);
-  return (rawCaption.split("").find(x => x === delimiter))
+  return (rawCaption.split("").find(char => char === delimiter))
     ? rawCaption.split("@")[1]
     : rawCaption;
 }
