@@ -33,7 +33,7 @@ export default function BreadGallery(){
           return (
             <div className={getClassName(item, index)} key={index}>
               {(Array.isArray(item))
-                ? <ImageCardStacked arrayOfUrls={item} index={index} caption={caption(item[0])}/>
+                ? <ImageCardStacked bucketItems={item} index={index} caption={caption(item[0])}/>
                 : <ImageCard file={item} index={index} caption={caption(item)}/>
               }
             </div>

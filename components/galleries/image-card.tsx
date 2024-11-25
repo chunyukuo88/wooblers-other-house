@@ -19,21 +19,25 @@ export function ImageCard(props: ImageCardProps) {
   const {caption, file, index, layoutType} = props;
   const displayCaption = caption ? processRawCaption(caption) : "";
   return (
-    <div
-      data-testid="image-item"
-      key={index}
-      className={`woh__image-item woh__image-index-${index}`}
-    >
-      <Image
-        src={file.url}
-        alt={`Image #${index + 1}`}
-        width={300}
-        height={200}
-        placeholder="blur"
-        blurDataURL="/images/image_placeholder.png"
-        layout={layoutType || "intrinsic"}
-      />
-      {displayCaption ? <p className="woh__caption" data-testid="display-caption">{displayCaption}</p> : null}
-    </div>
+    <>
+      <div
+        data-testid="image-item"
+        key={index}
+        className={`woh__image-item woh__image-index-${index}`}
+      >
+        <Image
+          src={file.url}
+          alt={`Image #${index + 1}`}
+          width={300}
+          height={200}
+          placeholder="blur"
+          blurDataURL="/images/image_placeholder.png"
+          layout={layoutType || "intrinsic"}
+        />
+      </div>
+      <div className="woh__caption-container">
+        {displayCaption ? <div className="woh__caption" data-testid="display-caption">{displayCaption}</div> : null}
+      </div>
+    </>
   );
 }

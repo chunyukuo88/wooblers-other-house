@@ -2,31 +2,38 @@ import {BucketItem} from "../../store/types";
 import {calculateStyle} from "@/components/galleries/utils";
 
 type StackedCardProps = {
-  arrayOfUrls: BucketItem[],
+  bucketItems: BucketItem[],
   index: number,
   caption: string,
 }
 
 export default function ImageCardStacked(props: StackedCardProps) {
-  const {arrayOfUrls, caption, index} = props;
-
+  const {bucketItems, caption, index} = props;
+  const clickHandler = () => {};
   return (
     <>
       <div className="woh__card-fan-frame" key={index}>
-        {arrayOfUrls.map((bucketItem, index) => {
+        {bucketItems.map((bucketItem, index) => {
           return (
-            <div className="woh__card-fan-member" style={calculateStyle(arrayOfUrls,index)} key={index}>
+            <div
+              onClick={clickHandler}
+              style={calculateStyle(bucketItems,index)}
+              key={index}
+              className="woh__card-fan-member"
+            >
               <img
                 src={bucketItem.url}
                 alt={`Image #${index + 1}`}
-                width={270}
+                width={280}
                 height={"auto"}
               />
             </div>
           );
         })}
       </div>
-      <p className="woh__caption">{caption}</p>
+      <div className="woh__caption-container">
+        <div className="woh__caption-under-stacked">{caption}</div>
+      </div>
     </>
   )
 };
