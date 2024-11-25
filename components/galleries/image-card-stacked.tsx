@@ -1,5 +1,6 @@
-import {BucketItem} from "../../store/types";
+import {useState} from "react";
 import {calculateStyle} from "@/components/galleries/utils";
+import {BucketItem} from "../../store/types";
 
 type StackedCardProps = {
   bucketItems: BucketItem[],
@@ -9,15 +10,24 @@ type StackedCardProps = {
 
 export default function ImageCardStacked(props: StackedCardProps) {
   const {bucketItems, caption, index} = props;
-  const clickHandler = () => {};
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const clickHandler = (index: number) => {
+    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
   return (
     <>
       <div className="woh__card-fan-frame" key={index}>
         {bucketItems.map((bucketItem, index) => {
+          const isActive = (activeIndex === index);
           return (
             <div
-              onClick={clickHandler}
-              style={calculateStyle(bucketItems,index)}
+              onClick={() => clickHandler(index)}
+              style={{
+                ...calculateStyle(bucketItems, index),
+                zIndex: isActive ? 100 : 0,
+              }}
               key={index}
               className="woh__card-fan-member"
             >
