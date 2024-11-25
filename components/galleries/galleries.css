@@ -3,8 +3,6 @@
 }
 
 .woh__image-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
 }
 
@@ -24,20 +22,10 @@
     margin: 4rem;
 }
 
-.woh__card-fan-frame {
-    display: flex;
-}
 
 .woh__caption {
     padding: 0 0.5rem;
     color: white;
-}
-
-.woh__card-fan-member {
-    transform-origin: bottom center;
-    border: 0.75rem solid #ddd;
-    background: purple;
-    border-radius: 5px;
 }
 
 .woh__card-fan-member:after {
@@ -47,7 +35,22 @@
     inset: 0;
     opacity: 0.6;
     border-radius: inherit;
-    box-shadow: 0 0 1em 0.5em red;
+    box-shadow: 0 0 1em 0.5em purple;
     transition: 250ms ease-in-out;
     transition-property: opacity;
+}
+
+
+
+.woh__card-fan-frame {
+    display: grid;
+    place-items: center;
+    width: 300px;
+}
+
+.woh__card-fan-member {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: auto;
+    border: 8px solid white;
 }

@@ -1,4 +1,5 @@
 import {BucketItem} from "../../store/types";
+import {calculateStyle} from "@/components/galleries/utils";
 
 type StackedCardProps = {
   arrayOfUrls: BucketItem[],
@@ -9,40 +10,12 @@ type StackedCardProps = {
 export default function ImageCardStacked(props: StackedCardProps) {
   const {arrayOfUrls, caption, index} = props;
 
-  const calculateStyle = (i: number) => {
-    if (arrayOfUrls.length === 2) {
-      const rotation = (i === 1) ? 15 : -15;
-      const marginRight = (i === 1) ? 100 : -100;
-      return { transform:  `rotate(${rotation}deg)`, marginRight: `${marginRight}px`, justifySelf: "center" };
-    }
-    if (arrayOfUrls.length === 3) {
-      const rotations = [-15, 1, 15];
-      return { transform:  `rotate(${rotations[i]}deg)`, marginRight: "-200px", justifySelf: "center" };
-    }
-    if (arrayOfUrls.length === 4) {
-      const rotations = [-15, -5, 5, 15];
-      return { transform:  `rotate(${rotations[i]}deg)`, marginRight: "-200px", justifySelf: "center" };
-    }
-    if (arrayOfUrls.length === 5) {
-      const rotations = [-15, -5, 0, 5, 15];
-      return { transform:  `rotate(${rotations[i]}deg)`, marginRight: "-200px", justifySelf: "center" };
-    }
-    if (arrayOfUrls.length === 6) {
-      const rotations = [-20, -10, -5, 5, 10, 20];
-      return { transform:  `rotate(${rotations[i]}deg)`, marginRight: "-200px", justifySelf: "center" };
-    }
-    if (arrayOfUrls.length === 7) {
-      const rotations = [-20, -10, -5, 0, 5, 10, 20];
-      return { transform:  `rotate(${rotations[i]}deg)`, marginRight: "-200px", justifySelf: "center" };
-    }
-  };
-
   return (
     <>
       <div className="woh__card-fan-frame" key={index}>
         {arrayOfUrls.map((bucketItem, index) => {
           return (
-            <div className="woh__card-fan-member" style={calculateStyle(index)} key={index}>
+            <div className="woh__card-fan-member" style={calculateStyle(arrayOfUrls,index)} key={index}>
               <img
                 src={bucketItem.url}
                 alt={`Image #${index + 1}`}
