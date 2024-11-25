@@ -29,7 +29,7 @@ export default function BreadGallery(){
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
-        {groupedAndSorted.map((item: BucketItem | BucketItem[], index) => {
+        {groupedAndSorted.map((item: any, index: number) => {
           return (
             <div className={getClassName(item, index)} key={index}>
               {(Array.isArray(item))

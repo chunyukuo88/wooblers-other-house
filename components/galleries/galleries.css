@@ -27,7 +27,6 @@
 .woh__card-fan-frame {
     display: grid;
     place-items: center;
-    /*width: 300px;*/
 }
 
 .woh__card-fan-member {
@@ -37,6 +36,8 @@
     width: 100%;
     height: auto;
     border: 8px solid #064ec2;
+    justify-self: center;
+
     display: flex;
     justify-content: center;
 }
@@ -44,7 +45,6 @@
 .woh__card-fan-member:after {
     content: "";
     position: absolute;
-    /*z-index: -1;*/
     inset: 0;
     opacity: 0.6;
     border-radius: inherit;
@@ -60,7 +60,7 @@
 
 .woh__caption,
 .woh__caption-under-stacked {
-    background: #ff1500;
+    background: #6196e1;
     color: black;
     text-shadow: 2px 2px 4px gray;
     text-align: center;

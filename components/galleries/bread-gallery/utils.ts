@@ -35,7 +35,9 @@ export function groupByRepetition(images: BucketItem[]): string[][] {
   });
 
   counts.forEach((arr) => (arr.length > 1)
+  // @ts-ignore
     ? result.multiples.push(arr)
+  // @ts-ignore
     : result.singles.push(arr));
 
   const bothImagesAndImageArrays = [...result.singles.flat(), ...result.multiples];
