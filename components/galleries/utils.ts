@@ -1,16 +1,28 @@
+const rulesetValues = {
+  2: {
+    rotations: [-15, 15],
+    margins: [100, -100],
+  },
+  3: {
+    rotations: [-15, 1, 15],
+    margins: [-200, 0, 200],
+  }
+};
+
 export function calculateStyle (arrayOfUrls: string[], i: number) {
   if (arrayOfUrls.length === 2) {
-    const rotations = [-15, 15];
-    const margins = [100, -100];
     return {
-      transform:  `rotate(${rotations[i - 1]}deg)`,
-      marginRight: `${margins[i - 1]}px`,
+      transform:  `rotate(${rulesetValues[arrayOfUrls.length].rotations[i - 1]}deg)`,
+      marginRight: `${rulesetValues[arrayOfUrls.length].margins[i - 1]}px`,
       justifySelf: "center"
     };
   }
   if (arrayOfUrls.length === 3) {
-    const rotations = [-15, 1, 15];
-    return { transform:  `rotate(${rotations[i]}deg)`, marginRight: "-200px", justifySelf: "center" };
+    return {
+      transform:  `rotate(${rulesetValues[arrayOfUrls.length].rotations[i - 1]}deg)`,
+      marginRight: `${rulesetValues[arrayOfUrls.length].margins[i - 1]}px`,
+      justifySelf: "center"
+    };
   }
   if (arrayOfUrls.length === 4) {
     const rotations = [-15, -5, 5, 15];
