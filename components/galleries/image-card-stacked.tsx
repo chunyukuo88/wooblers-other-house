@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {BucketItem} from "../../store/types";
 
 type StackedCardProps = {
@@ -9,13 +8,12 @@ type StackedCardProps = {
 
 export default function ImageCardStacked(props: StackedCardProps) {
   const {arrayOfUrls, caption, index} = props;
-  const rotationBase = -25;
 
   const calculateStyle = (i: number) => {
-
     if (arrayOfUrls.length === 2) {
       const rotation = (i === 1) ? 15 : -15;
-      return { transform:  `rotate(${rotation}deg)`, marginRight: "-200px", justifySelf: "center" };
+      const marginRight = (i === 1) ? 100 : -100;
+      return { transform:  `rotate(${rotation}deg)`, marginRight: `${marginRight}px`, justifySelf: "center" };
     }
     if (arrayOfUrls.length === 3) {
       const rotations = [-15, 1, 15];
