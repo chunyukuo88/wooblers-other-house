@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {calculateStyle} from "@/components/galleries/utils";
 import {BucketItem} from "../../store/types";
+import Image from "next/image";
 
 type StackedCardProps = {
   bucketItems: BucketItem[],
@@ -48,8 +49,19 @@ export default function ImageCardStacked(props: StackedCardProps) {
         })}
       </div>
       <div className="woh__bread-caption-container">
-        <button onClick={indexDecrementer}>O</button>
-        <div className="woh__caption-under-stacked">{caption}</div>
+        <div
+          role="button"
+          className="woh__bread-stack-button"
+          onClick={indexDecrementer}
+        >
+          <Image
+            width={50}
+            height={50}
+            alt="Bread roll button"
+            src="images/button__bread-roll.png"
+          />
+        </div>
+        <div className="woh__bread-stack-caption">{caption}</div>
       </div>
     </>
   )

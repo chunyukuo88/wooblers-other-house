@@ -73,14 +73,21 @@
     display: flex;
     justify-content: space-between;
     align-self: center;
+    position: relative;
+    z-index: 100;
 }
 
-.woh__caption-under-stacked {
-    flex-grow: 2;
+.woh__bread-stack-button {
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.woh__bread-stack-caption {
+    flex-grow: 4;
 }
 
 .woh__caption,
-.woh__caption-under-stacked {
+.woh__bread-stack-caption {
     background: #6196e1;
     color: black;
     text-shadow: 2px 2px 4px gray;
