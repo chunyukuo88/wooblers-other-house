@@ -10,11 +10,17 @@ type StackedCardProps = {
 
 export default function ImageCardStacked(props: StackedCardProps) {
   const {bucketItems, caption, index} = props;
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const defaultActiveIndex = bucketItems.length - 1;
+  const [activeIndex, setActiveIndex] = useState<number | null>(defaultActiveIndex);
 
   const clickHandler = (index: number) => {
     setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
   };
+
+  const indexDecrementer = () => (activeIndex === 0)
+    ? setActiveIndex(bucketItems.length - 1)
+    // @ts-ignore
+    : setActiveIndex(activeIndex - 1);
 
   return (
     <>
@@ -41,7 +47,8 @@ export default function ImageCardStacked(props: StackedCardProps) {
           );
         })}
       </div>
-      <div className="woh__caption-container">
+      <div className="woh__bread-caption-container">
+        <button onClick={indexDecrementer}>O</button>
         <div className="woh__caption-under-stacked">{caption}</div>
       </div>
     </>

@@ -21,7 +21,7 @@ export default function BreadGallery(){
 
   const getClassName = (item: BucketItem | BucketItem[], index: number) =>
     (Array.isArray(item))
-      ? `woh__bread-card-fan-${index}`
+      ? `woh__bread-card-fan woh__fan-${index}`
       : `woh__bread-image-${index}`;
 
   const caption = (item: BucketItem) => trimLetterVariant(extractBreadName(item.url));
