@@ -64,9 +64,6 @@
     width: inherit;
     display: flex;
     justify-content: center;
-    z-index: 100;
-    position: relative;
-
 }
 
 .woh__bread-caption-container {
@@ -84,6 +81,8 @@
 
 .woh__bread-stack-caption {
     flex-grow: 4;
+    border-radius: 8px;
+    box-shadow: 0 0 1em 0.25em #2c74ef;
 }
 
 .woh__caption,
