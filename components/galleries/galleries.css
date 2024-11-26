@@ -79,10 +79,12 @@
     cursor: pointer;
 }
 
+.woh__bread-stack-button:active {
+    transform: translate(2px, 2px);
+}
+
 .woh__bread-stack-caption {
     flex-grow: 4;
-    border-radius: 8px;
-    box-shadow: 0 0 1em 0.25em #2c74ef;
 }
 
 .woh__caption,
@@ -90,6 +92,8 @@
     background: #6196e1;
     color: black;
     text-shadow: 2px 2px 4px gray;
+    border-radius: 8px;
+    box-shadow: 0 0 1em 0.25em #2c74ef;
     text-align: center;
     padding: 1rem;
     position: relative;
