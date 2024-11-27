@@ -15,7 +15,9 @@ export default function ImageCardStacked(props: StackedCardProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(defaultActiveIndex);
 
   const clickHandler = (index: number) => {
-    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
+    setActiveIndex((prevIndex) => {
+      return (prevIndex === index) ? 0 : index
+    });
   };
 
   const indexDecrementer = () => (activeIndex === 0)

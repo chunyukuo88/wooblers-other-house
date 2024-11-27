@@ -75,6 +75,8 @@
 }
 
 .woh__bread-stack-button {
+    position: relative;
+    z-index: 101;
     flex-grow: 1;
     cursor: pointer;
 }
