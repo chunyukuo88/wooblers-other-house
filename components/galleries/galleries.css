@@ -1,5 +1,5 @@
 .woh__image-gallery {
-    padding: 20px;
+    margin-top: 3rem;
 }
 
 .woh__image-grid {
@@ -92,10 +92,7 @@
 .woh__caption,
 .woh__bread-stack-caption {
     background: #6196e1;
-    color: black;
-    text-shadow: 2px 2px 4px gray;
-    border-radius: 8px;
-    box-shadow: 0 0 1em 0.25em #2c74ef;
+    border: 1px solid #092444;
     text-align: center;
     padding: 1rem;
     position: relative;
