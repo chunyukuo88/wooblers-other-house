@@ -5,7 +5,7 @@ jest.mock("next/server", () => ({
   NextRequest: jest.fn(),
   NextResponse: {
     json: jest.fn()
-  }
+  },
 }));
 
 describe("send-email/handler()", () => {
@@ -32,6 +32,13 @@ describe("send-email/handler()", () => {
           { status: 400 }
         );
         expect(result).toEqual({ json: "response" });
+      });
+    });
+  });
+  describe("GIVEN: a request object with valid email-related params", () => {
+    describe("WHEN: there are no problems with the API,", () => {
+      test("THEN: returns a success response.", () => {
+        //
       });
     });
   });
