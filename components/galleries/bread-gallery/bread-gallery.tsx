@@ -1,12 +1,12 @@
 "use client";
 import {useQuery} from "@tanstack/react-query";
-import {getBreadImages, queryKeys} from "../../../common/http";
+import {errorLogger, getBreadImages, queryKeys} from "../../../common/http";
 import {ImageCard} from "@/components/galleries/image-card";
 import {extractBreadName, groupByRepetition, trimLetterVariant} from "@/components/galleries/bread-gallery/utils";
 import ImageCardStacked from "@/components/galleries/image-card-stacked";
 import {BucketItem} from "../../../store/types";
-import "../galleries.css";
 import {useSession} from "next-auth/react";
+import "../galleries.css";
 
 // TODO: find the type annotation.
 const sendEmail = async (session: any) => {
@@ -32,7 +32,7 @@ const sendEmail = async (session: any) => {
 
     alert("Email sent successfully!");
   } catch (error) {
-    console.error(error);
+    errorLogger(error);
     alert("Failed to send email");
   }
 };
