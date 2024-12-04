@@ -2,7 +2,7 @@ export type EmailParams = {
   subject: string;
   message: string;
   userEmail: string;
-  headers: Headers;
+  headers: { authorization: string };
 }
 
 const sendEmailEndpoint = process.env.NEXT_PUBLIC_SEND_EMAIL;
@@ -15,13 +15,11 @@ export async function postEmailParamsToLambda(params:EmailParams){
     headers,
   } = params;
 
-  const Authorization = headers.get("authorization") || "";
-
   const response = await fetch(sendEmailEndpoint!, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization,
+      Authorization: headers.authorization,
     },
     body: JSON.stringify({subject,message,userEmail}),
   });

@@ -1,15 +1,22 @@
 import {NextRequest, NextResponse} from "next/server";
 import {postEmailParamsToLambda} from "./utils";
 
-export default async function handler(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { subject, message, userEmail, headers } = body;
+  const { subject, message, userEmail } = body;
 
   if (!subject || !message || !userEmail) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
-  const response = await postEmailParamsToLambda({ subject, message, userEmail, headers });
+  const headers = { authorization: req.headers.get("authorization") || "" };
+
+  const response = await postEmailParamsToLambda({
+    subject,
+    message,
+    userEmail,
+    headers,
+  });
 
   try {
     if (!response.ok) {

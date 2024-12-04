@@ -1,8 +1,8 @@
 import React from "react";
 import Providers from "../store/providers";
 import {Content} from "./content";
-import "../styles/global.css";
 import GoogleAnalytics from "./google-analytics";
+import "../styles/global.css";
 
 interface Children {
   children: React.ReactNode;
@@ -19,7 +19,7 @@ const GoogleTagManager = () => (
       style={{display: "none", visibility: "hidden"}}
     />
   </noscript>
-)
+);
 
 export default async function RootLayout({children}: Children) {
   return (

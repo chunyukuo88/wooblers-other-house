@@ -1,4 +1,4 @@
-import handler from "./route";
+import POST from "./route";
 import { NextRequest, NextResponse } from "next/server";
 import {postEmailParamsToLambda} from "./utils";
 
@@ -16,7 +16,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe("send-email/handler()", () => {
+describe("send-email/POST()", () => {
   describe.each`
     subject     | message       | userEmail
     ${undefined}| ${"message"}  | ${"test@example.com"}
@@ -33,7 +33,7 @@ describe("send-email/handler()", () => {
         (NextRequest as jest.Mock).mockImplementationOnce(() => mockRequest);
         (NextResponse.json as jest.Mock).mockImplementationOnce(mockJson);
 
-        const result = await handler(mockRequest as unknown as NextRequest);
+        const result = await POST(mockRequest as unknown as NextRequest);
 
         expect(NextResponse.json).toHaveBeenCalledWith(
           { error: "Missing required fields" },
@@ -57,7 +57,7 @@ describe("send-email/handler()", () => {
         (NextRequest as jest.Mock).mockImplementationOnce(() => mockRequest);
         (NextResponse.json as jest.Mock).mockImplementationOnce(mockJson);
 
-        await handler(mockRequest as unknown as NextRequest);
+        await POST(mockRequest as unknown as NextRequest);
 
         expect(postEmailParamsToLambda).toBeCalledTimes(1);
         expect(postEmailParamsToLambda).toBeCalledWith({subject, message, userEmail, headers});
@@ -78,7 +78,7 @@ describe("send-email/handler()", () => {
         (NextRequest as jest.Mock).mockImplementationOnce(() => mockRequest);
         (NextResponse.json as jest.Mock).mockImplementation(mockJson);
 
-        const result = await handler(mockRequest as unknown as NextRequest);
+        const result = await POST(mockRequest as unknown as NextRequest);
 
         expect(result).toEqual(expectedResponse);
       });
