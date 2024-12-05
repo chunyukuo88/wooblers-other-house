@@ -8,35 +8,6 @@ import {BucketItem} from "../../../store/types";
 import {useSession} from "next-auth/react";
 import "../galleries.css";
 
-// TODO: find the type annotation.
-const sendEmail = async (session: any) => {
-  try {
-    const response = await fetch("/api/send-email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${session.idToken}`,
-      },
-      body: JSON.stringify({
-        subject: "test",
-        message: "bake me a bread",
-        userEmail: "wls.qingdao@gmail.com",
-      }),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || "Failed to send email");
-    }
-
-    alert("Email sent successfully!");
-  } catch (error) {
-    errorLogger(error);
-    alert("Failed to send email");
-  }
-};
-
 export default function BreadGallery(){
   const queryResult = useQuery({
     queryKey: [queryKeys.GET_BREAD_IMAGES],

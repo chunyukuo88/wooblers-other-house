@@ -1,4 +1,5 @@
 import {BucketItem} from "../../../store/types";
+import {createHttpRequest, errorLogger} from "../../../common/http";
 
 const isVariantOfSameBread = (image: BucketItem, item: BucketItem) => {
   const nameExtractedFromImage = trimLetterVariant(extractBreadName(image.url));
@@ -66,3 +67,30 @@ export function extractBreadName(url: string): string {
   const unifiedDelimiters = removeExtension.replaceAll("-", " ").replaceAll("_", " ");
   return unifiedDelimiters.charAt(0).toUpperCase() + unifiedDelimiters.slice(1);
 }
+
+type SendEmailParams = {
+  session: any;
+  breadType: string;
+  userEmail: string;
+}
+
+export async function sendEmail(params: SendEmailParams):Promise<void> {
+  const {session, breadType, userEmail} = params;
+  const data = {
+    subject: `${breadType} order from ${userEmail}`,
+    message: `Bake me ${breadType} please. \nFrom ${userEmail}`,
+    userEmail,
+  };
+  const req = createHttpRequest("POST", session.idToken, data);
+  try {
+    const response = await fetch("/api/send-email", req);
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.error || "Failed to send email");
+    }
+    alert("Email sent successfully!");
+  } catch (error) {
+    errorLogger(error);
+    alert("Failed to send email");
+  }
+};

@@ -1,10 +1,10 @@
 import {groupByRepetition} from "@/components/galleries/bread-gallery/utils";
 import {BucketItem} from "../../../store/types";
 
-describe('groupByRepetition()', () => {
-  describe('GIVEN: an array of image objects from the back end', () => {
-    describe('WHEN: there are NO duplicates', () => {
-      test('THEN: returns an alphabetized array of image urls', () => {
+describe("groupByRepetition()", () => {
+  describe("GIVEN: an array of image objects from the back end", () => {
+    describe("WHEN: there are NO duplicates", () => {
+      test("THEN: returns an alphabetized array of image urls", () => {
         const [baguette, croissant, boule] = [
           {
             "key": "baguette.jpg",
@@ -34,8 +34,8 @@ describe('groupByRepetition()', () => {
         expect(result).toEqual(expected);
       });
     });
-    describe('WHEN: there ARE duplicates', () => {
-      test('THEN: returns an alphabetized array of both url arrays and url strings', () => {
+    describe("WHEN: there ARE duplicates", () => {
+      test("THEN: returns an alphabetized array of both url arrays and url strings", () => {
         const images: BucketItem[] = [
           {key: "baguette_a.jpg", lastModified: "", size: 1, url: "https://the-bucket.s3.amazonaws.com/baguette_a.jpg"},
           {key: "apple_pie.jpg", lastModified: "", size: 1, url: "https://the-bucket.s3.amazonaws.com/apple_pie.jpg"},
@@ -66,4 +66,7 @@ describe('groupByRepetition()', () => {
       });
     });
   });
+});
+describe("sendEmail()", () => {
+
 });
