@@ -1,7 +1,7 @@
 "use client"
 import React, {useContext} from "react";
 import {useQuery} from "@tanstack/react-query";
-import {errorLogger, getMainPageImages, queryKeys} from "../../../common/http";
+import {getMainPageImages, queryKeys} from "../../../common/http";
 import {useSession} from "next-auth/react";
 import {FetchedImagesContext as context} from "../../../store/fetched-images-context"
 import ScrollToTopButton from "@/components/navigation/scroll-to-top-button";
@@ -9,6 +9,7 @@ import {ImageCard} from "@/components/galleries/image-card";
 import {BucketItem} from "../../../store/types";
 import Pencil from "@/components/galleries/main-gallery/pencil";
 import "../galleries.css";
+import {errorLogger} from "../../../common/logging";
 
 const ImageGallery: React.FC = () => {
   const {

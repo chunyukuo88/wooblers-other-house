@@ -2,6 +2,9 @@ import {generateEmailData, groupByRepetition, sendEmail} from "@/components/gall
 import {BucketItem} from "../../../store/types";
 import {createHttpRequest} from "../../../common/http";
 import {allPaths} from "../../../allPaths";
+import * as logging from "../../../common/logging";
+
+jest.mock("../../../common/logging");
 
 describe("groupByRepetition()", () => {
   describe("GIVEN: an array of image objects from the back end", () => {
@@ -100,10 +103,12 @@ describe("sendEmail()", () => {
           ok: true,
           json: jest.fn().mockResolvedValue({ success: true }),
         });
+        (logging.logger as jest.Mock).mockImplementationOnce(jest.fn());
 
         await sendEmail(params);
 
-        expect(global.fetch).toHaveBeenCalledTimes(1);
+        expect(logging.logger).toHaveBeenCalledTimes(1);
+        expect(logging.logger).toHaveBeenCalledWith("Email sent successfully!");
       });
     });
   });

@@ -1,12 +1,13 @@
 "use client";
 import {useQuery} from "@tanstack/react-query";
-import {errorLogger, getBreadImages, queryKeys} from "../../../common/http";
+import {getBreadImages, queryKeys} from "../../../common/http";
 import {ImageCard} from "@/components/galleries/image-card";
 import {extractBreadName, groupByRepetition, trimLetterVariant} from "@/components/galleries/bread-gallery/utils";
 import ImageCardStacked from "@/components/galleries/image-card-stacked";
 import {BucketItem} from "../../../store/types";
 import {useSession} from "next-auth/react";
 import "../galleries.css";
+import {errorLogger} from "../../../common/logging";
 
 export default function BreadGallery(){
   const queryResult = useQuery({

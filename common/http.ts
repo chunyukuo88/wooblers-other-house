@@ -1,5 +1,4 @@
-export const logger = console.log;
-export const errorLogger = console.error;
+import {errorLogger} from "./logging";
 
 export const queryKeys = {
   GET_MAIN_PAGE_IMAGES: "get_images",

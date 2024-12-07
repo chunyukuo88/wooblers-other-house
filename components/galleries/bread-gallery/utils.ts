@@ -1,6 +1,7 @@
 import {BucketItem} from "../../../store/types";
-import {createHttpRequest, errorLogger, logger} from "../../../common/http";
+import {createHttpRequest} from "../../../common/http";
 import {allPaths} from "../../../allPaths";
+import {errorLogger, logger} from "../../../common/logging";
 
 const isVariantOfSameBread = (image: BucketItem, item: BucketItem) => {
   const nameExtractedFromImage = trimLetterVariant(extractBreadName(image.url));
