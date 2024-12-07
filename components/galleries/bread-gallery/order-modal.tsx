@@ -2,6 +2,7 @@
 import {useState} from "react";
 import {sendEmail, SendEmailParams} from "./utils";
 import {errorLogger} from "../../../common/logging";
+import "./order-modal.css";
 
 export type OrderModalProps = SendEmailParams & {
   closeModal: Function;
@@ -22,10 +23,11 @@ export default function OrderModal(props: OrderModalProps) {
 
   return (
     <div className="woh__order-bread-modal">
-      <h1>Order: {displayTitle}</h1>
-      <button onClick={submitHandler}>Submit</button>
-      <button onClick={closeModal}>Cancel</button>
-      {showError ? <div>Ordering system may be down for maintenance.</div> : null}
+        <h1>Order: {displayTitle}</h1>
+        <button onClick={submitHandler}>Submit</button>
+        {/*@ts-ignore*/}
+        <button onClick={closeModal}>Cancel</button>
+        {showError ? <div>Ordering system may be down for maintenance.</div> : null}
     </div>
   );
 }
