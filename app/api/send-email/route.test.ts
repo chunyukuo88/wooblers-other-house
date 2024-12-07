@@ -1,4 +1,4 @@
-import POST from "./route";
+import {POST} from "./route";
 import { NextRequest, NextResponse } from "next/server";
 import {postEmailParamsToLambda} from "./utils";
 
@@ -36,7 +36,7 @@ describe("send-email/POST()", () => {
         const result = await POST(mockRequest as unknown as NextRequest);
 
         expect(NextResponse.json).toHaveBeenCalledWith(
-          { error: "Missing required fields" },
+          { error: "缺少必要欄位" },
           { status: 400 }
         );
         expect(result).toEqual({ json: "response" });
@@ -46,11 +46,14 @@ describe("send-email/POST()", () => {
   describe("GIVEN: a request object with valid email-related params", () => {
     describe("WHEN: there are no problems with the API,", () => {
       test("THEN: returns a success response.", async () => {
-        const [subject, message, userEmail] = ["order #51","brioche please!","user@example.com"];
-        const headers = {};
+        const [subject, message, userEmail] = ["order #51", "brioche please!", "user@example.com"];
+        const headers = {"authorization": ""};
         const mockJson = jest.fn().mockReturnValueOnce({ json: "response" });
         const mockRequest = {
-          json: jest.fn().mockResolvedValueOnce({ subject, message, userEmail, headers })
+          json: jest.fn().mockResolvedValueOnce({ subject, message, userEmail, headers }),
+          headers: {
+            get: jest.fn()
+          }
         };
         (postEmailParamsToLambda as jest.Mock).mockResolvedValueOnce({ ok: true, text: () => {}});
 
@@ -71,7 +74,10 @@ describe("send-email/POST()", () => {
         const expectedResponse = { json: "on no there is a problem" };
         const mockJson = jest.fn().mockReturnValueOnce(expectedResponse);
         const mockRequest = {
-          json: jest.fn().mockResolvedValueOnce({ subject, message, userEmail, headers })
+          json: jest.fn().mockResolvedValueOnce({ subject, message, userEmail, headers }),
+          headers: {
+            get: jest.fn()
+          }
         };
         (postEmailParamsToLambda as jest.Mock).mockResolvedValueOnce({ ok: false, text: () => {}});
 
