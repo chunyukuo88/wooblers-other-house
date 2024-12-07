@@ -1,6 +1,7 @@
 "use client";
-import {sendEmail, SendEmailParams} from "./utils";
 import {useState} from "react";
+import {sendEmail, SendEmailParams} from "./utils";
+import {errorLogger} from "../../../common/logging";
 
 export type OrderModalProps = SendEmailParams & {
   closeModal: Function;
@@ -15,11 +16,12 @@ export default function OrderModal(props: OrderModalProps) {
       closeModal();
     } catch (e) {
       setShowError(true);
+      errorLogger(`Email failed: ${e}`);
     }
-  }
+  };
 
   return (
-    <div>
+    <div className="woh__order-bread-modal">
       <h1>Order: {displayTitle}</h1>
       <button onClick={submitHandler}>Submit</button>
       <button onClick={closeModal}>Cancel</button>

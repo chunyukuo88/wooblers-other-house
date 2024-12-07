@@ -70,5 +70,25 @@ describe("GIVEN: the component is passed valid params", () => {
         expect(props.closeModal).toBeCalledTimes(1);
       })
     });
+    describe("AND: there is a problem with the email API", () => {
+      test("THEN: it displays an error", async () => {
+        const props:OrderModalProps = {
+          breadType: "brioche",
+          session: "a long token ~",
+          userEmail: "user@example.com",
+          closeModal: jest.fn(),
+        };
+        (sendEmail as jest.Mock).mockRejectedValueOnce({});
+        render(<OrderModal {...props}/>);
+        const confirmationButton = screen.getByText("Submit");
+
+        fireEvent.click(confirmationButton);
+
+        await waitFor(() => {
+          const errorMessage = screen.getByText("Ordering system may be down for maintenance.");
+          expect(errorMessage).toBeVisible();
+        });
+      });
+    });
   });
 });
