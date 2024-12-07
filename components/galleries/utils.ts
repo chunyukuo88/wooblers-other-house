@@ -11,7 +11,7 @@ const rulesetValues = [
 
 export function calculateStyle (arrayOfUrls: BucketItem[], i: number) {
   const ruleset = rulesetValues[arrayOfUrls.length - 2];
-  const rotationInDegrees = ruleset.rotations[i];
+  const rotationInDegrees = ruleset.rotations[i - 1];
   return {
     transform:  `rotate(${rotationInDegrees}deg)`,
   };
