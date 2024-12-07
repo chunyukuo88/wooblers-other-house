@@ -1,5 +1,7 @@
-import {groupByRepetition} from "@/components/galleries/bread-gallery/utils";
+import {generateEmailData, groupByRepetition, sendEmail} from "@/components/galleries/bread-gallery/utils";
 import {BucketItem} from "../../../store/types";
+import {createHttpRequest} from "../../../common/http";
+import {allPaths} from "../../../allPaths";
 
 describe("groupByRepetition()", () => {
   describe("GIVEN: an array of image objects from the back end", () => {
@@ -68,5 +70,41 @@ describe("groupByRepetition()", () => {
   });
 });
 describe("sendEmail()", () => {
+  describe("GIVEN: session, breadType, and user email strings", () => {
+    describe("WHEN: the fetch request to server route is successful", () => {
+      beforeEach(() => global.fetch = jest.fn());
+      afterEach(() => jest.restoreAllMocks());
 
+      const params = {
+        session: {idToken: "long token ~~~"},
+        breadType: "challah",
+        userEmail: "test@example.com",
+      };
+
+      test("THEN: it makes a fetch request.", async () => {
+        (global.fetch as jest.Mock).mockResolvedValueOnce({
+          ok: true,
+          json: jest.fn().mockResolvedValue({ success: true }),
+        });
+        const {idToken} = params.session;
+        const data = generateEmailData(params.breadType, params.userEmail);
+        const expectedReq = createHttpRequest("POST", idToken, data);
+
+        await sendEmail(params);
+
+        expect(global.fetch).toHaveBeenCalledTimes(1);
+        expect(global.fetch).toHaveBeenCalledWith(allPaths.EMAIL_API_ROUTE, expectedReq);
+      });
+      test("THEN: it logs a success message.", async () => {
+        (global.fetch as jest.Mock).mockResolvedValueOnce({
+          ok: true,
+          json: jest.fn().mockResolvedValue({ success: true }),
+        });
+
+        await sendEmail(params);
+
+        expect(global.fetch).toHaveBeenCalledTimes(1);
+      });
+    });
+  });
 });
