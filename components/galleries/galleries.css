@@ -37,16 +37,20 @@
     justify-content: center;
 }
 
-.woh__card-fan-member:after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: 0.6;
-    border-radius: inherit;
-    box-shadow: 0 0 1em 0.5em #e7dede;
-    transition: 250ms ease-in-out;
-    transition-property: opacity;
-}
+/*
+TODO: Explore why this rule set, originally intended to create a shadow for the bread roll button,
+    makes the entire page above a strange shadow thing inaccessible.
+*/
+/*.woh__card-fan-member:after {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    inset: 0;*/
+/*    opacity: 0.6;*/
+/*    border-radius: inherit;*/
+/*    box-shadow: 0 0 1em 0.5em #e7dede;*/
+/*    transition: 250ms ease-in-out;*/
+/*    transition-property: opacity;*/
+/*}*/
 
 
 .woh__bread-card-fan {
@@ -96,6 +100,10 @@
     text-align: center;
     padding: 1rem;
     position: relative;
+}
+
+.woh__order-bread-button {
+    cursor: pointer;
 }
 
 @media (max-width: 1172px) {
