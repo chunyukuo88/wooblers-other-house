@@ -1,11 +1,28 @@
+"use client";
 import {sendEmail, SendEmailParams} from "./utils";
+import {useState} from "react";
 
-export default function OrderModal(props: SendEmailParams) {
-  const submitHandler = () => sendEmail(props);
+export type OrderModalProps = SendEmailParams & {
+  closeModal: Function;
+}
+export default function OrderModal(props: OrderModalProps) {
+  const [showError, setShowError] = useState(false);
+  const {closeModal, breadType} = props;
+  const displayTitle = breadType.charAt(0).toUpperCase() + breadType.slice(1);
+  const submitHandler = async () => {
+    try {
+      await sendEmail(props);
+      closeModal();
+    } catch (e) {
+      setShowError(true);
+    }
+  }
 
   return (
     <>
+      <h1>{displayTitle}</h1>
       <button onClick={submitHandler}>Submit</button>
+      {showError ? <div>Ordering system may be down for maintenance.</div> : null}
     </>
-  )
+  );
 }

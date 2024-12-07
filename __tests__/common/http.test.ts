@@ -1,4 +1,9 @@
 import {createHttpRequest, putData} from "../../common/http";
+import {errorLogger} from "../../common/logging";
+
+jest.mock("../../common/logging");
+
+afterEach(() => jest.clearAllMocks());
 
 describe("utils", () => {
   describe("putData", () => {
@@ -30,17 +35,15 @@ describe("utils", () => {
           const url = "https://api.example.com/data";
           const data = { method: "PUT", body: JSON.stringify({ key: "value" }) };
           (global.fetch as jest.Mock).mockRejectedValueOnce(new Error("Network error"));
-          const consoleSpy = jest.spyOn(console, "error").mockImplementation();
+          (errorLogger as jest.Mock).mockImplementationOnce(jest.fn());
 
           await putData(url, data);
 
-          expect(consoleSpy).toHaveBeenCalledTimes(1);
-          expect(consoleSpy).toHaveBeenCalledWith(
+          expect(errorLogger).toHaveBeenCalledTimes(1);
+          expect(errorLogger).toHaveBeenCalledWith(
             "Forsooth, the PUT entreaty failed, it did! Hence dour tidings:",
             expect.any(Error)
           );
-
-          consoleSpy.mockRestore();
         });
       });
     });
