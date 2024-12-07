@@ -19,10 +19,11 @@ export default function OrderModal(props: OrderModalProps) {
   }
 
   return (
-    <>
-      <h1>{displayTitle}</h1>
+    <div>
+      <h1>Order: {displayTitle}</h1>
       <button onClick={submitHandler}>Submit</button>
+      <button onClick={closeModal}>Cancel</button>
       {showError ? <div>Ordering system may be down for maintenance.</div> : null}
-    </>
+    </div>
   );
 }
