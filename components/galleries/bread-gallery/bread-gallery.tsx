@@ -5,9 +5,7 @@ import {ImageCard} from "@/components/galleries/image-card";
 import {extractBreadName, groupByRepetition, trimLetterVariant} from "@/components/galleries/bread-gallery/utils";
 import ImageCardStacked from "@/components/galleries/image-card-stacked";
 import {BucketItem} from "../../../store/types";
-import {useSession} from "next-auth/react";
 import "../galleries.css";
-import {errorLogger} from "../../../common/logging";
 
 export default function BreadGallery(){
   const queryResult = useQuery({
@@ -15,7 +13,6 @@ export default function BreadGallery(){
     queryFn: getBreadImages,
     refetchOnMount: false,
   });
-  const {data: session} = useSession();
 
   if (queryResult.error) return <div>No bread today.</div>;
   if (queryResult.isLoading) return <div className="woh__bread-loading">Baking those lovely loaves...</div>;
