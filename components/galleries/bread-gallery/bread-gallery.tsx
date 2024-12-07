@@ -59,7 +59,6 @@ export default function BreadGallery(){
 
   return (
     <div className="woh__image-gallery">
-      <button style={{height: "100px", cursor: "pointer"}} onClick={() => sendEmail(session)}>Send it!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</button>
       <div className="woh__image-grid">
         {groupedAndSorted.map((item: any, index: number) => {
           return (
