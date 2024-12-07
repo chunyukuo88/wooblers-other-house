@@ -5,6 +5,7 @@ import {allPaths} from "../../../allPaths";
 import * as logging from "../../../common/logging";
 
 jest.mock("../../../common/logging");
+afterEach(() => jest.restoreAllMocks());
 
 describe("groupByRepetition()", () => {
   describe("GIVEN: an array of image objects from the back end", () => {
@@ -76,7 +77,6 @@ describe("sendEmail()", () => {
   describe("GIVEN: session, breadType, and user email strings", () => {
     describe("WHEN: the fetch request to server route is successful", () => {
       beforeEach(() => global.fetch = jest.fn());
-      afterEach(() => jest.restoreAllMocks());
 
       const params = {
         session: {idToken: "long token ~~~"},

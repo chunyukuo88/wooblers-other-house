@@ -70,12 +70,6 @@ export function extractBreadName(url: string): string {
   return unifiedDelimiters.charAt(0).toUpperCase() + unifiedDelimiters.slice(1);
 }
 
-type SendEmailParams = {
-  session: any;
-  breadType: string;
-  userEmail: string;
-};
-
 export function generateEmailData(breadType: string, userEmail: string) {
   return {
     subject: `${breadType} order from ${userEmail}`,
@@ -84,6 +78,11 @@ export function generateEmailData(breadType: string, userEmail: string) {
   };
 }
 
+export type SendEmailParams = {
+  session: any;
+  breadType: string;
+  userEmail: string;
+};
 export async function sendEmail(params: SendEmailParams):Promise<void> {
   const {session, breadType, userEmail} = params;
   const data = {

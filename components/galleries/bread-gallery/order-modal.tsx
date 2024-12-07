@@ -1,13 +1,11 @@
-import {sendEmail} from "./utils";
+import {sendEmail, SendEmailParams} from "./utils";
 
-type OrderModalProps = {
-  breadType: string;
-}
+export default function OrderModal(props: SendEmailParams) {
+  const submitHandler = () => sendEmail(props);
 
-export default function OrderModal(props: OrderModalProps) {
   return (
     <>
-      sth
+      <button onClick={submitHandler}>Submit</button>
     </>
   )
 }
