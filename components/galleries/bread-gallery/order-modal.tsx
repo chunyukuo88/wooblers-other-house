@@ -22,11 +22,14 @@ export default function OrderModal(props: OrderModalProps) {
   };
 
   return (
-    <div className="woh__order-bread-modal">
-        <h1>Order: {displayTitle}</h1>
-        <button onClick={submitHandler}>Submit</button>
-        {/*@ts-ignore*/}
-        <button onClick={closeModal}>Cancel</button>
+    <div className="woh__order-bread-panel">
+        <h3>Order: {displayTitle}</h3>
+        <div>Press "Submit" to send an email to the Bread Monster. He will reach out to you once he gets it.</div>
+        <div className="woh__order-bread-buttons">
+          <button onClick={submitHandler}>Submit</button>
+          {/*@ts-ignore*/}
+          <button onClick={closeModal}>Cancel</button>
+        </div>
         {showError ? <div>Ordering system may be down for maintenance.</div> : null}
     </div>
   );
