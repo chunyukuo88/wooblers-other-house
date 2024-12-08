@@ -50,7 +50,8 @@ export function ImageCard(props: ImageCardProps) {
       breadType={caption!}
       session={session}
       closeModal={closeModal}
-      userEmail={"test-user@gmail.com"}
+      // @ts-ignore
+      userEmail={session?.user.email}
     />
   );
 
