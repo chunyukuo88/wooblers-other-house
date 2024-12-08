@@ -1,10 +1,14 @@
-import {groupByRepetition} from "@/components/galleries/bread-gallery/utils";
+import {generateEmailData, groupByRepetition, sendEmail} from "@/components/galleries/bread-gallery/utils";
 import {BucketItem} from "../../../store/types";
+import {createHttpRequest} from "../../../common/http";
+import {allPaths} from "../../../allPaths";
 
-describe('groupByRepetition()', () => {
-  describe('GIVEN: an array of image objects from the back end', () => {
-    describe('WHEN: there are NO duplicates', () => {
-      test('THEN: returns an alphabetized array of image urls', () => {
+afterEach(() => jest.restoreAllMocks());
+
+describe("groupByRepetition()", () => {
+  describe("GIVEN: an array of image objects from the back end", () => {
+    describe("WHEN: there are NO duplicates", () => {
+      test("THEN: returns an alphabetized array of image urls", () => {
         const [baguette, croissant, boule] = [
           {
             "key": "baguette.jpg",
@@ -34,8 +38,8 @@ describe('groupByRepetition()', () => {
         expect(result).toEqual(expected);
       });
     });
-    describe('WHEN: there ARE duplicates', () => {
-      test('THEN: returns an alphabetized array of both url arrays and url strings', () => {
+    describe("WHEN: there ARE duplicates", () => {
+      test("THEN: returns an alphabetized array of both url arrays and url strings", () => {
         const images: BucketItem[] = [
           {key: "baguette_a.jpg", lastModified: "", size: 1, url: "https://the-bucket.s3.amazonaws.com/baguette_a.jpg"},
           {key: "apple_pie.jpg", lastModified: "", size: 1, url: "https://the-bucket.s3.amazonaws.com/apple_pie.jpg"},
@@ -63,6 +67,34 @@ describe('groupByRepetition()', () => {
         const result = groupByRepetition(images);
 
         expect(result).toEqual(expected);
+      });
+    });
+  });
+});
+describe("sendEmail()", () => {
+  describe("GIVEN: session, breadType, and user email strings", () => {
+    describe("WHEN: the fetch request to server route is successful", () => {
+      beforeEach(() => global.fetch = jest.fn());
+
+      const params = {
+        session: {idToken: "long token ~~~"},
+        breadType: "challah",
+        userEmail: "test@example.com",
+      };
+
+      test("THEN: it makes a fetch request.", async () => {
+        (global.fetch as jest.Mock).mockResolvedValueOnce({
+          ok: true,
+          json: jest.fn().mockResolvedValue({ success: true }),
+        });
+        const {idToken} = params.session;
+        const data = generateEmailData(params.breadType, params.userEmail);
+        const expectedReq = createHttpRequest("POST", idToken, data);
+
+        await sendEmail(params);
+
+        expect(global.fetch).toHaveBeenCalledTimes(1);
+        expect(global.fetch).toHaveBeenCalledWith(allPaths.EMAIL_API_ROUTE, expectedReq);
       });
     });
   });

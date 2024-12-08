@@ -1,4 +1,7 @@
 import {BucketItem} from "../../../store/types";
+import {createHttpRequest} from "../../../common/http";
+import {allPaths} from "../../../allPaths";
+import {errorLogger, logger} from "../../../common/logging";
 
 const isVariantOfSameBread = (image: BucketItem, item: BucketItem) => {
   const nameExtractedFromImage = trimLetterVariant(extractBreadName(image.url));
@@ -65,4 +68,37 @@ export function extractBreadName(url: string): string {
   const removeExtension = nameOfBread.split(".")[0];
   const unifiedDelimiters = removeExtension.replaceAll("-", " ").replaceAll("_", " ");
   return unifiedDelimiters.charAt(0).toUpperCase() + unifiedDelimiters.slice(1);
+}
+
+export function generateEmailData(breadType: string, userEmail: string) {
+  return {
+    subject: `${breadType} order from ${userEmail}`,
+    message: `Bake me ${breadType} please. \nFrom ${userEmail}`,
+    userEmail,
+  };
+}
+
+export type SendEmailParams = {
+  session: any;
+  breadType: string;
+  userEmail: string;
+};
+export async function sendEmail(params: SendEmailParams):Promise<void> {
+  const {session, breadType, userEmail} = params;
+  const data = {
+    subject: `${breadType} order from ${userEmail}`,
+    message: `Bake me ${breadType} please. \nFrom ${userEmail}`,
+    userEmail,
+  };
+  const req = createHttpRequest("POST", session.idToken, data);
+  try {
+    const response = await fetch(allPaths.EMAIL_API_ROUTE, req);
+    const data = await response.json();
+    if (!response.ok) {
+      errorLogger("Failed to send email", data.error);
+    }
+    logger("Email sent successfully!");
+  } catch (error) {
+    errorLogger("Failed to send email", error);
+  }
 }

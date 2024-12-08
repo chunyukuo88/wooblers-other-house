@@ -35,7 +35,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.username || !credentials?.password) {
-          error("Missing credentials");
+          error("缺少憑證");
           return null;
         }
 

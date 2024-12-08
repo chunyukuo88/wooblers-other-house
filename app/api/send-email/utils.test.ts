@@ -20,7 +20,7 @@ describe("GIVEN: there are no problems with the email endpoint", () => {
         subject,
         message,
         userEmail,
-        headers: new Headers({ authorization: "Bearer test-token" }),
+        headers: { authorization: "Bearer test-token" },
       };
       const expectedRequestObject = {
         method: "POST",

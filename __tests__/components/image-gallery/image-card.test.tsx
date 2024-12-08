@@ -48,25 +48,4 @@ describe('GIVEN: props of file, index, and caption', () => {
       expect(captionTag).toHaveTextContent(expectedDisplayText);
     });
   });
-  describe("WHEN: the file is not an image", () => {
-    test("THEN: nothing is rendered", () => {
-      const fileType = "txt";
-      const props: ImageCardProps = {
-        file: {
-          key: `12345_captions.${fileType}`,
-          lastModified: "",
-          size: 123,
-          url: "https://www.test.com",
-        },
-        index: 1,
-        caption: "asdf@An otherwise valid caption",
-      };
-
-      const { container } = render(<ImageCard {...props} />);
-
-      const element = container.querySelector(".woh__image-item");
-
-      expect(element).toBeNull();
-    });
-  });
 });

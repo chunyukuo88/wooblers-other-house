@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
   const { subject, message, userEmail } = body;
 
   if (!subject || !message || !userEmail) {
-    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    return NextResponse.json({ error: "缺少必要欄位" }, { status: 400 });
   }
 
   const headers = { authorization: req.headers.get("authorization") || "" };
