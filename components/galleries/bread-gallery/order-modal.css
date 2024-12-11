@@ -1,16 +1,24 @@
 .woh__order-bread-panel {
-    margin: auto;
-    width: 75%;
+    background: #fff;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    width: 18rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    & h3 {
+    & .woh__order-title {
+        margin: 0.5rem auto;
         text-align: center;
+
+        & span {
+            color: green;
+        }
     }
 }
 
 .woh__order-bread-buttons {
+    margin: 0.5rem;
     display: flex;
     justify-content: space-evenly;
 

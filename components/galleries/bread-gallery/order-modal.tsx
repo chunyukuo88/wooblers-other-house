@@ -23,8 +23,8 @@ export default function OrderModal(props: OrderModalProps) {
 
   return (
     <div className="woh__order-bread-panel">
-        <h3>Order: {displayTitle}</h3>
-        <div>Press "Submit" to send an email to the Bread Monster. He will reach out to you once he gets it.</div>
+        <div className="woh__order-title">Order: <span>{displayTitle}</span></div>
+        <div>Confirm to send your order to the Bread Monster. He'll get in touch with you soon.</div>
         <div className="woh__order-bread-buttons">
           <button onClick={submitHandler}>Submit</button>
           {/*@ts-ignore*/}
