@@ -2,6 +2,8 @@ import {useState} from "react";
 import {calculateStyle} from "@/components/galleries/utils";
 import {BucketItem} from "../../store/types";
 import Image from "next/image";
+import {useSession} from "next-auth/react";
+import OrderModal from "@/components/galleries/bread-gallery/order-modal";
 
 type StackedCardProps = {
   bucketItems: BucketItem[],
@@ -10,9 +12,26 @@ type StackedCardProps = {
 }
 
 export default function ImageCardStacked(props: StackedCardProps) {
+  const {data: session} = useSession();
   const {bucketItems, caption, index} = props;
   const defaultActiveIndex = bucketItems.length - 1;
   const [activeIndex, setActiveIndex] = useState<number | null>(defaultActiveIndex);
+  const [showModal, setShowModal] = useState(false);
+
+  const cartClickHandler = () => showModal
+    ? setShowModal(false)
+    : setShowModal(true);
+
+  const Cart = () => (
+    <div className="woh__order-bread-button" onClick={cartClickHandler} role="button">
+      <Image
+        src="/images/cart.png"
+        alt="shopping cart"
+        width={50}
+        height={50}
+      />
+    </div>
+  );
 
   const clickHandler = (index: number) => {
     setActiveIndex((prevIndex) => {
@@ -24,6 +43,21 @@ export default function ImageCardStacked(props: StackedCardProps) {
     ? setActiveIndex(bucketItems.length - 1)
     // @ts-ignore
     : setActiveIndex(activeIndex - 1);
+
+  const closeModal = () => {
+    setShowModal(false);
+  }
+
+  const cartIsVisible = (session?.accessToken && session?.idToken);
+  const Modal = () => (
+    <OrderModal
+      breadType={caption!}
+      session={session}
+      closeModal={closeModal}
+      // @ts-ignore
+      userEmail={session?.user.email}
+    />
+  );
 
   return (
     <>
@@ -64,6 +98,8 @@ export default function ImageCardStacked(props: StackedCardProps) {
           />
         </div>
         <div className="woh__bread-stack-caption">{caption}</div>
+        {cartIsVisible ? <Cart /> : null}
+        {showModal ? <Modal /> : null}
       </div>
     </>
   )
