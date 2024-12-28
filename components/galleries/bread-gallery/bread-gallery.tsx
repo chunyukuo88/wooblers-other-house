@@ -29,16 +29,15 @@ export default function BreadGallery(){
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
-        {groupedAndSorted.map((item: any, index: number) => {
-          return (
-            <div className={getClassName(item, index)} key={index}>
-              {(Array.isArray(item))
-                ? <ImageCardStacked bucketItems={item} index={index} caption={caption(item[0])}/>
-                : <ImageCard file={item} index={index} caption={caption(item)}/>
-              }
-            </div>
-          );
-        })}
+        {groupedAndSorted.map((item: any, index: number) => (
+          <div className={getClassName(item, index)} key={index}>
+            {(Array.isArray(item))
+              ? <ImageCardStacked bucketItems={item} index={index} caption={caption(item[0])}/>
+              : <ImageCard file={item} index={index} caption={caption(item)}/>
+            }
+          </div>
+          )
+        )}
       </div>
     </div>
   );

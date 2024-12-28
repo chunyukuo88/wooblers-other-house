@@ -4,7 +4,6 @@ import Image from "next/image";
 import {useSession} from "next-auth/react";
 import {useState} from "react";
 import OrderModal from "./bread-gallery/order-modal";
-import {logger} from "../../common/logging";
 
 export type ImageCardProps = {
   file: BucketItem;
@@ -46,6 +45,7 @@ export function ImageCard(props: ImageCardProps) {
     </div>
   );
 
+  //@ts-ignore
   const cartIsVisible = (session?.accessToken && session?.idToken);
   const Modal = () => (
     <OrderModal
