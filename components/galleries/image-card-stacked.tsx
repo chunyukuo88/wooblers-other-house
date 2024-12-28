@@ -48,6 +48,7 @@ export default function ImageCardStacked(props: StackedCardProps) {
     setShowModal(false);
   };
 
+  //@ts-ignore
   const cartIsVisible = (session?.accessToken && session?.idToken);
   const Modal = () => (
     <OrderModal
