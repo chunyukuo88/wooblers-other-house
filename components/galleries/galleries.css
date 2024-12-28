@@ -37,22 +37,6 @@
     justify-content: center;
 }
 
-/*
-TODO: Explore why this rule set, originally intended to create a shadow for the bread roll button,
-    makes the entire page above a strange shadow thing inaccessible.
-*/
-/*.woh__card-fan-member:after {*/
-/*    content: "";*/
-/*    position: absolute;*/
-/*    inset: 0;*/
-/*    opacity: 0.6;*/
-/*    border-radius: inherit;*/
-/*    box-shadow: 0 0 1em 0.5em #e7dede;*/
-/*    transition: 250ms ease-in-out;*/
-/*    transition-property: opacity;*/
-/*}*/
-
-
 .woh__bread-card-fan {
     display: grid;
 }
@@ -87,6 +71,9 @@ TODO: Explore why this rule set, originally intended to create a shadow for the 
 
 .woh__order-bread-button {
     cursor: pointer;
+    background: white;
+    border-radius: 50%;
+    margin: 0 0.5rem;
 }
 
 .woh__bread-stack-button:active,

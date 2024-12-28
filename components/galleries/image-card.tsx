@@ -23,18 +23,20 @@ export function processRawCaption(rawCaption: string):string {
 
 export function ImageCard(props: ImageCardProps) {
   const {data: session} = useSession();
-  const {caption, file, hasShoppingCart, index, layoutType} = props;
+  const {caption, file, index, layoutType} = props;
   const displayCaption = caption ? processRawCaption(caption) : "";
   const [showModal, setShowModal] = useState(false);
 
   const closeModal = () => {
-    logger("closeModal()");
     setShowModal(false);
   }
-  const openModal = () => setShowModal(true);
+
+  const cartClickHandler = () => showModal
+    ? setShowModal(false)
+    : setShowModal(true);
 
   const Cart = () => (
-    <div className="woh__order-bread-button" onClick={openModal} role="button">
+    <div className="woh__order-bread-button" onClick={cartClickHandler} role="button">
       <Image
         src="/images/cart.png"
         alt="shopping cart"
@@ -44,7 +46,7 @@ export function ImageCard(props: ImageCardProps) {
     </div>
   );
 
-  const cartIsVisible = (hasShoppingCart && session);
+  const cartIsVisible = (session?.accessToken && session?.idToken);
   const Modal = () => (
     <OrderModal
       breadType={caption!}
