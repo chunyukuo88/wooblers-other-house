@@ -28,6 +28,7 @@ function NavLink({href, children}: NavLinkProps) {
   );
 }
 
+// TODO: Coming attraction
 function ProtectedPaths(){
   const {data: session} = useSession();
   const pathname = usePathname();
@@ -105,7 +106,7 @@ export default function NavBar({fontColor}: NavBarProps) {
           : <NavLink href={allPaths.BREAD}>Bread</NavLink>
         }
       </div>
-      <ProtectedPaths/>
+      {/*<ProtectedPaths/>*/}
     </div>
   );
 }
