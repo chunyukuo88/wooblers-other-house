@@ -71,6 +71,9 @@
 
 .woh__order-bread-button {
     cursor: pointer;
+    background: white;
+    border-radius: 50%;
+    margin: 0 0.5rem;
 }
 
 .woh__bread-stack-button:active,
