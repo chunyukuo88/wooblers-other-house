@@ -17,7 +17,9 @@ const ScrollToTopButton = () => {
     const numberOfImages = fetchedImageObjects.length;
     const lastImage = `.woh__image-${numberOfImages - 1}`;
     const trigger = document.querySelector(lastImage)!;
-    observer.observe(trigger);
+    if (trigger) {
+      observer.observe(trigger);
+    }
 
     return () => observer.disconnect();
   }, [fetchedImageObjects]);
