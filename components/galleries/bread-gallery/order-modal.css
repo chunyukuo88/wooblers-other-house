@@ -8,7 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1100;
 }
 
 .woh__order-modal {
@@ -19,7 +19,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    z-index: 1001;
+    z-index: 1025;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
     & .woh__order-title {

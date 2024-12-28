@@ -46,7 +46,7 @@ export default function ImageCardStacked(props: StackedCardProps) {
 
   const closeModal = () => {
     setShowModal(false);
-  }
+  };
 
   const cartIsVisible = (session?.accessToken && session?.idToken);
   const Modal = () => (
