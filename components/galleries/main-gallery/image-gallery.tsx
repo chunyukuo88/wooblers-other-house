@@ -53,7 +53,6 @@ const ImageGallery: React.FC = () => {
                 file={file}
                 index={index}
                 caption={caption}
-                layoutType={"responsive"}
               />
               {session ? <Pencil captions={fetchedCaptionStrings} index={index} /> : null}
             </div>

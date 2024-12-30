@@ -57,6 +57,8 @@ export function ImageCard(props: ImageCardProps) {
     />
   );
 
+  const responsive = { width: "100%", height: "auto" };
+
   return (
     <>
       <div
@@ -71,7 +73,7 @@ export function ImageCard(props: ImageCardProps) {
           height={200}
           placeholder="blur"
           blurDataURL="/images/image_placeholder.png"
-          layout={layoutType || "intrinsic"}
+          style={responsive}
         />
       </div>
       <div className="woh__caption-container">
