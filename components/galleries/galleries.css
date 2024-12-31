@@ -1,5 +1,5 @@
 .woh__image-gallery {
-    margin-top: 3rem;
+    margin: 3rem 1rem;
 }
 
 .woh__image-grid {
@@ -28,7 +28,7 @@
     background: #5050c7;
     border-radius: 8px;
     grid-area: 1 / 1;
-    width: 100%;
+    width: 350px;
     height: auto;
     border: 8px solid #042b6b;
     justify-self: center;

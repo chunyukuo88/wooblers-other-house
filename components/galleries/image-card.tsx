@@ -22,7 +22,7 @@ export function processRawCaption(rawCaption: string):string {
 
 export function ImageCard(props: ImageCardProps) {
   const {data: session} = useSession();
-  const {caption, file, index, layoutType} = props;
+  const {caption, file, index} = props;
   const displayCaption = caption ? processRawCaption(caption) : "";
   const [showModal, setShowModal] = useState(false);
 
