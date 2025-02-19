@@ -1,11 +1,12 @@
-import {ImageCard, ImageCardProps, processRawCaption} from "@/components/galleries/image-card";
+import {ImageCard, processRawCaption} from "@/components/galleries/image-card";
 import {render, screen} from "@testing-library/react";
+import {SingleCardProps} from "@/components/galleries/types";
 
 describe('GIVEN: props of file, index, and caption', () => {
   describe('WHEN: the caption is an empty string', () => {
     test('THEN: no caption tag is displayed', () => {
       const caption = "";
-      const props: ImageCardProps = {
+      const props: SingleCardProps = {
         file: {
           key: "12345_captions.jpg",
           lastModified: "",
@@ -28,7 +29,7 @@ describe('GIVEN: props of file, index, and caption', () => {
   describe('WHEN: the caption string has content', () => {
     test('THEN: a caption tag is displayed', async () => {
       const caption = "IMG_1234578@Woobler playing in the sand";
-      const props: ImageCardProps = {
+      const props: SingleCardProps = {
         file: {
           key: "12345_captions.jpg",
           lastModified: "",

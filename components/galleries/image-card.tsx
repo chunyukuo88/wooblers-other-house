@@ -1,17 +1,9 @@
 "use client";
-import {BucketItem} from "../../store/types";
 import Image from "next/image";
 import {useSession} from "next-auth/react";
 import {useState} from "react";
 import OrderModal from "./bread-gallery/order-modal";
-
-export type ImageCardProps = {
-  file: BucketItem;
-  index: number;
-  caption?: string;
-  layoutType?: string;
-  hasShoppingCart?: boolean;
-};
+import {SingleCardProps} from "@/components/galleries/types";
 
 export function processRawCaption(rawCaption: string):string {
   const delimiter = "@";
@@ -20,7 +12,7 @@ export function processRawCaption(rawCaption: string):string {
     : rawCaption;
 }
 
-export function ImageCard(props: ImageCardProps) {
+export function ImageCard(props: SingleCardProps) {
   const {data: session} = useSession();
   const {caption, file, index} = props;
   const displayCaption = caption ? processRawCaption(caption) : "";
