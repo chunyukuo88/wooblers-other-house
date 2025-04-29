@@ -55,11 +55,12 @@
 }
 
 .woh__bread-caption-container {
-    display: flex;
-    justify-content: space-between;
-    align-self: center;
-    position: relative;
-    z-index: 100;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*align-self: center;*/
+    /*position: relative;*/
+    /*z-index: 100;*/
+    min-width: 100%;
 }
 
 .woh__bread-stack-button {
@@ -87,8 +88,6 @@
 
 .woh__caption,
 .woh__bread-stack-caption {
-    background: #6196e1;
-    border: 1px solid #092444;
     text-align: center;
     padding: 1rem;
     position: relative;
