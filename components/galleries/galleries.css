@@ -55,12 +55,7 @@
 }
 
 .woh__bread-caption-container {
-    /*display: flex;*/
-    /*justify-content: space-between;*/
-    /*align-self: center;*/
-    /*position: relative;*/
-    /*z-index: 100;*/
-    min-width: 100%;
+    width: 100%;
 }
 
 .woh__bread-stack-button {
