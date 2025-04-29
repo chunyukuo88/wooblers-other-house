@@ -1,15 +1,9 @@
 import {useState} from "react";
 import {calculateStyle} from "@/components/galleries/utils";
-import {BucketItem} from "../../store/types";
 import Image from "next/image";
 import {useSession} from "next-auth/react";
 import OrderModal from "@/components/galleries/bread-gallery/order-modal";
-
-type StackedCardProps = {
-  bucketItems: BucketItem[],
-  index: number,
-  caption: string,
-}
+import {StackedCardProps} from "@/components/galleries/types";
 
 export default function ImageCardStacked(props: StackedCardProps) {
   const {data: session} = useSession();

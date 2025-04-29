@@ -30,8 +30,8 @@ export function FetchedImagesProvider(props: PropsWithChildren){
 
   return (
     // @ts-ignore
-    <FetchedImagesContext.Provider value={context}>
+    (<FetchedImagesContext.Provider value={context}>
       {props.children}
-    </FetchedImagesContext.Provider>
+    </FetchedImagesContext.Provider>)
   );
 }

@@ -1,17 +1,9 @@
 "use client";
-import {BucketItem} from "../../store/types";
 import Image from "next/image";
 import {useSession} from "next-auth/react";
 import {useState} from "react";
 import OrderModal from "./bread-gallery/order-modal";
-
-export type ImageCardProps = {
-  file: BucketItem;
-  index: number;
-  caption?: string;
-  layoutType?: string;
-  hasShoppingCart?: boolean;
-};
+import {SingleCardProps} from "@/components/galleries/types";
 
 export function processRawCaption(rawCaption: string):string {
   const delimiter = "@";
@@ -20,9 +12,9 @@ export function processRawCaption(rawCaption: string):string {
     : rawCaption;
 }
 
-export function ImageCard(props: ImageCardProps) {
+export function ImageCard(props: SingleCardProps) {
   const {data: session} = useSession();
-  const {caption, file, index, layoutType} = props;
+  const {caption, file, index} = props;
   const displayCaption = caption ? processRawCaption(caption) : "";
   const [showModal, setShowModal] = useState(false);
 
@@ -57,6 +49,8 @@ export function ImageCard(props: ImageCardProps) {
     />
   );
 
+  const responsive = { width: "100%", height: "auto" };
+
   return (
     <>
       <div
@@ -71,7 +65,7 @@ export function ImageCard(props: ImageCardProps) {
           height={200}
           placeholder="blur"
           blurDataURL="/images/image_placeholder.png"
-          layout={layoutType || "intrinsic"}
+          style={responsive}
         />
       </div>
       <div className="woh__caption-container">

@@ -1,5 +1,5 @@
 .woh__image-gallery {
-    margin-top: 3rem;
+    margin: 3rem 1rem;
 }
 
 .woh__image-grid {
@@ -28,7 +28,7 @@
     background: #5050c7;
     border-radius: 8px;
     grid-area: 1 / 1;
-    width: 100%;
+    width: 350px;
     height: auto;
     border: 8px solid #042b6b;
     justify-self: center;
@@ -55,11 +55,7 @@
 }
 
 .woh__bread-caption-container {
-    display: flex;
-    justify-content: space-between;
-    align-self: center;
-    position: relative;
-    z-index: 100;
+    width: 100%;
 }
 
 .woh__bread-stack-button {
@@ -87,8 +83,6 @@
 
 .woh__caption,
 .woh__bread-stack-caption {
-    background: #6196e1;
-    border: 1px solid #092444;
     text-align: center;
     padding: 1rem;
     position: relative;
