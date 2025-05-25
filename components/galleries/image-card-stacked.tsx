@@ -1,10 +1,10 @@
-import {Dispatch, SetStateAction, useState} from "react";
+import {useState} from "react";
 import {calculateStyle} from "@/components/galleries/utils";
 import Image from "next/image";
 import {useSession} from "next-auth/react";
-import OrderModal from "@/components/galleries/bread-gallery/order-modal";
 import {StackedCardProps} from "@/components/galleries/types";
-import {Session} from "next-auth";
+import Cart from "@/components/galleries/cart";
+import Modal from "@/components/galleries/modal";
 
 export default function ImageCardStacked(props: StackedCardProps) {
   const {data: session} = useSession();
@@ -73,49 +73,3 @@ export default function ImageCardStacked(props: StackedCardProps) {
     </>
   )
 };
-
-type ModalProps = {
-  caption: string;
-  closeModal: () => void;
-  session: Session | null;
-  showModal: boolean;
-}
-
-const Modal = ({showModal, caption, session, closeModal}: ModalProps) => {
-  if (!showModal) return null;
-
-  return (
-    <OrderModal
-      breadType={caption!}
-      closeModal={closeModal}
-      session={session}
-      // @ts-ignore
-      userEmail={session?.user.email}
-    />
-  );
-}
-
-type CartProps = {
-  cartIsVisible: boolean;
-  setShowModal: Dispatch<SetStateAction<boolean>>
-  showModal: boolean;
-}
-
-const Cart = ({cartIsVisible, showModal, setShowModal}: CartProps) => {
-  if (!cartIsVisible) return null;
-
-  const cartClickHandler = () => showModal
-    ? setShowModal(false)
-    : setShowModal(true);
-
-  return (
-    <div className="woh__order-bread-button" onClick={cartClickHandler} role="button">
-      <Image
-        src="/images/cart.png"
-        alt="shopping cart"
-        width={50}
-        height={50}
-      />
-    </div>
-  );
-}
