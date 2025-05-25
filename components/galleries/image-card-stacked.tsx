@@ -26,6 +26,7 @@ export default function ImageCardStacked(props: StackedCardProps) {
 
   //@ts-ignore
   const cartIsVisible = (session && session.accessToken && session.idToken);
+  const responsive = { width: "100%", height: "auto" };
 
   return (
     <>
@@ -39,33 +40,45 @@ export default function ImageCardStacked(props: StackedCardProps) {
               key={index}
               className="woh__card-fan-member"
             >
-              <img
+              <Image
                 src={bucketItem.url}
                 alt={`Image #${index + 1}`}
-                width={280}
-                height={"auto"}
+                width={300}
+                height={200}
+                placeholder="blur"
+                blurDataURL="/images/image_placeholder.png"
+                style={responsive}
               />
             </div>
           );
         })}
       </div>
-      <div className="woh__bread-caption-container">
-        <div
-          role="button"
-          className="woh__bread-stack-button"
-          onClick={indexDecrementer}
-        >
-          <Image
-            width={50}
-            height={50}
-            alt="Bread roll button"
-            src="images/button__bread-roll.png"
-          />
-        </div>
-        <div className="woh__bread-stack-caption">{caption}</div>
+      <div className="woh__bread-description">
+        <BreadButton indexDecrementer={indexDecrementer}/>
+        {caption}
         <Cart cartIsVisible={cartIsVisible} showModal={showModal} setShowModal={setShowModal}/>
         <Modal showModal={showModal} caption={caption} session={session} closeModal={closeModal}/>
       </div>
     </>
   )
+};
+type BreadButtonProps = {
+  indexDecrementer: () => void;
+};
+
+const BreadButton = ({indexDecrementer}: BreadButtonProps) => {
+  return (
+    <div
+      role="button"
+      className="woh__bread-stack-button"
+      onClick={indexDecrementer}
+    >
+      <Image
+        width={50}
+        height={50}
+        alt="Bread roll button"
+        src="images/button__bread-roll.png"
+      />
+    </div>
+  );
 };

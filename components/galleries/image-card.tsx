@@ -35,10 +35,8 @@ export function ImageCard(props: SingleCardProps) {
           style={responsive}
         />
       </div>
-      <div className="woh__caption-container">
-        <Cart cartIsVisible={cartIsVisible} showModal={showModal} setShowModal={setShowModal}/>
-        {displayCaption ? <div className="woh__caption" data-testid="display-caption">{displayCaption}</div> : null}
-      </div>
+      <Cart cartIsVisible={cartIsVisible} showModal={showModal} setShowModal={setShowModal}/>
+      {displayCaption ? <div className="woh__caption" data-testid="display-caption">{displayCaption}</div> : null}
       <Modal showModal={showModal} caption={caption} session={session} closeModal={closeModal}/>
     </>
   );
