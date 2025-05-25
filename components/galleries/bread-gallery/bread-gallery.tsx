@@ -5,7 +5,7 @@ import {ImageCard} from "@/components/galleries/image-card";
 import {extractBreadName, groupByRepetition, trimLetterVariant} from "@/components/galleries/bread-gallery/utils";
 import ImageCardStacked from "@/components/galleries/image-card-stacked";
 import {BucketItem} from "../../../store/types";
-import "../galleries.css";
+import "../styles.css";
 
 export default function BreadGallery(){
   const queryResult = useQuery({

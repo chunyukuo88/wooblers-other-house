@@ -3,8 +3,8 @@ import {calculateStyle} from "@/components/galleries/utils";
 import Image from "next/image";
 import {useSession} from "next-auth/react";
 import {StackedCardProps} from "@/components/galleries/types";
-import Cart from "@/components/galleries/cart";
-import Modal from "@/components/galleries/modal";
+import Cart from "@/components/galleries/components/cart";
+import Modal from "@/components/galleries/components/modal";
 
 export default function ImageCardStacked(props: StackedCardProps) {
   const {data: session} = useSession();

@@ -1,5 +1,5 @@
-import {calculateStyle} from "./utils";
-import {BucketItem} from "../../store/types";
+import {calculateStyle} from "../utils";
+import {BucketItem} from "../../../store/types";
 
 const bucketItem:BucketItem = {
   key: "www.example.com/image.jpg",
