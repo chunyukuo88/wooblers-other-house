@@ -5,13 +5,6 @@ import {useState} from "react";
 import OrderModal from "./bread-gallery/order-modal";
 import {SingleCardProps} from "@/components/galleries/types";
 
-export function processRawCaption(rawCaption: string):string {
-  const delimiter = "@";
-  return (rawCaption.split("").find(char => char === delimiter))
-    ? rawCaption.split("@")[1]
-    : rawCaption;
-}
-
 export function ImageCard(props: SingleCardProps) {
   const {data: session} = useSession();
   const {caption, file, index} = props;
@@ -75,4 +68,11 @@ export function ImageCard(props: SingleCardProps) {
       {showModal ? <Modal /> : null}
     </>
   );
+}
+
+export function processRawCaption(rawCaption: string):string {
+  const delimiter = "@";
+  return (rawCaption.split("").find(char => char === delimiter))
+    ? rawCaption.split("@")[1]
+    : rawCaption;
 }

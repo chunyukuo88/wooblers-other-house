@@ -9,8 +9,8 @@ import {Session} from "next-auth";
 export default function ImageCardStacked(props: StackedCardProps) {
   const {data: session} = useSession();
   const {bucketItems, caption, index} = props;
-  const defaultActiveIndex = bucketItems.length - 1;
-  const [activeIndex, setActiveIndex] = useState<number | null>(defaultActiveIndex);
+  const defaultActiveIndex = bucketItems.length - 1 || 0;
+  const [activeIndex, setActiveIndex] = useState<number>(defaultActiveIndex);
   const [showModal, setShowModal] = useState(false);
 
   const clickHandler = (index: number) => {
@@ -21,15 +21,12 @@ export default function ImageCardStacked(props: StackedCardProps) {
 
   const indexDecrementer = () => (activeIndex === 0)
     ? setActiveIndex(bucketItems.length - 1)
-    // @ts-ignore
     : setActiveIndex(activeIndex - 1);
 
-  const closeModal = () => {
-    setShowModal(false);
-  };
+  const closeModal = () => setShowModal(false);
 
   //@ts-ignore
-  const cartIsVisible = (session?.accessToken && session?.idToken);
+  const cartIsVisible = (session && session.accessToken && session.idToken);
 
   return (
     <>
