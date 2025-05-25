@@ -10,12 +10,12 @@ describe("GIVEN: the component is passed valid params", () => {
     const uppercaseName = breadType.charAt(0).toUpperCase() + breadType.slice(1);
     const props:OrderModalProps = {
       breadType: breadType,
+      closeModal: jest.fn(),
       session: "a long token ~",
       userEmail: "user@example.com",
-      closeModal: jest.fn()
     };
-    render(<OrderModal {...props}/>);
 
+    render(<OrderModal {...props}/>);
     const title = screen.getByText(`Order: ${uppercaseName}`);
 
     expect(title).toBeVisible();
