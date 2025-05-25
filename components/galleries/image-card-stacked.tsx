@@ -1,5 +1,4 @@
 import {useState} from "react";
-import {calculateStyle} from "@/components/galleries/utils";
 import Image from "next/image";
 import {useSession} from "next-auth/react";
 import {StackedCardProps} from "@/components/galleries/types";
@@ -36,10 +35,7 @@ export default function ImageCardStacked(props: StackedCardProps) {
           return (
             <div
               onClick={() => clickHandler(index)}
-              style={{
-                ...calculateStyle(bucketItems, index),
-                zIndex: isActive ? 100 : 0,
-              }}
+              style={{zIndex: isActive ? 100 : 0}}
               key={index}
               className="woh__card-fan-member"
             >
