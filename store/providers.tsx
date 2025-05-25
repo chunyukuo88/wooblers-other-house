@@ -6,17 +6,16 @@ import {FetchedImagesProvider} from "./fetched-images-context";
 import {CaptionColorProvider} from "./background-color-context";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
-interface Children {
+interface PageProps {
   children: ReactNode;
+  session: Session;
 }
-
-type PageProps = { session: Session | null | undefined; }
 
 const queryClient = new QueryClient();
 
-export default function Providers({children}: Children, pageProps: PageProps) {
+export default function Providers({children, session}: PageProps) {
   return (
-    <SessionProvider session={pageProps.session}>
+    <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
         <CaptionColorProvider>
           <FetchedImagesProvider>
