@@ -1,31 +1,16 @@
 import {useState} from "react";
-import {calculateStyle} from "@/components/galleries/utils";
 import Image from "next/image";
 import {useSession} from "next-auth/react";
-import OrderModal from "@/components/galleries/bread-gallery/order-modal";
 import {StackedCardProps} from "@/components/galleries/types";
+import Cart from "@/components/galleries/components/cart";
+import Modal from "@/components/galleries/components/modal";
 
 export default function ImageCardStacked(props: StackedCardProps) {
   const {data: session} = useSession();
   const {bucketItems, caption, index} = props;
-  const defaultActiveIndex = bucketItems.length - 1;
-  const [activeIndex, setActiveIndex] = useState<number | null>(defaultActiveIndex);
+  const defaultActiveIndex = bucketItems.length - 1 || 0;
+  const [activeIndex, setActiveIndex] = useState<number>(defaultActiveIndex);
   const [showModal, setShowModal] = useState(false);
-
-  const cartClickHandler = () => showModal
-    ? setShowModal(false)
-    : setShowModal(true);
-
-  const Cart = () => (
-    <div className="woh__order-bread-button" onClick={cartClickHandler} role="button">
-      <Image
-        src="/images/cart.png"
-        alt="shopping cart"
-        width={50}
-        height={50}
-      />
-    </div>
-  );
 
   const clickHandler = (index: number) => {
     setActiveIndex((prevIndex) => {
@@ -35,24 +20,13 @@ export default function ImageCardStacked(props: StackedCardProps) {
 
   const indexDecrementer = () => (activeIndex === 0)
     ? setActiveIndex(bucketItems.length - 1)
-    // @ts-ignore
     : setActiveIndex(activeIndex - 1);
 
-  const closeModal = () => {
-    setShowModal(false);
-  };
+  const closeModal = () => setShowModal(false);
 
   //@ts-ignore
-  const cartIsVisible = (session?.accessToken && session?.idToken);
-  const Modal = () => (
-    <OrderModal
-      breadType={caption!}
-      session={session}
-      closeModal={closeModal}
-      // @ts-ignore
-      userEmail={session?.user.email}
-    />
-  );
+  const cartIsVisible = (session && session.accessToken && session.idToken);
+  const responsive = { width: "100%", height: "auto" };
 
   return (
     <>
@@ -62,40 +36,49 @@ export default function ImageCardStacked(props: StackedCardProps) {
           return (
             <div
               onClick={() => clickHandler(index)}
-              style={{
-                ...calculateStyle(bucketItems, index),
-                zIndex: isActive ? 100 : 0,
-              }}
+              style={{zIndex: isActive ? 100 : 0}}
               key={index}
               className="woh__card-fan-member"
             >
-              <img
+              <Image
                 src={bucketItem.url}
                 alt={`Image #${index + 1}`}
-                width={280}
-                height={"auto"}
+                width={300}
+                height={200}
+                placeholder="blur"
+                blurDataURL="/images/image_placeholder.png"
+                style={responsive}
               />
             </div>
           );
         })}
       </div>
-      <div className="woh__bread-caption-container">
-        <div
-          role="button"
-          className="woh__bread-stack-button"
-          onClick={indexDecrementer}
-        >
-          <Image
-            width={50}
-            height={50}
-            alt="Bread roll button"
-            src="images/button__bread-roll.png"
-          />
-        </div>
-        <div className="woh__bread-stack-caption">{caption}</div>
-        {cartIsVisible ? <Cart /> : null}
-        {showModal ? <Modal /> : null}
+      <div className="woh__bread-description">
+        <BreadButton indexDecrementer={indexDecrementer}/>
+        {caption}
+        <Cart cartIsVisible={cartIsVisible} showModal={showModal} setShowModal={setShowModal}/>
+        <Modal showModal={showModal} caption={caption} session={session} closeModal={closeModal}/>
       </div>
     </>
   )
+};
+type BreadButtonProps = {
+  indexDecrementer: () => void;
+};
+
+const BreadButton = ({indexDecrementer}: BreadButtonProps) => {
+  return (
+    <div
+      role="button"
+      className="woh__bread-stack-button"
+      onClick={indexDecrementer}
+    >
+      <Image
+        width={50}
+        height={50}
+        alt="Bread roll button"
+        src="images/button__bread-roll.png"
+      />
+    </div>
+  );
 };

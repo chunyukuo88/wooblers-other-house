@@ -31,7 +31,7 @@ export default function OrderModal(props: OrderModalProps) {
   return (
     <div className="woh__modal-overlay" onClick={handleOverlayClick}>
       <div className="woh__order-modal">
-        <div className="woh__order-title">Order: <span>{displayTitle}</span></div>
+        <div className="woh__order-title">Order: {displayTitle}</div>
         <div>Confirm to send your order to the Bread Monster. He'll get in touch with you soon.</div>
         <div className="woh__order-bread-buttons">
           <button onClick={submitHandler}>Submit</button>
