@@ -66,8 +66,7 @@
 }
 
 
-.woh__caption,
-.woh__bread-stack-caption {
+.woh__caption {
     text-align: center;
     padding: 0.5rem;
     position: relative;
