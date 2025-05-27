@@ -17,7 +17,7 @@
     align-items: center;
     justify-content: center;
     background: #4f4848;
-    margin: 1rem 0 0 0;
+    margin: 0;
 }
 
 .woh__bread-loading {
@@ -25,16 +25,15 @@
 }
 
 .woh__card-fan-member {
-    background: #5050c7;
-    border-radius: 8px;
     grid-area: 1 / 1;
-    width: 350px;
-    height: auto;
-    border: 8px solid #042b6b;
     justify-self: center;
 
     display: flex;
     justify-content: center;
+
+    img {
+        border-radius: 8px;
+    }
 }
 
 .woh__bread-card-fan {
@@ -47,22 +46,11 @@
     justify-self: stretch;
 }
 
-.woh__caption-container {
-    margin: 0 auto;
-    width: inherit;
+.woh__bread-description {
+    width: 100%;
     display: flex;
     justify-content: center;
-}
-
-.woh__bread-caption-container {
-    width: 100%;
-}
-
-.woh__bread-stack-button {
-    position: relative;
-    z-index: 101;
-    flex-grow: 1;
-    cursor: pointer;
+    align-items: center;
 }
 
 .woh__order-bread-button {
@@ -77,14 +65,10 @@
     transform: translate(2px, 2px);
 }
 
-.woh__bread-stack-caption {
-    flex-grow: 4;
-}
 
-.woh__caption,
-.woh__bread-stack-caption {
+.woh__caption {
     text-align: center;
-    padding: 1rem;
+    padding: 0.5rem;
     position: relative;
 }
 
