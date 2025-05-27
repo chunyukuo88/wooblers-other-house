@@ -26,7 +26,7 @@ export default async function RootLayout({children}: Children) {
     <html lang="en" className="h-full bg-gray-100">
       <GoogleAnalytics GA_MEASUREMENT_ID={gaMeasurementId}/>
       <body className="h-full">
-        <Providers>
+        <Providers session={null}>
           <GoogleTagManager />
           <Content children={children}/>
         </Providers>
