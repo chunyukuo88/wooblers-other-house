@@ -8,7 +8,7 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 interface PageProps {
   children: ReactNode;
-  session: Session;
+  session: Session | null;
 }
 
 const queryClient = new QueryClient();
