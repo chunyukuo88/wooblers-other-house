@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  web:
+    image: nextjs-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    environment:
+      NODE_ENV: development
+      API_BASE_URL: http://api:4000
+
+  api:
+    build:
+      context: ../woobler-api-express
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
