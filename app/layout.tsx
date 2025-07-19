@@ -1,5 +1,6 @@
 import React from "react";
 import Providers from "../store/providers";
+import ProvidersV2 from "../store/providersV2";
 import {Content} from "./content";
 import GoogleAnalytics from "./google-analytics";
 import "../styles/global.css";
@@ -26,10 +27,10 @@ export default async function RootLayout({children}: Children) {
     <html lang="en" className="h-full bg-gray-100">
       <GoogleAnalytics GA_MEASUREMENT_ID={gaMeasurementId}/>
       <body className="h-full">
-        <Providers session={null}>
+        <ProvidersV2 session={null}>
           <GoogleTagManager />
           <Content children={children}/>
-        </Providers>
+        </ProvidersV2>
       </body>
     </html>
   );
