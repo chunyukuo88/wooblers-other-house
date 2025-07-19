@@ -6,6 +6,15 @@ export type BucketItem = {
 }
 
 /**
+ * For FetchedImagesContextV2
+ * */
+export type Folder = {
+  name: string;
+  photos: string[];
+  captions: string[];
+}
+
+/**
  * For local storage
  * */
 export enum COLOR_LABELS {
