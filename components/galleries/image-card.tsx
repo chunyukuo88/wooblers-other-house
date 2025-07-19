@@ -18,6 +18,7 @@ export function ImageCard(props: SingleCardProps) {
 
   const responsive = { width: "100%", height: "auto" };
 
+  const imageUrl = `https://woobler-photos-test.s3.us-east-1.amazonaws.com/${file}`;
   return (
     <>
       <div
@@ -26,7 +27,7 @@ export function ImageCard(props: SingleCardProps) {
         className={`woh__image-item woh__image-index-${index}`}
       >
         <Image
-          src={file.url}
+          src={imageUrl}
           alt={`Image #${index + 1}`}
           width={300}
           height={200}

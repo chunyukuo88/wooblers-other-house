@@ -1,6 +1,9 @@
 "use client";
-import { createContext, useState, type PropsWithChildren } from "react";
+import React, { createContext, useState, type PropsWithChildren } from "react";
 import {Folder} from "./types";
+import {useQuery} from "@tanstack/react-query";
+import {getMainPageImages, queryKeys} from "../common/http";
+import {errorLogger} from "../common/logging";
 
 export const FetchedImagesContextV2 = createContext({
   fetchedFolders: [] as Folder[],
@@ -18,6 +21,10 @@ export function FetchedImagesV2Provider(props: PropsWithChildren){
     fetchedFolderObjects: fetchedFolders,
     updateFetchedFolders: folderHandler,
   };
+
+
+
+
 
   return (
     // @ts-ignore
