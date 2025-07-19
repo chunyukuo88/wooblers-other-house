@@ -25,9 +25,6 @@ export function FetchedImagesV2Provider(props: PropsWithChildren){
 
   const folders: Folder[] = data ?? [];
 
-  console.log('Provider / data')
-  console.log(data)
-
   const getEm = () => {};
 
   return (

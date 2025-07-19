@@ -7,9 +7,6 @@ import "../styles.css";
 const ImageGallery = () => {
   const { fetchedFolders } = useMainImages();
 
-  console.log('FetchedImagesV2Provider / fetchedFolders')
-  console.log(fetchedFolders)
-
   const firstFolder = fetchedFolders[0];
 
   if (!firstFolder) {

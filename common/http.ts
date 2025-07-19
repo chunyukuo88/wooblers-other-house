@@ -14,8 +14,6 @@ export async function getBreadImages() {
 
 export async function getMainPageImages(){
   const imageSource = process.env.NEXT_PUBLIC_IMAGE_SOURCE;
-  console.log('imageSource:');
-  console.log(imageSource);
   // @ts-ignore
   const response = await fetch(imageSource);
   return await response.json();
