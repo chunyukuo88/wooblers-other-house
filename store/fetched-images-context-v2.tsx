@@ -1,5 +1,11 @@
 "use client";
-import React, { createContext, useState, type PropsWithChildren } from "react";
+import {
+  createContext,
+  useState,
+  type PropsWithChildren,
+  useContext,
+  useEffect
+} from "react";
 import {Folder} from "./types";
 import {useQuery} from "@tanstack/react-query";
 import {getMainPageImages, queryKeys} from "../common/http";
@@ -11,25 +17,27 @@ export const FetchedImagesContextV2 = createContext({
 });
 
 export function FetchedImagesV2Provider(props: PropsWithChildren){
-  const [fetchedFolders, setFolders] = useState<Folder[]>([]);
+  const {error, isLoading, isSuccess, data} = useQuery({
+    queryKey: [queryKeys.GET_MAIN_PAGE_IMAGES],
+    queryFn: getMainPageImages,
+    refetchOnMount: false,
+  });
 
-  function folderHandler(result: Folder[]){
-    setFolders(result);
-  }
+  const folders: Folder[] = data ?? [];
 
-  const context = {
-    fetchedFolderObjects: fetchedFolders,
-    updateFetchedFolders: folderHandler,
-  };
+  console.log('Provider / data')
+  console.log(data)
 
-
-
-
+  const getEm = () => {};
 
   return (
     // @ts-ignore
-    <FetchedImagesContextV2.Provider value={context}>
+    <FetchedImagesContextV2.Provider value={{ fetchedFolders: folders, updateFetchedFolders: getEm}}>
       {props.children}
     </FetchedImagesContextV2.Provider>
   );
+}
+
+export function useMainImages() {
+  return useContext(FetchedImagesContextV2);
 }
