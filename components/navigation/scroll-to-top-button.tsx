@@ -3,7 +3,12 @@ import {useEffect, useState} from "react";
 import Image from "next/image";
 import "./scroll-to-top-button.css";
 
-const ScrollToTopButton = (images: string[]) => {
+type ScrollToTopButtonProps = {
+  images: string[];
+}
+
+const ScrollToTopButton = (props: ScrollToTopButtonProps) => {
+  const { images } = props;
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -12,11 +17,10 @@ const ScrollToTopButton = (images: string[]) => {
         setIsVisible(entry.isIntersecting);
       }
     );
-    const numberOfImages = images.images.length;
+    const numberOfImages = images.length;
     const lastImage = `.woh__image-index-${numberOfImages - 1}`;
     const trigger = document.querySelector(lastImage)!;
     if (trigger) {
-      console.log('triggered!')
       observer.observe(trigger);
     }
 
