@@ -53,6 +53,13 @@
     align-items: center;
 }
 
+[class*="woh__image-wrapper-"] {
+    display: flex;
+    align-items: center;
+    background: #b4b1b1;
+    border-radius: 8px;
+}
+
 .woh__order-bread-button {
     cursor: pointer;
     background: white;
