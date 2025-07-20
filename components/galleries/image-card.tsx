@@ -2,13 +2,13 @@
 import {useState} from "react";
 import {useSession} from "next-auth/react";
 import Image from "next/image";
-import {SingleCardProps} from "@/components/galleries/types";
+import {GALLERY_BUCKETS, SingleCardProps} from "@/components/galleries/types";
 import Modal from "@/components/galleries/components/modal";
 import Cart from "@/components/galleries/components/cart";
 
 export function ImageCard(props: SingleCardProps) {
   const {data: session} = useSession();
-  const {caption, file, index} = props;
+  const {caption, file, galleryPrefix, index} = props;
   const displayCaption = caption ? processRawCaption(caption) : "";
   const [showModal, setShowModal] = useState(false);
 
@@ -19,13 +19,17 @@ export function ImageCard(props: SingleCardProps) {
 
   const responsive = { width: "100%", height: "auto" };
 
-  const imageUrl = `https://woobler-photos-test.s3.us-east-1.amazonaws.com/${file}`;
+  const imageUrl = (galleryPrefix === GALLERY_BUCKETS.MAIN)
+    ? `${galleryPrefix}${file}`
+    // @ts-ignore
+    : `${galleryPrefix}${file.key}`;
+
   return (
     <>
       <div
         data-testid="image-item"
         key={index}
-        className={`woh__image-item woh__image-index-${index}`}
+        className={`woh__image-item woh__image-index-${index}`} // TODO: use `[class*="woh__image-wrapper-"]` syntax instead of two classes.
       >
         <Image
           src={imageUrl}
