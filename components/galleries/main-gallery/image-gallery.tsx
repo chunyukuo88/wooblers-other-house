@@ -1,6 +1,7 @@
 "use client";
 import {useMainImages} from "../../../store";
 import ScrollToTopButton from "@/components/navigation/scroll-to-top-button";
+import {GALLERY_BUCKETS} from "@/components/galleries/types";
 import {ImageCard} from "@/components/galleries/image-card";
 import "../styles.css";
 
@@ -26,7 +27,7 @@ const ImageGallery = () => {
           const caption = firstFolder.captions[index];
           return (
             <div className={`woh__image-wrapper-${index}`} key={index}>
-              <ImageCard file={file} index={index} caption={caption}/>
+              <ImageCard file={file} index={index} caption={caption} galleryPrefix={GALLERY_BUCKETS.MAIN}/>
             </div>
           );
         })}
