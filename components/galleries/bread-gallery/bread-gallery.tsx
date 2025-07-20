@@ -1,24 +1,18 @@
 "use client";
-import {useQuery} from "@tanstack/react-query";
-import {getBreadImages, queryKeys} from "../../../common/http";
 import {ImageCard} from "@/components/galleries/image-card";
 import {extractBreadName, groupByRepetition, trimLetterVariant} from "@/components/galleries/bread-gallery/utils";
 import ImageCardStacked from "@/components/galleries/image-card-stacked";
 import {BucketItem} from "../../../store/types";
 import {GALLERY_BUCKETS} from "@/components/galleries/types";
+import {useBreadImages} from "../../../store";
 import "../styles.css";
 
-export default function BreadGallery(){
-  const queryResult = useQuery({
-    queryKey: [queryKeys.GET_BREAD_IMAGES],
-    queryFn: getBreadImages,
-    refetchOnMount: false,
-  });
+export default function BreadGallery() {
+  const {error, isLoading, fetchedBreadImages} = useBreadImages();
+  if (error || fetchedBreadImages.length < 1) return <div className="woh__cold-hearth">The hearth is cold and the bannetons are empty; there will be no bread today.</div>;
+  if (isLoading) return <div className="woh__bread-loading">Baking those lovely loaves...</div>;
 
-  if (queryResult.error) return <div>No bread today.</div>;
-  if (queryResult.isLoading) return <div className="woh__bread-loading">Baking those lovely loaves...</div>;
-
-  const groupedAndSorted = groupByRepetition(queryResult.data);
+  const groupedAndSorted = groupByRepetition(fetchedBreadImages);
 
   return (
     <div className="woh__image-gallery">
