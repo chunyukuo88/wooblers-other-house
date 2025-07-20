@@ -23,13 +23,11 @@ export default function BreadGallery(){
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
-        {groupedAndSorted.map((item: any, index: number) => <DisplayedImage item={item} index={index}/>)}
+        {groupedAndSorted.map((item: any, index: number) => <DisplayedImage key={index} item={item} index={index}/>)}
       </div>
     </div>
   );
 }
-
-const caption = (item: BucketItem) => trimLetterVariant(extractBreadName(item.url));
 
 function DisplayedImage(props: DisplayedImageProps){
   const {item, index} = props;
@@ -39,19 +37,21 @@ function DisplayedImage(props: DisplayedImageProps){
         ? <ImageCardStacked
             bucketItems={item}
             index={index}
-            caption={caption(item[0])}
+            caption={getCaption(item[0])}
             galleryPrefix={GALLERY_BUCKETS.BREAD}
           />
         : <ImageCard
           file={item}
           index={index}
-          caption={caption(item)}
+          caption={getCaption(item)}
           galleryPrefix={GALLERY_BUCKETS.BREAD}
         />
       }
     </div>
   );
 }
+
+const getCaption = (item: BucketItem) => trimLetterVariant(extractBreadName(item.url));
 
 type DisplayedImageProps = {
   item: any;
