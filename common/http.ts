@@ -16,7 +16,7 @@ export async function getMainPageImages(){
   const imageSource = process.env.NEXT_PUBLIC_IMAGE_SOURCE;
   // @ts-ignore
   const response = await fetch(imageSource);
-  return response.json();
+  return await response.json();
 }
 
 export async function putData(url: string, data: any){

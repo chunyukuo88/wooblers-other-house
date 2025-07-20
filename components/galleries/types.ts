@@ -7,7 +7,7 @@ type ImageCardProps = {
 }
 
 export type SingleCardProps = ImageCardProps & {
-  file: BucketItem;
+  file: string;
 };
 
 export type StackedCardProps = ImageCardProps & {
