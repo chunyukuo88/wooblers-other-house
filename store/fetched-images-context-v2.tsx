@@ -25,7 +25,7 @@ export function FetchedImagesV2Provider(props: PropsWithChildren){
     if (data) {
       setCurrentFolder(data[0]);
     }
-  }, [data])
+  }, [data]);
 
   function updateFolder(newFolder: Folder) {
     setCurrentFolder(newFolder);

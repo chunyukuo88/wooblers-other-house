@@ -9,7 +9,6 @@ import "../styles.css";
 const ImageGallery = () => {
   const { currentFolder } = useMainImages();
   const firstFolder = currentFolder as Folder;
-
   if (!firstFolder) {
     return <div>Loading ... </div>
   }
