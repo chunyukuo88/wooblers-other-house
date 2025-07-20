@@ -83,30 +83,29 @@ export default function NavBar({fontColor}: NavBarProps) {
   return (
     <div className="woh__nav-bar" style={style}>
       <div className="woh__nav-bar-string">
-        {shouldShowLogin
-          ? <NavLink href={allPaths.LOGIN}>Login</NavLink>
-          : <LogoutOrHome/>
-        }
-      </div>
-      <div className="woh__nav-bar-string">
         {pathname === allPaths.SETTINGS
-          ? null
+          ? <Link href={allPaths.HOME}>Home</Link>
           : <NavLink href={allPaths.SETTINGS}>Settings</NavLink>
         }
       </div>
       <div className="woh__nav-bar-string">
         {pathname === allPaths.TECH
-          ? null
+          ? <Link href={allPaths.HOME}>Home</Link>
           : <NavLink href={allPaths.TECH}>Tech</NavLink>
         }
       </div>
       <div className="woh__nav-bar-string">
         {pathname === allPaths.BREAD
-          ? null
+          ? <Link href={allPaths.HOME}>Home</Link>
           : <NavLink href={allPaths.BREAD}>Bread</NavLink>
         }
       </div>
-      {/*<ProtectedPaths/>*/}
+      <div className="woh__nav-bar-string">
+        {shouldShowLogin
+          ? <NavLink href={allPaths.LOGIN}>Admin</NavLink>
+          : <LogoutOrHome/>
+        }
+      </div>
     </div>
   );
 }
