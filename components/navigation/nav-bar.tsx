@@ -46,7 +46,7 @@ export default function NavBar({fontColor}: NavBarProps) {
         }
       </div>
       <div className="woh__nav-bar-string">
-        <AlbumSelector />
+        <AlbumSelector style={style}/>
       </div>
     </div>
   );
