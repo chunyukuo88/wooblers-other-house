@@ -1,11 +1,9 @@
 "use client";
-import {useContext, useEffect, useState} from "react";
-import {FetchedImagesContext as context} from "../../store/fetched-images-context";
+import {useEffect, useState} from "react";
 import Image from "next/image";
 import "./scroll-to-top-button.css";
 
-const ScrollToTopButton = () => {
-  const {fetchedImageObjects} = useContext(context);
+const ScrollToTopButton = (images: string[]) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -14,15 +12,16 @@ const ScrollToTopButton = () => {
         setIsVisible(entry.isIntersecting);
       }
     );
-    const numberOfImages = fetchedImageObjects.length;
-    const lastImage = `.woh__image-${numberOfImages - 1}`;
+    const numberOfImages = images.images.length;
+    const lastImage = `.woh__image-index-${numberOfImages - 1}`;
     const trigger = document.querySelector(lastImage)!;
     if (trigger) {
+      console.log('triggered!')
       observer.observe(trigger);
     }
 
     return () => observer.disconnect();
-  }, [fetchedImageObjects]);
+  }, [images]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

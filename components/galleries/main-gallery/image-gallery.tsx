@@ -1,5 +1,5 @@
-"use client"
-import {useMainImages} from "../../../store/fetched-images-context-v2"
+"use client";
+import {useMainImages} from "../../../store";
 import ScrollToTopButton from "@/components/navigation/scroll-to-top-button";
 import {ImageCard} from "@/components/galleries/image-card";
 import "../styles.css";
@@ -15,7 +15,7 @@ const ImageGallery = () => {
 
   const WrappedButton = () => (
     <div style={{height: "0px"}} className="woh__scroll-to-top-trigger">
-      <ScrollToTopButton/>
+      <ScrollToTopButton images={firstFolder.photos}/>
     </div>
   );
 
@@ -26,11 +26,7 @@ const ImageGallery = () => {
           const caption = firstFolder.captions[index];
           return (
             <div className={`woh__image-wrapper-${index}`} key={index}>
-              <ImageCard
-                file={file}
-                index={index}
-                caption={caption}
-              />
+              <ImageCard file={file} index={index} caption={caption}/>
             </div>
           );
         })}

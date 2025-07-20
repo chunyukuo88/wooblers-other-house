@@ -1,6 +1,7 @@
-import Image from "next/image";
-import {useSession} from "next-auth/react";
+"use client";
 import {useState} from "react";
+import {useSession} from "next-auth/react";
+import Image from "next/image";
 import {SingleCardProps} from "@/components/galleries/types";
 import Modal from "@/components/galleries/components/modal";
 import Cart from "@/components/galleries/components/cart";
