@@ -19,7 +19,7 @@ export default function NavBar({fontColor}: NavBarProps) {
     : <Link href={allPaths.HOME}>Home</Link>;
 
   return (
-    <div className="woh__nav-bar" style={style}>
+    <div id="woh__nav-bar" style={style}>
       <div className="woh__nav-bar-string">
         {pathname === allPaths.SETTINGS
           ? <Link href={allPaths.HOME}>Home</Link>

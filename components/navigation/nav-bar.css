@@ -2,7 +2,7 @@
     cursor: pointer;
 }
 
-.woh__nav-bar {
+#woh__nav-bar {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
