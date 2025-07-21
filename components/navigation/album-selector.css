@@ -6,8 +6,8 @@
 }
 
 .woh__album-picker__option {
-    background: inherit;
-    color: inherit;
+    background: white;
+    color: black;
     font-family: Georgia, Times, serif;
 }
 
