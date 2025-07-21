@@ -20,7 +20,7 @@ export const AlbumSelector = (props: any) => {
       <option value="">Pick album</option>
       {fetchedFolders.map((folder, index) => {
         return (
-          <option key={index} value="">
+          <option className="woh__album-picker__option" key={index} value={folder.friendlyName}>
             {folder.friendlyName}
           </option>
         );
