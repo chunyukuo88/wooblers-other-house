@@ -4,8 +4,8 @@ import Link from "next/link";
 import {allPaths} from "../../allPaths";
 import {usePathname} from "next/navigation";
 import {signOut, useSession} from "next-auth/react";
-import "./nav-bar.css"
 import {AlbumSelector} from "@/components/navigation/album-selector";
+import "./nav-bar.css"
 
 export default function NavBar({fontColor}: NavBarProps) {
   const pathname = usePathname();

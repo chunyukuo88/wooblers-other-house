@@ -3,7 +3,10 @@
 }
 
 .woh__nav-bar {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 0.5rem;
 }
 
 .woh__nav-bar-string {

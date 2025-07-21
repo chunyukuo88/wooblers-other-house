@@ -1,5 +1,5 @@
 import React from "react";
-import Providers from "../store/providers";
+// import Providers from "../store/providers"; // TODO: Do not delete this comment until old Providers is nixed.
 import ProvidersV2 from "../store/providersV2";
 import {Content} from "./content";
 import GoogleAnalytics from "./google-analytics";
