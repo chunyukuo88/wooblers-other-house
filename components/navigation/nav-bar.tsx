@@ -5,6 +5,54 @@ import {allPaths} from "../../allPaths";
 import {usePathname} from "next/navigation";
 import {signOut, useSession} from "next-auth/react";
 import "./nav-bar.css"
+import {AlbumSelector} from "@/components/navigation/album-selector";
+
+export default function NavBar({fontColor}: NavBarProps) {
+  const pathname = usePathname();
+  const {data: session} = useSession();
+
+  const style = getStyle(fontColor)
+  const shouldShowLogin = (!session && pathname !== allPaths.LOGIN);
+
+  const LogoutOrHome = () => session
+    ? <a className="woh__logout-button" onClick={() => signOut()}>Logout</a>
+    : <Link href={allPaths.HOME}>Home</Link>;
+
+  return (
+    <div className="woh__nav-bar" style={style}>
+      <div className="woh__nav-bar-string">
+        {pathname === allPaths.SETTINGS
+          ? <Link href={allPaths.HOME}>Home</Link>
+          : <NavLink href={allPaths.SETTINGS}>Settings</NavLink>
+        }
+      </div>
+      <div className="woh__nav-bar-string">
+        {pathname === allPaths.TECH
+          ? <Link href={allPaths.HOME}>Home</Link>
+          : <NavLink href={allPaths.TECH}>Tech</NavLink>
+        }
+      </div>
+      <div className="woh__nav-bar-string">
+        {pathname === allPaths.BREAD
+          ? <Link href={allPaths.HOME}>Home</Link>
+          : <NavLink href={allPaths.BREAD}>Bread</NavLink>
+        }
+      </div>
+      <div className="woh__nav-bar-string">
+        {shouldShowLogin
+          ? <NavLink href={allPaths.LOGIN}>Admin</NavLink>
+          : <LogoutOrHome/>
+        }
+      </div>
+      <div className="woh__nav-bar-string">
+        {pathname === allPaths.HOME
+          ? <AlbumSelector style={style}/>
+          : <div className="woh_album-picker-placeholder"></div>
+        }
+      </div>
+    </div>
+  );
+}
 
 type NavLinkProps = {
   href: string;
@@ -54,10 +102,7 @@ type NavBarProps = {
   fontColor: string;
 }
 
-export default function NavBar({fontColor}: NavBarProps) {
-  const pathname = usePathname();
-  const {data: session} = useSession();
-
+const getStyle = (fontColor: string) => {
   const shadowColor = (!fontColor) ? "gray" : "black";
 
   const textShadow = (fontColor !== "black")
@@ -67,46 +112,11 @@ export default function NavBar({fontColor}: NavBarProps) {
     `1px 1px 0 ${shadowColor}`
     : undefined;
 
-  const style = {
+  return {
     color: fontColor,
     transition: "2s ease-in",
     fontSize: "1.25rem",
     textShadow,
     fontWeight: 700,
   };
-
-  const shouldShowLogin = (!session && pathname !== allPaths.LOGIN);
-  const LogoutOrHome = () => session
-    ? <a className="woh__logout-button" onClick={() => signOut()}>Logout</a>
-    : <Link href={allPaths.HOME}>Home</Link>;
-
-  return (
-    <div className="woh__nav-bar" style={style}>
-      <div className="woh__nav-bar-string">
-        {shouldShowLogin
-          ? <NavLink href={allPaths.LOGIN}>Login</NavLink>
-          : <LogoutOrHome/>
-        }
-      </div>
-      <div className="woh__nav-bar-string">
-        {pathname === allPaths.SETTINGS
-          ? null
-          : <NavLink href={allPaths.SETTINGS}>Settings</NavLink>
-        }
-      </div>
-      <div className="woh__nav-bar-string">
-        {pathname === allPaths.TECH
-          ? null
-          : <NavLink href={allPaths.TECH}>Tech</NavLink>
-        }
-      </div>
-      <div className="woh__nav-bar-string">
-        {pathname === allPaths.BREAD
-          ? null
-          : <NavLink href={allPaths.BREAD}>Bread</NavLink>
-        }
-      </div>
-      {/*<ProtectedPaths/>*/}
-    </div>
-  );
-}
+};

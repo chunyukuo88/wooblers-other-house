@@ -1,0 +1,11 @@
+#woh__album-picker {
+    background: inherit;
+    color: inherit;
+    font-family: Georgia, Times, serif;
+    border: inherit;
+
+}
+
+#woh__album-picker, .woh_album-picker-placeholder {
+    width: 146px;
+}

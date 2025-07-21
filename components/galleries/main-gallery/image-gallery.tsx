@@ -3,13 +3,12 @@ import {useMainImages} from "../../../store";
 import ScrollToTopButton from "@/components/navigation/scroll-to-top-button";
 import {GALLERY_BUCKETS} from "@/components/galleries/types";
 import {ImageCard} from "@/components/galleries/image-card";
+import {Folder} from "../../../store/types";
 import "../styles.css";
 
 const ImageGallery = () => {
-  const { fetchedFolders } = useMainImages();
-
-  const firstFolder = fetchedFolders[0];
-
+  const { currentFolder } = useMainImages();
+  const firstFolder = currentFolder as Folder;
   if (!firstFolder) {
     return <div>Loading ... </div>
   }
