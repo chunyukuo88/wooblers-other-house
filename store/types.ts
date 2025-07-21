@@ -9,6 +9,7 @@ export type BucketItem = {
  * For FetchedImagesContextV2
  * */
 export type Folder = {
+  friendlyName: string;
   name: string;
   photos: string[];
   captions: string[];

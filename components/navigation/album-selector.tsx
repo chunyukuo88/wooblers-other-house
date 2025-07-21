@@ -17,11 +17,11 @@ export const AlbumSelector = (props: any) => {
 
   return (
     <select name="album-picked" id="woh__album-picker" onChange={changeHandler} style={style}>
-      <option value="">Past albums</option>
+      <option value="">Pick album</option>
       {fetchedFolders.map((folder, index) => {
         return (
           <option key={index} value="">
-            {convertFolderNameToDate(folder)}
+            {folder.friendlyName}
           </option>
         );
       })}

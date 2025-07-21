@@ -38,12 +38,12 @@ export default function NavBar({fontColor}: NavBarProps) {
           : <NavLink href={allPaths.BREAD}>Bread</NavLink>
         }
       </div>
-      <div className="woh__nav-bar-string">
-        {shouldShowLogin
-          ? <NavLink href={allPaths.LOGIN}>Admin</NavLink>
-          : <LogoutOrHome/>
-        }
-      </div>
+      {/*<div className="woh__nav-bar-string">*/}
+      {/*  {shouldShowLogin*/}
+      {/*    ? <NavLink href={allPaths.LOGIN}>Admin</NavLink>*/}
+      {/*    : <LogoutOrHome/>*/}
+      {/*  }*/}
+      {/*</div>*/}
       <div className="woh__nav-bar-string">
         {pathname === allPaths.HOME
           ? <AlbumSelector style={style}/>
