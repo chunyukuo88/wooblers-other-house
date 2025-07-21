@@ -1,13 +1,11 @@
 "use client"
-import {ReactNode, useEffect, useState} from "react";
+import {ReactNode, useState} from "react";
 import Link from "next/link";
 import {allPaths} from "../../allPaths";
 import {usePathname} from "next/navigation";
 import {signOut, useSession} from "next-auth/react";
 import "./nav-bar.css"
-import {useMainImages} from "../../store";
 import {AlbumSelector} from "@/components/navigation/album-selector";
-import {Folder} from "../../store/types";
 
 export default function NavBar({fontColor}: NavBarProps) {
   const pathname = usePathname();
@@ -15,6 +13,7 @@ export default function NavBar({fontColor}: NavBarProps) {
 
   const style = getStyle(fontColor)
   const shouldShowLogin = (!session && pathname !== allPaths.LOGIN);
+
   const LogoutOrHome = () => session
     ? <a className="woh__logout-button" onClick={() => signOut()}>Logout</a>
     : <Link href={allPaths.HOME}>Home</Link>;
@@ -46,7 +45,10 @@ export default function NavBar({fontColor}: NavBarProps) {
         }
       </div>
       <div className="woh__nav-bar-string">
-        <AlbumSelector style={style}/>
+        {pathname === allPaths.HOME
+          ? <AlbumSelector style={style}/>
+          : <div className="woh_album-picker-placeholder"></div>
+        }
       </div>
     </div>
   );
