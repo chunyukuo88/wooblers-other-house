@@ -20,7 +20,7 @@ export const AlbumSelector = (props: any) => {
   return (
     <select name="album-picked" id="woh__album-picker" onChange={changeHandler} style={style}>
         {!fetchedFolders || !isSuccess
-          ? <AlbumsLoading style={style}/>
+          ? <AlbumsLoading/>
           : null
         }
         {fetchedFolders
@@ -51,10 +51,6 @@ function Albums(props: AlbumsProps){
   );
 }
 
-function AlbumsLoading(style: any) {
-  return (
-    <select name="album-picked" id="woh__album-picker" style={style}>
-      <option value="">Loading albums...</option>
-    </select>
-  );
+function AlbumsLoading() {
+  return (<option className="woh__album-picker__option" value="">Loading...</option>);
 }
