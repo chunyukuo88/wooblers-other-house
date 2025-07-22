@@ -1,43 +1,38 @@
 "use client";
 import {createContext, type PropsWithChildren, useContext, useEffect, useState} from "react";
 import {Folder} from "./types";
-import {useQuery} from "@tanstack/react-query";
-import {getMainPageImages, queryKeys} from "../common/http";
+
+const emptyFolder = {
+  friendlyName: "",
+  name: "",
+  photos: [],
+  captions: [],
+};
 
 export const FetchedImagesContextV2 = createContext({
   fetchedFolders: [] as Folder[],
-  currentFolder: {},
+  currentFolder: emptyFolder as Folder,
   updateCurrentFolder: (newFolder: Folder) => {},
-  error: null,
-  isSuccess: false,
-  data: false,
+  updateFetchedFolders: (folders: Folder[]) => {},
 });
 
 export function FetchedImagesV2Provider(props: PropsWithChildren){
   const [currentFolder, setCurrentFolder] = useState<Folder>();
-  const {error, isLoading, isSuccess, data} = useQuery({
-    queryKey: [queryKeys.GET_MAIN_PAGE_IMAGES],
-    queryFn: getMainPageImages,
-    refetchOnMount: false,
-  });
-
-  useEffect(() => {
-    if (data) {
-      setCurrentFolder(data[0]);
-    }
-  }, [data]);
+  const [fetched, setFetched] = useState<Folder[]>([]);
 
   function updateFolder(newFolder: Folder) {
     setCurrentFolder(newFolder);
   }
 
+  function updateTheFolders(folders: Folder[]) {
+    setFetched(folders);
+  }
+
   const contextValue = {
-    fetchedFolders: data ?? [],
-    currentFolder,
+    fetchedFolders: fetched || [],
+    currentFolder: currentFolder || emptyFolder as Folder,
     updateCurrentFolder: updateFolder,
-    error,
-    isLoading,
-    isSuccess,
+    updateFetchedFolders: updateTheFolders,
   };
 
   return (

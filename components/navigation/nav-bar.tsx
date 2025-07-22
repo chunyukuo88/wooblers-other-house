@@ -12,11 +12,10 @@ export default function NavBar({fontColor}: NavBarProps) {
   const {data: session} = useSession();
 
   const style = getStyle(fontColor)
-  const shouldShowLogin = (!session && pathname !== allPaths.LOGIN);
-
-  const LogoutOrHome = () => session
-    ? <a className="woh__logout-button" onClick={() => signOut()}>Logout</a>
-    : <Link href={allPaths.HOME}>Home</Link>;
+  // const shouldShowLogin = (!session && pathname !== allPaths.LOGIN);
+  // const LogoutOrHome = () => session
+  //   ? <a className="woh__logout-button" onClick={() => signOut()}>Logout</a>
+  //   : <Link href={allPaths.HOME}>Home</Link>;
 
   return (
     <div id="woh__nav-bar" style={style}>
