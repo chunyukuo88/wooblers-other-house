@@ -29,14 +29,12 @@ type AlbumsProps = {
 
 function Albums(props: AlbumsProps){
   const {fetchedFolders} = props;
-  console.log('fetchedFolders:');
-  console.dir(fetchedFolders)
   return (
     <>
       {fetchedFolders.map((folder, index) => {
         return (
           <option className="woh__album-picker__option" key={index} value={folder.friendlyName}>
-            {index}
+            {folder.friendlyName || index}
           </option>
         );
       })}
