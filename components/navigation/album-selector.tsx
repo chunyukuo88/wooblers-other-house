@@ -17,14 +17,7 @@ export const AlbumSelector = (props: any) => {
   return (
     <label htmlFor="woh__album-picker">Album:
       <select name="album-picked" id="woh__album-picker" onChange={changeHandler} style={style}>
-          {!fetchedFolders
-            ? <AlbumsLoading/>
-            : null
-          }
-          {fetchedFolders
-            ? <Albums fetchedFolders={fetchedFolders}/>
-            : null
-          }
+        {!fetchedFolders?.length ? <AlbumsLoading /> : <Albums fetchedFolders={fetchedFolders} />}
       </select>
     </label>
   );
@@ -41,7 +34,7 @@ function Albums(props: AlbumsProps){
       {fetchedFolders.map((folder, index) => {
         return (
           <option className="woh__album-picker__option" key={index} value={folder.friendlyName}>
-            {folder.friendlyName}
+            {folder.friendlyName || 'loading...'}
           </option>
         );
       })}
