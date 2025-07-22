@@ -29,6 +29,8 @@ type AlbumsProps = {
 
 function Albums(props: AlbumsProps){
   const {fetchedFolders} = props;
+  console.log('fetchedFolders:');
+  console.dir(fetchedFolders)
   return (
     <>
       {fetchedFolders.map((folder, index) => {
