@@ -1,5 +1,4 @@
 "use client";
-// import {convertFolderNameToDate} from "@/components/navigation/utils";
 import {ChangeEvent} from "react";
 import {useMainImages} from "../../store";
 import {Folder} from "../../store/types";
@@ -7,7 +6,7 @@ import "./album-selector.css";
 
 export const AlbumSelector = (props: any) => {
   const { style } = props;
-  const {currentFolder, fetchedFolders, updateCurrentFolder} = useMainImages();
+  const {fetchedFolders, updateCurrentFolder} = useMainImages();
 
   const changeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     const index  = event.target.selectedIndex;
@@ -23,7 +22,7 @@ export const AlbumSelector = (props: any) => {
             : null
           }
           {fetchedFolders
-            ? <Albums currentFolder={currentFolder} fetchedFolders={fetchedFolders}/>
+            ? <Albums fetchedFolders={fetchedFolders}/>
             : null
           }
       </select>
@@ -33,11 +32,10 @@ export const AlbumSelector = (props: any) => {
 
 type AlbumsProps = {
   fetchedFolders: Folder[];
-  currentFolder: Folder;
 }
 
 function Albums(props: AlbumsProps){
-  const {currentFolder, fetchedFolders} = props;
+  const {fetchedFolders} = props;
   return (
     <>
       {fetchedFolders.map((folder, index) => {
