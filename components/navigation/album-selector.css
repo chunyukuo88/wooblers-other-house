@@ -1,16 +1,17 @@
 #woh__album-picker {
-    background: white;
-    color: black;
+    margin: 0 0.5rem;
+    background: inherit;
+    color: inherit;
     font-family: Georgia, Times, serif;
     border: inherit;
 }
 
 .woh__album-picker__option {
-    background: white;
-    color: black;
+    background: inherit;
+    color: inherit;
     font-family: Georgia, Times, serif;
 }
 
 #woh__album-picker, .woh_album-picker-placeholder {
-    width: 86px;
+    width: 2.5rem;
 }
