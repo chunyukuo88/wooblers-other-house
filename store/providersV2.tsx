@@ -5,7 +5,6 @@ import {SessionProvider} from "next-auth/react";
 import {FetchedImagesV2Provider} from "./fetched-images-context-v2";
 import {CaptionColorProvider} from "./background-color-context";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import {FetchedBreadContextProvider} from "./fetched-bread-context";
 
 interface PageProps {
   children: ReactNode;
@@ -20,9 +19,7 @@ export default function ProvidersV2({children, session}: PageProps) {
       <QueryClientProvider client={queryClient}>
         <CaptionColorProvider>
           <FetchedImagesV2Provider>
-            <FetchedBreadContextProvider>
-              {children}
-            </FetchedBreadContextProvider>
+            {children}
           </FetchedImagesV2Provider>
         </CaptionColorProvider>
       </QueryClientProvider>

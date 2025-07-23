@@ -9,7 +9,7 @@ import Cart from "@/components/galleries/components/cart";
 export function ImageCard(props: SingleCardProps) {
   const {data: session} = useSession();
   const {caption, file, galleryPrefix, index} = props;
-  // const displayCaption = caption ? processRawCaption(caption) : ""; // TODO: Revisit in caption ticket.
+  const displayCaption = caption ? processRawCaption(caption) : ""; // TODO: Revisit in caption ticket.
   const [showModal, setShowModal] = useState(false);
 
   const closeModal = () => setShowModal(false);
@@ -40,6 +40,7 @@ export function ImageCard(props: SingleCardProps) {
           blurDataURL="/images/image_placeholder.png"
           style={responsive}
         />
+        {displayCaption ? <div className="woh__caption" data-testid="display-caption">{displayCaption}</div> : null}
       </div>
       <Cart cartIsVisible={cartIsVisible} showModal={showModal} setShowModal={setShowModal}/>
       <Modal showModal={showModal} caption={caption} session={session} closeModal={closeModal}/>

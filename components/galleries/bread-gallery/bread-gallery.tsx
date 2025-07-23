@@ -7,12 +7,15 @@ import {GALLERY_BUCKETS} from "@/components/galleries/types";
 import {useBreadImages} from "../../../store";
 import "../styles.css";
 
-export default function BreadGallery() {
-  const {error, isLoading, fetchedBreadImages} = useBreadImages();
-  if (error || fetchedBreadImages.length < 1) return <div className="woh__cold-hearth">The hearth is cold and the bannetons are empty; there will be no bread today.</div>;
-  if (isLoading) return <div className="woh__bread-loading">Baking those lovely loaves...</div>;
+type BreadGalleryProps = {
+  breadObjects: BucketItem[];
+}
 
-  const groupedAndSorted = groupByRepetition(fetchedBreadImages);
+export default function BreadGallery(props: BreadGalleryProps) {
+  const { breadObjects } = props;
+  if (!breadObjects) return <div className="woh__bread-loading">Baking those lovely loaves...</div>;
+
+  const groupedAndSorted = groupByRepetition(breadObjects);
 
   return (
     <div className="woh__image-gallery">

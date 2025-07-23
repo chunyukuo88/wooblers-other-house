@@ -1,20 +1,13 @@
 import {errorLogger} from "./logging";
 
-export const queryKeys = {
-  GET_MAIN_PAGE_IMAGES: "get_images",
-  GET_BREAD_IMAGES: "get_bread_images",
-};
-
 export async function getBreadImages() {
-  const breadImageSource = process.env.NEXT_PUBLIC_BREAD_SOURCE;
-  // @ts-ignore
+  const breadImageSource = process.env.NEXT_PUBLIC_BREAD_SOURCE!;
   const response = await fetch(breadImageSource);
   return await response.json();
 }
 
 export async function getMainPageImages(){
-  const imageSource = process.env.NEXT_PUBLIC_IMAGE_SOURCE;
-  // @ts-ignore
+  const imageSource = process.env.NEXT_PUBLIC_IMAGE_SOURCE!;
   const response = await fetch(imageSource);
   return await response.json();
 }
