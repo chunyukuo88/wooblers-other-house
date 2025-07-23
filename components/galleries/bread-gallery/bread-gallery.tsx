@@ -4,7 +4,6 @@ import {extractBreadName, groupByRepetition, trimLetterVariant} from "@/componen
 import ImageCardStacked from "@/components/galleries/image-card-stacked";
 import {BucketItem} from "../../../store/types";
 import {GALLERY_BUCKETS} from "@/components/galleries/types";
-import {useBreadImages} from "../../../store";
 import "../styles.css";
 
 type BreadGalleryProps = {

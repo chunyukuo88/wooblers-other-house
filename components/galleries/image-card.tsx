@@ -24,12 +24,13 @@ export function ImageCard(props: SingleCardProps) {
     // @ts-ignore
     : `${galleryPrefix}${file.key}`;
 
+  const transparent = (galleryPrefix === GALLERY_BUCKETS.BREAD) ? 'transparent' : '';
   return (
     <>
       <div
         data-testid="image-item"
         key={index}
-        className={`woh__image-item woh__image-index-${index}`} // TODO: use `[class*="woh__image-wrapper-"]` syntax instead of two classes.
+        className={`woh__image-item ${transparent} woh__image-index-${index}`} // TODO: use `[class*="woh__image-wrapper-"]` syntax instead of two classes.
       >
         <Image
           src={imageUrl}

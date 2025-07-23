@@ -42,7 +42,7 @@ describe("<ImageCard />", () => {
         const expectedDisplayText = processRawCaption(caption);
 
         render(
-          <SessionProvider session={{}}>
+          <SessionProvider session={{ expires: ''}}>
             <ImageCard {...props} />
           </SessionProvider>
         );

@@ -13,7 +13,7 @@ type ImageCardProps = {
 }
 
 export type SingleCardProps = ImageCardProps & {
-  file: string;
+  file: string | { key: string };
 };
 
 export type StackedCardProps = ImageCardProps & {
