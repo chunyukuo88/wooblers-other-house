@@ -3,7 +3,8 @@ import {getMainPageImages} from "../common/http";
 import {getFlagsFromParams} from "./flags";
 
 export default async function Page({ searchParams }: any) {
-  const {showPrivateImages} = getFlagsFromParams(searchParams);
+  const {howzit} = await searchParams;
+  const {showPrivateImages} = getFlagsFromParams(howzit);
   const folders = await getMainPageImages(showPrivateImages);
 
   return <ImageGallery folders={folders} showPrivateImages={showPrivateImages}/>;
