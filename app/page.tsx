@@ -1,9 +1,9 @@
 import ImageGallery from "@/components/galleries/main-gallery/image-gallery";
 import {getMainPageImages} from "../common/http";
-import {getFlagsFromParams, SearchParams} from "./flags";
+import {getFlagsFromParams} from "./flags";
 
-export default async function Page({ searchParams }: SearchParams) {
-  const {showPrivateImages} = getFlagsFromParams(searchParams as unknown as SearchParams);
+export default async function Page({ searchParams }: any) {
+  const {showPrivateImages} = getFlagsFromParams(searchParams);
   const folders = await getMainPageImages(showPrivateImages);
 
   return <ImageGallery folders={folders} showPrivateImages={showPrivateImages}/>;
