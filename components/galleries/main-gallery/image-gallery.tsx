@@ -9,10 +9,11 @@ import "../styles.css";
 
 type ImageGalleryProps = {
   folders: Folder[];
+  showPrivateImages: boolean;
 }
 
 const ImageGallery = (props: ImageGalleryProps) => {
-  const { folders } = props;
+  const { folders, showPrivateImages } = props;
   const {currentFolder, updateCurrentFolder, updateFetchedFolders} = useMainImages();
   const [current, setCurrent] = useState<Folder>();
   if (!folders) {
@@ -43,6 +44,10 @@ const ImageGallery = (props: ImageGalleryProps) => {
     </div>
   );
 
+  const galleryPrefix = showPrivateImages
+    ? GALLERY_BUCKETS.MAIN_PRIVATE
+    : GALLERY_BUCKETS.MAIN_PUBLIC;
+
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
@@ -50,7 +55,7 @@ const ImageGallery = (props: ImageGalleryProps) => {
           const caption = current.captions[index];
           return (
             <div className={`woh__image-wrapper-${index}`} key={index}>
-              <ImageCard file={file} index={index} caption={caption} galleryPrefix={GALLERY_BUCKETS.MAIN}/>
+              <ImageCard file={file} index={index} caption={caption} galleryPrefix={galleryPrefix}/>
             </div>
           );
         })}

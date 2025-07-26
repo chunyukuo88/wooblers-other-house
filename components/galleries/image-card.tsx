@@ -19,7 +19,8 @@ export function ImageCard(props: SingleCardProps) {
 
   const responsive = { width: "100%", height: "auto" };
 
-  const imageUrl = (galleryPrefix === GALLERY_BUCKETS.MAIN)
+  const isMainGallery = (galleryPrefix === GALLERY_BUCKETS.MAIN_PRIVATE || galleryPrefix === GALLERY_BUCKETS.MAIN_PUBLIC);
+  const imageUrl = (isMainGallery)
     ? `${galleryPrefix}${file}`
     // @ts-ignore
     : `${galleryPrefix}${file.key}`;

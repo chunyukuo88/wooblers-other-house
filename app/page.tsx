@@ -6,7 +6,7 @@ export default async function Page({ searchParams }: SearchParams) {
   const {showPrivateImages} = getFlagsFromParams(searchParams as unknown as SearchParams);
   const folders = await getMainPageImages(showPrivateImages);
 
-  return <ImageGallery folders={folders}/>;
+  return <ImageGallery folders={folders} showPrivateImages={showPrivateImages}/>;
 }
 
 export const metadata = {
