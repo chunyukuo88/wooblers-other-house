@@ -8,10 +8,10 @@ export async function getBreadImages() {
 
 export async function getMainPageImages(showPrivateImages: boolean) {
   try {
-    const imageSource = showPrivateImages
-        ? 'https://n91hho3k6h.execute-api.us-east-1.amazonaws.com/dev/src/getImagesPrivate'
-        : 'https://n91hho3k6h.execute-api.us-east-1.amazonaws.com/dev/src/getImagesPublic';
-    const response = await fetch(imageSource);
+    const getMainImagesEndpoint = showPrivateImages
+        ? 'https://z943v9dl6c.execute-api.us-east-1.amazonaws.com/prod/src/getImagesPrivate'
+        : 'https://z943v9dl6c.execute-api.us-east-1.amazonaws.com/prod/src/getImagesPublic';
+    const response = await fetch(getMainImagesEndpoint);
     return await response.json();
   } catch (error) {
     console.log(error);
