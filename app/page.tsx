@@ -1,14 +1,12 @@
 import ImageGallery from "@/components/galleries/main-gallery/image-gallery";
 import {getMainPageImages} from "../common/http";
-import {howzitFlag} from "../flags";
+import {getFlagsFromParams, SearchParams} from "./flags";
 
-export default async function Page() {
-  const isHowzit = await howzitFlag();
-  const folders = await getMainPageImages();
+export default async function Page({ searchParams }: SearchParams) {
+  const {showPrivateImages} = getFlagsFromParams(searchParams as unknown as SearchParams);
+  const folders = await getMainPageImages(showPrivateImages);
 
-  return isHowzit
-    ? <div>crunchy woozle</div>
-    : <ImageGallery folders={folders}/>;
+  return <ImageGallery folders={folders}/>;
 }
 
 export const metadata = {

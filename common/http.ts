@@ -6,8 +6,10 @@ export async function getBreadImages() {
   return await response.json();
 }
 
-export async function getMainPageImages(){
-  const imageSource = process.env.NEXT_PUBLIC_IMAGE_SOURCE!;
+export async function getMainPageImages(showPrivateImages: boolean) {
+  const imageSource = showPrivateImages
+      ? process.env.NEXT_PRIVATE_IMAGE_SOURCE!
+      : process.env.NEXT_PUBLIC_IMAGE_SOURCE!;
   const response = await fetch(imageSource);
   return await response.json();
 }
