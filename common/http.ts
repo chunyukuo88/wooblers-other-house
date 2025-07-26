@@ -7,21 +7,13 @@ export async function getBreadImages() {
 }
 
 export async function getMainPageImages(showPrivateImages: boolean) {
-  console.log("getMainPageImages - process.env.NEXT_PRIVATE_IMAGE_SOURCE:", process.env.NEXT_PRIVATE_IMAGE_SOURCE);
-  console.log("getMainPageImages - process.env.NEXT_PUBLIC_IMAGE_SOURCE:", process.env.NEXT_PUBLIC_IMAGE_SOURCE);
-  console.log("getMainPageImages - showPrivateImages:", showPrivateImages);
-
   try {
     const imageSource = showPrivateImages
         ? 'https://n91hho3k6h.execute-api.us-east-1.amazonaws.com/dev/src/getImagesPrivate'
-        : process.env.NEXT_PUBLIC_IMAGE_SOURCE!;
-    console.log("getMainPageImages - imageSource: ", imageSource);
+        : 'https://n91hho3k6h.execute-api.us-east-1.amazonaws.com/dev/src/getImagesPublic';
     const response = await fetch(imageSource);
-    console.log("try: response.ok", response.ok);
-    console.log("try: response.status", response.status);
     return await response.json();
   } catch (error) {
-    console.log('Oh nose!')
     console.log(error);
   }
 }
