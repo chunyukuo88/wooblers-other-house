@@ -2,7 +2,12 @@ import ImageGallery from "@/components/galleries/main-gallery/image-gallery";
 import {getMainPageImages} from "../common/http";
 import {getFlagsFromParams} from "./flags";
 
-export default async function Page({ searchParams }: any) {
+type Params = {
+  searchParams: Promise<{
+    [key: string]: string
+  }>
+}
+export default async function Page({ searchParams }: Params) {
   const {howzit} = await searchParams;
   const {showPrivateImages} = getFlagsFromParams(howzit);
   const folders = await getMainPageImages(showPrivateImages);
