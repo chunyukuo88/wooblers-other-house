@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers';
 import ImageGallery from "@/components/galleries/main-gallery/image-gallery";
 import {getMainPageImages} from "../common/http";
 import {getFlagsFromParams} from "./flags";
@@ -9,10 +10,14 @@ type Params = {
 }
 export default async function Page({ searchParams }: Params) {
   const {howzit} = await searchParams;
-  const {showPrivateImages} = getFlagsFromParams(howzit);
-  const folders = await getMainPageImages(showPrivateImages);
+  const cookieStore = await cookies();
+  const enabledHowzitFromCookies = cookieStore.get('howzit')?.value === 'true';
 
-  return <ImageGallery folders={folders} showPrivateImages={showPrivateImages}/>;
+  const {showPrivateImages: enableHowzitFromQueryParams} = getFlagsFromParams(howzit);
+  const displayPrivateImages = enableHowzitFromQueryParams || enabledHowzitFromCookies;
+  const folders = await getMainPageImages(displayPrivateImages);
+
+  return <ImageGallery folders={folders} showPrivateImages={displayPrivateImages}/>;
 }
 
 export const metadata = {
