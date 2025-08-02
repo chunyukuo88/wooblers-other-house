@@ -1,5 +1,4 @@
 "use client";
-import {useSearchParams} from "next/navigation";
 import {useEffect, useState} from "react";
 import {useMainImages} from "../../../store";
 import ScrollToTopButton from "@/components/navigation/scroll-to-top-button";
@@ -15,16 +14,6 @@ type ImageGalleryProps = {
 
 const ImageGallery = (props: ImageGalleryProps) => {
   const { folders, showPrivateImages } = props;
-
-  const searchParams = useSearchParams();
-  const howzit = searchParams.get('howzit');
-  useEffect(() => {
-    if (howzit === 'true') {
-      document.cookie = 'howzit=true';
-    }
-  }, [howzit]);
-
-
   const {currentFolder, updateCurrentFolder, updateFetchedFolders} = useMainImages();
   const [current, setCurrent] = useState<Folder>();
   if (!folders) {
