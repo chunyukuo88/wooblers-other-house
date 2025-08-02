@@ -1,7 +1,7 @@
 "use client";
 import React, {useContext} from "react";
-import SiteTitleString from "@/components/navigation/site-title-string";
-import NavBar from "@/components/navigation/nav-bar";
+import SiteTitleString from "@/components/navigation/components/site-title-string";
+import NavBar from "@/components/navigation/components/nav-bar";
 import {BackgroundColorContext as context} from "../store/background-color-context";
 import {calculateFontColor} from "../common/utils";
 

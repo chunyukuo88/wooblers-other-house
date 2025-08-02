@@ -1,7 +1,7 @@
 "use client";
 import {useEffect, useState} from "react";
 import Image from "next/image";
-import "./scroll-to-top-button.css";
+import "../styles/scroll-to-top-button.css";
 
 type ScrollToTopButtonProps = {
   images: string[];

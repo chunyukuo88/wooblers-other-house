@@ -1,10 +1,10 @@
 "use client"
 import {ReactNode, useState} from "react";
 import Link from "next/link";
-import {allPaths} from "../../allPaths";
+import {allPaths} from "../../../allPaths";
 import {usePathname} from "next/navigation";
-import {AlbumSelector} from "@/components/navigation/album-selector";
-import "./nav-bar.css"
+import {AlbumSelector} from "@/components/navigation/components/album-selector";
+import "../styles/nav-bar.css"
 
 export default function NavBar({fontColor}: NavBarProps) {
   const pathname = usePathname();

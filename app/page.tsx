@@ -1,8 +1,6 @@
-import {cookies} from 'next/headers';
 import ImageGallery from "@/components/galleries/main-gallery/image-gallery";
-import {getMainPageImages} from "../common/http";
-import {getFlagsFromParams} from "./flags";
-import {CookiesSetter} from "@/components/navigation/cookies-setter";
+import {CookiesSetter} from "@/components/navigation/components/cookies-setter";
+import {getFolders} from "@/components/navigation/utils";
 
 type Params = {
   searchParams: Promise<{
@@ -11,12 +9,7 @@ type Params = {
 }
 export default async function Page({ searchParams }: Params) {
   const {howzit} = await searchParams;
-  const cookieStore = await cookies();
-  const enabledHowzitFromCookies = cookieStore.get('howzit')?.value === 'true';
-
-  const {showPrivateImages: enableHowzitFromQueryParams} = getFlagsFromParams(howzit);
-  const displayPrivateImages = enableHowzitFromQueryParams || enabledHowzitFromCookies;
-  const folders = await getMainPageImages(displayPrivateImages);
+  const {displayPrivateImages, folders} = await getFolders(howzit);
 
   return (
       <>

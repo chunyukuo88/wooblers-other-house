@@ -1,7 +1,7 @@
 "use client";
 import {useEffect, useState} from "react";
 import {useMainImages} from "../../../store";
-import ScrollToTopButton from "@/components/navigation/scroll-to-top-button";
+import ScrollToTopButton from "@/components/navigation/components/scroll-to-top-button";
 import {GALLERY_BUCKETS} from "@/components/galleries/types";
 import {ImageCard} from "@/components/galleries/image-card";
 import {Folder} from "../../../store/types";
