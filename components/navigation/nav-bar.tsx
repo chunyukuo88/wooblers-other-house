@@ -3,19 +3,13 @@ import {ReactNode, useState} from "react";
 import Link from "next/link";
 import {allPaths} from "../../allPaths";
 import {usePathname} from "next/navigation";
-import {signOut, useSession} from "next-auth/react";
 import {AlbumSelector} from "@/components/navigation/album-selector";
 import "./nav-bar.css"
 
 export default function NavBar({fontColor}: NavBarProps) {
   const pathname = usePathname();
-  const {data: session} = useSession();
 
   const style = getStyle(fontColor)
-  // const shouldShowLogin = (!session && pathname !== allPaths.LOGIN);
-  // const LogoutOrHome = () => session
-  //   ? <a className="woh__logout-button" onClick={() => signOut()}>Logout</a>
-  //   : <Link href={allPaths.HOME}>Home</Link>;
 
   return (
     <div id="woh__nav-bar" style={style}>
@@ -37,12 +31,6 @@ export default function NavBar({fontColor}: NavBarProps) {
           : <NavLink href={allPaths.BREAD}>Bread</NavLink>
         }
       </div>
-      {/*<div className="woh__nav-bar-string">*/}
-      {/*  {shouldShowLogin*/}
-      {/*    ? <NavLink href={allPaths.LOGIN}>Admin</NavLink>*/}
-      {/*    : <LogoutOrHome/>*/}
-      {/*  }*/}
-      {/*</div>*/}
       <div className="woh__nav-bar-string">
         {pathname === allPaths.HOME
           ? <AlbumSelector style={style}/>
@@ -73,28 +61,6 @@ function NavLink({href, children}: NavLinkProps) {
       {children}
     </Link>
   );
-}
-
-// TODO: Coming attraction
-function ProtectedPaths(){
-  const {data: session} = useSession();
-  const pathname = usePathname();
-
-  return session ? <>
-    <div className="woh__nav-bar-string">
-      {pathname === allPaths.DASHBOARD
-        ? null
-        : <NavLink href={allPaths.DASHBOARD}>Dashboard</NavLink>
-      }
-    </div>
-    <div className="woh__nav-bar-string">
-      {pathname === allPaths.PROFILE
-        ? null
-        : <NavLink href={allPaths.PROFILE}>Profile</NavLink>
-      }
-
-    </div>
-  </> : null;
 }
 
 type NavBarProps = {
