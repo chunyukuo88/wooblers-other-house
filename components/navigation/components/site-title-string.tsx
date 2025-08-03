@@ -1,6 +1,6 @@
-import {allPaths} from "../../allPaths";
+import {allPaths} from "../../../allPaths";
 import Link from "next/link";
-import "./site-title-string.css";
+import "../styles/site-title-string.css";
 
 type SiteTitleStringProps = {
   fontColor: string;

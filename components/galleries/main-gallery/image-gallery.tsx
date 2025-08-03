@@ -1,7 +1,7 @@
 "use client";
 import {useEffect, useState} from "react";
 import {useMainImages} from "../../../store";
-import ScrollToTopButton from "@/components/navigation/scroll-to-top-button";
+import ScrollToTopButton from "@/components/navigation/components/scroll-to-top-button";
 import {GALLERY_BUCKETS} from "@/components/galleries/types";
 import {ImageCard} from "@/components/galleries/image-card";
 import {Folder} from "../../../store/types";
@@ -44,7 +44,10 @@ const ImageGallery = (props: ImageGalleryProps) => {
     </div>
   );
 
-  const galleryPrefix = showPrivateImages
+  const howzitModePersisted = localStorage && localStorage.getItem("howzit") === "true";
+  const displayPrivateImages = showPrivateImages || howzitModePersisted;
+
+  const galleryPrefix = displayPrivateImages
     ? GALLERY_BUCKETS.MAIN_PRIVATE
     : GALLERY_BUCKETS.MAIN_PUBLIC;
 

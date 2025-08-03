@@ -1,8 +1,8 @@
 "use client";
 import {ChangeEvent} from "react";
-import {useMainImages} from "../../store";
-import {Folder} from "../../store/types";
-import "./album-selector.css";
+import {useMainImages} from "../../../store";
+import {Folder} from "../../../store/types";
+import "../styles/album-selector.css";
 
 export const AlbumSelector = (props: any) => {
   const { style } = props;

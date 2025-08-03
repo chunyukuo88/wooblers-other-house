@@ -1,15 +1,14 @@
-import React from "react";
-// import Providers from "../store/providers"; // TODO: Do not delete this comment until old Providers is nixed.
+import {ReactNode} from "react";
 import ProvidersV2 from "../store/providersV2";
 import {Content} from "./content";
 import GoogleAnalytics from "./google-analytics";
 import "../styles/global.css";
 
 interface Children {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-const gaMeasurementId = "G-9MSJV2CGHW";
+const gaMeasurementId = process.env.GA_MEASUREMENT_ID!;
 
 const GoogleTagManager = () => (
   <noscript>

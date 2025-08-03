@@ -1,13 +1,22 @@
 import ImageGallery from "@/components/galleries/main-gallery/image-gallery";
-import {getMainPageImages} from "../common/http";
-import {getFlagsFromParams} from "./flags";
+import {CookiesSetter} from "@/components/navigation/components/cookies-setter";
+import {getFolders} from "@/components/navigation/utils";
 
-export default async function Page({ searchParams }: any) {
+type Params = {
+  searchParams: Promise<{
+    [key: string]: string
+  }>
+}
+export default async function Page({ searchParams }: Params) {
   const {howzit} = await searchParams;
-  const {showPrivateImages} = getFlagsFromParams(howzit);
-  const folders = await getMainPageImages(showPrivateImages);
+  const {displayPrivateImages, folders} = await getFolders(howzit);
 
-  return <ImageGallery folders={folders} showPrivateImages={showPrivateImages}/>;
+  return (
+      <>
+        <CookiesSetter />
+        <ImageGallery folders={folders} showPrivateImages={displayPrivateImages}/>
+      </>
+  );
 }
 
 export const metadata = {
