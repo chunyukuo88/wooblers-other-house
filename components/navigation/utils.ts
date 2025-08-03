@@ -1,4 +1,3 @@
-import {Folder} from "../../store/types";
 import {cookies} from "next/headers";
 import {getFlagsFromParams} from "../../app/flags";
 import {getMainPageImages} from "../../common/http";
