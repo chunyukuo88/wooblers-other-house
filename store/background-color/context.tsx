@@ -1,6 +1,6 @@
 "use client";
 import {createContext, useState, type PropsWithChildren, useEffect} from "react";
-import {COLOR_LABELS} from "./types";
+import {COLOR_LABELS} from "../types";
 
 const maxColorIntensity = 255;
 

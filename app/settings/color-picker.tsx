@@ -1,6 +1,6 @@
 "use client";
 import React, {useContext, useEffect, useState} from "react";
-import {BackgroundColorContext as context} from "../../store/background-color-context";
+import {BackgroundColorContext as context} from "../../store/background-color/context";
 
 export default function ColorPicker(){
   const {
