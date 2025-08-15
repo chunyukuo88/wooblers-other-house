@@ -1,78 +1,47 @@
 "use client";
-import {createContext, useState, type PropsWithChildren, useEffect} from "react";
-import {COLOR_LABELS} from "../types";
+import React, { createContext, useReducer, useEffect, type PropsWithChildren } from "react";
+import { colorReducer, initialColorState } from "./reducer";
+import { ColorState } from "./types";
+import { setRed, setGreen, setBlue } from "./actions";
 
-const maxColorIntensity = 255;
+interface ColorContextShape extends ColorState {
+    setRed: (value: number) => void;
+    setGreen: (value: number) => void;
+    setBlue: (value: number) => void;
+}
 
-export const BackgroundColorContext = createContext({
-  backgroundColor_R: maxColorIntensity,
-  backgroundColor_G: maxColorIntensity,
-  backgroundColor_B: maxColorIntensity,
-  updateBackgroundColor_R: (colorInteger_R: number) => {},
-  updateBackgroundColor_G: (colorInteger_G: number) => {},
-  updateBackgroundColor_B: (colorInteger_B: number) => {},
-  sumOfColors: 765, // === 255 * 3
+export const BackgroundColorContext = createContext<ColorContextShape>({
+    ...initialColorState,
+    setRed: () => {},
+    setGreen: () => {},
+    setBlue: () => {},
 });
 
-export function CaptionColorProvider(props: PropsWithChildren) {
-  const getDefaultColor = (color: string): number => {
-    const storageResult = window.localStorage?.getItem(color);
-    return (storageResult)
-      ? parseInt(storageResult, 10)
-      : maxColorIntensity;
-  };
+export function CaptionColorProvider({ children }: PropsWithChildren) {
+    const [state, dispatch] = useReducer(colorReducer, initialColorState);
 
-  const [color_R, setColor_R] = useState(maxColorIntensity);
-  const [color_G, setColor_G] = useState(maxColorIntensity);
-  const [color_B, setColor_B] = useState(maxColorIntensity);
-  const [sum, setSum] = useState(765);
+    useEffect(() => {
+        if (typeof window !== "undefined" && window.localStorage) {
+            const r = parseInt(window.localStorage.getItem("RED") || String(state.red), 10);
+            const g = parseInt(window.localStorage.getItem("GREEN") || String(state.green), 10);
+            const b = parseInt(window.localStorage.getItem("BLUE") || String(state.blue), 10);
 
-  useEffect(() => {
-    const defaultColor_R = getDefaultColor(COLOR_LABELS.RED);
-    const defaultColor_G = getDefaultColor(COLOR_LABELS.GREEN);
-    const defaultColor_B = getDefaultColor(COLOR_LABELS.BLUE);
+            dispatch(setRed(r));
+            dispatch(setGreen(g));
+            dispatch(setBlue(b));
+        }
+    }, []);
 
-    setColor_R(defaultColor_R);
-    setColor_G(defaultColor_G);
-    setColor_B(defaultColor_B);
-    setSum(defaultColor_R + defaultColor_G + defaultColor_B);
-  }, []);
+    const value: ColorContextShape = {
+        ...state,
+        setRed: (v) => dispatch(setRed(v)),
+        setGreen: (v) => dispatch(setGreen(v)),
+        setBlue: (v) => dispatch(setBlue(v)),
+    };
 
-  function updateTheColor_R(newColor_R: number){
-    setColor_R(newColor_R);
-    if (typeof window !== 'undefined' && window.localStorage) {
-      window.localStorage.setItem(COLOR_LABELS.RED, newColor_R.toString());
-    }
-    setSum((color_R + color_G + color_B));
-  }
-  function updateTheColor_G(newColor_G: number){
-    setColor_G(newColor_G);
-    if (typeof window !== 'undefined' && window.localStorage) {
-      window.localStorage.setItem(COLOR_LABELS.GREEN, newColor_G.toString());
-    }
-    setSum((color_R + color_G + color_B));
-  }
-  function updateTheColor_B(newColor_B: number){
-    setColor_B(newColor_B);
-    if (typeof window !== 'undefined' && window.localStorage) {
-      window.localStorage.setItem(COLOR_LABELS.BLUE, newColor_B.toString());
-    }
-    setSum((color_R + color_G + color_B));
-  }
-
-  const context = {
-    backgroundColor_R: color_R,
-    backgroundColor_G: color_G,
-    backgroundColor_B: color_B,
-    sumOfColors: sum,
-    updateBackgroundColor_R: updateTheColor_R,
-    updateBackgroundColor_G: updateTheColor_G,
-    updateBackgroundColor_B: updateTheColor_B,
-  };
-
-  return (
-    <BackgroundColorContext.Provider value={context}>
-      {props.children}
-    </BackgroundColorContext.Provider>
-  );
+    return (
+        <BackgroundColorContext.Provider value={value}>
+            {children}
+        </BackgroundColorContext.Provider>
+    );
 }

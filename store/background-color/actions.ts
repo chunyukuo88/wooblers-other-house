@@ -1,18 +1,16 @@
-export enum ColorActionType {
-    SET_RED = 'SET_RED',
-    SET_BLUE = 'SET_BLUE',
-    SET_GREEN = 'SET_GREEN',
-    RESET = 'RESET',
-}
+import {ColorAction, ColorActionType} from "./types";
 
-export interface ColorState {
-    red: number;
-    green: number;
-    blue: number;
-    sum: number;
-}
+export const setRed = (value: number): ColorAction => ({
+    type: ColorActionType.SET_RED,
+    payload: value,
+});
 
-export interface ColorAction {
-    type: ColorActionType;
-    payload?: number;
-}
+export const setBlue = (value: number): ColorAction => ({
+   type: ColorActionType.SET_BLUE,
+   payload: value,
+});
+
+export const setGreen = (value: number): ColorAction => ({
+    type: ColorActionType.SET_GREEN,
+    payload: value,
+});
