@@ -1,7 +1,8 @@
 "use client";
-import { ChangeEvent, useContext } from "react";
-import { BackgroundColorContext } from "../../store/background-color/context";
-import './settings.css';
+import {useContext} from "react";
+import {BackgroundColorContext } from "../../store/background-color/context";
+import {SliderProps, Event} from "./types"
+import "./settings.css";
 
 export default function ColorPicker() {
   const { red, green, blue, setRed, setGreen, setBlue } = useContext(BackgroundColorContext);
@@ -12,9 +13,9 @@ export default function ColorPicker() {
   return (
       <div id="color-picker-section">
           <h2>Change the Color!</h2>
-          <Slider label={'Red'} color={red} handler={redHandler} />
-          <Slider label={'Green'} color={green} handler={greenHandler} />
-          <Slider label={'Blue'} color={blue} handler={blueHandler} />
+          <Slider label={"Red"} color={red} handler={redHandler} />
+          <Slider label={"Green"} color={green} handler={greenHandler} />
+          <Slider label={"Blue"} color={blue} handler={blueHandler} />
       </div>
   );
 }
@@ -32,15 +33,7 @@ function Slider(props: SliderProps) {
                 value={color}
                 onChange={handler}
             />
-            <div>Hue: {color}°</div>
+            <div>{color}°</div>
         </div>
     );
 }
-
-type SliderProps = {
-    label: string;
-    color: number;
-    handler: (e: Event) => void;
-}
-
-type Event = ChangeEvent<HTMLInputElement>;
