@@ -1,27 +1,22 @@
 "use client";
-import React, {useContext} from "react";
+import {ReactNode, useContext} from "react";
 import SiteTitleString from "@/components/navigation/components/site-title-string";
 import NavBar from "@/components/navigation/components/nav-bar";
-import {BackgroundColorContext as context} from "../store/background-color-context";
+import {BackgroundColorContext as context} from "../store/background-color/context";
 import {calculateFontColor} from "../common/utils";
 
 interface Children {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function Content({children}: Children){
-  const {
-    backgroundColor_R: red,
-    backgroundColor_G: green,
-    backgroundColor_B: blue,
-    sumOfColors,
-  } = useContext(context);
+  const {red, green, blue, sum} = useContext(context);
 
   const gradientStart = `rgb(${red}, ${green}, ${blue})`;
   const style = {
     backgroundImage: `linear-gradient(${gradientStart}, white)`
   };
-  const fontColor = calculateFontColor({sumOfColors, red, green, blue});
+  const fontColor = calculateFontColor({sum, red, green, blue});
 
   return (
     <main className="woh__site-content" style={style}>
