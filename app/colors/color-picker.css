@@ -1,0 +1,50 @@
+.woh___settings-page {
+    margin-top: 1rem;
+    width: 100vw;
+}
+
+.woh__color-picker {
+    margin-top: 9rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 22rem;
+    position: relative;
+}
+
+
+.woh__color-picker__concentric-circle {
+    border-radius: 50%;
+    border: 1px solid black;
+    position: absolute;
+}
+
+.woh__color-picker__concentric-circle:nth-child(1) { height: 8rem; width: 8rem; }
+.woh__color-picker__concentric-circle:nth-child(2) { height: 6rem; width: 6rem; z-index: 1; }
+.woh__color-picker__concentric-circle:nth-child(3) { height: 4rem; width: 4rem; z-index: 2; }
+.woh__color-picker__concentric-circle:nth-child(4) { height: 2rem; width: 2rem; z-index: 3; }
+
+.woh__color-value {
+    position: absolute;
+    width: 12rem;
+
+    & span {
+        background: white;
+        border: 1px solid black;
+        border-radius: 50%;
+        height: 2rem;
+        width: 2rem;
+        padding: 0.20rem 2px 0 0;
+        text-align: center;
+    }
+}
+
+.woh__color-picker > span {
+    width: 4rem;
+}
+
+.woh__color-input {
+    width: 8rem;
+    z-index: 10;
+}

@@ -11,7 +11,7 @@ const allPaths = {
   HOME: "/",
   LOGIN: "/login",
   PROFILE,
-  SETTINGS: "/settings",
+  COLORS: "/colors",
   TECH: "/tech",
 };
 
