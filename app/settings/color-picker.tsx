@@ -1,9 +1,7 @@
 "use client";
-import React, { ChangeEvent, useContext } from "react";
+import { ChangeEvent, useContext } from "react";
 import { BackgroundColorContext } from "../../store/background-color/context";
 import './settings.css';
-
-type Event = ChangeEvent<HTMLInputElement>;
 
 export default function ColorPicker() {
   const { red, green, blue, setRed, setGreen, setBlue } = useContext(BackgroundColorContext);
@@ -14,42 +12,35 @@ export default function ColorPicker() {
   return (
       <div id="color-picker-section">
           <h2>Change the Color!</h2>
-          <div className="woh__color-picker">
-              <span>Red</span>
-              <input
-                  className="woh__color-input"
-                  type="range"
-                  min="0"
-                  max="255"
-                  value={red}
-                  onChange={redHandler}
-              />
-              <div>Hue: {red}°</div>
-          </div>
-          <div className="woh__color-picker">
-              <span>Green</span>
-              <input
-                  className="woh__color-input"
-                  type="range"
-                  min="0"
-                  max="255"
-                  value={green}
-                  onChange={greenHandler}
-              />
-              <div>Hue: {green}°</div>
-          </div>
-          <div className="woh__color-picker">
-              <span>Blue</span>
-              <input
-                  className="woh__color-input"
-                  type="range"
-                  min="0"
-                  max="255"
-                  value={blue}
-                  onChange={blueHandler}
-              />
-              <div>Hue: {blue}°</div>
-          </div>
+          <Slider label={'Red'} color={red} handler={redHandler} />
+          <Slider label={'Green'} color={green} handler={greenHandler} />
+          <Slider label={'Blue'} color={blue} handler={blueHandler} />
       </div>
   );
 }
+
+function Slider(props: SliderProps) {
+    const {label, color, handler} = props;
+    return (
+        <div className="woh__color-picker">
+            <span>{label}</span>
+            <input
+                className="woh__color-input"
+                type="range"
+                min="0"
+                max="255"
+                value={color}
+                onChange={handler}
+            />
+            <div>Hue: {color}°</div>
+        </div>
+    );
+}
+
+type SliderProps = {
+    label: string;
+    color: number;
+    handler: (e: Event) => void;
+}
+
+type Event = ChangeEvent<HTMLInputElement>;
