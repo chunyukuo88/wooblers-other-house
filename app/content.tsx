@@ -10,18 +10,13 @@ interface Children {
 }
 
 export function Content({children}: Children){
-  const {
-    backgroundColor_R: red,
-    backgroundColor_G: green,
-    backgroundColor_B: blue,
-    sumOfColors,
-  } = useContext(context);
+  const { red, green, blue, sum } = useContext(context);
 
   const gradientStart = `rgb(${red}, ${green}, ${blue})`;
   const style = {
     backgroundImage: `linear-gradient(${gradientStart}, white)`
   };
-  const fontColor = calculateFontColor({sumOfColors, red, green, blue});
+  const fontColor = calculateFontColor({sum, red, green, blue});
 
   return (
     <main className="woh__site-content" style={style}>
