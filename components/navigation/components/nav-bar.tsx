@@ -14,9 +14,9 @@ export default function NavBar({fontColor}: NavBarProps) {
   return (
     <div id="woh__nav-bar" style={style}>
       <div className="woh__nav-bar-string">
-        {pathname === allPaths.SETTINGS
+        {pathname === allPaths.COLORS
           ? <Link href={allPaths.HOME}>Home</Link>
-          : <NavLink href={allPaths.SETTINGS}>Settings</NavLink>
+          : <NavLink href={allPaths.COLORS}>Colors</NavLink>
         }
       </div>
       <div className="woh__nav-bar-string">

@@ -2,7 +2,7 @@
 import {useContext} from "react";
 import {BackgroundColorContext } from "../../store/background-color/context";
 import {SliderProps, Event} from "./types";
-import "./settings.css";
+import "./color-picker.css";
 
 export default function ColorPicker() {
     const { red, green, blue, setRed, setGreen, setBlue } = useContext(BackgroundColorContext);
