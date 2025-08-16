@@ -1,8 +1,8 @@
 import {ChangeEvent} from "react";
 
 export type SliderProps = {
-    label: string;
     color: number;
+    degrees: number;
     handler: (e: Event) => void;
 }
 

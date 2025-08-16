@@ -12,19 +12,22 @@ export default function ColorPicker() {
 
   return (
       <div id="color-picker-section">
-          <h2>Change the Color!</h2>
-          <Slider label={"Red"} color={red} handler={redHandler} />
-          <Slider label={"Green"} color={green} handler={greenHandler} />
-          <Slider label={"Blue"} color={blue} handler={blueHandler} />
+          <Slider color={red} degrees={45} handler={redHandler} />
+          <Slider color={green} degrees={135} handler={greenHandler} />
+          <Slider color={blue} degrees={90} handler={blueHandler} />
       </div>
   );
 }
 
 function Slider(props: SliderProps) {
-    const {label, color, handler} = props;
+    const {color, degrees, handler} = props;
+    const rotation = { 'transform': `rotate(${degrees}deg)` };
     return (
         <div className="woh__color-picker">
-            <span>{label}</span>
+            <div className="woh__color-picker__concentric-circle" />
+            <div className="woh__color-picker__concentric-circle" />
+            <div className="woh__color-picker__concentric-circle" />
+            <div className="woh__color-picker__concentric-circle" />
             <input
                 className="woh__color-input"
                 type="range"
@@ -32,8 +35,9 @@ function Slider(props: SliderProps) {
                 max="255"
                 value={color}
                 onChange={handler}
+                style={rotation}
             />
-            <div>{color}°</div>
+            <div className="woh__color-value">{color}</div>
         </div>
     );
 }
