@@ -14,7 +14,7 @@ export default function ColorPicker() {
         <div id="color-picker-section">
             <Slider circleFillColor={"red"} color={red} degrees={45} handler={redHandler} />
             <Slider circleFillColor={"green"} color={green} degrees={135} handler={greenHandler} />
-            <Slider circleFillColor={"blue"} color={blue} degrees={90} handler={blueHandler} />
+            <Slider circleFillColor={"blue"} color={blue} degrees={180} handler={blueHandler} />
         </div>
     );
 }
