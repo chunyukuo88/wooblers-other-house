@@ -7,4 +7,9 @@ export type SliderProps = {
     handler: (e: Event) => void;
 }
 
+export type ConcentricCirclesProps = {
+    color: number;
+    circleFillColor: string;
+}
+
 export type Event = ChangeEvent<HTMLInputElement>;
