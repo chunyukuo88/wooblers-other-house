@@ -20,10 +20,64 @@
     position: absolute;
 }
 
-.woh__color-picker__concentric-circle:nth-child(1) { height: 8rem; width: 8rem; }
-.woh__color-picker__concentric-circle:nth-child(2) { height: 6rem; width: 6rem; z-index: 1; }
-.woh__color-picker__concentric-circle:nth-child(3) { height: 4rem; width: 4rem; z-index: 2; }
-.woh__color-picker__concentric-circle:nth-child(4) { height: 2rem; width: 2rem; z-index: 3; }
+.woh__color-picker__tick-container {
+    position: relative;
+}
+
+.woh__color-picker__tick {
+    position: absolute;
+    height: 0;
+    border: 1px solid black;
+    width: 0.5rem;
+    z-index: 0;
+}
+
+.woh__color-picker__tick:nth-child(1) {
+    position: absolute;
+    top: 0.5rem;
+    right: 4rem;
+}
+
+.woh__color-picker__tick:nth-child(2) {
+    transform: rotate(45deg);
+    right: 2.75rem;
+    bottom: 2.25rem;
+}
+
+.woh__color-picker__tick:nth-child(3) {
+    transform: rotate(90deg);
+    bottom: 3.5rem;
+    left: -0.25rem;
+}
+
+.woh__color-picker__tick:nth-child(4) {
+    transform: rotate(135deg);
+    bottom: 2.25rem;
+    left: 2.75rem;
+}
+
+.woh__color-picker__tick:nth-child(5) {
+    top: 0.5rem;
+    left: 4rem;
+}
+
+.woh__color-picker__tick:nth-child(6) {
+    transform: rotate(45deg);
+    top: 3.5rem;
+    left: 2.75rem;
+}
+
+.woh__color-picker__tick:nth-child(7) {
+    transform: rotate(75deg);
+    top: 4.65rem;
+    left: 0.85rem;
+}
+
+.woh__color-picker__concentric-circle:nth-child(1) { height: 8rem; width: 8rem; z-index: 1; }
+.woh__color-picker__concentric-circle:nth-child(2) { height: 6rem; width: 6rem; z-index: 2; }
+.woh__color-picker__concentric-circle:nth-child(3) { height: 4rem; width: 4rem; z-index: 3; }
+.woh__color-picker__concentric-circle:nth-child(4) { height: 2rem; width: 2rem; z-index: 4; }
+.woh__color-picker__concentric-circle:nth-child(5) { height: 9rem; width: 9rem; z-index: 0; }
 
 .woh__color-value {
     position: absolute;

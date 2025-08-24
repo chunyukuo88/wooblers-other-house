@@ -1,7 +1,7 @@
 "use client";
 import {useContext} from "react";
 import {BackgroundColorContext } from "../../store/background-color/context";
-import {SliderProps, Event} from "./types";
+import {ConcentricCirclesProps, Event, SliderProps} from "./types";
 import "./color-picker.css";
 
 export default function ColorPicker() {
@@ -29,10 +29,7 @@ function Slider(props: SliderProps) {
     };
     return (
         <div className="woh__color-picker">
-            <div className="woh__color-picker__concentric-circle" style={{ backgroundColor: color > 191 ? circleFillColor : '' }}/>
-            <div className="woh__color-picker__concentric-circle" style={{ backgroundColor: color > 127 ? circleFillColor : '' }}/>
-            <div className="woh__color-picker__concentric-circle" style={{ backgroundColor: color > 63 ? circleFillColor : '' }}/>
-            <div className="woh__color-picker__concentric-circle" style={{ backgroundColor: color > 1 ? circleFillColor : '' }}/>
+            <ConcentricCircles color={color} circleFillColor={circleFillColor} />
             <input
                 className="woh__color-input"
                 type="range"
@@ -46,5 +43,28 @@ function Slider(props: SliderProps) {
                 <span style={valueRotationInternal}>{color}</span>
             </div>
         </div>
+    );
+}
+
+
+function ConcentricCircles(props: ConcentricCirclesProps) {
+    const {color, circleFillColor} = props;
+    return (
+        <>
+            <div className="woh__color-picker__concentric-circle" style={{ backgroundColor: color > 191 ? circleFillColor : '' }}/>
+            <div className="woh__color-picker__concentric-circle" style={{ backgroundColor: color > 127 ? circleFillColor : '' }}/>
+            <div className="woh__color-picker__concentric-circle" style={{ backgroundColor: color > 63 ? circleFillColor : '' }}/>
+            <div className="woh__color-picker__concentric-circle" style={{ backgroundColor: color > 1 ? circleFillColor : '' }}/>
+            <div className="woh__color-picker__concentric-circle" style={{ backgroundColor: 'transparent'}}/>
+            <div className="woh__color-picker__tick-container">
+                <div className="woh__color-picker__tick" style={{ borderColor: circleFillColor}}/>
+                <div className="woh__color-picker__tick" style={{ borderColor: circleFillColor}}/>
+                <div className="woh__color-picker__tick" style={{ borderColor: circleFillColor}}/>
+                <div className="woh__color-picker__tick" style={{ borderColor: circleFillColor}}/>
+                <div className="woh__color-picker__tick" style={{ borderColor: circleFillColor}}/>
+                <div className="woh__color-picker__tick" style={{ borderColor: circleFillColor}}/>
+                <div className="woh__color-picker__tick" style={{ borderColor: circleFillColor}}/>
+            </div>
+        </>
     );
 }
