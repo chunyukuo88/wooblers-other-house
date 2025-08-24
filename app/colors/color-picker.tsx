@@ -55,8 +55,13 @@ function ConcentricCircles(props: ConcentricCirclesProps) {
             <div className="woh__color-picker__concentric-circle" style={{ backgroundColor: color > 127 ? circleFillColor : '' }}/>
             <div className="woh__color-picker__concentric-circle" style={{ backgroundColor: color > 63 ? circleFillColor : '' }}/>
             <div className="woh__color-picker__concentric-circle" style={{ backgroundColor: color > 1 ? circleFillColor : '' }}/>
+            <div className="woh__color-picker__concentric-circle" style={{ backgroundColor: 'transparent'}}/>
             <div className="woh__color-picker__tick-container">
-                <div className="woh__color-picker__tick" style={{ borderColor: circleFillColor}} />
+                <div className="woh__color-picker__tick" style={{ borderColor: circleFillColor}}/>
+                <div className="woh__color-picker__tick" style={{ borderColor: circleFillColor}}/>
+                <div className="woh__color-picker__tick" style={{ borderColor: circleFillColor}}/>
+                <div className="woh__color-picker__tick" style={{ borderColor: circleFillColor}}/>
+                <div className="woh__color-picker__tick" style={{ borderColor: circleFillColor}}/>
                 <div className="woh__color-picker__tick" style={{ borderColor: circleFillColor}}/>
                 <div className="woh__color-picker__tick" style={{ borderColor: circleFillColor}}/>
             </div>
