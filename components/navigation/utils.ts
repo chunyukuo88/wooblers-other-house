@@ -21,12 +21,10 @@ const removeThumbnails = (folders: Folder[]) => {
   return folders.map((folder: Folder) => {
     const photosSansThumbnail = folder.photos.filter((photo: string) => {
       const isThumbnail = photo.split(".").find(part => part.includes("thumbnail"));
-      console.log(`isThumbnail: ${photo}`)
       return !isThumbnail;
     });
     const captionsSansThumbnail = folder.captions.filter((caption: string) => {
       const isThumbnailCaption = caption.startsWith("thumbnail");
-      console.log(`isThumbnailCaption: ${caption}`);
       return !isThumbnailCaption;
     });
     return {
