@@ -1,5 +1,4 @@
 .woh___settings-page {
-    margin-top: 1rem;
     width: 100vw;
 }
 
@@ -13,6 +12,9 @@
     position: relative;
 }
 
+.woh__color-picker:nth-child(1) {
+    margin-top: 5rem;
+}
 
 .woh__color-picker__concentric-circle {
     border-radius: 50%;
@@ -41,7 +43,7 @@
 .woh__color-picker__tick:nth-child(2) {
     transform: rotate(45deg);
     right: 2.75rem;
-    bottom: 2.75rem;
+    bottom: 45px;
 }
 
 .woh__color-picker__tick:nth-child(3) {
@@ -63,14 +65,24 @@
 
 .woh__color-picker__tick:nth-child(6) {
     transform: rotate(45deg);
-    top: 3.15rem;
+    top: 50px;
     left: 2.75rem;
 }
 
 .woh__color-picker__tick:nth-child(7) {
     transform: rotate(75deg);
-    top: 4.65rem;
+    top: 67px;
     left: 0.85rem;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .woh__color-picker__concentric-circle:nth-child(1) { height: 8rem; width: 8rem; z-index: 1; }
@@ -101,7 +113,8 @@
 .woh__color-input {
     -webkit-appearance: none;
     appearance: none;
+    background: black;
     width: 8rem;
-    height: 2px;
+    height: 1px;
     z-index: 10;
 }
