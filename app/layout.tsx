@@ -8,6 +8,7 @@ interface Children {
   children: ReactNode;
 }
 
+
 const gaMeasurementId = process.env.GA_MEASUREMENT_ID!;
 
 const GoogleTagManager = () => (
