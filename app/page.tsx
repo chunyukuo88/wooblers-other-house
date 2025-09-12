@@ -1,5 +1,4 @@
 import ImageGallery from "@/components/galleries/main-gallery/image-gallery";
-import {CookiesSetter} from "@/components/navigation/components/cookies-setter";
 import {getFolders} from "@/components/navigation/utils";
 
 type Params = {
@@ -13,7 +12,6 @@ export default async function Page({ searchParams }: Params) {
 
   return (
       <>
-        <CookiesSetter />
         <ImageGallery folders={folders} showPrivateImages={displayPrivateImages}/>
       </>
   );
