@@ -1,13 +1,9 @@
-import {cookies} from "next/headers";
-import {getFlagsFromParams} from "../../app/flags";
+import {getFeatureStatus} from "../../app/flags";
 import {getMainPageImages, Folder} from "../../common/http";
 
 export async function getFolders(searchParam: string){
-  const cookieStore = await cookies();
-  const enabledHowzitFromCookies = cookieStore.get('howzit')?.value === 'true';
-
-  const {showPrivateImages: enableHowzitFromQueryParams} = getFlagsFromParams(searchParam);
-  const displayPrivateImages = enableHowzitFromQueryParams || enabledHowzitFromCookies;
+  const featureFlag = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY!;
+  const displayPrivateImages = await getFeatureStatus(searchParam, featureFlag);
   const unprocessedFolders = await getMainPageImages(displayPrivateImages);
   const sansThumbnails = removeThumbnails(unprocessedFolders);
 
