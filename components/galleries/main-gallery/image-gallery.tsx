@@ -43,11 +43,7 @@ const ImageGallery = (props: ImageGalleryProps) => {
       <ScrollToTopButton images={current.photos}/>
     </div>
   );
-
-  const howzitModePersisted = localStorage && localStorage.getItem("howzit") === "true";
-  const displayPrivateImages = showPrivateImages || howzitModePersisted;
-
-  const galleryPrefix = displayPrivateImages
+  const galleryPrefix = showPrivateImages
     ? GALLERY_BUCKETS.MAIN_PRIVATE
     : GALLERY_BUCKETS.MAIN_PUBLIC;
 
