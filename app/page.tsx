@@ -7,8 +7,9 @@ type Params = {
   }>
 }
 export default async function Page({ searchParams }: Params) {
-  const {howzit} = await searchParams;
-  const {displayPrivateImages, folders} = await getFolders(howzit);
+  const params = await searchParams;
+  const privateImageQuery = params[process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY!];
+  const {displayPrivateImages, folders} = await getFolders(privateImageQuery);
 
   return (
       <>
