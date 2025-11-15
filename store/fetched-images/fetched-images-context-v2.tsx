@@ -1,6 +1,6 @@
 "use client";
 import {createContext, type PropsWithChildren, useContext, useEffect, useState} from "react";
-import {Folder} from "./types";
+import {Folder} from "../types";
 
 const emptyFolder = {
   friendlyName: "",
