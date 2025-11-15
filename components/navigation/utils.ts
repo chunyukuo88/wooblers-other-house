@@ -1,7 +1,12 @@
 import {getFeatureStatus} from "../../app/flags";
 import {getMainPageImages, Folder} from "../../common/http";
 
-export async function getFolders(searchParam: string){
+type GetFoldersResult = {
+    displayPrivateImages: boolean;
+    folders: Folder[];
+};
+
+export async function getFolders(searchParam: string): Promise<GetFoldersResult> {
   const featureFlag = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY!;
   const displayPrivateImages = await getFeatureStatus(searchParam, featureFlag);
   const unprocessedFolders = await getMainPageImages(displayPrivateImages);

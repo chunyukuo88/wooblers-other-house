@@ -2,7 +2,7 @@
 import {ReactNode} from "react";
 import {Session} from "next-auth";
 import {SessionProvider} from "next-auth/react";
-import {FetchedImagesV2Provider} from "./fetched-images-context-v2";
+import {FetchedImagesV2Provider} from "./private-images/fetched-images-context-v2";
 import {CaptionColorProvider} from "./background-color/context";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 

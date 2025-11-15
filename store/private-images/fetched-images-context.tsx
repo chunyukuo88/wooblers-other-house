@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useState, type PropsWithChildren } from "react";
-import {BucketItem} from "./types";
+import {BucketItem} from "../types";
 
 export const FetchedImagesContext = createContext({
   fetchedImageObjects: [],
