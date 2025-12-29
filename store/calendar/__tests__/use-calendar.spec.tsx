@@ -1,5 +1,6 @@
-import {MISSING_CONTEXT, useCalendar} from "../use-calendar"
-import { renderHook } from "@testing-library/react";
+import {ReactNode} from "react";
+import {ERROR_MISSING_CONTEXT, useCalendar} from "../use-calendar"
+import {renderHook} from "@testing-library/react";
 import {CalendarContext, CalendarContextProvider} from "../calendar-context";
 import {Season} from "../types";
 
@@ -11,25 +12,32 @@ describe("useCalendar", () => {
             renderHook(() => useCalendar())
 
             expect(spy).toHaveBeenCalledTimes(1);
-            expect(spy).toHaveBeenCalledWith(MISSING_CONTEXT);
+            expect(spy).toHaveBeenCalledWith(ERROR_MISSING_CONTEXT);
         });
     });
     describe("WHEN: called within a context provider", () => {
         it("THEN: returns the current day, current date, and season", () => {
+           const [day, date, season] = ["Sunday", "12-28-2025", Season.Winter];
            const calendarContextProviderProps = {
-               currentDay: "",
-               currentDate: "",
-               currentSeason: Season.Winter,
+               currentDay: day,
+               currentDate: date,
+               currentSeason: season,
            };
-            const wrapper = () => (
+           const wrapper = ({ children }: { children: ReactNode }) => (
              <CalendarContext.Provider value={calendarContextProviderProps}>
-                 <div></div>
+                 {children}
              </CalendarContext.Provider>
            );
 
-            const {result} = renderHook(() => useCalendar(), { wrapper });
+            const {
+                result: {
+                    current,
+                },
+            } = renderHook(() => useCalendar(), { wrapper });
 
-            expect(result.current?.currentDate).toEqual("");
+            expect(current!.currentDay).toEqual(day);
+            expect(current!.currentDate).toEqual(date);
+            expect(current!.currentSeason).toEqual(season);
         });
     });
 });
