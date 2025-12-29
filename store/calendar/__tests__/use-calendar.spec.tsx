@@ -1,7 +1,7 @@
 import {ReactNode} from "react";
 import {ERROR_MISSING_CONTEXT, useCalendar} from "../use-calendar"
 import {renderHook} from "@testing-library/react";
-import {CalendarContext, CalendarContextProvider} from "../calendar-context";
+import {CalendarContext} from "../calendar-context";
 import {Season} from "../types";
 
 describe("useCalendar", () => {

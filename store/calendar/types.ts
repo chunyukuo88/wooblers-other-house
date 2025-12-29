@@ -8,5 +8,5 @@ export enum Season {
 export type CalendarContextValue = {
     currentDay: string;
     currentDate: string;
-    currentSeason: Season;
+    currentSeason: Season | "";
 }

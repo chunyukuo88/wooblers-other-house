@@ -2,9 +2,13 @@
 import {createContext, type PropsWithChildren} from "react";
 import {CalendarContextValue, Season} from "./types";
 
-export const CalendarContext = createContext<CalendarContextValue | undefined>(
-    undefined
-);
+export const initialCalendarContext = {
+    currentDay: "",
+    currentDate: "",
+    currentSeason: "" as Season,
+};
+
+export const CalendarContext = createContext<CalendarContextValue>(initialCalendarContext);
 
 export function CalendarContextProvider(props: PropsWithChildren){
     const now = new Date();

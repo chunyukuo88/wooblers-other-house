@@ -5,12 +5,20 @@ import Image from "next/image";
 import {GALLERY_BUCKETS, SingleCardProps} from "@/components/galleries/types";
 import Modal from "@/components/galleries/components/modal";
 import Cart from "@/components/galleries/components/cart";
+import {useCalendar} from "../../store/calendar/use-calendar";
 
 export function ImageCard(props: SingleCardProps) {
   const {data: session} = useSession();
   const {caption, file, galleryPrefix, index} = props;
   const displayCaption = caption ? processRawCaption(caption) : ""; // TODO: Revisit in caption ticket.
   const [showModal, setShowModal] = useState(false);
+  const {currentDay, currentDate, currentSeason} = useCalendar();
+
+    console.log(`
+    currentDay: ${currentDay}
+    currentDate: ${currentDate}
+    currentSeason: ${currentSeason}
+    `)
 
   const closeModal = () => setShowModal(false);
 
