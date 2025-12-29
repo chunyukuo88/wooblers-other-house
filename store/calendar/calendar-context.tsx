@@ -1,29 +1,21 @@
 "use client";
-import {createContext, useState, type PropsWithChildren} from "react";
+import {createContext, type PropsWithChildren} from "react";
+import {CalendarContextValue, Season} from "./types";
 
-export const CalendarContext = createContext({
-    currentDay: '',
-    currentSeason: '',
-    updateCalendarDay: function(day: string){},
-    updateSeason: function(season: string){},
-})
+export const CalendarContext = createContext<CalendarContextValue | undefined>(
+    undefined
+);
 
 export function CalendarContextProvider(props: PropsWithChildren){
-    const [season, setSeason] = useState<string>('');
-    const [calendarDay, setCalendarDay] = useState<string>('');
-
-    function seasonHandler(value: string){
-        setSeason(value);
-    }
-    function calendarDayHandler(day: string){
-        setCalendarDay(day);
-    }
-
+    const now = new Date();
     const context = {
-        updateCalendarDay: calendarDayHandler,
-        currentDay: calendarDay,
-        updateSeason: seasonHandler,
-        currentSeason: season,
+        currentDay: now.toLocaleDateString(undefined, { weekday: "long" }),
+        currentDate: now.toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        }),
+        currentSeason: getCurrentSeason(now),
     };
 
     return (
@@ -31,4 +23,38 @@ export function CalendarContextProvider(props: PropsWithChildren){
             {props.children}
         </CalendarContext.Provider>
     );
+}
+
+export function getCurrentSeason(date = new Date()): Season {
+    const month = date.getMonth() + 1; // 1–12
+    const day = date.getDate();
+
+    if (
+        (month === 12 && day >= 21) ||
+        month === 1 ||
+        month === 2 ||
+        (month === 3 && day < 20)
+    ) {
+        return Season.Winter;
+    }
+
+    if (
+        (month === 3 && day >= 20) ||
+        month === 4 ||
+        month === 5 ||
+        (month === 6 && day < 21)
+    ) {
+        return Season.Spring;
+    }
+
+    if (
+        (month === 6 && day >= 21) ||
+        month === 7 ||
+        month === 8 ||
+        (month === 9 && day < 23)
+    ) {
+        return Season.Summer;
+    }
+
+    return Season.Autumn;
 }
