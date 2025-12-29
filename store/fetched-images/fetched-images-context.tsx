@@ -1,10 +1,10 @@
 "use client";
-import { createContext, useState, type PropsWithChildren } from "react";
+import {createContext, useState, type PropsWithChildren} from "react";
 import {BucketItem} from "../types";
 
 export const FetchedImagesContext = createContext({
-  fetchedImageObjects: [],
-  fetchedCaptionStrings: [],
+  fetchedImageObjects: [] as BucketItem[],
+  fetchedCaptionStrings: [] as string[],
   updateFetchedImages: function(images: BucketItem[]){},
   updateFetchedCaptions: function(captions: string[]){},
 });
@@ -23,13 +23,12 @@ export function FetchedImagesProvider(props: PropsWithChildren){
 
   const context = {
     fetchedImageObjects: fetchedImages,
-    updateFetchedImages: imageHandler,
     fetchedCaptionStrings: fetchedCaptions,
+    updateFetchedImages: imageHandler,
     updateFetchedCaptions: captionHandler,
   };
 
   return (
-    // @ts-ignore
     (<FetchedImagesContext.Provider value={context}>
       {props.children}
     </FetchedImagesContext.Provider>)
