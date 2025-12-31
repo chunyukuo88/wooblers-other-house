@@ -1,7 +1,7 @@
 .woh__scroll-to-top-button {
     position: fixed;
     bottom: 0;
-    right: 20px;
+    right: 8px;
     cursor: pointer;
 
     transition: background-color 0.3s, transform 0.3s;
