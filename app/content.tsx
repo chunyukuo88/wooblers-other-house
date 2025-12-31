@@ -4,7 +4,6 @@ import SiteTitleString from "@/components/navigation/components/site-title-strin
 import NavBar from "@/components/navigation/components/nav-bar";
 import {BackgroundColorContext as context} from "../store/background-color/context";
 import {calculateFontColor} from "../common/utils";
-import "./content.css";
 import {SeasonalEffect} from "@/components/seasonal/seasonal-effect";
 
 interface Children {
