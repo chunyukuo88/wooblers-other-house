@@ -2,7 +2,7 @@ import {NextResponse} from "next/server";
 import type {NextRequest} from "next/server";
 import {allPaths, protectedPaths} from "./allPaths";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/api/auth')) {
     return NextResponse.next();
   }
