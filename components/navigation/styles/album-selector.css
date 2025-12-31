@@ -2,6 +2,7 @@
     background: inherit;
     color: inherit;
     font-family: Georgia, Times, serif;
+    font-size: 1rem;
     border: inherit;
 }
 
@@ -9,8 +10,4 @@
     background: inherit;
     color: inherit;
     font-family: Georgia, Times, serif;
-}
-
-#woh__album-picker, .woh_album-picker-placeholder {
-    width: 8rem;
 }

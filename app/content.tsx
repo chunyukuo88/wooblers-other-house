@@ -18,7 +18,6 @@ export function Content({children}: Children){
     backgroundImage: `linear-gradient(${gradientStart}, white)`
   };
   const fontColor = calculateFontColor({sum, red, green, blue});
-  // TODO: 按照季节开、关
   return (
     <main className="woh__site-content" style={style}>
       <SeasonalEffect/>
