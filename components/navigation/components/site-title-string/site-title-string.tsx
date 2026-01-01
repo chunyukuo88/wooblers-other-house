@@ -1,10 +1,8 @@
-import {allPaths} from "../../../allPaths";
 import Link from "next/link";
-import "../styles/site-title-string.css";
-
-type SiteTitleStringProps = {
-  fontColor: string;
-}
+import {allPaths} from "../../../../allPaths";
+import "../../styles/site-title-string.css";
+import {SiteTitleStringProps} from "./types";
+import {Wooblers} from "./wooblers";
 
 export default function SiteTitleString(props: SiteTitleStringProps) {
   const {fontColor} = props;
@@ -27,10 +25,7 @@ export default function SiteTitleString(props: SiteTitleStringProps) {
     <h1 className="woh__site-title-string" style={style}>
       <div className="woh__wiggling-cars">🚛</div>
       <Link href={allPaths.HOME}>
-        <div className="woh_drop-in">
-          <img id="santa-hat" src="/images/seasonal/santa-hat__small.png" alt="A santa hat"/>
-          <div>Woobler's</div>
-        </div>
+        <Wooblers />
         <div className="woh_drop-in">Other</div>
         <div className="woh_eventual-slant">House</div>
       </Link>
