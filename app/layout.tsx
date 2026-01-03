@@ -1,4 +1,6 @@
 import {ReactNode} from "react";
+import { StackProvider, StackTheme } from "@stackframe/stack";
+import { stackClientApp } from "../stack/client";
 import ProvidersV2 from "../store/providersV2";
 import {Content} from "./content";
 import GoogleAnalytics from "./google-analytics";
@@ -26,12 +28,12 @@ export default async function RootLayout({children}: Children) {
   return (
     <html lang="en" className="h-full bg-gray-100">
       <GoogleAnalytics GA_MEASUREMENT_ID={gaMeasurementId}/>
-      <body className="h-full">
+      <body className="h-full"><StackProvider app={stackClientApp}><StackTheme>
         <ProvidersV2 session={null}>
           <GoogleTagManager />
           <Content children={children}/>
         </ProvidersV2>
-      </body>
+      </StackTheme></StackProvider></body>
     </html>
   );
 }
