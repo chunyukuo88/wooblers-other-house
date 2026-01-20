@@ -8,14 +8,18 @@ export async function getBreadImages() {
 
 export async function getMainPageImages(showPrivateImages: boolean) {
   try {
-    const getMainImagesEndpoint = showPrivateImages
-        ? 'https://z943v9dl6c.execute-api.us-east-1.amazonaws.com/prod/src/getImagesPrivate'
-        : 'https://z943v9dl6c.execute-api.us-east-1.amazonaws.com/prod/src/getImagesPublic';
-    const response = await fetch(getMainImagesEndpoint);
+    const mainImagesEndpoint = getMainImagesEndpoint(showPrivateImages);
+    const response = await fetch(mainImagesEndpoint);
     return await response.json();
   } catch (error) {
     console.log(error);
   }
+}
+
+function getMainImagesEndpoint(showPrivateImages: boolean): string {
+    return showPrivateImages
+        ? process.env.NEXT_PRIVATE_IMAGE_SOURCE!
+        : process.env.NEXT_PUBLIC_IMAGE_SOURCE!;
 }
 
 export type Folder = {
