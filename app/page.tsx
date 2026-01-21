@@ -1,6 +1,8 @@
 import ImageGallery from "@/components/galleries/main-gallery/image-gallery";
 import {getFolders} from "./utils";
 
+export const dynamic = "force-dynamic";
+
 type Params = {
   searchParams: Promise<{
     [key: string]: string
