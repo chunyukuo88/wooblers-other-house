@@ -1,5 +1,5 @@
 import ImageGallery from "@/components/galleries/main-gallery/image-gallery";
-import {getFolders} from "@/components/navigation/utils";
+import {getFolders} from "./utils";
 
 type Params = {
   searchParams: Promise<{
