@@ -7,6 +7,13 @@ export async function getBreadImages() {
 }
 
 export async function getMainPageImages(showPrivateImages: boolean) {
+    if (process.env.NODE_ENV === "production") {
+        if (
+            process.env.NEXT_PRIVATE_IMAGE_SOURCE === "NEXT_PRIVATE_IMAGE_SOURCE"
+        ) {
+            errorLogger("Env var incorrectly inlined at build time");
+        }
+    }
     const mainImagesEndpoint = getMainImagesEndpoint(showPrivateImages);
     try {
         const response = await fetch(mainImagesEndpoint);
