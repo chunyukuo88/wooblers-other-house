@@ -7,13 +7,6 @@ export async function getBreadImages() {
 }
 
 export async function getMainPageImages(showPrivateImages: boolean) {
-    if (process.env.NODE_ENV === "production") {
-        if (
-            process.env.NEXT_PRIVATE_IMAGE_SOURCE === "NEXT_PRIVATE_IMAGE_SOURCE"
-        ) {
-            errorLogger("Env var incorrectly inlined at build time");
-        }
-    }
     const mainImagesEndpoint = getMainImagesEndpoint(showPrivateImages);
     try {
         const response = await fetch(mainImagesEndpoint);
@@ -25,8 +18,8 @@ export async function getMainPageImages(showPrivateImages: boolean) {
 
 function getMainImagesEndpoint(showPrivateImages: boolean): string {
     const result = showPrivateImages
-        ? process.env.NEXT_PRIVATE_IMAGE_SOURCE!
-        : process.env.NEXT_PUBLIC_IMAGE_SOURCE!;
+        ? 'https://z943v9dl6c.execute-api.us-east-1.amazonaws.com/prod/src/getImagesPrivate'
+        : 'https://z943v9dl6c.execute-api.us-east-1.amazonaws.com/prod/src/getImagesPublic'
     console.log(`getMainImagesEndpoint() result: ${result}`);
     return result;
 }
