@@ -2,7 +2,7 @@
     display: flex;
 }
 
-.woh__wiggling-cars {
+.woh__wiggling-toys {
     animation: wiggle 10s linear infinite;
     margin: 0 1rem;
     padding-top: 10%;
