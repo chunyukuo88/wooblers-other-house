@@ -2,7 +2,7 @@
     display: flex;
 }
 
-.woh__wiggling-cars {
+.woh__wiggling-toys {
     animation: wiggle 10s linear infinite;
     margin: 0 1rem;
     padding-top: 10%;
@@ -27,8 +27,8 @@
     position: absolute;
     transform: rotate(10deg);
     width: 12%;
-    bottom: 18px;
-    left: -5px;
+    bottom: 23px;
+    left: -4px;
 }
 
 .woh_drop-in:nth-child(2) {

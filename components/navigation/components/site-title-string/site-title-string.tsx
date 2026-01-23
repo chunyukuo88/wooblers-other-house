@@ -23,13 +23,13 @@ export default function SiteTitleString(props: SiteTitleStringProps) {
 
   return (
     <h1 className="woh__site-title-string" style={style}>
-      <div className="woh__wiggling-cars">🚛</div>
+      <div className="woh__wiggling-toys">⚽</div>
       <Link href={allPaths.HOME}>
         <Wooblers />
         <div className="woh_drop-in">Other</div>
         <div className="woh_eventual-slant">House</div>
       </Link>
-      <div className="woh__wiggling-cars">🚔</div>
+      <div className="woh__wiggling-toys">🪀</div>
     </h1>
   )
 }
