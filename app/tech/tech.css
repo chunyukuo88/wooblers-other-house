@@ -56,9 +56,3 @@ h4.woh__dev-diary-date {
     opacity: 1;
     transition: all 500ms;
 }
-
-.woh__technology-caption {
-    text-align: center;
-    font-style: italic;
-    font-size: 0.95rem;
-}
