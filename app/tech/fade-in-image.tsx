@@ -1,4 +1,5 @@
 import Image from "next/image";
+import classNames from "classnames";
 
 type FadeInImageProps = {
   alt: string;
@@ -24,16 +25,20 @@ export default function FadeInImage(props: FadeInImageProps) {
     src,
     width,
   } = props;
+
+  const imageContainerClasses = `woh__fade-in-container-${fadeInFromThe}`;
+  const imageClasses = `woh__tech-page-image-${fadeInFromThe} ${isVisible ? "fade-in" : ""}`;
+
   return (
-    <span className={`woh__fade-in-container-${fadeInFromThe}`}>
-      <div className={`woh__tech-page-image-${fadeInFromThe} ${isVisible ? "fade-in" : ""}`}>
+    <span className={imageContainerClasses}>
+      <div className={imageClasses}>
         <Image
           alt={alt}
           src={src}
           width={width}
           height={height}
         />
-        <div className="woh__technology-caption">{extractedCaption(src)}</div>
+        <div className="text-center italic text-[0.95rem]">{extractedCaption(src)}</div>
       </div>
     </span>
   );

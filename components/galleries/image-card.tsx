@@ -9,7 +9,7 @@ import Cart from "@/components/galleries/components/cart";
 export function ImageCard(props: SingleCardProps) {
   const {data: session} = useSession();
   const {caption, file, galleryPrefix, index} = props;
-  const displayCaption = caption ? processRawCaption(caption) : ""; // TODO: Revisit in caption ticket.
+  const displayCaption = caption ? processRawCaption(caption) : "";
   const [showModal, setShowModal] = useState(false);
 
   const closeModal = () => setShowModal(false);
@@ -17,13 +17,7 @@ export function ImageCard(props: SingleCardProps) {
   //@ts-ignore
   const cartIsVisible = (session?.accessToken && session?.idToken);
 
-  const responsive = { width: "100%", height: "auto" };
-
-  const isMainGallery = (galleryPrefix === GALLERY_BUCKETS.MAIN_PRIVATE || galleryPrefix === GALLERY_BUCKETS.MAIN_PUBLIC);
-  const imageUrl = (isMainGallery)
-    ? `${galleryPrefix}${file}`
-    // @ts-ignore
-    : `${galleryPrefix}${file.key}`;
+  const imageUrl = getImageUrl(galleryPrefix, file);
 
   const transparent = (galleryPrefix === GALLERY_BUCKETS.BREAD) ? 'transparent' : '';
   return (
@@ -31,7 +25,7 @@ export function ImageCard(props: SingleCardProps) {
       <div
         data-testid="image-item"
         key={index}
-        className={`woh__image-item ${transparent} woh__image-index-${index}`} // TODO: use `[class*="woh__image-wrapper-"]` syntax instead of two classes.
+        className={`woh__image-item ${transparent} woh__image-index-${index}`}
       >
         <Image
           src={imageUrl}
@@ -50,7 +44,17 @@ export function ImageCard(props: SingleCardProps) {
   );
 }
 
-export function processRawCaption(rawCaption: string):string {
+const responsive = { width: "100%", height: "auto" };
+
+const getImageUrl = (galleryPrefix: string, file: string | { key: string }) => {
+    const isMainGallery = (galleryPrefix === GALLERY_BUCKETS.MAIN_PRIVATE || galleryPrefix === GALLERY_BUCKETS.MAIN_PUBLIC);
+    return (isMainGallery)
+        ? `${galleryPrefix}${file}`
+        //@ts-ignore
+        : `${galleryPrefix}${file.key}`;
+};
+
+export function processRawCaption(rawCaption: string): string {
   const delimiter = "@";
   return (rawCaption.split("").find(char => char === delimiter))
     ? rawCaption.split("@")[1]
