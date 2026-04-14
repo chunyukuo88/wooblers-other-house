@@ -9,7 +9,7 @@ import Cart from "@/components/galleries/components/cart";
 export function ImageCard(props: SingleCardProps) {
   const {data: session} = useSession();
   const {caption, file, galleryPrefix, index} = props;
-  const displayCaption = caption ? processRawCaption(caption) : ""; // TODO: Revisit in caption ticket.
+  const displayCaption = caption ? processRawCaption(caption) : "";
   const [showModal, setShowModal] = useState(false);
 
   const closeModal = () => setShowModal(false);
@@ -31,7 +31,7 @@ export function ImageCard(props: SingleCardProps) {
       <div
         data-testid="image-item"
         key={index}
-        className={`woh__image-item ${transparent} woh__image-index-${index}`} // TODO: use `[class*="woh__image-wrapper-"]` syntax instead of two classes.
+        className={`woh__image-item ${transparent} woh__image-index-${index}`}
       >
         <Image
           src={imageUrl}
