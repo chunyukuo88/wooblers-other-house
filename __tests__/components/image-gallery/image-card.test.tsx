@@ -1,6 +1,6 @@
 import {ImageCard, processRawCaption} from "@/components/galleries/image-card";
 import {render, screen} from "@testing-library/react";
-import {GALLERY_BUCKETS, SingleCardProps} from "@/components/galleries/types";
+import {SingleCardProps} from "@/components/galleries/types";
 import {SessionProvider} from "next-auth/react";
 
 describe("<ImageCard />", () => {
