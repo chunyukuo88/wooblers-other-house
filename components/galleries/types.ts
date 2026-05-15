@@ -1,14 +1,8 @@
 import {BucketItem} from "../../store/types";
 
-export const GALLERY_BUCKETS = {
-  BREAD: process.env.NEXT_PUBLIC_BUCKET_BREAD as string,
-  MAIN_PRIVATE: process.env.NEXT_PUBLIC_BUCKET_MAIN_PRIVATE as string,
-  MAIN_PUBLIC: process.env.NEXT_PUBLIC_BUCKET_MAIN_PUBLIC as string,
-};
-
 type ImageCardProps = {
   caption: string;
-  galleryPrefix: string;
+  bucketAlias: 'private' | 'public';
   hasShoppingCart?: boolean;
   index: number;
 }
@@ -20,4 +14,3 @@ export type SingleCardProps = ImageCardProps & {
 export type StackedCardProps = ImageCardProps & {
   bucketItems: BucketItem[];
 };
-

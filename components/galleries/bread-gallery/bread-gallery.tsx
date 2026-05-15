@@ -3,7 +3,7 @@ import {ImageCard} from "@/components/galleries/image-card";
 import {extractBreadName, groupByRepetition, trimLetterVariant} from "@/components/galleries/bread-gallery/utils";
 import ImageCardStacked from "@/components/galleries/image-card-stacked";
 import {BucketItem} from "../../../store/types";
-import {GALLERY_BUCKETS} from "@/components/galleries/types";
+// import {GALLERY_BUCKETS} from "@/components/galleries/types";
 import "../styles.css";
 
 type BreadGalleryProps = {

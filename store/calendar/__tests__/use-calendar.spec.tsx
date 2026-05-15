@@ -7,7 +7,7 @@ import {Season} from "../types";
 describe("useCalendar", () => {
     describe("WHEN: the hook is used outside a context provider", () => {
         it("THEN: returns an error", () => {
-            const spy = jest.spyOn(console, "error");
+            const spy = jest.spyOn(console, "error").mockImplementationOnce(jest.fn());
 
             renderHook(() => useCalendar())
 

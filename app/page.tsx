@@ -28,5 +28,5 @@ export default async function Page({ searchParams }: Params) {
 }
 
 export const metadata = {
-  title: process.env.NODE_ENV === "production" ? "🚗 Vrooooooom!" : "小巫之另一個屋",
+  title: process.env.NODE_ENV === "production" ? "⚽ Gooooaaal!" : "小巫之另一個屋",
 };

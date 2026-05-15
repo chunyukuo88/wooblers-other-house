@@ -1,14 +1,14 @@
 "use client";
 import {useState} from "react";
 import {useSession} from "next-auth/react";
-import {GALLERY_BUCKETS, SingleCardProps} from "@/components/galleries/types";
+import {SingleCardProps} from "@/components/galleries/types";
 import Modal from "@/components/galleries/components/modal";
 import Cart from "@/components/galleries/components/cart";
 import {getImageUrl, getSrcSet} from "@/components/galleries/utils";
 
 export function ImageCard(props: SingleCardProps) {
     const {data: session} = useSession();
-    const {caption, file, galleryPrefix, index} = props;
+    const {bucketAlias, caption, file, index} = props;
     const displayCaption = caption ? processRawCaption(caption) : "";
     const [showModal, setShowModal] = useState(false);
 
@@ -17,17 +17,16 @@ export function ImageCard(props: SingleCardProps) {
     //@ts-ignore
     const cartIsVisible = (session?.accessToken && session?.idToken);
 
-    const imageUrl = getImageUrl(galleryPrefix, file);
+    const imageUrl = getImageUrl(bucketAlias, file);
 
-    const srcSet = getSrcSet(galleryPrefix, file);
+    const srcSet = getSrcSet(bucketAlias, file);
 
-    const transparent = (galleryPrefix === GALLERY_BUCKETS.BREAD) ? 'transparent' : '';
     return (
         <>
             <div
                 data-testid="image-item"
                 key={index}
-                className={`woh__image-item ${transparent} woh__image-index-${index}`}
+                className={`woh__image-item woh__image-index-${index}`}
             >
                 <img
                     src={imageUrl}
