@@ -4,8 +4,7 @@ import {useSession} from "next-auth/react";
 import {GALLERY_BUCKETS, SingleCardProps} from "@/components/galleries/types";
 import Modal from "@/components/galleries/components/modal";
 import Cart from "@/components/galleries/components/cart";
-
-const CLOUDFRONT = 'https://d3lmusesbs23gp.cloudfront.net';
+import {getImageUrl, getSrcSet} from "@/components/galleries/utils";
 
 export function ImageCard(props: SingleCardProps) {
     const {data: session} = useSession();
@@ -19,6 +18,7 @@ export function ImageCard(props: SingleCardProps) {
     const cartIsVisible = (session?.accessToken && session?.idToken);
 
     const imageUrl = getImageUrl(galleryPrefix, file);
+
     const srcSet = getSrcSet(galleryPrefix, file);
 
     const transparent = (galleryPrefix === GALLERY_BUCKETS.BREAD) ? 'transparent' : '';
@@ -47,29 +47,6 @@ export function ImageCard(props: SingleCardProps) {
 }
 
 const responsive = { width: "100%", height: "auto" };
-
-const getImageKey = (galleryPrefix: string, file: string | { key: string }): string => {
-    const isMainGallery = (galleryPrefix === GALLERY_BUCKETS.MAIN_PRIVATE || galleryPrefix === GALLERY_BUCKETS.MAIN_PUBLIC);
-    //@ts-ignore
-    const fullUrl = isMainGallery ? `${galleryPrefix}${file}` : `${galleryPrefix}${file.key}`;
-
-    // Strip the S3 domain, leaving just the key e.g. "1753562439640/b.jpg"
-    const s3UrlPattern = /https:\/\/[^/]+\.s3[^/]*\.amazonaws\.com\//;
-    return fullUrl.replace(s3UrlPattern, '');
-};
-
-const getImageUrl = (galleryPrefix: string, file: string | { key: string }): string => {
-    return `${CLOUDFRONT}/${getImageKey(galleryPrefix, file)}?w=800`;
-};
-
-const getSrcSet = (galleryPrefix: string, file: string | { key: string }): string => {
-    const key = getImageKey(galleryPrefix, file);
-    return [
-        `${CLOUDFRONT}/${key}?w=800 800w`,
-        `${CLOUDFRONT}/${key}?w=1600 1600w`,
-        `${CLOUDFRONT}/${key}?w=3200 3200w`,
-    ].join(', ');
-};
 
 export function processRawCaption(rawCaption: string): string {
     const delimiter = "@";
