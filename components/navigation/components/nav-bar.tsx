@@ -25,12 +25,12 @@ export default function NavBar({fontColor}: NavBarProps) {
           : <NavLink href={allPaths.TECH}>Tech</NavLink>
         }
       </div>
-      <div className="woh__nav-bar-string">
-        {pathname === allPaths.BREAD
-          ? <Link href={allPaths.HOME}>Home</Link>
-          : <NavLink href={allPaths.BREAD}>Bread</NavLink>
-        }
-      </div>
+      {/*<div className="woh__nav-bar-string">*/}
+      {/*  {pathname === allPaths.BREAD*/}
+      {/*    ? <Link href={allPaths.HOME}>Home</Link>*/}
+      {/*    : <NavLink href={allPaths.BREAD}>Bread</NavLink>*/}
+      {/*  }*/}
+      {/*</div>*/}
       <div className="woh__nav-bar-string">
         {pathname === allPaths.HOME
           ? <AlbumSelector style={style}/>
