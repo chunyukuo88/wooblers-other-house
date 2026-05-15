@@ -1,4 +1,4 @@
-import BreadGallery from "@/components/galleries/bread-gallery/bread-gallery";
+import BreadGallery from "@/components/galleries/bread-gallery_DEPRECATED/bread-gallery";
 import {getBreadImages} from "../../common/http";
 
 export default async function Page(){

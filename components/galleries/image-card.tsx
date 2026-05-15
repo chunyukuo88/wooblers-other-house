@@ -1,21 +1,9 @@
-"use client";
-import {useState} from "react";
-import {useSession} from "next-auth/react";
-import {SingleCardProps} from "@/components/galleries/types";
-import Modal from "@/components/galleries/components/modal";
-import Cart from "@/components/galleries/components/cart";
-import {getImageUrl, getSrcSet} from "@/components/galleries/utils";
+import {SingleCardProps} from "./types";
+import {getImageUrl, getSrcSet} from "./utils";
 
 export function ImageCard(props: SingleCardProps) {
-    const {data: session} = useSession();
     const {bucketAlias, caption, file, index} = props;
     const displayCaption = caption ? processRawCaption(caption) : "";
-    const [showModal, setShowModal] = useState(false);
-
-    const closeModal = () => setShowModal(false);
-
-    //@ts-ignore
-    const cartIsVisible = (session?.accessToken && session?.idToken);
 
     const imageUrl = getImageUrl(bucketAlias, file);
 
@@ -39,8 +27,6 @@ export function ImageCard(props: SingleCardProps) {
                 />
                 {displayCaption ? <div className="woh__caption" data-testid="display-caption">{displayCaption}</div> : null}
             </div>
-            <Cart cartIsVisible={cartIsVisible} showModal={showModal} setShowModal={setShowModal}/>
-            <Modal showModal={showModal} caption={caption} session={session} closeModal={closeModal}/>
         </>
     );
 }
