@@ -5,9 +5,9 @@ export function ImageCard(props: SingleCardProps) {
     const {bucketAlias, caption, file, index} = props;
     const displayCaption = caption ? processRawCaption(caption) : "";
 
-    const imageUrl = getImageUrl(bucketAlias, file);
+    const imageUrl = getImageUrl(cdn, bucketAlias, file);
 
-    const srcSet = getSrcSet(bucketAlias, file);
+    const srcSet = getSrcSet(cdn, bucketAlias, file);
 
     return (
         <>
@@ -39,3 +39,5 @@ export function processRawCaption(rawCaption: string): string {
         ? rawCaption.split("@")[1]
         : rawCaption;
 }
+
+const cdn = 'https://d3lmusesbs23gp.cloudfront.net';
