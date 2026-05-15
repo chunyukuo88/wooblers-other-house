@@ -1,5 +1,5 @@
 import {SingleCardProps} from "./types";
-import {getImageUrl, getSrcSet} from "./utils";
+import {getImageUrl, getSrcSet, SIZES} from "./utils";
 
 export function ImageCard(props: SingleCardProps) {
     const {bucketAlias, caption, file, index} = props;
@@ -19,10 +19,8 @@ export function ImageCard(props: SingleCardProps) {
                 <img
                     src={imageUrl}
                     srcSet={srcSet}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
+                    sizes={SIZES}
                     alt={`Image #${index + 1}`}
-                    width={300}
-                    height={200}
                     style={responsive}
                 />
                 {displayCaption ? <div className="woh__caption" data-testid="display-caption">{displayCaption}</div> : null}

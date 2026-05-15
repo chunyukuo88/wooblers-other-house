@@ -2,15 +2,17 @@ const concatenateBucketAndImage = (bucketAlias: string, file: string | { key: st
     return `${bucketAlias}/${file}`;
 };
 
-export const getImageUrl = (cdn: string, bucketAlias: string, file: string): string => {
-    return `${cdn}/${concatenateBucketAndImage(bucketAlias, file)}?w=800`;
+export const SRCSET_WIDTHS = [400, 800, 1200] as const;
+
+export const SIZES = `(max-width: 400px) 400px, (max-width: 800px) 800px, 1600px`;
+
+export const getSrcSet = (cdn: string, bucketAlias: string, file: string): string => {
+    const key = concatenateBucketAndImage(bucketAlias, file);
+    return SRCSET_WIDTHS
+        .map(w => `${cdn}/${key}?w=${w} ${w}w`)
+        .join(', ');
 };
 
-export const getSrcSet = (cdn: string, bucketAlias: string, file: string | { key: string }): string => {
-    const key = concatenateBucketAndImage(bucketAlias, file);
-    return [
-        `${cdn}/${key}?w=800 800w`,
-        `${cdn}/${key}?w=1600 1600w`,
-        `${cdn}/${key}?w=3200 3200w`,
-    ].join(', ');
+export const getImageUrl = (cdn: string, bucketAlias: string, file: string): string => {
+    return `${cdn}/${concatenateBucketAndImage(bucketAlias, file)}?w=${SRCSET_WIDTHS[0]}`;
 };
