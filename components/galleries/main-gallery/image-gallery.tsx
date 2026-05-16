@@ -2,7 +2,6 @@
 import {useEffect, useState} from "react";
 import {useMainImages} from "../../../store";
 import ScrollToTopButton from "@/components/navigation/components/scroll-to-top-button";
-import {GALLERY_BUCKETS} from "@/components/galleries/types";
 import {ImageCard} from "@/components/galleries/image-card";
 import {Folder} from "../../../store/types";
 import "../styles.css";
@@ -25,6 +24,8 @@ const ImageGallery = (props: ImageGalleryProps) => {
       document.cookie = `${process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY}=${process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_VAL}; path=/;`;
     }
   }, [showPrivateImages]);
+
+  const bucketAlias = showPrivateImages ? 'private' : 'public';
 
   useEffect(() => {
     if (folders?.length > 0) {
@@ -49,9 +50,6 @@ const ImageGallery = (props: ImageGalleryProps) => {
       <ScrollToTopButton images={current.photos}/>
     </div>
   );
-  const galleryPrefix = showPrivateImages
-    ? GALLERY_BUCKETS.MAIN_PRIVATE
-    : GALLERY_BUCKETS.MAIN_PUBLIC;
 
   return (
     <div className="woh__image-gallery">
@@ -60,7 +58,7 @@ const ImageGallery = (props: ImageGalleryProps) => {
           const caption = current.captions[index];
           return (
             <div className={`woh__image-wrapper-${index}`} key={index}>
-              <ImageCard file={file} index={index} caption={caption} galleryPrefix={galleryPrefix}/>
+              <ImageCard file={file} index={index} caption={caption} bucketAlias={bucketAlias}/>
             </div>
           );
         })}
