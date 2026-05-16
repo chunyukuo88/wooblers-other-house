@@ -9,7 +9,7 @@ interface Children {
 }
 
 
-const gaMeasurementId = process.env.GA_MEASUREMENT_ID!;
+const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!;
 
 const GoogleTagManager = () => (
   <noscript>
