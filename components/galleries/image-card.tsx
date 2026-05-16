@@ -1,11 +1,9 @@
 import {SingleCardProps} from "./types";
-import {getImageUrl, getSrcSet, SIZES} from "./utils";
+import {getSrcSet, SIZES} from "./utils";
 
 export function ImageCard(props: SingleCardProps) {
     const {bucketAlias, caption, file, index} = props;
     const displayCaption = caption ? processRawCaption(caption) : "";
-
-    const imageUrl = getImageUrl(cdn, bucketAlias, file);
 
     const srcSet = getSrcSet(cdn, bucketAlias, file);
 
@@ -17,7 +15,6 @@ export function ImageCard(props: SingleCardProps) {
                 className={`woh__image-item woh__image-index-${index}`}
             >
                 <img
-                    src={imageUrl}
                     srcSet={srcSet}
                     sizes={SIZES}
                     alt={`Image #${index + 1}`}
