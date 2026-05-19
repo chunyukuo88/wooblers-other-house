@@ -1,17 +1,11 @@
 "use client";
 import Script from "next/script"
-import {useEffect, useState} from "react";
 
-type Props = {
-  GA_MEASUREMENT_ID: string;
-}
-
-export default function GoogleAnalyticsObject({GA_MEASUREMENT_ID}: Props) {
-  const [initialized, setInitialized] = useState(false);
-
-  useEffect(() => {
-    setInitialized(true);
-  }, []);
+export default function GoogleAnalyticsObject() {
+  if (process.env.NODE_ENV !== "production") {
+      return null;
+  }
+  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!;
 
   const script = {
     __html: `
@@ -19,17 +13,14 @@ export default function GoogleAnalyticsObject({GA_MEASUREMENT_ID}: Props) {
     function gtag(){dataLayer.push(arguments);}
     gtag("js", new Date());
     
-    gtag("config", '${GA_MEASUREMENT_ID}', {
-      page_path: window.location.pathname,
-    })
-    `,
+    gtag("config", '${gaMeasurementId}')`,
   }
 
-  return initialized ? (
+  return (
     <>
       <Script
         strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
       />
       <Script
         id="google-analytics"
@@ -37,5 +28,5 @@ export default function GoogleAnalyticsObject({GA_MEASUREMENT_ID}: Props) {
         dangerouslySetInnerHTML={script}
       />
     </>
-  ) : null;
+  );
 }
