@@ -20,7 +20,6 @@ function getMainImagesEndpoint(showPrivateImages: boolean): string {
     const result = showPrivateImages
         ? 'https://z943v9dl6c.execute-api.us-east-1.amazonaws.com/prod/src/getImagesPrivate'
         : 'https://6nxnraji72.execute-api.us-east-2.amazonaws.com/gallery'
-    console.log(`getMainImagesEndpoint() result: ${result}`);
     return result;
 }
 

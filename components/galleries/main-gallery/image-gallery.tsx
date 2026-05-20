@@ -1,10 +1,12 @@
 "use client";
-import {useEffect, useState} from "react";
+import {lazy, useEffect, useState} from "react";
 import {useMainImages} from "../../../store";
-import ScrollToTopButton from "@/components/navigation/components/scroll-to-top-button";
 import {ImageCard} from "@/components/galleries/image-card";
 import {Folder} from "../../../store/types";
+import {getIntersectionObserver} from "@/components/navigation/components/scroll-to-top-button/utils";
 import "../styles.css";
+
+const ScrollToTopButton = lazy(() => import("../../navigation/components/scroll-to-top-button"));
 
 type ImageGalleryProps = {
   folders: Folder[];
@@ -18,6 +20,19 @@ const ImageGallery = (props: ImageGalleryProps) => {
   if (!folders) {
     return <div>Loading ... </div>
   }
+  const [wooblerIsVisible, setWooblerIsVisible] = useState(false);
+
+    useEffect(() => {
+      const observer = getIntersectionObserver(setWooblerIsVisible);
+      const numberOfImages = current?.photos.length;
+      const lastImage = `.woh__image-index-${(numberOfImages && numberOfImages - 1) || 'final'}`;
+      const trigger = document.querySelector(lastImage)!;
+      if (trigger) {
+        observer.observe(trigger);
+      }
+
+      return () => observer.disconnect();
+    }, [current]);
 
   useEffect(() => {
     if (showPrivateImages) {
@@ -45,12 +60,7 @@ const ImageGallery = (props: ImageGalleryProps) => {
     return null;
   }
 
-  const WrappedButton = () => (
-    <div style={{height: "0px"}} className="woh__scroll-to-top-trigger">
-      <ScrollToTopButton images={current.photos}/>
-    </div>
-  );
-
+    console.log('gallery');
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
@@ -63,7 +73,9 @@ const ImageGallery = (props: ImageGalleryProps) => {
           );
         })}
       </div>
-      {(current.photos.length > 0) ? <WrappedButton /> : null}
+        <div style={{height: "0px"}}>
+            {wooblerIsVisible ? <ScrollToTopButton/> : null}
+        </div>
     </div>
   );
 };
