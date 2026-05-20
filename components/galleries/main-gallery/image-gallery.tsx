@@ -3,6 +3,7 @@ import {lazy, useEffect, useState} from "react";
 import {useMainImages} from "../../../store";
 import {ImageCard} from "@/components/galleries/image-card";
 import {Folder} from "../../../store/types";
+import {getIntersectionObserver} from "@/components/navigation/components/scroll-to-top-button/utils";
 import "../styles.css";
 
 const ScrollToTopButton = lazy(() => import("../../navigation/components/scroll-to-top-button"));
@@ -19,19 +20,19 @@ const ImageGallery = (props: ImageGalleryProps) => {
   if (!folders) {
     return <div>Loading ... </div>
   }
-    // const [isVisible, setIsVisible] = useState(false);
-    //
-    // useEffect(() => {
-    //   const observer = getIntersectionObserver(setIsVisible);
-    //   const numberOfImages = images.length;
-    //   const lastImage = `.woh__image-index-${numberOfImages - 1}`;
-    //   const trigger = document.querySelector(lastImage)!;
-    //   if (trigger) {
-    //     observer.observe(trigger);
-    //   }
-    //
-    //   return () => observer.disconnect();
-    // }, [images]);
+  const [wooblerIsVisible, setWooblerIsVisible] = useState(false);
+
+    useEffect(() => {
+      const observer = getIntersectionObserver(setWooblerIsVisible);
+      const numberOfImages = current?.photos.length;
+      const lastImage = `.woh__image-index-${(numberOfImages && numberOfImages - 1) || 'final'}`;
+      const trigger = document.querySelector(lastImage)!;
+      if (trigger) {
+        observer.observe(trigger);
+      }
+
+      return () => observer.disconnect();
+    }, [current]);
 
   useEffect(() => {
     if (showPrivateImages) {
@@ -72,7 +73,9 @@ const ImageGallery = (props: ImageGalleryProps) => {
           );
         })}
       </div>
-      {(current.photos.length > 8) ? <ScrollToTopButton /> : null}
+        <div style={{height: "0px"}}>
+            {wooblerIsVisible ? <ScrollToTopButton/> : null}
+        </div>
     </div>
   );
 };
