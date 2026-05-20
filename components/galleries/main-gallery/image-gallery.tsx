@@ -1,10 +1,11 @@
 "use client";
-import {useEffect, useState} from "react";
+import {lazy, useEffect, useState} from "react";
 import {useMainImages} from "../../../store";
-import ScrollToTopButton from "@/components/navigation/components/scroll-to-top-button";
 import {ImageCard} from "@/components/galleries/image-card";
 import {Folder} from "../../../store/types";
 import "../styles.css";
+
+const ScrollToTopButton = lazy(() => import("../../navigation/components/scroll-to-top-button"));
 
 type ImageGalleryProps = {
   folders: Folder[];
@@ -18,6 +19,19 @@ const ImageGallery = (props: ImageGalleryProps) => {
   if (!folders) {
     return <div>Loading ... </div>
   }
+    // const [isVisible, setIsVisible] = useState(false);
+    //
+    // useEffect(() => {
+    //   const observer = getIntersectionObserver(setIsVisible);
+    //   const numberOfImages = images.length;
+    //   const lastImage = `.woh__image-index-${numberOfImages - 1}`;
+    //   const trigger = document.querySelector(lastImage)!;
+    //   if (trigger) {
+    //     observer.observe(trigger);
+    //   }
+    //
+    //   return () => observer.disconnect();
+    // }, [images]);
 
   useEffect(() => {
     if (showPrivateImages) {
@@ -45,12 +59,7 @@ const ImageGallery = (props: ImageGalleryProps) => {
     return null;
   }
 
-  const WrappedButton = () => (
-    <div style={{height: "0px"}} className="woh__scroll-to-top-trigger">
-      <ScrollToTopButton images={current.photos}/>
-    </div>
-  );
-
+    console.log('gallery');
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
@@ -63,7 +72,7 @@ const ImageGallery = (props: ImageGalleryProps) => {
           );
         })}
       </div>
-      {(current.photos.length > 0) ? <WrappedButton /> : null}
+      {(current.photos.length > 8) ? <ScrollToTopButton /> : null}
     </div>
   );
 };
