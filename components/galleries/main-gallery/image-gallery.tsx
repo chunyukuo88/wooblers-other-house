@@ -60,7 +60,6 @@ const ImageGallery = (props: ImageGalleryProps) => {
     return null;
   }
 
-    console.log('gallery');
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
