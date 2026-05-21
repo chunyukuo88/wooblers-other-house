@@ -1,3 +1,3 @@
 export type SiteTitleStringProps = {
-    fontColor: string;
-}
+  fontColor: string;
+};

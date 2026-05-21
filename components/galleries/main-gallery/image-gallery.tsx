@@ -1,40 +1,40 @@
-"use client";
-import {lazy, useEffect, useState} from "react";
-import {useMainImages} from "../../../store";
-import {ImageCard} from "@/components/galleries/image-card";
-import {Folder} from "../../../store/types";
-import {getIntersectionObserver} from "@/components/navigation/components/scroll-to-top-button/utils";
-import "../styles.css";
+'use client';
+import { lazy, useEffect, useState } from 'react';
+import { useMainImages } from '../../../store';
+import { ImageCard } from '@/components/galleries/image-card';
+import { Folder } from '../../../store/types';
+import { getIntersectionObserver } from '@/components/navigation/components/scroll-to-top-button/utils';
+import '../styles.css';
 
-const ScrollToTopButton = lazy(() => import("../../navigation/components/scroll-to-top-button"));
+const ScrollToTopButton = lazy(() => import('../../navigation/components/scroll-to-top-button'));
 
 type ImageGalleryProps = {
   folders: Folder[];
   showPrivateImages: boolean;
-}
+};
 
 // TODO: Think about how to make the gallery SSR, or at least the images and captions only.
 
 const ImageGallery = (props: ImageGalleryProps) => {
   const { folders, showPrivateImages } = props;
-  const {currentFolder, updateCurrentFolder, updateFetchedFolders} = useMainImages();
+  const { currentFolder, updateCurrentFolder, updateFetchedFolders } = useMainImages();
   const [current, setCurrent] = useState<Folder>();
   if (!folders) {
-    return <div>Loading ... </div>
+    return <div>Loading ... </div>;
   }
   const [wooblerIsVisible, setWooblerIsVisible] = useState(false);
 
-    useEffect(() => {
-      const observer = getIntersectionObserver(setWooblerIsVisible);
-      const numberOfImages = current?.photos.length;
-      const lastImage = `.woh__image-index-${(numberOfImages && numberOfImages - 1) || 'final'}`;
-      const trigger = document.querySelector(lastImage)!;
-      if (trigger) {
-        observer.observe(trigger);
-      }
+  useEffect(() => {
+    const observer = getIntersectionObserver(setWooblerIsVisible);
+    const numberOfImages = current?.photos.length;
+    const lastImage = `.woh__image-index-${(numberOfImages && numberOfImages - 1) || 'final'}`;
+    const trigger = document.querySelector(lastImage)!;
+    if (trigger) {
+      observer.observe(trigger);
+    }
 
-      return () => observer.disconnect();
-    }, [current]);
+    return () => observer.disconnect();
+  }, [current]);
 
   useEffect(() => {
     if (showPrivateImages) {
@@ -69,14 +69,12 @@ const ImageGallery = (props: ImageGalleryProps) => {
           const caption = current.captions[index];
           return (
             <div className={`woh__image-wrapper-${index}`} key={index}>
-              <ImageCard file={file} index={index} caption={caption} bucketAlias={bucketAlias}/>
+              <ImageCard file={file} index={index} caption={caption} bucketAlias={bucketAlias} />
             </div>
           );
         })}
       </div>
-        <div style={{height: "0px"}}>
-            {wooblerIsVisible ? <ScrollToTopButton/> : null}
-        </div>
+      <div style={{ height: '0px' }}>{wooblerIsVisible ? <ScrollToTopButton /> : null}</div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
-import {EmailParams, postEmailParamsToLambda} from "./utils";
+import { EmailParams, postEmailParamsToLambda } from './utils';
 
-describe("GIVEN: there are no problems with the email endpoint", () => {
-  describe("WHEN: passed headers with valid authorization", () => {
+describe('GIVEN: there are no problems with the email endpoint', () => {
+  describe('WHEN: passed headers with valid authorization', () => {
     beforeEach(() => {
       global.fetch = jest.fn();
     });
@@ -10,25 +10,25 @@ describe("GIVEN: there are no problems with the email endpoint", () => {
       jest.restoreAllMocks();
     });
 
-    test("THEN: returns an `ok` response.", async () => {
+    test('THEN: returns an `ok` response.', async () => {
       (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
         json: jest.fn().mockResolvedValue({ success: true }),
       });
-      const [subject ,message ,userEmail] = ["Test Subject", "Test Message", "test@example.com"];
+      const [subject, message, userEmail] = ['Test Subject', 'Test Message', 'test@example.com'];
       const params: EmailParams = {
         subject,
         message,
         userEmail,
-        headers: { authorization: "Bearer test-token" },
+        headers: { authorization: 'Bearer test-token' },
       };
       const expectedRequestObject = {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer test-token",
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer test-token',
         },
-        body: JSON.stringify({subject, message, userEmail}),
+        body: JSON.stringify({ subject, message, userEmail }),
       };
       const url = process.env.NEXT_PUBLIC_SEND_EMAIL;
 
