@@ -4,6 +4,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build --debug",
+    "lint": "eslint .",
+    "format": "prettier . --write",
     "start": "next start",
     "test": "jest --colors --verbose --coverage",
     "test:ci": "jest --ci",
