@@ -1,18 +1,17 @@
-"use client";
-import {useRef, useState} from "react";
-import {updateWithNewCaption} from "@/components/galleries/main-gallery/utils";
-import {createHttpRequest, putData} from "../../../common/http";
-import {useSession} from "next-auth/react";
+'use client';
+import { useRef, useState } from 'react';
+import { updateWithNewCaption } from '@/components/galleries/main-gallery/utils';
+import { createHttpRequest, putData } from '../../../common/http';
+import { useSession } from 'next-auth/react';
 
 type PencilProps = {
   captions: string[];
   index: number;
-}
+};
 
-
-export default function Pencil({captions, index}: PencilProps) {
+export default function Pencil({ captions, index }: PencilProps) {
   const [modalIsVisible, setModalIsVisible] = useState(false);
-  const {data: session} = useSession();
+  const { data: session } = useSession();
   const inputRef = useRef(null);
   const openModal = () => setModalIsVisible(true);
   const closeModal = () => setModalIsVisible(false);
@@ -21,10 +20,10 @@ export default function Pencil({captions, index}: PencilProps) {
     const captionsClone = [...captions];
     try {
       // @ts-ignore
-      const newCaption = inputRef.current.value
+      const newCaption = inputRef.current.value;
       const updatedCaptions = updateWithNewCaption(captionsClone, newCaption, index);
       // @ts-ignore
-      const httpRequest = createHttpRequest("PUT", session.idToken, updatedCaptions);
+      const httpRequest = createHttpRequest('PUT', session.idToken, updatedCaptions);
       const url = process.env.NEXT_PUBLIC_PUT_DATA;
       // @ts-ignore
       await putData(url, httpRequest);
@@ -41,15 +40,8 @@ export default function Pencil({captions, index}: PencilProps) {
       <div className="woh__pencil-triggered-modal">
         <div>New caption:</div>
         <textarea ref={inputRef} />
-        <button
-          onClick={confirmationHandler}
-        >
-          Confirm
-        </button>
-        <button
-          className="woh__modal-cancel-button"
-          onClick={cancellationHandler}
-        >
+        <button onClick={confirmationHandler}>Confirm</button>
+        <button className="woh__modal-cancel-button" onClick={cancellationHandler}>
           Cancel
         </button>
       </div>
@@ -58,16 +50,10 @@ export default function Pencil({captions, index}: PencilProps) {
 
   return (
     <>
-      <button
-        data-testid="pencil-button"
-        onClick={openModal}
-      >
+      <button data-testid="pencil-button" onClick={openModal}>
         ✏
       </button>
-      {modalIsVisible
-        ? <Modal/>
-        : null
-      }
+      {modalIsVisible ? <Modal /> : null}
     </>
   );
 }

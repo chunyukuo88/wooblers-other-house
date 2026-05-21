@@ -1,25 +1,28 @@
-import CredentialsProvider from "next-auth/providers/credentials";
-import {CognitoIdentityProviderClient, InitiateAuthCommand} from "@aws-sdk/client-cognito-identity-provider";
-import {allPaths} from "../../../../allPaths";
-import {NextAuthOptions} from "next-auth";
+import CredentialsProvider from 'next-auth/providers/credentials';
+import {
+  CognitoIdentityProviderClient,
+  InitiateAuthCommand,
+} from '@aws-sdk/client-cognito-identity-provider';
+import { allPaths } from '../../../../allPaths';
+import { NextAuthOptions } from 'next-auth';
 
 const cognitoClient = new CognitoIdentityProviderClient({ region: process.env.REGION });
-const isProduction = process.env.NODE_ENV === "production";
+const isProduction = process.env.NODE_ENV === 'production';
 
 const prodCookies = {
   sessionToken: {
-    name: "__Secure-next-auth.session-token",
+    name: '__Secure-next-auth.session-token',
     options: {
       httpOnly: true,
-      sameSite: "lax",
-      path: "/",
+      sameSite: 'lax',
+      path: '/',
       secure: true,
-      domain: "wooblers-other-house.com"
+      domain: 'wooblers-other-house.com',
     },
   },
 };
 
-const {log, error} = console;
+const { log, error } = console;
 
 export const authOptions: NextAuthOptions = {
   debug: true,
@@ -28,20 +31,20 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
-      name: "Cognito",
+      name: 'Cognito',
       credentials: {
-        username: { label: "Username", type: "text" },
-        password: { label: "Password", type: "password" }
+        username: { label: 'Username', type: 'text' },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
         if (!credentials?.username || !credentials?.password) {
-          error("缺少憑證");
+          error('缺少憑證');
           return null;
         }
 
         try {
           const command = new InitiateAuthCommand({
-            AuthFlow: "USER_PASSWORD_AUTH",
+            AuthFlow: 'USER_PASSWORD_AUTH',
             ClientId: process.env.USER_POOL_WEB_CLIENT_ID,
             AuthParameters: {
               USERNAME: credentials.username,
@@ -62,7 +65,7 @@ export const authOptions: NextAuthOptions = {
           }
         } catch (error) {
           // @ts-ignore
-          error("Authentication error:", error);
+          error('Authentication error:', error);
           if (error instanceof Error) {
             log(error.name);
             log(error.message);

@@ -1,138 +1,160 @@
 .woh___settings-page {
-    width: 100vw;
+  width: 100vw;
 }
 
 .woh__color-picker {
-    margin-top: 10rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    width: 22rem;
-    position: relative;
+  margin-top: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 22rem;
+  position: relative;
 }
 
 .woh__color-picker:nth-child(1) {
-    margin-top: 5rem;
+  margin-top: 5rem;
 }
 
 .woh__color-picker__concentric-circle {
-    border-radius: 50%;
-    border: 1px solid black;
-    position: absolute;
+  border-radius: 50%;
+  border: 1px solid black;
+  position: absolute;
 }
 
 .woh__color-picker__tick-container {
-    position: relative;
+  position: relative;
 }
 
 .woh__color-picker__tick {
-    position: absolute;
-    height: 0;
-    border: 1px solid black;
-    width: 0.5rem;
-    z-index: 0;
+  position: absolute;
+  height: 0;
+  border: 1px solid black;
+  width: 0.5rem;
+  z-index: 0;
 }
 
 .woh__color-picker__tick:nth-child(1) {
-    position: absolute;
-    top: 2px;
-    right: 4rem;
+  position: absolute;
+  top: 2px;
+  right: 4rem;
 }
 
 .woh__color-picker__tick:nth-child(2) {
-    transform: rotate(45deg);
-    right: 2.75rem;
-    bottom: 45px;
+  transform: rotate(45deg);
+  right: 2.75rem;
+  bottom: 45px;
 }
 
 .woh__color-picker__tick:nth-child(3) {
-    transform: rotate(90deg);
-    bottom: 64px;
-    left: -0.25rem;
+  transform: rotate(90deg);
+  bottom: 64px;
+  left: -0.25rem;
 }
 
 .woh__color-picker__tick:nth-child(4) {
-    transform: rotate(135deg);
-    bottom: 2.75rem;
-    left: 2.75rem;
+  transform: rotate(135deg);
+  bottom: 2.75rem;
+  left: 2.75rem;
 }
 
 .woh__color-picker__tick:nth-child(5) {
-    top: 2px;
-    left: 4rem;
+  top: 2px;
+  left: 4rem;
 }
 
 .woh__color-picker__tick:nth-child(6) {
-    transform: rotate(45deg);
-    top: 50px;
-    left: 2.75rem;
+  transform: rotate(45deg);
+  top: 50px;
+  left: 2.75rem;
 }
 
 .woh__color-picker__tick:nth-child(7) {
-    transform: rotate(75deg);
-    top: 67px;
-    left: 0.85rem;
-    animation: spin 2s linear infinite;
+  transform: rotate(75deg);
+  top: 67px;
+  left: 0.85rem;
+  animation: spin 2s linear infinite;
 }
 
 @keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.woh__color-picker__concentric-circle:nth-child(1) { height: 8rem; width: 8rem; z-index: 1; }
-.woh__color-picker__concentric-circle:nth-child(2) { height: 6rem; width: 6rem; z-index: 2; }
-.woh__color-picker__concentric-circle:nth-child(3) { height: 4rem; width: 4rem; z-index: 3; }
-.woh__color-picker__concentric-circle:nth-child(4) { height: 2rem; width: 2rem; z-index: 4; }
-.woh__color-picker__concentric-circle:nth-child(5) { height: 9rem; width: 9rem; z-index: 0; }
+.woh__color-picker__concentric-circle:nth-child(1) {
+  height: 8rem;
+  width: 8rem;
+  z-index: 1;
+}
+.woh__color-picker__concentric-circle:nth-child(2) {
+  height: 6rem;
+  width: 6rem;
+  z-index: 2;
+}
+.woh__color-picker__concentric-circle:nth-child(3) {
+  height: 4rem;
+  width: 4rem;
+  z-index: 3;
+}
+.woh__color-picker__concentric-circle:nth-child(4) {
+  height: 2rem;
+  width: 2rem;
+  z-index: 4;
+}
+.woh__color-picker__concentric-circle:nth-child(5) {
+  height: 9rem;
+  width: 9rem;
+  z-index: 0;
+}
 
 .woh__color-value {
-    position: absolute;
-    width: 12rem;
+  position: absolute;
+  width: 12rem;
 
-    & span {
-        background: white;
-        border: 1px solid black;
-        border-radius: 50%;
-        height: 2rem;
-        width: 2rem;
-        padding: 0.20rem 2px 0 0;
-        text-align: center;
-    }
+  & span {
+    background: white;
+    border: 1px solid black;
+    border-radius: 50%;
+    height: 2rem;
+    width: 2rem;
+    padding: 0.2rem 2px 0 0;
+    text-align: center;
+  }
 }
 
 .woh__color-picker > span {
-    width: 4rem;
+  width: 4rem;
 }
 
 .woh__color-input {
-    -webkit-appearance: none;
-    appearance: none;
-    background: black;
-    width: 8rem;
-    height: 1px;
-    z-index: 10;
+  -webkit-appearance: none;
+  appearance: none;
+  background: black;
+  width: 8rem;
+  height: 1px;
+  z-index: 10;
 }
 
 .woh__color-input::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    background: #ffffff;
-    cursor: pointer;
-    box-shadow: 1px 1px 1px #000000, 0 0 1px #0d0d0d;
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow:
+    1px 1px 1px #000000,
+    0 0 1px #0d0d0d;
 }
 
 .woh__color-input::-moz-range-thumb {
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    background: #ffffff;
-    cursor: pointer;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
 }

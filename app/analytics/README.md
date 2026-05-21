@@ -1,6 +1,6 @@
 ## Automatic Events
 
-In addition to `clicked_woobler` and other self-defined events, there are also GA4 automatic events — Google fires them for you with no code required, just by virtue of having gtag.js loaded. 
+In addition to `clicked_woobler` and other self-defined events, there are also GA4 automatic events — Google fires them for you with no code required, just by virtue of having gtag.js loaded.
 
 Here's what triggers each one:
 
@@ -19,4 +19,5 @@ Fired automatically by `gtag("config", 'G-XXXXXXXX')` — that single line in yo
 ```angular2html
 user_engagement
 ```
+
 Fired when the page has been in focus for at least 1 second. Google uses this to distinguish real human visits from bots or accidental loads. It's also what powers the "engaged sessions" metric in the console.

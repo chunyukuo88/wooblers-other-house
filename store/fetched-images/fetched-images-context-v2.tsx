@@ -1,10 +1,10 @@
-"use client";
-import {createContext, type PropsWithChildren, useContext, useState} from "react";
-import {Folder} from "../types";
+'use client';
+import { createContext, type PropsWithChildren, useContext, useState } from 'react';
+import { Folder } from '../types';
 
 const emptyFolder = {
-  friendlyName: "",
-  name: "",
+  friendlyName: '',
+  name: '',
   photos: [],
   captions: [],
 };
@@ -16,7 +16,7 @@ export const FetchedImagesContextV2 = createContext({
   updateFetchedFolders: (folders: Folder[]) => {},
 });
 
-export function FetchedImagesV2Provider(props: PropsWithChildren){
+export function FetchedImagesV2Provider(props: PropsWithChildren) {
   const [currentFolder, setCurrentFolder] = useState<Folder>();
   const [fetched, setFetched] = useState<Folder[]>([]);
 
@@ -30,7 +30,7 @@ export function FetchedImagesV2Provider(props: PropsWithChildren){
 
   const contextValue = {
     fetchedFolders: fetched || [],
-    currentFolder: currentFolder || emptyFolder as Folder,
+    currentFolder: currentFolder || (emptyFolder as Folder),
     updateCurrentFolder: updateFolder,
     updateFetchedFolders: updateTheFolders,
   };

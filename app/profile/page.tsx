@@ -1,3 +1,3 @@
-export default function Profile(){
-return <>Profile ~</>
+export default function Profile() {
+  return <>Profile ~</>;
 }

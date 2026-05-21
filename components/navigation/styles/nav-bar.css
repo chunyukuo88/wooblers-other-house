@@ -1,14 +1,14 @@
 .woh__logout-button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #woh__nav-bar {
-    display: grid;
-    grid-template-columns: 0.75fr 3fr;
-    grid-template-rows: 1fr 1fr;
-    row-gap: 0.5rem;
+  display: grid;
+  grid-template-columns: 0.75fr 3fr;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 0.5rem;
 }
 
 .woh__nav-bar-string {
-    padding: 0 0.5rem;
+  padding: 0 0.5rem;
 }

@@ -1,9 +1,9 @@
-import {getFeatureStatus} from "./flags";
-import {getMainPageImages, Folder} from "../common/http";
+import { getFeatureStatus } from './flags';
+import { getMainPageImages, Folder } from '../common/http';
 
 type GetFoldersResult = {
-    displayPrivateImages: boolean;
-    folders: Folder[];
+  displayPrivateImages: boolean;
+  folders: Folder[];
 };
 
 export async function getFolders(searchParam: string): Promise<GetFoldersResult> {
@@ -21,11 +21,11 @@ export async function getFolders(searchParam: string): Promise<GetFoldersResult>
 const removeThumbnails = (folders: Folder[]) => {
   return folders.map((folder: Folder) => {
     const photosSansThumbnail = folder.photos.filter((photo: string) => {
-      const isThumbnail = photo.split(".").find(part => part.includes("thumbnail"));
+      const isThumbnail = photo.split('.').find((part) => part.includes('thumbnail'));
       return !isThumbnail;
     });
     const captionsSansThumbnail = folder.captions.filter((caption: string) => {
-      const isThumbnailCaption = caption.startsWith("thumbnail");
+      const isThumbnailCaption = caption.startsWith('thumbnail');
       return !isThumbnailCaption;
     });
     return {

@@ -1,32 +1,32 @@
-"use client";
-import {ChangeEvent} from "react";
-import {useMainImages} from "../../../store";
-import {Folder} from "../../../store/types";
-import "../styles/album-selector.css";
+'use client';
+import { ChangeEvent } from 'react';
+import { useMainImages } from '../../../store';
+import { Folder } from '../../../store/types';
+import '../styles/album-selector.css';
 
 export const AlbumSelector = (props: any) => {
   const { style } = props;
-  const {fetchedFolders, updateCurrentFolder} = useMainImages();
+  const { fetchedFolders, updateCurrentFolder } = useMainImages();
 
   const changeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-    const index  = event.target.selectedIndex;
+    const index = event.target.selectedIndex;
     const folder = fetchedFolders[index];
     updateCurrentFolder(folder);
   };
 
   return (
-      <select name="album-picked" id="woh__album-picker" onChange={changeHandler} style={style}>
-        {!fetchedFolders?.length ? <AlbumsLoading /> : <Albums fetchedFolders={fetchedFolders} />}
-      </select>
+    <select name="album-picked" id="woh__album-picker" onChange={changeHandler} style={style}>
+      {!fetchedFolders?.length ? <AlbumsLoading /> : <Albums fetchedFolders={fetchedFolders} />}
+    </select>
   );
-}
+};
 
 type AlbumsProps = {
   fetchedFolders: Folder[];
-}
+};
 
-function Albums(props: AlbumsProps){
-  const {fetchedFolders} = props;
+function Albums(props: AlbumsProps) {
+  const { fetchedFolders } = props;
   return (
     <>
       {fetchedFolders.map((folder, index) => {
@@ -41,5 +41,9 @@ function Albums(props: AlbumsProps){
 }
 
 function AlbumsLoading() {
-  return (<option className="woh__album-picker__option" value="">Loading...</option>);
+  return (
+    <option className="woh__album-picker__option" value="">
+      Loading...
+    </option>
+  );
 }
