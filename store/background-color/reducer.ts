@@ -1,13 +1,26 @@
-import { ColorState, ColorAction, ColorActionType } from "./types";
+import {ColorState, ColorAction, ColorActionType, LocalStorageColorKey} from "./types";
 import {COLOR_LABELS} from "../types";
 
 const MAX_INTENSITY = 255;
 
+const colorFromLocalStorage = (colorKey: string)=> {
+    if (window.localStorage.getItem(colorKey)) {
+        return parseInt(window.localStorage.getItem(colorKey) as string, 10);
+    }
+    return MAX_INTENSITY;
+};
+
+const getInitialSumOfColors = () => (
+  colorFromLocalStorage(LocalStorageColorKey.RED) +
+  colorFromLocalStorage(LocalStorageColorKey.GREEN) +
+  colorFromLocalStorage(LocalStorageColorKey.BLUE)
+);
+
 export const initialColorState: ColorState = {
-    red: MAX_INTENSITY,
-    green: MAX_INTENSITY,
-    blue: MAX_INTENSITY,
-    sum: MAX_INTENSITY * 3,
+    red: colorFromLocalStorage(LocalStorageColorKey.RED),
+    green: colorFromLocalStorage(LocalStorageColorKey.GREEN),
+    blue: colorFromLocalStorage(LocalStorageColorKey.BLUE),
+    sum: getInitialSumOfColors(),
 };
 
 function persistColor(key: string, value: number) {
