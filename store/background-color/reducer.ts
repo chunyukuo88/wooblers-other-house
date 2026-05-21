@@ -1,13 +1,14 @@
+'use client';
+
 import {ColorState, ColorAction, ColorActionType, LocalStorageColorKey} from "./types";
-import {COLOR_LABELS} from "../types";
 
 const MAX_INTENSITY = 255;
 
 const colorFromLocalStorage = (colorKey: string)=> {
-    if (window.localStorage.getItem(colorKey)) {
-        return parseInt(window.localStorage.getItem(colorKey) as string, 10);
+    if (typeof window !== undefined) {
+        return MAX_INTENSITY;
     }
-    return MAX_INTENSITY;
+    return parseInt(window.localStorage.getItem(colorKey) as string, 10);
 };
 
 const getInitialSumOfColors = () => (
@@ -33,17 +34,17 @@ export const colorReducer = (state: ColorState, action: ColorAction): ColorState
     switch (action.type) {
         case ColorActionType.SET_RED: {
             const red = action.payload ?? state.red;
-            persistColor(COLOR_LABELS.RED, red);
+            persistColor(LocalStorageColorKey.RED, red);
             return { ...state, red, sum: red + state.green + state.blue };
         }
         case ColorActionType.SET_GREEN: {
             const green = action.payload ?? state.green;
-            persistColor(COLOR_LABELS.GREEN, green);
+            persistColor(LocalStorageColorKey.GREEN, green);
             return { ...state, green, sum: state.red + green + state.blue };
         }
         case ColorActionType.SET_BLUE: {
             const blue = action.payload ?? state.blue;
-            persistColor(COLOR_LABELS.BLUE, blue);
+            persistColor(LocalStorageColorKey.BLUE, blue);
             return { ...state, blue, sum: state.red + state.green + blue };
         }
         case ColorActionType.RESET:
