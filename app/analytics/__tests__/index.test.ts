@@ -1,4 +1,5 @@
-import {EventName, trackEvent} from '..';
+import {trackEvent} from '..';
+import {GA_EVENTS} from "../tracked-events";
 
 beforeAll(() => {
     window.gtag = jest.fn();
@@ -10,11 +11,11 @@ describe('GIVEN: the site has loaded,', () => {
            const spy = jest.spyOn(window, 'gtag');
            const params = undefined;
 
-           const event: EventName = 'button-click';
+           const eventName = GA_EVENTS.CLICKED_WOOBLER;
 
-           trackEvent(event);
+           trackEvent(eventName);
 
-           expect(spy).toBeCalledWith("event", event, params);
+           expect(spy).toBeCalledWith("event", eventName, params);
        });
     });
     describe('WHEN: the user adjusts the background color of their session', () => {
@@ -22,11 +23,11 @@ describe('GIVEN: the site has loaded,', () => {
             const spy = jest.spyOn(window, 'gtag');
             const params = undefined;
 
-            const event: EventName = 'adjust-colors';
+            const eventName = GA_EVENTS.ADJUST_COLORS_GREEN;
 
-            trackEvent(event);
+            trackEvent(eventName);
 
-            expect(spy).toBeCalledWith("event", event, params);
+            expect(spy).toBeCalledWith("event", eventName, params);
         });
     });
 });

@@ -14,12 +14,3 @@ export type Folder = {
   photos: string[];
   captions: string[];
 }
-
-/**
- * For local storage
- * */
-export enum COLOR_LABELS {
-  RED = "woh__red",
-  BLUE = "woh__blue",
-  GREEN = "woh__green",
-}

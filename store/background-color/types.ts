@@ -5,6 +5,12 @@ export enum ColorActionType {
     RESET = 'RESET',
 }
 
+export enum LocalStorageColorKey {
+    RED = 'woh__red',
+    GREEN = 'woh__green',
+    BLUE = 'woh__blue',
+}
+
 export interface ColorState {
     red: number;
     green: number;

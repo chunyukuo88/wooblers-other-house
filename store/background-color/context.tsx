@@ -1,7 +1,7 @@
 "use client";
 import React, { createContext, useReducer, useEffect, type PropsWithChildren } from "react";
 import { colorReducer, initialColorState } from "./reducer";
-import { ColorState } from "./types";
+import { ColorState, LocalStorageColorKey } from "./types";
 import { setRed, setGreen, setBlue } from "./actions";
 
 interface ColorContextShape extends ColorState {
@@ -22,9 +22,9 @@ export function CaptionColorProvider({ children }: PropsWithChildren) {
 
     useEffect(() => {
         if (typeof window !== "undefined" && window.localStorage) {
-            const r = parseInt(window.localStorage.getItem("RED") || String(state.red), 10);
-            const g = parseInt(window.localStorage.getItem("GREEN") || String(state.green), 10);
-            const b = parseInt(window.localStorage.getItem("BLUE") || String(state.blue), 10);
+            const r = parseInt(window.localStorage.getItem(LocalStorageColorKey.RED) || String(state.red), 10);
+            const g = parseInt(window.localStorage.getItem(LocalStorageColorKey.GREEN) || String(state.green), 10);
+            const b = parseInt(window.localStorage.getItem(LocalStorageColorKey.BLUE) || String(state.blue), 10);
 
             dispatch(setRed(r));
             dispatch(setGreen(g));

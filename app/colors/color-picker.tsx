@@ -2,13 +2,24 @@
 import {useContext} from "react";
 import {BackgroundColorContext } from "../../store/background-color/context";
 import {ConcentricCirclesProps, Event, SliderProps} from "./types";
+import {trackEvent} from "../analytics";
 import "./color-picker.css";
+import {GA_EVENTS} from "../analytics/tracked-events";
 
 export default function ColorPicker() {
     const { red, green, blue, setRed, setGreen, setBlue } = useContext(BackgroundColorContext);
-    const redHandler = (e: Event) => setRed(Number(e.target.value));
-    const greenHandler = (e: Event) => setGreen(Number(e.target.value));
-    const blueHandler = (e: Event) => setBlue(Number(e.target.value));
+    const redHandler = (e: Event) => {
+        setRed(Number(e.target.value));
+        trackEvent(GA_EVENTS.ADJUST_COLORS_RED);
+    }
+    const greenHandler = (e: Event) => {
+        setGreen(Number(e.target.value));
+        trackEvent(GA_EVENTS.ADJUST_COLORS_GREEN);
+    }
+    const blueHandler = (e: Event) => {
+        setBlue(Number(e.target.value));
+        trackEvent(GA_EVENTS.ADJUST_COLORS_BLUE);
+    }
 
     return (
         <div id="color-picker-section">

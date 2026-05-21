@@ -13,6 +13,8 @@ type ImageGalleryProps = {
   showPrivateImages: boolean;
 }
 
+// TODO: Think about how to make the gallery SSR, or at least the images and captions only.
+
 const ImageGallery = (props: ImageGalleryProps) => {
   const { folders, showPrivateImages } = props;
   const {currentFolder, updateCurrentFolder, updateFetchedFolders} = useMainImages();
@@ -60,7 +62,6 @@ const ImageGallery = (props: ImageGalleryProps) => {
     return null;
   }
 
-    console.log('gallery');
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
