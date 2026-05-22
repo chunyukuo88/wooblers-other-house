@@ -1,12 +1,14 @@
 .woh__scroll-to-top-button {
-    position: fixed;
-    bottom: 0;
-    right: 8px;
-    cursor: pointer;
+  position: fixed;
+  bottom: 0;
+  right: 8px;
+  cursor: pointer;
 
-    transition: background-color 0.3s, transform 0.3s;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
 }
 
 .woh__scroll-to-top-button:hover {
-    transform: translateY(-3px);
+  transform: translateY(-3px);
 }

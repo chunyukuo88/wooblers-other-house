@@ -1,9 +1,9 @@
-"use client";
-import Script from "next/script";
+'use client';
+import Script from 'next/script';
 
 export default function GoogleAnalyticsObject() {
-  if (process.env.NODE_ENV !== "production") {
-      return null;
+  if (process.env.NODE_ENV !== 'production') {
+    return null;
   }
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!;
 
@@ -14,7 +14,7 @@ export default function GoogleAnalyticsObject() {
     gtag("js", new Date());
     
     gtag("config", '${gaMeasurementId}')`,
-  }
+  };
 
   return (
     <>
@@ -22,11 +22,7 @@ export default function GoogleAnalyticsObject() {
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
       />
-      <Script
-        id="google-analytics"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={script}
-      />
+      <Script id="google-analytics" strategy="afterInteractive" dangerouslySetInnerHTML={script} />
     </>
   );
 }

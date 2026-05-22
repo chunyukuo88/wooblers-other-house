@@ -1,35 +1,38 @@
-"use client"
-import {ReactNode, useState} from "react";
-import Link from "next/link";
-import {allPaths} from "../../../allPaths";
-import {usePathname} from "next/navigation";
-import {AlbumSelector} from "@/components/navigation/components/album-selector";
-import "../styles/nav-bar.css"
+'use client';
+import { ReactNode, useState } from 'react';
+import Link from 'next/link';
+import { allPaths } from '../../../allPaths';
+import { usePathname } from 'next/navigation';
+import { AlbumSelector } from '@/components/navigation/components/album-selector';
+import '../styles/nav-bar.css';
 
-export default function NavBar({fontColor}: NavBarProps) {
+export default function NavBar({ fontColor }: NavBarProps) {
   const pathname = usePathname();
 
-  const style = getStyle(fontColor)
+  const style = getStyle(fontColor);
 
   return (
     <div id="woh__nav-bar" style={style}>
       <div className="woh__nav-bar-string">
-        {pathname === allPaths.COLORS
-          ? <Link href={allPaths.HOME}>Home</Link>
-          : <NavLink href={allPaths.COLORS}>Colors</NavLink>
-        }
+        {pathname === allPaths.COLORS ? (
+          <Link href={allPaths.HOME}>Home</Link>
+        ) : (
+          <NavLink href={allPaths.COLORS}>Colors</NavLink>
+        )}
       </div>
       <div className="woh__nav-bar-string">
-        {pathname === allPaths.TECH
-          ? <Link href={allPaths.HOME}>Home</Link>
-          : <NavLink href={allPaths.TECH}>Tech</NavLink>
-        }
+        {pathname === allPaths.TECH ? (
+          <Link href={allPaths.HOME}>Home</Link>
+        ) : (
+          <NavLink href={allPaths.TECH}>Tech</NavLink>
+        )}
       </div>
       <div className="woh__nav-bar-string">
-        {pathname === allPaths.HOME
-          ? <AlbumSelector style={style}/>
-          : <div className="woh_album-picker-placeholder"></div>
-        }
+        {pathname === allPaths.HOME ? (
+          <AlbumSelector style={style} />
+        ) : (
+          <div className="woh_album-picker-placeholder"></div>
+        )}
       </div>
     </div>
   );
@@ -40,7 +43,7 @@ type NavLinkProps = {
   children: ReactNode;
 };
 
-function NavLink({href, children}: NavLinkProps) {
+function NavLink({ href, children }: NavLinkProps) {
   const [isHovering, setIsHovering] = useState(false);
 
   const handleMouseEnter = () => {
@@ -59,22 +62,23 @@ function NavLink({href, children}: NavLinkProps) {
 
 type NavBarProps = {
   fontColor: string;
-}
+};
 
 const getStyle = (fontColor: string) => {
-  const shadowColor = (!fontColor) ? "gray" : "black";
+  const shadowColor = !fontColor ? 'gray' : 'black';
 
-  const textShadow = (fontColor !== "black")
-    ? `-1px -1px 0 ${shadowColor}, ` +
-    `1px -1px 0 ${shadowColor}, ` +
-    `-1px 1px 0 ${shadowColor}, ` +
-    `1px 1px 0 ${shadowColor}`
-    : undefined;
+  const textShadow =
+    fontColor !== 'black'
+      ? `-1px -1px 0 ${shadowColor}, ` +
+        `1px -1px 0 ${shadowColor}, ` +
+        `-1px 1px 0 ${shadowColor}, ` +
+        `1px 1px 0 ${shadowColor}`
+      : undefined;
 
   return {
     color: fontColor,
-    transition: "2s ease-in",
-    fontSize: "1.25rem",
+    transition: '2s ease-in',
+    fontSize: '1.25rem',
     textShadow,
     fontWeight: 700,
   };

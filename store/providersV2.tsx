@@ -1,11 +1,11 @@
-"use client";
-import {ReactNode} from "react";
-import {Session} from "next-auth";
-import {SessionProvider} from "next-auth/react";
-import {FetchedImagesV2Provider} from "./fetched-images/fetched-images-context-v2";
-import {CaptionColorProvider} from "./background-color/context";
-import {CalendarContextProvider} from "./calendar/calendar-context";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+'use client';
+import { ReactNode } from 'react';
+import { Session } from 'next-auth';
+import { SessionProvider } from 'next-auth/react';
+import { FetchedImagesV2Provider } from './fetched-images/fetched-images-context-v2';
+import { CaptionColorProvider } from './background-color/context';
+import { CalendarContextProvider } from './calendar/calendar-context';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 interface PageProps {
   children: ReactNode;
@@ -14,18 +14,16 @@ interface PageProps {
 
 const queryClient = new QueryClient();
 
-export default function ProvidersV2({children, session}: PageProps) {
+export default function ProvidersV2({ children, session }: PageProps) {
   return (
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
         <CaptionColorProvider>
           <FetchedImagesV2Provider>
-            <CalendarContextProvider>
-              {children}
-            </CalendarContextProvider>
+            <CalendarContextProvider>{children}</CalendarContextProvider>
           </FetchedImagesV2Provider>
         </CaptionColorProvider>
       </QueryClientProvider>
     </SessionProvider>
   );
-};
+}
