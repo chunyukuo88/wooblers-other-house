@@ -1,5 +1,5 @@
 'use client';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import { FetchedImagesV2Provider } from './fetched-images/fetched-images-context-v2';
@@ -12,9 +12,9 @@ interface PageProps {
   session: Session | null;
 }
 
-const queryClient = new QueryClient();
-
 export default function Providers({ children, session }: PageProps) {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
