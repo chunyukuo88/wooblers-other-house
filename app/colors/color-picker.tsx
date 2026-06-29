@@ -3,8 +3,8 @@ import { useContext } from 'react';
 import { BackgroundColorContext } from '../../store/background-color/context';
 import { ConcentricCirclesProps, Event, SliderProps } from './types';
 import { trackEvent } from '../analytics';
-import './color-picker.css';
 import { GA_EVENTS } from '../analytics/tracked-events';
+import './color-picker.css';
 
 export default function ColorPicker() {
   const { red, green, blue, setRed, setGreen, setBlue } = useContext(BackgroundColorContext);

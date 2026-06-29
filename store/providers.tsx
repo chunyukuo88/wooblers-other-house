@@ -14,7 +14,7 @@ interface PageProps {
 
 const queryClient = new QueryClient();
 
-export default function ProvidersV2({ children, session }: PageProps) {
+export default function Providers({ children, session }: PageProps) {
   return (
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
