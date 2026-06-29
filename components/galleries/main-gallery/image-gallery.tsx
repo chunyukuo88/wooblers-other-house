@@ -19,10 +19,10 @@ const ImageGallery = (props: ImageGalleryProps) => {
   const { folders, showPrivateImages } = props;
   const { currentFolder, updateCurrentFolder, updateFetchedFolders } = useMainImages();
   const [current, setCurrent] = useState<Folder>();
+  const [wooblerIsVisible, setWooblerIsVisible] = useState(false);
   if (!folders) {
     return <div>Loading ... </div>;
   }
-  const [wooblerIsVisible, setWooblerIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = getIntersectionObserver(setWooblerIsVisible);

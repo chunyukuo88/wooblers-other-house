@@ -1,5 +1,5 @@
 'use client';
-import React, { createContext, useReducer, useEffect, type PropsWithChildren } from 'react';
+import { createContext, useReducer, useEffect, type PropsWithChildren } from 'react';
 import { colorReducer, initialColorState } from './reducer';
 import { ColorState, LocalStorageColorKey } from './types';
 import { setRed, setGreen, setBlue } from './actions';
@@ -21,25 +21,29 @@ export function CaptionColorProvider({ children }: PropsWithChildren) {
   const [state, dispatch] = useReducer(colorReducer, initialColorState);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const r = parseInt(
-        window.localStorage.getItem(LocalStorageColorKey.RED) || String(state.red),
-        10,
-      );
-      const g = parseInt(
-        window.localStorage.getItem(LocalStorageColorKey.GREEN) || String(state.green),
-        10,
-      );
-      const b = parseInt(
-        window.localStorage.getItem(LocalStorageColorKey.BLUE) || String(state.blue),
-        10,
-      );
+    const r = parseInt(
+      window.localStorage.getItem(LocalStorageColorKey.RED) || String(state.red),
+      10,
+    );
+    const g = parseInt(
+      window.localStorage.getItem(LocalStorageColorKey.GREEN) || String(state.green),
+      10,
+    );
+    const b = parseInt(
+      window.localStorage.getItem(LocalStorageColorKey.BLUE) || String(state.blue),
+      10,
+    );
 
-      dispatch(setRed(r));
-      dispatch(setGreen(g));
-      dispatch(setBlue(b));
-    }
+    dispatch(setRed(r));
+    dispatch(setGreen(g));
+    dispatch(setBlue(b));
   }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(LocalStorageColorKey.RED, String(state.red));
+    window.localStorage.setItem(LocalStorageColorKey.GREEN, String(state.green));
+    window.localStorage.setItem(LocalStorageColorKey.BLUE, String(state.blue));
+  }, [state.red, state.blue, state.green]);
 
   const value: ColorContextShape = {
     ...state,

@@ -6,7 +6,7 @@ export type BucketItem = {
 };
 
 /**
- * For FetchedImagesContextV2
+ * For FetchedImagesContext
  * */
 export type Folder = {
   friendlyName: string;

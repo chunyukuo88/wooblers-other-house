@@ -1,34 +1,48 @@
 'use client';
-import { createContext, useState, type PropsWithChildren } from 'react';
-import { BucketItem } from '../types';
+import { createContext, type PropsWithChildren, useContext, useState } from 'react';
+import { Folder } from '../types';
+
+const emptyFolder = {
+  friendlyName: '',
+  name: '',
+  photos: [],
+  captions: [],
+};
 
 export const FetchedImagesContext = createContext({
-  fetchedImageObjects: [] as BucketItem[],
-  fetchedCaptionStrings: [] as string[],
-  updateFetchedImages: function (images: BucketItem[]) {},
-  updateFetchedCaptions: function (captions: string[]) {},
+  fetchedFolders: [] as Folder[],
+  currentFolder: emptyFolder as Folder,
+  updateCurrentFolder: (newFolder: Folder) => {},
+  updateFetchedFolders: (folders: Folder[]) => {},
 });
 
-export function FetchedImagesProvider(props: PropsWithChildren) {
-  const [fetchedImages, setImages] = useState<BucketItem[]>([]);
-  const [fetchedCaptions, setCaptions] = useState<string[]>([]);
+export function FetchedImagesV2Provider(props: PropsWithChildren) {
+  const [currentFolder, setCurrentFolder] = useState<Folder>();
+  const [fetched, setFetched] = useState<Folder[]>([]);
 
-  function imageHandler(result: BucketItem[]) {
-    setImages(result);
+  function updateFolder(newFolder: Folder) {
+    setCurrentFolder(newFolder);
   }
 
-  function captionHandler(result: string[]) {
-    setCaptions(result);
+  function updateTheFolders(folders: Folder[]) {
+    setFetched(folders);
   }
 
-  const context = {
-    fetchedImageObjects: fetchedImages,
-    fetchedCaptionStrings: fetchedCaptions,
-    updateFetchedImages: imageHandler,
-    updateFetchedCaptions: captionHandler,
+  const contextValue = {
+    fetchedFolders: fetched || [],
+    currentFolder: currentFolder || (emptyFolder as Folder),
+    updateCurrentFolder: updateFolder,
+    updateFetchedFolders: updateTheFolders,
   };
 
   return (
-    <FetchedImagesContext.Provider value={context}>{props.children}</FetchedImagesContext.Provider>
+    // @ts-ignore
+    <FetchedImagesContext.Provider value={contextValue}>
+      {props.children}
+    </FetchedImagesContext.Provider>
   );
+}
+
+export function useMainImages() {
+  return useContext(FetchedImagesContext);
 }
