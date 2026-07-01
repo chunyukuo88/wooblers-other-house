@@ -9,7 +9,7 @@ import {
   FetchedFoldersState,
 } from './types';
 
-export const initialFetchedImagesState = [] as Folder[];
+export const initialFetchedImagesState: Folder[] = [];
 
 export const initialCurrentFolder = emptyFolder as Folder;
 

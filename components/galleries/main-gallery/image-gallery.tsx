@@ -1,6 +1,6 @@
 'use client';
 import { lazy, useEffect, useState } from 'react';
-import { useMainImages } from '../../../store';
+import { useMainImages } from '../../../store/fetched-images/context';
 import { ImageCard } from '@/components/galleries/image-card';
 import { Folder } from 'store/fetched-images/types';
 import { getIntersectionObserver } from '@/components/navigation/components/scroll-to-top-button/utils';
@@ -53,7 +53,7 @@ const ImageGallery = (props: ImageGalleryProps) => {
   }, [folders]);
 
   useEffect(() => {
-    if (currentFolder.name.length > 0) {
+    if (!currentFolder || currentFolder.name.length > 0) {
       setCurrent(currentFolder);
     }
   }, [currentFolder]);
