@@ -2,7 +2,7 @@
 import { ReactNode, useState } from 'react';
 import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
-import { FetchedImagesV2Provider } from './fetched-images/fetched-images-context';
+import { FetchedImagesV2Provider } from './fetched-images/context';
 import { CaptionColorProvider } from './background-color/context';
 import { CalendarContextProvider } from './calendar/calendar-context';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
