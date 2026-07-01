@@ -36,8 +36,12 @@ export function FetchedImagesV2Provider(props: PropsWithChildren) {
   const contextValue: FetchedImagesContextType = {
     currentFolder: currentFolderState,
     fetchedFolders: fetchedFoldersState,
-    updateCurrentFolder: (folder) => dispatchCurrent(setCurrentFolder(folder)),
-    updateFetchedFolders: (folders) => dispatchFetched(setFetchedFolders(folders)),
+    updateCurrentFolder: (folder) => {
+      dispatchCurrent(setCurrentFolder(folder));
+    },
+    updateFetchedFolders: (folders) => {
+      dispatchFetched(setFetchedFolders(folders));
+    },
   };
 
   return (

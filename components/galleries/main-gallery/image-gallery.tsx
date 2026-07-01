@@ -17,7 +17,8 @@ type ImageGalleryProps = {
 
 const ImageGallery = (props: ImageGalleryProps) => {
   const { folders, showPrivateImages } = props;
-  const { currentFolder, updateCurrentFolder, updateFetchedFolders } = useMainImages();
+  const { currentFolder, fetchedFolders, updateCurrentFolder, updateFetchedFolders } =
+    useMainImages();
   const [current, setCurrent] = useState<Folder>();
   const [wooblerIsVisible, setWooblerIsVisible] = useState(false);
   if (!folders) {
@@ -48,6 +49,8 @@ const ImageGallery = (props: ImageGalleryProps) => {
     if (folders?.length > 0) {
       setCurrent(folders[0]);
       updateCurrentFolder(folders[0]);
+    }
+    if (!fetchedFolders) {
       updateFetchedFolders(folders);
     }
   }, [folders]);
