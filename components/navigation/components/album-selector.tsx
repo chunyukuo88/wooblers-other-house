@@ -1,7 +1,7 @@
 'use client';
 import { ChangeEvent } from 'react';
 import { useMainImages } from '../../../store';
-import { Folder } from '../../../store/types';
+import { Folder } from 'store/fetched-images/types';
 import '../styles/album-selector.css';
 
 export const AlbumSelector = (props: any) => {

@@ -1,5 +1,3 @@
-'use client';
-
 import { ColorState, ColorAction, ColorActionType, LocalStorageColorKey } from './types';
 
 export const initialColorState: ColorState = {

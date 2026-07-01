@@ -1,13 +1,7 @@
 'use client';
 import { createContext, type PropsWithChildren, useContext, useState } from 'react';
-import { Folder } from '../types';
-
-const emptyFolder = {
-  friendlyName: '',
-  name: '',
-  photos: [],
-  captions: [],
-};
+import { Folder } from './types';
+import { emptyFolder } from './types';
 
 export const FetchedImagesContext = createContext({
   fetchedFolders: [] as Folder[],

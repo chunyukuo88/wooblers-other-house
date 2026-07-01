@@ -2,7 +2,7 @@
 import { lazy, useEffect, useState } from 'react';
 import { useMainImages } from '../../../store';
 import { ImageCard } from '@/components/galleries/image-card';
-import { Folder } from '../../../store/types';
+import { Folder } from 'store/fetched-images/types';
 import { getIntersectionObserver } from '@/components/navigation/components/scroll-to-top-button/utils';
 import '../styles.css';
 
