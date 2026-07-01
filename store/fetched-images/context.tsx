@@ -2,10 +2,12 @@
 import { createContext, type PropsWithChildren, useContext, useState } from 'react';
 import { Folder } from './types';
 import { emptyFolder } from './types';
+import { initialCurrentFolder, initialFetchedImagesState } from './reducer';
+import { setCurrentFolder, setFetchedFolders } from './actions';
 
 export const FetchedImagesContext = createContext({
-  fetchedFolders: [] as Folder[],
-  currentFolder: emptyFolder as Folder,
+  ...initialCurrentFolder,
+  ...initialFetchedImagesState,
   updateCurrentFolder: (newFolder: Folder) => {},
   updateFetchedFolders: (folders: Folder[]) => {},
 });

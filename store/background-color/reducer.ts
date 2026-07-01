@@ -1,4 +1,4 @@
-import { ColorState, ColorAction, ColorActionType, LocalStorageColorKey } from './types';
+import { ColorState, ColorAction, ColorActionType } from './types';
 
 export const initialColorState: ColorState = {
   red: 255,
