@@ -1,8 +1,8 @@
 'use client';
 import { lazy, useEffect, useState } from 'react';
-import { useMainImages } from '../../../store/fetched-images/context';
+import { useMainImages } from '../../../store';
 import { ImageCard } from '@/components/galleries/image-card';
-import { Folder } from 'store/fetched-images/types';
+import { emptyFolder, Folder } from 'store/fetched-images/types';
 import { getIntersectionObserver } from '@/components/navigation/components/scroll-to-top-button/utils';
 import '../styles.css';
 
@@ -17,13 +17,9 @@ type ImageGalleryProps = {
 
 const ImageGallery = (props: ImageGalleryProps) => {
   const { folders, showPrivateImages } = props;
-  const { currentFolder, fetchedFolders, updateCurrentFolder, updateFetchedFolders } =
-    useMainImages();
-  const [current, setCurrent] = useState<Folder>();
+  const { currentFolder, updateFetchedFolders } = useMainImages();
+  const [current, setCurrent] = useState<Folder>(emptyFolder);
   const [wooblerIsVisible, setWooblerIsVisible] = useState(false);
-  if (!folders) {
-    return <div>Loading ... </div>;
-  }
 
   useEffect(() => {
     const observer = getIntersectionObserver(setWooblerIsVisible);
@@ -48,21 +44,18 @@ const ImageGallery = (props: ImageGalleryProps) => {
   useEffect(() => {
     if (folders?.length > 0) {
       setCurrent(folders[0]);
-      updateCurrentFolder(folders[0]);
-    }
-    if (!fetchedFolders) {
       updateFetchedFolders(folders);
     }
   }, [folders]);
 
   useEffect(() => {
-    if (!currentFolder || currentFolder.name.length > 0) {
+    if (currentFolder.name.length > 0) {
       setCurrent(currentFolder);
     }
   }, [currentFolder]);
 
-  if (!current) {
-    return null;
+  if (!folders || !current) {
+    return <div>Loading ... </div>;
   }
 
   return (
