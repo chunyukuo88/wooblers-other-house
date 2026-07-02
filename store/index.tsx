@@ -1,1 +1,1 @@
-export { useMainImages } from './fetched-images/fetched-images-context';
+export { useMainImages } from './fetched-images/context';

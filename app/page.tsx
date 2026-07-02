@@ -8,18 +8,17 @@ type Params = {
     [key: string]: string;
   }>;
 };
+
 export default async function Page({ searchParams }: Params) {
   const params = await searchParams;
   const privateImageQuery = params[process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY!];
   const { displayPrivateImages, folders } = await getFolders(privateImageQuery);
+
   if (!folders) {
     return <div>The site is down for maintenance. Come back tomorrow!</div>;
   }
-  return (
-    <>
-      <ImageGallery folders={folders} showPrivateImages={displayPrivateImages} />
-    </>
-  );
+
+  return <ImageGallery folders={folders} showPrivateImages={displayPrivateImages} />;
 }
 
 export const metadata = {

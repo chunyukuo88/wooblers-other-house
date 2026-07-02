@@ -4,13 +4,3 @@ export type BucketItem = {
   size: number;
   url: string;
 };
-
-/**
- * For FetchedImagesContext
- * */
-export type Folder = {
-  friendlyName: string;
-  name: string;
-  photos: string[];
-  captions: string[];
-};

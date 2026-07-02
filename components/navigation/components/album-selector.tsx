@@ -1,12 +1,14 @@
 'use client';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useMainImages } from '../../../store';
-import { Folder } from '../../../store/types';
+import { emptyFolder, Folder } from 'store/fetched-images/types';
 import '../styles/album-selector.css';
 
 export const AlbumSelector = (props: any) => {
   const { style } = props;
-  const { fetchedFolders, updateCurrentFolder } = useMainImages();
+  const { fetchedFolders, currentFolder, updateCurrentFolder } = useMainImages();
+  const [folders, setFolders] = useState<Folder[]>([]);
+  const [current, setCurrent] = useState<Folder>(emptyFolder);
 
   const changeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     const index = event.target.selectedIndex;
@@ -14,24 +16,42 @@ export const AlbumSelector = (props: any) => {
     updateCurrentFolder(folder);
   };
 
+  useEffect(() => {
+    if (fetchedFolders.length) {
+      setFolders(fetchedFolders);
+    }
+  }, [fetchedFolders]);
+
+  useEffect(() => {
+    if (currentFolder) {
+      setCurrent(currentFolder);
+    }
+  }, [currentFolder]);
+
   return (
     <select name="album-picked" id="woh__album-picker" onChange={changeHandler} style={style}>
-      {!fetchedFolders?.length ? <AlbumsLoading /> : <Albums fetchedFolders={fetchedFolders} />}
+      {!folders?.length ? <AlbumsLoading /> : <Albums folders={folders} current={current} />}
     </select>
   );
 };
 
 type AlbumsProps = {
-  fetchedFolders: Folder[];
+  folders: Folder[];
+  current: Folder;
 };
 
 function Albums(props: AlbumsProps) {
-  const { fetchedFolders } = props;
+  const { folders, current } = props;
   return (
     <>
-      {fetchedFolders.map((folder, index) => {
+      {folders.map((folder, index) => {
         return (
-          <option className="woh__album-picker__option" key={index} value={folder.friendlyName}>
+          <option
+            className="woh__album-picker__option"
+            key={index}
+            value={folder.friendlyName}
+            selected={folder.name === current.name}
+          >
             {folder.friendlyName || index}
           </option>
         );
