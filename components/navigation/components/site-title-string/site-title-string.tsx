@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { allPaths } from '../../../../allPaths';
 import '../../styles/site-title-string.css';
-import { SiteTitleStringProps } from './types';
+import { HomeLinkProps, SiteTitleStringProps } from './types';
 import { Wooblers } from './wooblers';
+import { usePathname } from 'next/navigation';
 
 export default function SiteTitleString(props: SiteTitleStringProps) {
   const { fontColor } = props;
+  const pathname = usePathname();
   const shadowColor = !fontColor ? 'gray' : 'black';
 
   const textShadow =
@@ -25,12 +27,24 @@ export default function SiteTitleString(props: SiteTitleStringProps) {
   return (
     <h1 className="woh__site-title-string" style={style}>
       <div className="woh__wiggling-toys">⚽</div>
-      <Link href={allPaths.HOME}>
-        <Wooblers />
-        <div className="woh_drop-in">Other</div>
-        <div className="woh_eventual-slant">House</div>
-      </Link>
+      <HomeLink pathname={pathname} />
       <div className="woh__wiggling-toys">🪀</div>
     </h1>
   );
 }
+
+const HomeLink = ({ pathname }: HomeLinkProps) => {
+  return pathname === allPaths.HOME ? (
+    <div>
+      <Wooblers />
+      <div className="woh_drop-in">Other</div>
+      <div className="woh_eventual-slant">House</div>
+    </div>
+  ) : (
+    <Link href={allPaths.HOME}>
+      <Wooblers />
+      <div className="woh_drop-in">Other</div>
+      <div className="woh_eventual-slant">House</div>
+    </Link>
+  );
+};
