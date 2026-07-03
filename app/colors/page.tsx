@@ -1,6 +1,5 @@
 import React from 'react';
 import ColorPicker from './color-picker';
-import './color-picker.css';
 
 export default function Settings() {
   return (
