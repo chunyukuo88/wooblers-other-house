@@ -7,7 +7,6 @@
   grid-template-columns: 200px 100px;
   grid-template-rows: 1fr 1fr;
   row-gap: 0.5rem;
-  border: solid 1px black;
   width: 350px;
 }
 
