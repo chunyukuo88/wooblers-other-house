@@ -4,8 +4,8 @@ import { useMainImages } from '../../../store';
 import { ImageCard } from '@/components/galleries/image-card';
 import { emptyFolder, Folder } from 'store/fetched-images/types';
 import { getIntersectionObserver } from '@/components/navigation/components/scroll-to-top-button/utils';
-import '../styles.css';
 import { useColors } from '../../../store/background-color/context';
+import '../styles.css';
 
 const ScrollToTopButton = lazy(() => import('../../navigation/components/scroll-to-top-button'));
 
@@ -70,7 +70,15 @@ const ImageGallery = (props: ImageGalleryProps) => {
               key={index}
               style={{ background: `rgb(${red} ${green} ${blue})` }}
             >
-              <ImageCard file={file} index={index} caption={caption} bucketAlias={bucketAlias} />
+              <ImageCard
+                file={file}
+                index={index}
+                caption={caption}
+                bucketAlias={bucketAlias}
+                red={red}
+                green={green}
+                blue={blue}
+              />
             </div>
           );
         })}
