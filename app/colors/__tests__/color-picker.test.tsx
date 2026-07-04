@@ -135,26 +135,6 @@ describe('ColorPicker', () => {
     });
   });
 
-  describe('Slider rotation styles', () => {
-    it('applies correct rotation to red slider input (45deg)', () => {
-      renderWithContext();
-      const sliders = screen.getAllByRole('slider');
-      expect(sliders[0]).toHaveStyle({ transform: 'rotate(45deg)' });
-    });
-
-    it('applies correct rotation to green slider input (135deg)', () => {
-      renderWithContext();
-      const sliders = screen.getAllByRole('slider');
-      expect(sliders[1]).toHaveStyle({ transform: 'rotate(135deg)' });
-    });
-
-    it('applies correct rotation to blue slider input (180deg)', () => {
-      renderWithContext();
-      const sliders = screen.getAllByRole('slider');
-      expect(sliders[2]).toHaveStyle({ transform: 'rotate(180deg)' });
-    });
-  });
-
   describe('ConcentricCircles', () => {
     it('fills no circles when color is 0', () => {
       renderWithContext({ ...defaultContextValue, red: 0 });

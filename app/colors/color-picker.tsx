@@ -23,16 +23,15 @@ export default function ColorPicker() {
 
   return (
     <div id="color-picker-section">
-      <Slider circleFillColor={'red'} color={red} degrees={45} handler={redHandler} />
-      <Slider circleFillColor={'green'} color={green} degrees={135} handler={greenHandler} />
-      <Slider circleFillColor={'blue'} color={blue} degrees={180} handler={blueHandler} />
+      <Slider circleFillColor={'red'} color={red} handler={redHandler} />
+      <Slider circleFillColor={'green'} color={green} handler={greenHandler} />
+      <Slider circleFillColor={'blue'} color={blue} handler={blueHandler} />
     </div>
   );
 }
 
 function Slider(props: SliderProps) {
-  const { circleFillColor, color, degrees, handler } = props;
-  const inputRotation = { transform: `rotate(${degrees}deg)` };
+  const { circleFillColor, color, handler } = props;
   const valueRotation = { transform: `rotate(${color}deg)` };
   const valueRotationInternal = {
     transform: `rotate(-${color}deg)`,
@@ -48,7 +47,6 @@ function Slider(props: SliderProps) {
         max="255"
         value={color}
         onChange={handler}
-        style={inputRotation}
       />
       <div className="woh__color-value" style={valueRotation}>
         <span style={valueRotationInternal}>{color}</span>
