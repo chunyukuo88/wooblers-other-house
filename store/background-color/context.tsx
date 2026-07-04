@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useReducer, useEffect, type PropsWithChildren } from 'react';
+import { createContext, useReducer, useEffect, type PropsWithChildren, useContext } from 'react';
 import { colorReducer, initialColorState } from './reducer';
 import { ColorState, LocalStorageColorKey } from './types';
 import { setRed, setGreen, setBlue } from './actions';
@@ -55,4 +55,8 @@ export function CaptionColorProvider({ children }: PropsWithChildren) {
   return (
     <BackgroundColorContext.Provider value={value}>{children}</BackgroundColorContext.Provider>
   );
+}
+
+export function useColors() {
+  return useContext(BackgroundColorContext);
 }
