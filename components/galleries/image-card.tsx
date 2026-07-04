@@ -1,11 +1,12 @@
 import { SingleCardProps } from './types';
-import { getSrcSet, SIZES } from './utils';
+import { getCaptionColor, getSrcSet, SIZES } from './utils';
 
 export function ImageCard(props: SingleCardProps) {
-  const { bucketAlias, caption, file, index } = props;
+  const { bucketAlias, caption, file, index, red, green, blue } = props;
   const displayCaption = caption ? processRawCaption(caption) : '';
 
   const srcSet = getSrcSet(cdn, bucketAlias, file);
+  const { background, captionFontColor } = getCaptionColor({ red, green, blue });
 
   return (
     <>
@@ -13,6 +14,7 @@ export function ImageCard(props: SingleCardProps) {
         data-testid="image-item"
         key={index}
         className={`woh__image-item woh__image-index-${index}`}
+        style={{ background, color: captionFontColor }}
       >
         <img srcSet={srcSet} sizes={SIZES} alt={`Image #${index + 1}`} style={responsive} />
         {displayCaption ? (

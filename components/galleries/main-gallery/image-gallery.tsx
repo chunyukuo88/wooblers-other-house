@@ -4,6 +4,7 @@ import { useMainImages } from '../../../store';
 import { ImageCard } from '@/components/galleries/image-card';
 import { emptyFolder, Folder } from 'store/fetched-images/types';
 import { getIntersectionObserver } from '@/components/navigation/components/scroll-to-top-button/utils';
+import { useColors } from '../../../store/background-color/context';
 import '../styles.css';
 
 const ScrollToTopButton = lazy(() => import('../../navigation/components/scroll-to-top-button'));
@@ -13,11 +14,11 @@ type ImageGalleryProps = {
   showPrivateImages: boolean;
 };
 
-// TODO: Think about how to make the gallery SSR, or at least the images and captions only.
-
 const ImageGallery = (props: ImageGalleryProps) => {
   const { folders, showPrivateImages } = props;
   const { currentFolder, updateFetchedFolders } = useMainImages();
+  const { red, green, blue } = useColors();
+
   const [current, setCurrent] = useState<Folder>(emptyFolder);
   const [wooblerIsVisible, setWooblerIsVisible] = useState(false);
 
@@ -64,8 +65,20 @@ const ImageGallery = (props: ImageGalleryProps) => {
         {current.photos.map((file: string, index: number) => {
           const caption = current.captions[index];
           return (
-            <div className={`woh__image-wrapper-${index}`} key={index}>
-              <ImageCard file={file} index={index} caption={caption} bucketAlias={bucketAlias} />
+            <div
+              className={`woh__image-wrapper-${index}`}
+              key={index}
+              style={{ background: `rgb(${red} ${green} ${blue})` }}
+            >
+              <ImageCard
+                file={file}
+                index={index}
+                caption={caption}
+                bucketAlias={bucketAlias}
+                red={red}
+                green={green}
+                blue={blue}
+              />
             </div>
           );
         })}
