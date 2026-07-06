@@ -1,5 +1,5 @@
 import ImageGallery from '@/components/galleries/main-gallery/image-gallery';
-import { getFolders } from './utils';
+import { convertAlbumParamToFriendly, getFolders } from './utils';
 import { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
@@ -13,14 +13,22 @@ type Params = {
 export default async function Page({ searchParams }: Params) {
   const params = await searchParams;
   const privateImageQuery = params[process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY!];
-  const preselectedAlbum = params['album'];
+  const albumQueryParameter = params['album'];
+  const preselectedAlbum = convertAlbumParamToFriendly(albumQueryParameter);
+
   const { displayPrivateImages, folders } = await getFolders(privateImageQuery);
 
   if (!folders) {
     return <div>The site is down for maintenance. Come back tomorrow!</div>;
   }
 
-  return <ImageGallery folders={folders} showPrivateImages={displayPrivateImages} />;
+  return (
+    <ImageGallery
+      folders={folders}
+      showPrivateImages={displayPrivateImages}
+      preselectedAlbum={preselectedAlbum}
+    />
+  );
 }
 
 export const metadata: Metadata = {

@@ -12,10 +12,11 @@ const ScrollToTopButton = lazy(() => import('../../navigation/components/scroll-
 type ImageGalleryProps = {
   folders: Folder[];
   showPrivateImages: boolean;
+  preselectedAlbum: string;
 };
 
 const ImageGallery = (props: ImageGalleryProps) => {
-  const { folders, showPrivateImages } = props;
+  const { folders, preselectedAlbum, showPrivateImages } = props;
   const { currentFolder, updateFetchedFolders } = useMainImages();
   const { red, green, blue } = useColors();
 
