@@ -6,6 +6,19 @@ type GetFoldersResult = {
   folders: Folder[];
 };
 
+/**
+ * Contract: The only special char used by album params is exclamation marks.
+ * @param searchParam the friendly album name, with URL conversions (such as for special chars)
+ * @returns the friendly album name, without URL conversions
+ * */
+export function convertAlbumParamToFriendly(searchParam: string): string {
+  if (!searchParam) {
+    return '';
+  }
+  const hyphensToSpaces = searchParam.split('-').join(' ').toLowerCase();
+  return hyphensToSpaces.replace('%21', '!');
+}
+
 export async function getFolders(searchParam: string): Promise<GetFoldersResult> {
   const featureFlag = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY!;
   const displayPrivateImages = await getFeatureStatus(searchParam, featureFlag);
