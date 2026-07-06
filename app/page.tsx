@@ -1,5 +1,6 @@
 import ImageGallery from '@/components/galleries/main-gallery/image-gallery';
 import { getFolders } from './utils';
+import { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,6 +23,6 @@ export default async function Page({ searchParams }: Params) {
   return <ImageGallery folders={folders} showPrivateImages={displayPrivateImages} />;
 }
 
-export const metadata = {
+export const metadata: Metadata = {
   title: process.env.NODE_ENV === 'production' ? '⚽ Gooooaaal!' : '小巫之另一個屋',
 };
