@@ -1,4 +1,4 @@
-import { convertAlbumParamToFriendly, convertFriendlyToQueryParam } from '../url';
+import { convertAlbumParamToFriendly, convertFriendlyToQueryParam } from '../utils';
 
 describe('utils', () => {
   describe('convertAlbumParamToFriendly()', () => {
