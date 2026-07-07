@@ -1,7 +1,7 @@
-import { createHttpRequest, putData } from './http';
-import { errorLogger } from './logging';
+import { createHttpRequest, putData } from '../http';
+import { errorLogger } from '../logging';
 
-jest.mock('./logging');
+jest.mock('../logging');
 
 afterEach(() => jest.clearAllMocks());
 

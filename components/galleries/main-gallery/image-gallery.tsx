@@ -15,11 +15,22 @@ type ImageGalleryProps = {
   preselectedAlbum: string;
 };
 
+function convertAlbumParamToFriendly(searchParam: string): string {
+  if (!searchParam) {
+    return '';
+  }
+  const hyphensToSpaces = searchParam.split('-').join(' ').toLowerCase();
+  return hyphensToSpaces.replace('%21', '!');
+}
+
 const ImageGallery = (props: ImageGalleryProps) => {
   const { folders, preselectedAlbum, showPrivateImages } = props;
   const { currentFolder, updateFetchedFolders } = useMainImages();
   const { red, green, blue } = useColors();
 
+  console.log(`
+    preselectedAlbum: ${preselectedAlbum}
+  `);
   const [current, setCurrent] = useState<Folder>(emptyFolder);
   const [wooblerIsVisible, setWooblerIsVisible] = useState(false);
 
@@ -45,8 +56,16 @@ const ImageGallery = (props: ImageGalleryProps) => {
 
   useEffect(() => {
     if (folders?.length > 0) {
-      setCurrent(folders[0]);
       updateFetchedFolders(folders);
+      const matchingFolder = folders.find((folder) => {
+        const converted = convertAlbumParamToFriendly(folder.friendlyName);
+        return converted === preselectedAlbum;
+      });
+      if (matchingFolder) {
+        setCurrent(matchingFolder);
+      } else {
+        setCurrent(folders[0]);
+      }
     }
   }, [folders]);
 
