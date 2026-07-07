@@ -1,12 +1,15 @@
 'use client';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useMainImages } from '../../../store';
+import { useMainImages, useAlbum } from 'store';
 import { emptyFolder, Folder } from 'store/fetched-images/types';
+import { convertFriendlyToQueryParam } from 'store/album/utils';
 import '../styles/album-selector.css';
 
 export const AlbumSelector = (props: any) => {
   const { style } = props;
   const { fetchedFolders, currentFolder, updateCurrentFolder } = useMainImages();
+  const { currentAlbumFriendly, updateAlbumFriendly, currentAlbumUrl, updateAlbumUrl } = useAlbum();
+
   const [folders, setFolders] = useState<Folder[]>([]);
   const [current, setCurrent] = useState<Folder>(emptyFolder);
 
@@ -25,6 +28,8 @@ export const AlbumSelector = (props: any) => {
   useEffect(() => {
     if (currentFolder) {
       setCurrent(currentFolder);
+      updateAlbumFriendly(currentFolder.friendlyName);
+      updateAlbumUrl(convertFriendlyToQueryParam(currentFolder.friendlyName));
     }
   }, [currentFolder]);
 

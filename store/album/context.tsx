@@ -1,5 +1,4 @@
 'use client';
-
 import { createContext, type PropsWithChildren, useReducer, useContext, ReactElement } from 'react';
 import { albumFriendlyReducer, albumUrlReducer, initialFriendly, initialUrl } from './reducer';
 import { setCurrentFriendly, setCurrentAlbumUrl } from './actions';
