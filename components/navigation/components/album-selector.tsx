@@ -8,7 +8,8 @@ import '../styles/album-selector.css';
 export const AlbumSelector = (props: any) => {
   const { style } = props;
   const { fetchedFolders, currentFolder, updateCurrentFolder } = useMainImages();
-  const { currentAlbumFriendly, updateAlbumFriendly, currentAlbumUrl, updateAlbumUrl } = useAlbum();
+  // TODO: figure out pattern for updating URL; this component just updates global state.
+  const { currentAlbumFriendly, updateAlbumFriendly, updateAlbumUrl } = useAlbum();
 
   const [folders, setFolders] = useState<Folder[]>([]);
   const [current, setCurrent] = useState<Folder>(emptyFolder);
@@ -28,8 +29,9 @@ export const AlbumSelector = (props: any) => {
   useEffect(() => {
     if (currentFolder) {
       setCurrent(currentFolder);
-      updateAlbumFriendly(currentFolder.friendlyName);
-      updateAlbumUrl(convertFriendlyToQueryParam(currentFolder.friendlyName));
+      const { friendlyName } = currentFolder;
+      updateAlbumFriendly(friendlyName);
+      updateAlbumUrl(convertFriendlyToQueryParam(friendlyName));
     }
   }, [currentFolder]);
 
