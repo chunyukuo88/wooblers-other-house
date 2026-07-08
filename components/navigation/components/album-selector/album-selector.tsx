@@ -13,6 +13,7 @@ export const AlbumSelector = (props: any) => {
   const { updateAlbumFriendly, updateAlbumUrl } = useAlbum();
 
   const [folders, setFolders] = useState<Folder[]>([]);
+
   const [current, setCurrent] = useState<Folder>(emptyFolder);
 
   const changeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
