@@ -1,13 +1,19 @@
 'use client';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { useMainImages } from '../../../store';
+import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
+import { useAlbum, useMainImages } from 'store';
 import { emptyFolder, Folder } from 'store/fetched-images/types';
-import '../styles/album-selector.css';
+import { convertFriendlyToQueryParam } from 'store/album/utils';
+import { AlbumsProps } from './types';
+import { updateUrl } from './utils';
+import '../../styles/album-selector.css';
 
 export const AlbumSelector = (props: any) => {
   const { style } = props;
   const { fetchedFolders, currentFolder, updateCurrentFolder } = useMainImages();
+  const { updateAlbumFriendly, updateAlbumUrl } = useAlbum();
+
   const [folders, setFolders] = useState<Folder[]>([]);
+
   const [current, setCurrent] = useState<Folder>(emptyFolder);
 
   const changeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -23,8 +29,13 @@ export const AlbumSelector = (props: any) => {
   }, [fetchedFolders]);
 
   useEffect(() => {
-    if (currentFolder) {
+    if (currentFolder?.name) {
       setCurrent(currentFolder);
+      const { friendlyName } = currentFolder;
+      updateAlbumFriendly(friendlyName);
+      const asQueryParams = convertFriendlyToQueryParam(friendlyName);
+      updateAlbumUrl(asQueryParams);
+      updateUrl(asQueryParams);
     }
   }, [currentFolder]);
 
@@ -35,12 +46,7 @@ export const AlbumSelector = (props: any) => {
   );
 };
 
-type AlbumsProps = {
-  folders: Folder[];
-  current: Folder;
-};
-
-function Albums(props: AlbumsProps) {
+function Albums(props: AlbumsProps): ReactNode {
   const { folders, current } = props;
   return (
     <>
@@ -60,7 +66,7 @@ function Albums(props: AlbumsProps) {
   );
 }
 
-function AlbumsLoading() {
+function AlbumsLoading(): ReactNode {
   return (
     <option className="woh__album-picker__option" value="">
       Loading...

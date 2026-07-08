@@ -1,6 +1,6 @@
 'use client';
 import { useContext } from 'react';
-import { BackgroundColorContext } from '../../store/background-color/context';
+import { BackgroundColorContext } from 'store/background-color/context';
 import { ConcentricCirclesProps, Event, SliderProps } from './types';
 import { trackEvent } from '../analytics';
 import { GA_EVENTS } from '../analytics/tracked-events';

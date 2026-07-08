@@ -1,5 +1,5 @@
 'use client';
-import { createContext, type PropsWithChildren } from 'react';
+import { createContext, type PropsWithChildren, useContext } from 'react';
 import { CalendarContextValue, Season } from './types';
 
 export const initialCalendarContext = {
@@ -8,7 +8,7 @@ export const initialCalendarContext = {
   currentSeason: '' as Season,
 };
 
-export const CalendarContext = createContext<CalendarContextValue>(initialCalendarContext);
+export const Context = createContext<CalendarContextValue>(initialCalendarContext);
 
 export function CalendarContextProvider(props: PropsWithChildren) {
   const now = new Date();
@@ -22,7 +22,7 @@ export function CalendarContextProvider(props: PropsWithChildren) {
     currentSeason: getCurrentSeason(now),
   };
 
-  return <CalendarContext.Provider value={context}>{props.children}</CalendarContext.Provider>;
+  return <Context.Provider value={context}>{props.children}</Context.Provider>;
 }
 
 export function getCurrentSeason(date = new Date()): Season {
@@ -43,3 +43,16 @@ export function getCurrentSeason(date = new Date()): Season {
 
   return Season.Autumn;
 }
+
+export function useCalendar() {
+  const context = useContext(Context);
+  if (!context || context === initialCalendarContext) {
+    const { error } = console;
+    error(ERROR_MISSING_CONTEXT);
+    return { currentDay: '', currentDate: '', currentSeason: '' };
+  }
+  const { currentDay, currentDate, currentSeason } = context;
+  return { currentDay, currentDate, currentSeason };
+}
+
+export const ERROR_MISSING_CONTEXT = 'useCalendar() must be called inside its context provider.';

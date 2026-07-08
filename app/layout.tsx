@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Providers from '../store/providers';
+import Providers from 'store/providers';
 import { Content } from './content';
 import GoogleAnalytics from './google-analytics';
 import '../styles/global.css';

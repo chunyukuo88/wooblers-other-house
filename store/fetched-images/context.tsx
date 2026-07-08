@@ -1,5 +1,5 @@
 'use client';
-import { createContext, type PropsWithChildren, useReducer, useContext } from 'react';
+import { createContext, type PropsWithChildren, useReducer, useContext, ReactElement } from 'react';
 import { Folder } from './types';
 import {
   currentFolderReducer,
@@ -23,7 +23,7 @@ export const FetchedImagesContext = createContext<FetchedImagesContextType>({
   updateFetchedFolders: () => {},
 });
 
-export function FetchedImagesV2Provider(props: PropsWithChildren) {
+export function FetchedImagesV2Provider(props: PropsWithChildren): ReactElement {
   const [currentFolderState, dispatchCurrent] = useReducer(
     currentFolderReducer,
     initialCurrentFolder,
@@ -51,6 +51,6 @@ export function FetchedImagesV2Provider(props: PropsWithChildren) {
   );
 }
 
-export function useMainImages() {
+export function useMainImages(): FetchedImagesContextType {
   return useContext(FetchedImagesContext);
 }

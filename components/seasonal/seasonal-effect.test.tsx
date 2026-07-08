@@ -1,7 +1,7 @@
-import { useCalendar } from '../../store/calendar/use-calendar';
 import { Season } from '../../store/calendar/types';
 import { render } from '@testing-library/react';
 import { SeasonalEffect } from '@/components/seasonal/seasonal-effect';
+import { useCalendar } from '../../store';
 
 jest.mock('../../store/calendar/use-calendar');
 

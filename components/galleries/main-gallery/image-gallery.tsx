@@ -1,10 +1,10 @@
 'use client';
 import { lazy, useEffect, useState } from 'react';
-import { useMainImages } from '../../../store';
+import { useColors, useMainImages } from 'store';
 import { ImageCard } from '@/components/galleries/image-card';
 import { emptyFolder, Folder } from 'store/fetched-images/types';
 import { getIntersectionObserver } from '@/components/navigation/components/scroll-to-top-button/utils';
-import { useColors } from '../../../store/background-color/context';
+import { convertAlbumParamToFriendly } from 'store/album/utils';
 import '../styles.css';
 
 const ScrollToTopButton = lazy(() => import('../../navigation/components/scroll-to-top-button'));
@@ -12,11 +12,12 @@ const ScrollToTopButton = lazy(() => import('../../navigation/components/scroll-
 type ImageGalleryProps = {
   folders: Folder[];
   showPrivateImages: boolean;
+  preselectedAlbum: string;
 };
 
 const ImageGallery = (props: ImageGalleryProps) => {
-  const { folders, showPrivateImages } = props;
-  const { currentFolder, updateFetchedFolders } = useMainImages();
+  const { folders, preselectedAlbum, showPrivateImages } = props;
+  const { currentFolder, updateCurrentFolder, updateFetchedFolders } = useMainImages();
   const { red, green, blue } = useColors();
 
   const [current, setCurrent] = useState<Folder>(emptyFolder);
@@ -44,8 +45,17 @@ const ImageGallery = (props: ImageGalleryProps) => {
 
   useEffect(() => {
     if (folders?.length > 0) {
-      setCurrent(folders[0]);
       updateFetchedFolders(folders);
+      const matchingFolder = folders.find((folder) => {
+        const converted = convertAlbumParamToFriendly(folder.friendlyName);
+        return converted === preselectedAlbum;
+      });
+      if (matchingFolder) {
+        updateCurrentFolder(matchingFolder);
+        setCurrent(matchingFolder);
+      } else {
+        setCurrent(folders[0]);
+      }
     }
   }, [folders]);
 

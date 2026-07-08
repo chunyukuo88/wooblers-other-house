@@ -1,5 +1,5 @@
 import { getFeatureStatus } from './flags';
-import { getMainPageImages, Folder } from '../common/http';
+import { Folder, getMainPageImages } from '../common/http';
 
 type GetFoldersResult = {
   displayPrivateImages: boolean;

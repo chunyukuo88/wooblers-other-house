@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { allPaths } from '../../../../allPaths';
 import { usePathname } from 'next/navigation';
-import { AlbumSelector } from '@/components/navigation/components/album-selector';
+import { AlbumSelector } from '@/components/navigation/components/album-selector/album-selector';
 import {
   ColorsLinkProps,
   HomeLinkProps,
