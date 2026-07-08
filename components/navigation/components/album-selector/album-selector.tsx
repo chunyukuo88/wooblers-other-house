@@ -29,7 +29,7 @@ export const AlbumSelector = (props: any) => {
   }, [fetchedFolders]);
 
   useEffect(() => {
-    if (currentFolder) {
+    if (currentFolder?.name) {
       setCurrent(currentFolder);
       const { friendlyName } = currentFolder;
       updateAlbumFriendly(friendlyName);
