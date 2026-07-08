@@ -4,7 +4,7 @@ import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import { FetchedImagesV2Provider } from './fetched-images/context';
 import { CaptionColorProvider } from './background-color/context';
-import { CalendarContextProvider } from './calendar/calendar-context';
+import { CalendarContextProvider } from './calendar/context';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AlbumProvider } from './album/context';
 

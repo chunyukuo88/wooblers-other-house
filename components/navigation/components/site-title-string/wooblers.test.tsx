@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
-import { useCalendar } from '../../../../store/calendar/use-calendar';
 import { Wooblers } from './wooblers';
+import { useCalendar } from '../../../../store';
 
 jest.mock('../../../../store/calendar/use-calendar');
 

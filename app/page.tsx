@@ -1,7 +1,7 @@
 import ImageGallery from '@/components/galleries/main-gallery/image-gallery';
 import { getFolders } from './utils';
 import { Metadata } from 'next';
-import { convertAlbumParamToFriendly } from '../store/album/utils';
+import { convertAlbumParamToFriendly } from 'store/album/utils';
 
 export const dynamic = 'force-dynamic';
 

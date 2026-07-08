@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
-import { ERROR_MISSING_CONTEXT, useCalendar } from '../use-calendar';
+import { ERROR_MISSING_CONTEXT } from '../use-calendar';
 import { renderHook } from '@testing-library/react';
-import { CalendarContext } from '../calendar-context';
+import { Context, useCalendar } from '../context';
 import { Season } from '../types';
 
 describe('useCalendar', () => {
@@ -24,9 +24,7 @@ describe('useCalendar', () => {
         currentSeason: season,
       };
       const wrapper = ({ children }: { children: ReactNode }) => (
-        <CalendarContext.Provider value={calendarContextProviderProps}>
-          {children}
-        </CalendarContext.Provider>
+        <Context.Provider value={calendarContextProviderProps}>{children}</Context.Provider>
       );
 
       const {

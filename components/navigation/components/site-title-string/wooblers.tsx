@@ -1,4 +1,4 @@
-import { useCalendar } from '../../../../store/calendar/use-calendar';
+import { useCalendar } from '../../../../store';
 
 export function Wooblers() {
   const { currentDate } = useCalendar();
