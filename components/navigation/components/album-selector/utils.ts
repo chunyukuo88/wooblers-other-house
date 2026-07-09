@@ -4,3 +4,7 @@ export const updateUrl = (asQueryParams: string): void => {
   const newUrl = `/?${newParams.toString()}`;
   window.history.replaceState(null, '', newUrl);
 };
+
+export const handleShare = () => {
+  //
+};
