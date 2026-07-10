@@ -1,14 +1,14 @@
-import { Season } from '../../store/calendar/types';
+import { Season } from '../../../store/calendar/types';
 import { render } from '@testing-library/react';
 import { SeasonalEffect } from '@/components/seasonal/seasonal-effect';
-import { useCalendar } from '../../store';
+import { useCalendar } from '../../../store';
 
-jest.mock('../../store/calendar/use-calendar');
+jest.mock('../../../store');
 
 describe('<SeasonalEffect />', () => {
   describe('GIVEN: season is not available', () => {
     describe('WHEN: the page loads', () => {
-      test('THEN: user sees no seasonal effects', () => {
+      it('THEN: user sees no seasonal effects', () => {
         (useCalendar as jest.Mock).mockReturnValue({
           currentDay: '',
           currentDate: '',
@@ -25,7 +25,7 @@ describe('<SeasonalEffect />', () => {
   });
   describe('GIVEN: it is winter', () => {
     describe('WHEN: the page loads', () => {
-      test('THEN: user sees snowflakes', () => {
+      it('THEN: user sees snowflakes', () => {
         (useCalendar as jest.Mock).mockReturnValue({
           currentDay: '',
           currentDate: '',

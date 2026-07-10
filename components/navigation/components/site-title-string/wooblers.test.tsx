@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import { Wooblers } from './wooblers';
-import { useCalendar } from '../../../../store';
+import { useCalendar } from 'store';
 
-jest.mock('../../../../store/calendar/use-calendar');
+jest.mock('../../../../store');
 
 describe('<Wooblers />', () => {
   describe('GIVEN: The page renders', () => {

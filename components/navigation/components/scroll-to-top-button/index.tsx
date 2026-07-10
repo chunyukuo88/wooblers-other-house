@@ -1,6 +1,5 @@
 import Image from 'next/image';
-import { trackEvent } from '../../../../app/analytics';
-import { GA_EVENTS } from '../../../../app/analytics/tracked-events';
+import { trackEvent, GA_EVENTS } from '@/analytics';
 import '../../styles/scroll-to-top-button.css';
 
 export const ScrollToTopButton = () => {

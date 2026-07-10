@@ -1,5 +1,4 @@
-import { trackEvent } from '../../../../app/analytics';
-import { GA_EVENTS } from '../../../../app/analytics/tracked-events';
+import { trackEvent, GA_EVENTS } from '@/analytics';
 
 export const updateUrl = (asQueryParams: string): void => {
   const newParams = new URLSearchParams(window.location.search);
