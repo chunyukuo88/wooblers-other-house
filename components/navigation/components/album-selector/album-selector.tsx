@@ -6,6 +6,8 @@ import { convertFriendlyToQueryParam } from 'store/album/utils';
 import { AlbumsProps } from './types';
 import { handleShare, updateUrl } from './utils';
 import '../../styles/album-selector.css';
+import { trackEvent } from '../../../../app/analytics';
+import { GA_EVENTS } from '../../../../app/analytics/tracked-events';
 
 export const AlbumSelector = (props: any) => {
   const { style } = props;
@@ -39,16 +41,17 @@ export const AlbumSelector = (props: any) => {
     }
   }, [currentFolder]);
 
+  const clickHandler = async () => {
+    await handleShare();
+    trackEvent(GA_EVENTS.SHARING.SHARE_INITIATED);
+  };
+
   return (
     <>
       <select name="album-picked" id="woh__album-picker" onChange={changeHandler} style={style}>
         {!folders?.length ? <AlbumsLoading /> : <Albums folders={folders} current={current} />}
       </select>
-      <button
-        onClick={() => {
-          handleShare(() => {});
-        }}
-      >
+      <button onClick={clickHandler} data-testid="woh__album-picker-button">
         Share album 😀
       </button>
     </>
