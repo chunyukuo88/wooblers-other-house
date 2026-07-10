@@ -1,32 +1,20 @@
 import { handleShare } from '../utils';
+import { trackEvent } from '../../../../../app/analytics';
+import { GA_EVENTS } from '../../../../../app/analytics/tracked-events';
+import {
+  setUpAbortedSharing,
+  setUpCookies,
+  setUpNavigatorClipboardWriteText,
+  setUpNavigatorError,
+  setUpNavigatorShare,
+  setUpWindowLocation,
+} from './fixtures';
 
-const setUpWindowLocation = async (href: string): Promise<void> => {
-  delete global.window.location;
-  global.window = Object.create(window);
-  global.window.location = { href };
-};
-const setUpNavigatorShare = async (): Promise<void> => {
-  delete global.navigator;
-  global.navigator = {
-    share: jest.fn(),
-  };
-};
-const setUpNavigatorClipboardWriteText = async (): Promise<void> => {
-  const mockWriteText = jest.fn();
-  delete global.navigator.clipboard;
-  global.navigator = Object.create(navigator);
-  global.navigator.share = undefined;
-  global.navigator.clipboard = {
-    writeText: mockWriteText,
-    read: jest.fn(),
-    readText: jest.fn(),
-    write: jest.fn(),
-    addEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-    removeEventListener: jest.fn(),
-  };
-};
+jest.mock('../../../../../app/analytics');
 
+beforeEach(() => {
+  (trackEvent as jest.Mock).mockImplementationOnce(jest.fn());
+});
 afterEach(() => jest.clearAllMocks());
 
 describe('handleShare()', () => {
@@ -41,7 +29,7 @@ describe('handleShare()', () => {
 
           const spy = jest.spyOn(global.navigator, 'share');
 
-          await handleShare(jest.fn());
+          await handleShare();
 
           expect(spy).toHaveBeenCalledWith({ url: theUrl });
         });
@@ -53,7 +41,7 @@ describe('handleShare()', () => {
 
           const writeTextSpy = jest.spyOn(global.navigator.clipboard, 'writeText');
 
-          await handleShare(jest.fn());
+          await handleShare();
 
           expect(writeTextSpy).toHaveBeenCalledWith(theUrl);
         });
@@ -73,7 +61,7 @@ describe('handleShare()', () => {
 
           const writeTextSpy = jest.spyOn(global.navigator.clipboard, 'writeText');
 
-          await handleShare(jest.fn());
+          await handleShare();
 
           expect(writeTextSpy).toHaveBeenCalledWith(urlWithFlag);
         });
@@ -87,18 +75,14 @@ describe('handleShare()', () => {
           const value = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_VAL!;
           const urlWithFlag = `https://www.wooblers-other-house.com/?album=onomichi-trip&${flag}=${value}`;
 
+          const onlyPrivateImagesCookie = `${flag}=${value}`;
+          setUpCookies(onlyPrivateImagesCookie);
           await setUpWindowLocation(urlWithoutFlag);
           await setUpNavigatorClipboardWriteText();
-          delete global.document.cookie;
-          global.document = Object.create(document);
-          Object.defineProperty(document, 'cookie', {
-            configurable: true,
-            get: () => `${flag}=${value}`,
-            set: jest.fn(),
-          });
+
           const writeTextSpy = jest.spyOn(global.navigator.clipboard, 'writeText');
 
-          await handleShare(jest.fn());
+          await handleShare();
 
           expect(writeTextSpy).toHaveBeenCalledWith(urlWithFlag);
         });
@@ -112,47 +96,63 @@ describe('handleShare()', () => {
           const value = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_VAL!;
           const urlWithFlag = `https://www.wooblers-other-house.com/?album=onomichi-trip&${flag}=${value}`;
 
+          const multipleCookies = `_ga=GA1.1.1024119243.1763168709; _ga_9MSJV2CGHW=GS2.1.s1778896719$o31$g1$t1778900238$j60$l0$h0; ${flag}=${value}; __next_hmr_refresh_hash__=201`;
+          setUpCookies(multipleCookies);
           await setUpWindowLocation(urlWithoutFlag);
           await setUpNavigatorClipboardWriteText();
-          delete global.document.cookie;
-          global.document = Object.create(document);
-          Object.defineProperty(document, 'cookie', {
-            configurable: true,
-            get: () =>
-              `_ga=GA1.1.1024119243.1763168709; _ga_9MSJV2CGHW=GS2.1.s1778896719$o31$g1$t1778900238$j60$l0$h0; ${flag}=${value}; __next_hmr_refresh_hash__=201`,
-            set: jest.fn(),
-          });
+
           const writeTextSpy = jest.spyOn(global.navigator.clipboard, 'writeText');
 
-          await handleShare(jest.fn());
+          await handleShare();
 
           expect(writeTextSpy).toHaveBeenCalledWith(urlWithFlag);
         });
       });
     });
   });
-  describe('GIVEN: user is viewing private or public images', () => {
-    describe('WHEN: the navigator.share() method is unavailable', () => {
-      it('THEN: invokes the callback passed to this function twice', async () => {
-        jest.useFakeTimers();
+  describe('SCENARIOS: Tracking', () => {
+    const href = 'https://www.example.com';
+    describe('WHEN: the user is able to share via the navigator share method', () => {
+      it('THEN: tracks that action', async () => {
+        await setUpWindowLocation(href);
+        await setUpNavigatorShare();
 
-        const theUrl = 'https://www.wooblers-other-house.com/?album=onomichi-trip';
-        await setUpWindowLocation(theUrl);
+        await handleShare();
+
+        expect(trackEvent).toHaveBeenCalledTimes(1);
+        expect(trackEvent).toHaveBeenCalledWith(GA_EVENTS.SHARING.SHARE_NATIVE);
+      });
+    });
+    describe('WHEN: the user is able to share via the navigator clipboard method', () => {
+      it('THEN: tracks that action', async () => {
+        await setUpWindowLocation(href);
         await setUpNavigatorClipboardWriteText();
 
-        // not needed after the navigator.share() method because the user dismisses that themselves;
-        // but for simply writing text to the clipboard, that is ephemeral. We want a notification to disappear
-        // then go away soon after, so the `setCopied` is for React local state.
-        const setCopied = jest.fn();
+        await handleShare();
 
-        await handleShare(setCopied);
+        expect(trackEvent).toHaveBeenCalledTimes(1);
+        expect(trackEvent).toHaveBeenCalledWith(GA_EVENTS.SHARING.SHARE_CLIPBOARD);
+      });
+    });
+    describe('WHEN: album sharing fails', () => {
+      it('THEN: tracking reports that failure', async () => {
+        await setUpWindowLocation(href);
+        setUpNavigatorError();
 
-        expect(setCopied).toHaveBeenCalledTimes(1);
-        expect(setCopied).toHaveBeenCalledWith(true);
-        jest.advanceTimersByTime(2_000);
+        await handleShare();
 
-        expect(setCopied).toHaveBeenCalledTimes(2);
-        expect(setCopied).toHaveBeenCalledWith(false);
+        expect(trackEvent).toHaveBeenCalledTimes(1);
+        expect(trackEvent).toHaveBeenCalledWith(GA_EVENTS.SHARING.SHARE_FAILED);
+      });
+    });
+    describe('WHEN: user initiates sharing but then aborts it', () => {
+      it('THEN: sends no further tracking', async () => {
+        await setUpWindowLocation(href);
+        setUpAbortedSharing();
+
+        await handleShare();
+
+        expect(trackEvent).not.toHaveBeenCalled();
       });
     });
   });

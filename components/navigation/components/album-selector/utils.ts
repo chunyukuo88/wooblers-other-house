@@ -1,3 +1,6 @@
+import { trackEvent } from '../../../../app/analytics';
+import { GA_EVENTS } from '../../../../app/analytics/tracked-events';
+
 export const updateUrl = (asQueryParams: string): void => {
   const newParams = new URLSearchParams(window.location.search);
   newParams.set('album', asQueryParams);
@@ -5,17 +8,22 @@ export const updateUrl = (asQueryParams: string): void => {
   window.history.replaceState(null, '', newUrl);
 };
 
-export const handleShare = async (setCopied: (hasBeenCopied: boolean) => void): Promise<void> => {
+export const handleShare = async (): Promise<void> => {
   const baseUrl = window.location.href;
   const url = buildUrl(baseUrl);
-  if (navigator.share) {
-    await navigator.share({ url });
-  } else {
-    await navigator.clipboard.writeText(url);
-    setCopied(true);
-    setTimeout(() => {
-      setCopied(false);
-    }, 2_000);
+  try {
+    if (navigator.share) {
+      await navigator.share({ url });
+      trackEvent(GA_EVENTS.SHARING.SHARE_NATIVE);
+    } else {
+      await navigator.clipboard.writeText(url);
+      trackEvent(GA_EVENTS.SHARING.SHARE_CLIPBOARD);
+    }
+  } catch (e) {
+    if (e instanceof DOMException && e.name === 'Abort Error') {
+      return;
+    }
+    trackEvent(GA_EVENTS.SHARING.SHARE_FAILED);
   }
 };
 
