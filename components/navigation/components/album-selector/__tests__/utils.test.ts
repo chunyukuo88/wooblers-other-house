@@ -131,29 +131,4 @@ describe('handleShare()', () => {
       });
     });
   });
-  describe('GIVEN: user is viewing private or public images', () => {
-    describe('WHEN: the navigator.share() method is unavailable', () => {
-      it('THEN: invokes the callback passed to this function twice', async () => {
-        jest.useFakeTimers();
-
-        const theUrl = 'https://www.wooblers-other-house.com/?album=onomichi-trip';
-        await setUpWindowLocation(theUrl);
-        await setUpNavigatorClipboardWriteText();
-
-        // not needed after the navigator.share() method because the user dismisses that themselves;
-        // but for simply writing text to the clipboard, that is ephemeral. We want a notification to disappear
-        // then go away soon after, so the `setCopied` is for React local state.
-        const setCopied = jest.fn();
-
-        await handleShare(setCopied);
-
-        expect(setCopied).toHaveBeenCalledTimes(1);
-        expect(setCopied).toHaveBeenCalledWith(true);
-        jest.advanceTimersByTime(2_000);
-
-        expect(setCopied).toHaveBeenCalledTimes(2);
-        expect(setCopied).toHaveBeenCalledWith(false);
-      });
-    });
-  });
 });

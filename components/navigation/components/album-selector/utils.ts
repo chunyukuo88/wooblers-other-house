@@ -5,17 +5,13 @@ export const updateUrl = (asQueryParams: string): void => {
   window.history.replaceState(null, '', newUrl);
 };
 
-export const handleShare = async (setCopied: (hasBeenCopied: boolean) => void): Promise<void> => {
+export const handleShare = async (): Promise<void> => {
   const baseUrl = window.location.href;
   const url = buildUrl(baseUrl);
   if (navigator.share) {
     await navigator.share({ url });
   } else {
     await navigator.clipboard.writeText(url);
-    setCopied(true);
-    setTimeout(() => {
-      setCopied(false);
-    }, 2_000);
   }
 };
 
