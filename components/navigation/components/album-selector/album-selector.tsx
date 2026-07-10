@@ -42,8 +42,8 @@ export const AlbumSelector = (props: any) => {
   }, [currentFolder]);
 
   const clickHandler = async () => {
-    await handleShare();
     trackEvent(GA_EVENTS.SHARING.SHARE_INITIATED);
+    await handleShare();
   };
 
   return (

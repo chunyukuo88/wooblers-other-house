@@ -7,8 +7,8 @@ import { AlbumSelector } from '../album-selector';
 jest.mock('../../../../../app/analytics');
 
 describe('AlbumSelector component', () => {
-  describe('AlbumSelector component', () => {
-    it('WHEN: user clicks the button to share an album', async () => {
+  describe('WHEN: user clicks the button to share an album', () => {
+    it('THEN: dispatches a tracking event indicating that sharing was initiated.', async () => {
       setUpNavigatorClipboardWriteText();
       (trackEvent as jest.Mock).mockImplementationOnce(jest.fn());
       const style = {};
