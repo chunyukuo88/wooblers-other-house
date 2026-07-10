@@ -4,12 +4,28 @@ export const setUpWindowLocation = async (href: string): Promise<void> => {
   global.window = Object.create(window);
   global.window.location = { href };
 };
+
 export const setUpNavigatorShare = async (): Promise<void> => {
   delete global.navigator;
   global.navigator = {
     share: jest.fn(),
   };
 };
+
+export const setupNavigatorError = () => {
+  delete global.navigator;
+};
+
+export const setupCookies = (cookies: string) => {
+  delete global.document.cookie;
+  global.document = Object.create(document);
+  Object.defineProperty(document, 'cookie', {
+    configurable: true,
+    get: () => cookies,
+    set: jest.fn(),
+  });
+};
+
 export const setUpNavigatorClipboardWriteText = async (): Promise<void> => {
   const mockWriteText = jest.fn();
   delete global.navigator.clipboard;

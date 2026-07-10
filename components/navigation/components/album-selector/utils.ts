@@ -1,3 +1,6 @@
+import { trackEvent } from '../../../../app/analytics';
+import { GA_EVENTS } from '../../../../app/analytics/tracked-events';
+
 export const updateUrl = (asQueryParams: string): void => {
   const newParams = new URLSearchParams(window.location.search);
   newParams.set('album', asQueryParams);
@@ -8,10 +11,16 @@ export const updateUrl = (asQueryParams: string): void => {
 export const handleShare = async (): Promise<void> => {
   const baseUrl = window.location.href;
   const url = buildUrl(baseUrl);
-  if (navigator.share) {
-    await navigator.share({ url });
-  } else {
-    await navigator.clipboard.writeText(url);
+  try {
+    if (navigator.share) {
+      await navigator.share({ url });
+      trackEvent(GA_EVENTS.SHARING.SHARE_NATIVE);
+    } else {
+      await navigator.clipboard.writeText(url);
+      trackEvent(GA_EVENTS.SHARING.SHARE_CLIPBOARD);
+    }
+  } catch (e) {
+    trackEvent(GA_EVENTS.SHARING.SHARE_FAILED);
   }
 };
 
