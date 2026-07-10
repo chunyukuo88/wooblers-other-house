@@ -12,11 +12,18 @@ export const setUpNavigatorShare = async (): Promise<void> => {
   };
 };
 
-export const setupNavigatorError = () => {
+export const setUpNavigatorError = () => {
   delete global.navigator;
 };
 
-export const setupCookies = (cookies: string) => {
+export const setUpAbortedSharing = () => {
+  delete global.navigator;
+  global.navigator = {
+    share: jest.fn().mockRejectedValueOnce(new DOMException('Share canceled', 'Abort Error')),
+  };
+};
+
+export const setUpCookies = (cookies: string) => {
   delete global.document.cookie;
   global.document = Object.create(document);
   Object.defineProperty(document, 'cookie', {

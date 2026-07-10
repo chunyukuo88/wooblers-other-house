@@ -2,9 +2,10 @@ import { handleShare } from '../utils';
 import { trackEvent } from '../../../../../app/analytics';
 import { GA_EVENTS } from '../../../../../app/analytics/tracked-events';
 import {
-  setupCookies,
+  setUpAbortedSharing,
+  setUpCookies,
   setUpNavigatorClipboardWriteText,
-  setupNavigatorError,
+  setUpNavigatorError,
   setUpNavigatorShare,
   setUpWindowLocation,
 } from './fixtures';
@@ -75,7 +76,7 @@ describe('handleShare()', () => {
           const urlWithFlag = `https://www.wooblers-other-house.com/?album=onomichi-trip&${flag}=${value}`;
 
           const onlyPrivateImagesCookie = `${flag}=${value}`;
-          setupCookies(onlyPrivateImagesCookie);
+          setUpCookies(onlyPrivateImagesCookie);
           await setUpWindowLocation(urlWithoutFlag);
           await setUpNavigatorClipboardWriteText();
 
@@ -96,7 +97,7 @@ describe('handleShare()', () => {
           const urlWithFlag = `https://www.wooblers-other-house.com/?album=onomichi-trip&${flag}=${value}`;
 
           const multipleCookies = `_ga=GA1.1.1024119243.1763168709; _ga_9MSJV2CGHW=GS2.1.s1778896719$o31$g1$t1778900238$j60$l0$h0; ${flag}=${value}; __next_hmr_refresh_hash__=201`;
-          setupCookies(multipleCookies);
+          setUpCookies(multipleCookies);
           await setUpWindowLocation(urlWithoutFlag);
           await setUpNavigatorClipboardWriteText();
 
@@ -136,12 +137,22 @@ describe('handleShare()', () => {
     describe('WHEN: album sharing fails', () => {
       it('THEN: tracking reports that failure', async () => {
         await setUpWindowLocation(href);
-        setupNavigatorError();
+        setUpNavigatorError();
 
         await handleShare();
 
         expect(trackEvent).toHaveBeenCalledTimes(1);
         expect(trackEvent).toHaveBeenCalledWith(GA_EVENTS.SHARING.SHARE_FAILED);
+      });
+    });
+    describe('WHEN: user initiates sharing but then aborts it', () => {
+      it('THEN: sends no further tracking', async () => {
+        await setUpWindowLocation(href);
+        setUpAbortedSharing();
+
+        await handleShare();
+
+        expect(trackEvent).not.toHaveBeenCalled();
       });
     });
   });

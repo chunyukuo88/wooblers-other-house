@@ -20,6 +20,9 @@ export const handleShare = async (): Promise<void> => {
       trackEvent(GA_EVENTS.SHARING.SHARE_CLIPBOARD);
     }
   } catch (e) {
+    if (e instanceof DOMException && e.name === 'Abort Error') {
+      return;
+    }
     trackEvent(GA_EVENTS.SHARING.SHARE_FAILED);
   }
 };
