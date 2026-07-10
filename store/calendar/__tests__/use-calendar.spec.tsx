@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { ERROR_MISSING_CONTEXT } from '../use-calendar';
+import { ERROR_MISSING_CONTEXT } from '../context';
 import { renderHook } from '@testing-library/react';
 import { Context, useCalendar } from '../context';
 import { Season } from '../types';

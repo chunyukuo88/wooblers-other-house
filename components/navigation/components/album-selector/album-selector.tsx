@@ -1,13 +1,12 @@
 'use client';
 import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
+import { trackEvent, GA_EVENTS } from '@/analytics';
 import { useAlbum, useMainImages } from 'store';
 import { emptyFolder, Folder } from 'store/fetched-images/types';
 import { convertFriendlyToQueryParam } from 'store/album/utils';
 import { AlbumsProps } from './types';
 import { handleShare, updateUrl } from './utils';
 import '../../styles/album-selector.css';
-import { trackEvent } from '../../../../app/analytics';
-import { GA_EVENTS } from '../../../../app/analytics/tracked-events';
 
 export const AlbumSelector = (props: any) => {
   const { style } = props;
