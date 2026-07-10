@@ -11,8 +11,8 @@ async function enabledByCookie(queryParamKey: string) {
   return cookieStore.get(queryParamKey)?.value === activationValue;
 }
 
-export async function getFeatureStatus(searchParam: string, queryParamKey: string) {
+export async function getFeatureStatus(queryParamValue: string, queryParamKey: string) {
   const featureEnabledByCookie = enabledByCookie(queryParamKey);
-  const featureEnabledByQueryParams = enabledByFeatureFlag(searchParam);
+  const featureEnabledByQueryParams = enabledByFeatureFlag(queryParamValue);
   return featureEnabledByQueryParams || featureEnabledByCookie;
 }
