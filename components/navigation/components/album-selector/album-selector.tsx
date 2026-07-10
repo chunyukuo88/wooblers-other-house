@@ -4,7 +4,7 @@ import { useAlbum, useMainImages } from 'store';
 import { emptyFolder, Folder } from 'store/fetched-images/types';
 import { convertFriendlyToQueryParam } from 'store/album/utils';
 import { AlbumsProps } from './types';
-import { updateUrl } from './utils';
+import { handleShare, updateUrl } from './utils';
 import '../../styles/album-selector.css';
 
 export const AlbumSelector = (props: any) => {
@@ -40,9 +40,18 @@ export const AlbumSelector = (props: any) => {
   }, [currentFolder]);
 
   return (
-    <select name="album-picked" id="woh__album-picker" onChange={changeHandler} style={style}>
-      {!folders?.length ? <AlbumsLoading /> : <Albums folders={folders} current={current} />}
-    </select>
+    <>
+      <select name="album-picked" id="woh__album-picker" onChange={changeHandler} style={style}>
+        {!folders?.length ? <AlbumsLoading /> : <Albums folders={folders} current={current} />}
+      </select>
+      <button
+        onClick={() => {
+          handleShare(() => {});
+        }}
+      >
+        Share album 😀
+      </button>
+    </>
   );
 };
 
