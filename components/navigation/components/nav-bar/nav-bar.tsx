@@ -1,4 +1,3 @@
-'use client';
 import Link from 'next/link';
 import { allPaths } from '../../../../allPaths';
 import { usePathname } from 'next/navigation';

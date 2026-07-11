@@ -1,4 +1,3 @@
-'use client';
 import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
 import { trackEvent, GA_EVENTS } from '@/analytics';
 import { useAlbum, useMainImages } from 'store';
