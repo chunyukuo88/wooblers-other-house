@@ -1,4 +1,3 @@
-'use client';
 import { useRef, useState } from 'react';
 import { updateWithNewCaption } from '@/components/galleries/main-gallery/utils';
 import { createHttpRequest, putData } from '../../../common/http';
