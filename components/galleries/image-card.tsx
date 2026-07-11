@@ -8,6 +8,7 @@ export function ImageCard(props: SingleCardProps) {
   const srcSet = getSrcSet(cdn, bucketAlias, file);
   const { background, captionFontColor } = getCaptionColor({ red, green, blue });
 
+  const eagerLoad = index < 3;
   return (
     <>
       <div
@@ -16,7 +17,14 @@ export function ImageCard(props: SingleCardProps) {
         className={`woh__image-item woh__image-index-${index}`}
         style={{ background, color: captionFontColor }}
       >
-        <img srcSet={srcSet} sizes={SIZES} alt={`Image #${index + 1}`} style={responsive} />
+        <img
+          srcSet={srcSet}
+          sizes={SIZES}
+          alt={`Image #${index + 1}`}
+          style={responsive}
+          loading={eagerLoad ? 'eager' : 'lazy'}
+          fetchPriority={eagerLoad ? 'high' : 'low'}
+        />
         {displayCaption ? (
           <div className="woh__caption" data-testid="display-caption">
             {displayCaption}

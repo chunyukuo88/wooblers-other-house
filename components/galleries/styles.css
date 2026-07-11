@@ -5,7 +5,7 @@
 .woh__image-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 80px;
+  gap: 2rem;
 }
 
 .woh__image-item {
@@ -22,6 +22,7 @@
 }
 
 [class*='woh__image-wrapper-'] {
+  aspect-ratio: 360 / 540;
   display: flex;
   align-items: center;
   justify-content: center;

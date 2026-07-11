@@ -1,6 +1,4 @@
-'use client';
 import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
-import { trackEvent, GA_EVENTS } from '@/analytics';
 import { useAlbum, useMainImages } from 'store';
 import { emptyFolder, Folder } from 'store/fetched-images/types';
 import { convertFriendlyToQueryParam } from 'store/album/utils';
@@ -40,19 +38,11 @@ export const AlbumSelector = (props: any) => {
     }
   }, [currentFolder]);
 
-  const clickHandler = async () => {
-    trackEvent(GA_EVENTS.SHARING.SHARE_INITIATED);
-    await handleShare();
-  };
-
   return (
     <>
       <select name="album-picked" id="woh__album-picker" onChange={changeHandler} style={style}>
         {!folders?.length ? <AlbumsLoading /> : <Albums folders={folders} current={current} />}
       </select>
-      <button onClick={clickHandler} data-testid="woh__album-picker-button">
-        Share album 😀
-      </button>
     </>
   );
 };
