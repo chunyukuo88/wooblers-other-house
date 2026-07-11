@@ -8,7 +8,7 @@ export function ImageCard(props: SingleCardProps) {
   const srcSet = getSrcSet(cdn, bucketAlias, file);
   const { background, captionFontColor } = getCaptionColor({ red, green, blue });
 
-  const eagerLoad = index < 6;
+  const eagerLoad = index < 3;
   return (
     <>
       <div
