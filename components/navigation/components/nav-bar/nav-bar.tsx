@@ -23,7 +23,7 @@ export default function NavBar(props: NavBarProps) {
       <ColorsLink pathname={pathname} />
       <TechLink pathname={pathname} />
       <Albums pathname={pathname} style={style} />
-      <ShareButton style={{ fontColor }} />
+      <ShareButton />
     </div>
   );
 }
