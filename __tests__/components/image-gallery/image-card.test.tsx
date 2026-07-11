@@ -36,7 +36,7 @@ describe('<ImageCard />', () => {
             key: '12345.jpg',
           },
           caption,
-          galleryPrefix: 'https://woobler-bread.s3.us-east-1.amazonaws.com/',
+          galleryPrefix: 'https://woobler-something.s3.us-east-1.amazonaws.com/',
           index: 123,
         };
         const expectedDisplayText = processRawCaption(caption);

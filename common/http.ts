@@ -1,11 +1,5 @@
 import { errorLogger } from './logging';
 
-export async function getBreadImages() {
-  const breadImageSource = process.env.NEXT_PUBLIC_BREAD_SOURCE!;
-  const response = await fetch(breadImageSource);
-  return await response.json();
-}
-
 export async function getMainPageImages(showPrivateImages: boolean) {
   const mainImagesEndpoint = getMainImagesEndpoint(showPrivateImages);
   try {

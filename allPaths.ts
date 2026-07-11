@@ -5,7 +5,6 @@ const EMAIL_API_ROUTE = '/api/send-email';
 const protectedPaths = [DASHBOARD, PROFILE, EMAIL_API_ROUTE];
 
 const allPaths = {
-  BREAD: '/bread',
   DASHBOARD,
   EMAIL_API_ROUTE,
   HOME: '/',
