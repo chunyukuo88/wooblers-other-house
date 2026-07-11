@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { allPaths } from '../../../../allPaths';
 import { usePathname } from 'next/navigation';
-import { AlbumSelector } from '@/components/navigation/components/album-selector/album-selector';
+import { AlbumSelector } from '../album-selector/album-selector';
 import {
   ColorsLinkProps,
   HomeLinkProps,
@@ -10,9 +10,11 @@ import {
 } from '@/components/navigation/components/nav-bar/types';
 import { NavLink } from '@/components/navigation/components/nav-bar/nav-link';
 import { getStyle } from '@/components/navigation/components/nav-bar/utils';
+import { ShareButton } from '../share-button';
 import '../../styles/nav-bar.css';
 
-export default function NavBar({ fontColor }: NavBarProps) {
+export default function NavBar(props: NavBarProps) {
+  const { fontColor } = props;
   const pathname = usePathname();
   const style = getStyle(fontColor);
 
@@ -21,6 +23,7 @@ export default function NavBar({ fontColor }: NavBarProps) {
       <ColorsLink pathname={pathname} />
       <TechLink pathname={pathname} />
       <Albums pathname={pathname} style={style} />
+      <ShareButton style={{ fontColor }} />
     </div>
   );
 }
