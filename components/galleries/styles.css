@@ -59,6 +59,7 @@
 }
 
 [class*='woh__image-wrapper-'] {
+  aspect-ratio: 360 / 540;
   display: flex;
   align-items: center;
   justify-content: center;
