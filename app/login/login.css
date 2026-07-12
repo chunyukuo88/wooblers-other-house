@@ -1,15 +1,114 @@
 .woh__login-page {
-  padding: 2rem;
-  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  padding-top: 3rem;
+  width: 100%;
 }
 
-.woh__login-page form {
+.woh__login-card {
+  background: rgba(255, 255, 255, 0.82);
+  border-radius: 12px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem 3rem;
+  width: min(90vw, 22rem);
+  animation: card-drop-in 0.5s ease-out forwards;
+}
+
+.woh__login-header {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
 }
 
-.woh__login-page form input,
-.woh__login-page form button {
-  margin: 0.25rem;
-  width: 10rem;
+.woh__login-icon {
+  font-size: 2.5rem;
+}
+
+.woh__login-title {
+  font-family: Georgia, Times, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.woh__login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.woh__login-field input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.3);
+  padding: 0.4rem 0;
+  font-family: Georgia, Times, serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.woh__login-field input:focus {
+  border-bottom-color: rgba(0, 0, 0, 0.8);
+}
+
+.woh__login-field input::placeholder {
+  color: rgba(0, 0, 0, 0.35);
+  font-style: italic;
+}
+
+.woh__login-error {
+  font-family: Georgia, Times, serif;
+  font-size: 0.875rem;
+  color: #b91c1c;
+  font-style: italic;
+  margin: 0;
+}
+
+.woh__login-button {
+  width: 100%;
+  padding: 0.65rem;
+  background: rgba(0, 0, 0, 0.82);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: Georgia, Times, serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+  margin-top: 0.5rem;
+}
+
+.woh__login-button:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.woh__login-button:active:not(:disabled) {
+  transform: translate(1px, 1px);
+}
+
+.woh__login-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@keyframes card-drop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  65% {
+    transform: translateY(5px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

@@ -23,7 +23,7 @@ export default function NavBar(props: NavBarProps) {
       <ColorsLink pathname={pathname} />
       <TechLink pathname={pathname} />
       <Albums pathname={pathname} style={style} />
-      <ShareButton />
+      {pathname === allPaths.HOME ? <ShareButton /> : null}
     </div>
   );
 }
@@ -45,10 +45,10 @@ const TechLink = (props: TechLinkProps) => {
   const { pathname } = props;
   return (
     <div className="woh__nav-bar-string">
-      {pathname === allPaths.TECH ? (
+      {pathname === allPaths.LOGIN ? (
         <Link href={allPaths.HOME}>Home</Link>
       ) : (
-        <NavLink href={allPaths.TECH}>Tech</NavLink>
+        <NavLink href={allPaths.LOGIN}>Admin</NavLink>
       )}
     </div>
   );
