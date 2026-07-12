@@ -8,18 +8,25 @@ import './login.css';
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+    setLoading(true);
+
     const result = await signIn('credentials', {
       username,
       password,
       redirect: false,
     });
 
+    setLoading(false);
+
     if (result?.error) {
-      console.error('Authentication error:', result.error);
+      setError('Invalid username or password.');
     } else {
       router.push(allPaths.HOME);
     }
@@ -27,21 +34,40 @@ export default function Login() {
 
   return (
     <div className="woh__login-page">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button type="submit">Sign In</button>
-      </form>
+      <div className="woh__login-card">
+        <div className="woh__login-header">
+          <span className="woh__login-icon">🏡</span>
+          <h2 className="woh__login-title">w00t!</h2>
+        </div>
+        <form className="woh__login-form" onSubmit={handleSubmit}>
+          <div className="woh__login-field">
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Admin username"
+              autoComplete="username"
+            />
+          </div>
+          <div className="woh__login-field">
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Admin password"
+              autoComplete="current-password"
+            />
+          </div>
+          {error && <p className="woh__login-error">{error}</p>}
+          <button
+            type="submit"
+            className="woh__login-button"
+            disabled={loading || !username || !password}
+          >
+            {loading ? 'Doing it…' : 'Do it'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

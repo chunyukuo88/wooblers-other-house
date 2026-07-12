@@ -4,7 +4,7 @@
   font-family: Georgia, Times, serif;
   font-size: 1rem;
   border: inherit;
-  width: 100%;
+  max-width: 100%;
 }
 
 .woh__album-picker__option {
