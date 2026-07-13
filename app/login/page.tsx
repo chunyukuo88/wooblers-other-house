@@ -1,8 +1,9 @@
 'use client';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { allPaths } from '../../allPaths';
+import { SignInResult } from './types';
 import './login.css';
 
 export default function Login() {
@@ -12,12 +13,12 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
 
-    const result = await signIn('credentials', {
+    const result: SignInResult = await signIn('credentials', {
       username,
       password,
       redirect: false,

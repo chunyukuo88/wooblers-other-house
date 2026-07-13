@@ -19,6 +19,9 @@ export async function getFolders(searchParam: string): Promise<GetFoldersResult>
 }
 
 const removeThumbnails = (folders: Folder[]) => {
+  if (!folders.length) {
+    return [];
+  }
   return folders.map((folder: Folder) => {
     const photosSansThumbnail = folder.photos.filter((photo: string) => {
       const isThumbnail = photo.split('.').find((part) => part.includes('thumbnail'));
