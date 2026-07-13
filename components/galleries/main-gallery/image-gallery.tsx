@@ -37,7 +37,9 @@ const ImageGallery = (props: ImageGalleryProps) => {
 
   useEffect(() => {
     if (showPrivateImages) {
-      document.cookie = `${process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY}=${process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_VAL}; path=/;`;
+      document.cookie = `${process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY}=${process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_ON}; path=/;`;
+    } else {
+      document.cookie = `${process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY}=${process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_OFF}; path=/;`;
     }
   }, [showPrivateImages]);
 

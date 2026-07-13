@@ -7,8 +7,7 @@ type GetFoldersResult = {
 };
 
 export async function getFolders(searchParam: string): Promise<GetFoldersResult> {
-  const featureFlag = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY!;
-  const displayPrivateImages = await getFeatureStatus(searchParam, featureFlag);
+  const displayPrivateImages = await getFeatureStatus(searchParam);
   const unprocessedFolders = await getMainPageImages(displayPrivateImages);
   const sansThumbnails = removeThumbnails(unprocessedFolders);
 
