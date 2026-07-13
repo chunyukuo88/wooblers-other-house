@@ -13,15 +13,15 @@ type Params = {
 
 export default async function Page({ searchParams }: Params) {
   const params = await searchParams;
+
   const privateImageQuery = params[process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY!];
-  const albumQueryParameter = params['album'];
-  const preselectedAlbum = convertAlbumParamToFriendly(albumQueryParameter);
-
   const { displayPrivateImages, folders } = await getFolders(privateImageQuery);
-
   if (!folders) {
     return <div>The site is down for maintenance. Come back tomorrow!</div>;
   }
+
+  const albumQueryParameter = params['album'];
+  const preselectedAlbum = convertAlbumParamToFriendly(albumQueryParameter);
 
   return (
     <ImageGallery

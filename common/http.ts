@@ -1,7 +1,10 @@
 import { errorLogger } from './logging';
 
 export async function getMainPageImages(showPrivateImages: boolean) {
-  const mainImagesEndpoint = getMainImagesEndpoint(showPrivateImages);
+  const mainImagesEndpoint = showPrivateImages
+    ? process.env.NEXT_PRIVATE_IMAGE_SOURCE!
+    : process.env.NEXT_PUBLIC_IMAGE_SOURCE!;
+
   try {
     const response = await fetch(mainImagesEndpoint);
     return await response.json();
@@ -11,13 +14,6 @@ export async function getMainPageImages(showPrivateImages: boolean) {
       error,
     );
   }
-}
-
-function getMainImagesEndpoint(showPrivateImages: boolean): string {
-  const result = showPrivateImages
-    ? 'https://z943v9dl6c.execute-api.us-east-1.amazonaws.com/prod/src/getImagesPrivate'
-    : 'https://6nxnraji72.execute-api.us-east-2.amazonaws.com/gallery';
-  return result;
 }
 
 export type Folder = {
