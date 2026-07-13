@@ -28,7 +28,7 @@ export const handleShare = async (): Promise<void> => {
 
 const buildUrl = (baseUrl: string): string => {
   const flag = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY!;
-  const value = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_VAL!;
+  const value = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_ON!;
   const flagAndValue = getPrivateImagesFlag(flag, value).split('=');
   if (!flagAndValue) {
     return baseUrl;

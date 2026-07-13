@@ -52,7 +52,7 @@ describe('handleShare()', () => {
       describe('WHEN: the user clicks the share button', () => {
         it("THEN: copies the URL to the user's clipboard as is.", async () => {
           const flag = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY!;
-          const value = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_VAL!;
+          const value = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_ON!;
           const urlWithFlag = `https://www.wooblers-other-house.com/?${flag}=${value}&album=onomichi-trip`;
 
           await setUpWindowLocation(urlWithFlag);
@@ -71,7 +71,7 @@ describe('handleShare()', () => {
         it("THEN: adds the flag in before copying the URL to the user's clipboard.", async () => {
           const urlWithoutFlag = `https://www.wooblers-other-house.com/?album=onomichi-trip`;
           const flag = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY!;
-          const value = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_VAL!;
+          const value = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_ON!;
           const urlWithFlag = `https://www.wooblers-other-house.com/?album=onomichi-trip&${flag}=${value}`;
 
           const onlyPrivateImagesCookie = `${flag}=${value}`;
@@ -92,7 +92,7 @@ describe('handleShare()', () => {
         it("THEN: adds the flag in before copying the URL to the user's clipboard.", async () => {
           const urlWithoutFlag = `https://www.wooblers-other-house.com/?album=onomichi-trip`;
           const flag = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY!;
-          const value = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_VAL!;
+          const value = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_ON!;
           const urlWithFlag = `https://www.wooblers-other-house.com/?album=onomichi-trip&${flag}=${value}`;
 
           const multipleCookies = `_ga=GA1.1.1024119243.1763168709; _ga_9MSJV2CGHW=GS2.1.s1778896719$o31$g1$t1778900238$j60$l0$h0; ${flag}=${value}; __next_hmr_refresh_hash__=201`;
