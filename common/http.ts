@@ -2,7 +2,7 @@ import { errorLogger } from './logging';
 
 export async function getMainPageImages(showPrivateImages: boolean) {
   const mainImagesEndpoint = showPrivateImages
-    ? process.env.NEXT_PRIVATE_IMAGE_SOURCE!
+    ? process.env.NEXT_PUBLIC_IMAGE_SOURCE_PRIVATE!
     : process.env.NEXT_PUBLIC_IMAGE_SOURCE!;
 
   try {

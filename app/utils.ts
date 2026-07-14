@@ -10,11 +10,11 @@ type GetFoldersResult = {
 export async function getFolders(searchParam: string): Promise<GetFoldersResult> {
   logger('getFolders() 0');
   const displayPrivateImages = await getFeatureStatus(searchParam);
-  logger('getFolders() 1');
+  logger('getFolders() 1 - displayPrivateImages', displayPrivateImages);
   const unprocessedFolders = await getMainPageImages(displayPrivateImages);
-  logger('getFolders() 2');
+  logger('getFolders() 2 - unprocessedFolders', unprocessedFolders);
   const sansThumbnails = removeThumbnails(unprocessedFolders);
-  logger('getFolders() 3');
+  logger('getFolders() 3 - sansThumbnails', sansThumbnails);
 
   return {
     displayPrivateImages,
@@ -24,7 +24,7 @@ export async function getFolders(searchParam: string): Promise<GetFoldersResult>
 
 const removeThumbnails = (folders: Folder[]) => {
   logger('🍎 removeThumbnails 0');
-  if (!folders.length) {
+  if (!folders) {
     return [];
   }
   logger('🍎 removeThumbnails 1');
