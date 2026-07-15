@@ -1,19 +1,28 @@
 .woh__site-title-string {
   display: flex;
+  justify-content: center;
   position: sticky;
   top: 0;
   z-index: 10;
+  width: 100%;
+}
+
+.woh__site-title-string,
+.woh__wiggling-toys {
+  height: 100px;
 }
 
 .woh_site-title-string--shrunken {
   font-size: 1.5rem;
   padding: 0.15rem 0;
+  height: 90px;
+  border-radius: 50%;
+  width: 30%;
 }
 
 .woh__wiggling-toys {
   animation: wiggle 10s linear infinite;
   margin: 0 1rem;
-  padding-top: 10%;
   padding-bottom: 10%;
 }
 
