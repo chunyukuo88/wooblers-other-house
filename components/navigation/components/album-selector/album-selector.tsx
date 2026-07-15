@@ -3,8 +3,8 @@ import { useAlbum, useMainImages } from 'store';
 import { emptyFolder, Folder } from 'store/fetched-images/types';
 import { convertFriendlyToQueryParam } from 'store/album/utils';
 import { AlbumsProps } from './types';
-import { handleShare, updateUrl } from './utils';
-import '../../styles/album-selector.css';
+import { updateUrl } from './utils';
+import './album-selector.css';
 
 export const AlbumSelector = (props: any) => {
   const { style } = props;

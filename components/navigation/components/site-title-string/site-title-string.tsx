@@ -1,13 +1,27 @@
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { allPaths } from '../../../../allPaths';
-import '../../styles/site-title-string.css';
 import { HomeLinkProps, SiteTitleStringProps } from './types';
-import { Wooblers } from './wooblers';
-import { usePathname } from 'next/navigation';
+import { Wooblers } from '.';
+import './site-title-string.css';
+import { useEffect, useState } from 'react';
 
-export default function SiteTitleString(props: SiteTitleStringProps) {
-  const { fontColor } = props;
+export function SiteTitleString(props: SiteTitleStringProps) {
+  const { fontColor, gradientStart } = props;
   const pathname = usePathname();
+  const [isShrunken, setIsShrunken] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const shouldBeShrunken = window.scrollY > 50;
+      setIsShrunken(shouldBeShrunken);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const shadowColor = !fontColor ? 'gray' : 'black';
 
   const textShadow =
@@ -19,16 +33,17 @@ export default function SiteTitleString(props: SiteTitleStringProps) {
       : undefined;
 
   const style = {
+    background: `${gradientStart}`,
     color: fontColor,
-    transition: '2s ease-in',
+    transition: '0.25s ease-in',
     textShadow,
   };
 
+  const className = `woh__site-title-string ${isShrunken ? 'woh_site-title-string--shrunken' : ''}`;
+
   return (
-    <h1 className="woh__site-title-string" style={style}>
-      <div className="woh__wiggling-toys">⚽</div>
+    <h1 className={className} style={style}>
       <HomeLink pathname={pathname} />
-      <div className="woh__wiggling-toys">🪀</div>
     </h1>
   );
 }

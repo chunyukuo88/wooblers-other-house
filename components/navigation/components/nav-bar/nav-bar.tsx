@@ -1,19 +1,14 @@
 import Link from 'next/link';
-import { allPaths } from '../../../../allPaths';
 import { usePathname } from 'next/navigation';
-import { AlbumSelector } from '../album-selector/album-selector';
-import {
-  ColorsLinkProps,
-  HomeLinkProps,
-  NavBarProps,
-  TechLinkProps,
-} from '@/components/navigation/components/nav-bar/types';
-import { NavLink } from '@/components/navigation/components/nav-bar/nav-link';
-import { getStyle } from '@/components/navigation/components/nav-bar/utils';
+import { allPaths } from '../../../../allPaths';
+import { AlbumSelector } from '../album-selector';
+import { ColorsLinkProps, HomeLinkProps, NavBarProps, TechLinkProps } from './types';
+import { NavLink } from './nav-link';
+import { getStyle } from './utils';
 import { ShareButton } from '../share-button';
-import '../../styles/nav-bar.css';
+import './nav-bar.css';
 
-export default function NavBar(props: NavBarProps) {
+export function NavBar(props: NavBarProps) {
   const { fontColor } = props;
   const pathname = usePathname();
   const style = getStyle(fontColor);
