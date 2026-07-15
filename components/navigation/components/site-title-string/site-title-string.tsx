@@ -43,9 +43,7 @@ export function SiteTitleString(props: SiteTitleStringProps) {
 
   return (
     <h1 className={className} style={style}>
-      <div className="woh__wiggling-toys">⚽</div>
       <HomeLink pathname={pathname} />
-      <div className="woh__wiggling-toys">🪀</div>
     </h1>
   );
 }
