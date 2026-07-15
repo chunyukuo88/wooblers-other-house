@@ -1,11 +1,11 @@
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { allPaths } from '../../../../allPaths';
 import '../../styles/site-title-string.css';
 import { HomeLinkProps, SiteTitleStringProps } from './types';
-import { Wooblers } from './wooblers';
-import { usePathname } from 'next/navigation';
+import { Wooblers } from '.';
 
-export default function SiteTitleString(props: SiteTitleStringProps) {
+export function SiteTitleString(props: SiteTitleStringProps) {
   const { fontColor } = props;
   const pathname = usePathname();
   const shadowColor = !fontColor ? 'gray' : 'black';
