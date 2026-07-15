@@ -1,5 +1,13 @@
 .woh__site-title-string {
   display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.woh_site-title-string--shrunken {
+  font-size: 1.5rem;
+  padding: 0.15rem 0;
 }
 
 .woh__wiggling-toys {
