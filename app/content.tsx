@@ -1,7 +1,7 @@
 'use client';
-import { ReactNode, useContext } from 'react';
+import { ReactNode, useContext, useEffect, useState } from 'react';
 import { SiteTitleString } from '@/components/navigation/components/site-title-string';
-import NavBar from '@/components/navigation/components/nav-bar/nav-bar';
+import { NavBar } from '@/components/navigation/components/nav-bar';
 import { BackgroundColorContext as context } from 'store/background-color/context';
 import { calculateFontColor } from '../common/utils';
 import { SeasonalEffect } from '@/components/seasonal/seasonal-effect';
@@ -12,6 +12,18 @@ interface Children {
 
 export function Content({ children }: Children) {
   const { red, green, blue, sum } = useContext(context);
+  const [isShrunken, setIsShrunken] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const shouldBeShrunken = window.scrollY > 50;
+      setIsShrunken(shouldBeShrunken);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const gradientStart = `rgb(${red}, ${green}, ${blue})`;
   const style = {
@@ -21,7 +33,7 @@ export function Content({ children }: Children) {
   return (
     <main className="woh__site-content" style={style}>
       <SeasonalEffect />
-      <SiteTitleString fontColor={fontColor} />
+      <SiteTitleString fontColor={fontColor} isShrunken={isShrunken} />
       <NavBar fontColor={fontColor} />
       {children}
     </main>
