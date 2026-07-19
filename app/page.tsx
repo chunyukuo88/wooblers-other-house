@@ -1,4 +1,4 @@
-import ImageGallery from '@/components/galleries/main-gallery/image-gallery';
+import { ImageGallery } from '@/components/galleries/main-gallery';
 import { getFolders } from './utils';
 import { Metadata } from 'next';
 import { convertAlbumParamToFriendly } from 'store/album/utils';

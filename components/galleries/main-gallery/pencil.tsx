@@ -1,3 +1,4 @@
+'use client';
 import { useRef, useState } from 'react';
 import { updateWithNewCaption } from '@/components/galleries/main-gallery/utils';
 import { createHttpRequest, putData } from '../../../common/http';
@@ -8,7 +9,7 @@ type PencilProps = {
   index: number;
 };
 
-export default function Pencil({ captions, index }: PencilProps) {
+export function Pencil({ captions, index }: PencilProps) {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const { data: session } = useSession();
   const inputRef = useRef(null);
@@ -17,6 +18,9 @@ export default function Pencil({ captions, index }: PencilProps) {
 
   const confirmationHandler = async () => {
     const captionsClone = [...captions];
+    if (session) {
+      console.dir(session);
+    }
     try {
       // @ts-ignore
       const newCaption = inputRef.current.value;
