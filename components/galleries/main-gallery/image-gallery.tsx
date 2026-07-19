@@ -15,7 +15,7 @@ type ImageGalleryProps = {
   preselectedAlbum: string;
 };
 
-const ImageGallery = (props: ImageGalleryProps) => {
+export const ImageGallery = (props: ImageGalleryProps) => {
   const { folders, preselectedAlbum, showPrivateImages } = props;
   const { currentFolder, updateCurrentFolder, updateFetchedFolders } = useMainImages();
   const { red, green, blue } = useColors();
@@ -86,6 +86,7 @@ const ImageGallery = (props: ImageGalleryProps) => {
                 file={file}
                 index={index}
                 caption={caption}
+                captions={current.captions}
                 bucketAlias={bucketAlias}
                 red={red}
                 green={green}
@@ -99,5 +100,3 @@ const ImageGallery = (props: ImageGalleryProps) => {
     </div>
   );
 };
-
-export default ImageGallery;

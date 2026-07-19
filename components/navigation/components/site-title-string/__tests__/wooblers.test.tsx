@@ -1,6 +1,7 @@
+import { SessionProvider } from 'next-auth/react';
 import { render } from '@testing-library/react';
-import { Wooblers } from '..';
 import { useCalendar } from 'store';
+import { Wooblers } from '..';
 
 jest.mock('../../../../../store');
 
@@ -13,7 +14,11 @@ describe('<Wooblers />', () => {
           currentDate: 'December 31, 2025',
           currentSeason: '',
         });
-        render(<Wooblers />);
+        render(
+          <SessionProvider session={null}>
+            <Wooblers />
+          </SessionProvider>,
+        );
 
         const santaHat = document.querySelector('#santa-hat');
 
@@ -33,7 +38,11 @@ describe('<Wooblers />', () => {
           currentDate: `${month} 15, 2026`,
           currentSeason: '',
         });
-        render(<Wooblers />);
+        render(
+          <SessionProvider session={null}>
+            <Wooblers />
+          </SessionProvider>,
+        );
 
         const santaHat = document.querySelector('#santa-hat');
         const winterHat = document.querySelector('#winter-hat');
@@ -49,7 +58,11 @@ describe('<Wooblers />', () => {
           currentDate: '',
           currentSeason: '',
         });
-        render(<Wooblers />);
+        render(
+          <SessionProvider session={null}>
+            <Wooblers />
+          </SessionProvider>,
+        );
 
         const santaHat = document.querySelector('#santa-hat');
         const winterHat = document.querySelector('#winter-hat');

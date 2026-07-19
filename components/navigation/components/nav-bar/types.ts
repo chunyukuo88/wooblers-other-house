@@ -17,7 +17,7 @@ export type HomeLinkProps = {
     fontWeight: number;
   };
 };
-export type TechLinkProps = {
+export type AdminLinkProps = {
   pathname: string;
 };
 export type ColorsLinkProps = {
