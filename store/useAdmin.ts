@@ -2,14 +2,12 @@ import { Session } from 'next-auth';
 
 type SessionStatus = 'authenticated' | 'loading' | 'unauthenticated';
 
-export function useAdmin(session: Session | null, status: SessionStatus): { isAdmin: boolean } {
+export function useAdmin(session: Session | null, status: SessionStatus): boolean {
   if (!session || !status) {
-    return { isAdmin: false };
+    return false;
   }
-  if (session?.user?.email) {
-    return {
-      isAdmin: session.user.email === 'alexgochenour@gmail.com',
-    };
+  if (session?.user?.email && status === 'authenticated') {
+    return session.user.email === 'alexgochenour@gmail.com';
   }
-  return { isAdmin: false };
+  return false;
 }

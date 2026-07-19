@@ -32,7 +32,8 @@ export function ImageCard(props: SingleCardProps) {
         />
         {displayCaption ? (
           <div className="woh__caption" data-testid="display-caption">
-            {displayCaption} {isAdmin ? <Pencil captions={captions} index={index} /> : null}
+            {displayCaption}{' '}
+            <span>{isAdmin ? <Pencil captions={captions} index={index} /> : null}</span>
           </div>
         ) : null}
       </div>

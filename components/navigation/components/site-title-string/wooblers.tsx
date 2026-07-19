@@ -8,10 +8,12 @@ export function Wooblers() {
   const isAdmin = useAdmin(session, status);
   const month = currentDate.split(' ')[0];
 
+  console.dir(session);
+  console.dir(status);
   return (
     <div className="woh_drop-in">
       <SeasonalAdornment month={month} />
-      {isAdmin ? <>Admin's</> : <div>Woobler's</div>}
+      {isAdmin ? <div>Admin's</div> : <div>Woobler's</div>}
     </div>
   );
 }
