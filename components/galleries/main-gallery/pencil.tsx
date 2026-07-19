@@ -11,16 +11,12 @@ type PencilProps = {
 
 export function Pencil({ captions, index }: PencilProps) {
   const [modalIsVisible, setModalIsVisible] = useState(false);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const inputRef = useRef(null);
   const openModal = () => setModalIsVisible(true);
   const closeModal = () => setModalIsVisible(false);
-
   const confirmationHandler = async () => {
     const captionsClone = [...captions];
-    if (session) {
-      console.dir(session);
-    }
     try {
       // @ts-ignore
       const newCaption = inputRef.current.value;
