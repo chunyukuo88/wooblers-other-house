@@ -1,13 +1,17 @@
-import { useCalendar } from '../../../../store';
+import { useCalendar } from 'store';
+import { useSession } from 'next-auth/react';
+import { useAdmin } from 'store';
 
 export function Wooblers() {
   const { currentDate } = useCalendar();
+  const { data: session, status } = useSession();
+  const isAdmin = useAdmin(session, status);
   const month = currentDate.split(' ')[0];
 
   return (
     <div className="woh_drop-in">
       <SeasonalAdornment month={month} />
-      <div>Woobler's</div>
+      {isAdmin ? <>Admin's</> : <div>Woobler's</div>}
     </div>
   );
 }
@@ -24,7 +28,7 @@ function SeasonalAdornment(props: { month: string }) {
 }
 
 function isWinterMonth(month: string): boolean {
-  // Excluding December
+  // Excluding December, which will have Santa theme
   return (
     month.toLocaleLowerCase() === 'november' ||
     month.toLocaleLowerCase() === 'january' ||
