@@ -6,13 +6,14 @@ import { useSession } from 'next-auth/react';
 
 type PencilProps = {
   albumId: string;
+  bucketAlias: string;
   captions: string[];
   index: number;
   photosLength: number;
 };
 
 export function Pencil(props: PencilProps) {
-  const { captions, index, photosLength, albumId } = props;
+  const { captions, index, photosLength, albumId, bucketAlias } = props;
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const { data: session } = useSession();
   const inputRef = useRef(null);
@@ -31,6 +32,7 @@ export function Pencil(props: PencilProps) {
       const httpRequest = createHttpRequest('PUT', session.idToken, {
         captions: updatedCaptions,
         albumId,
+        bucketAlias,
       });
       console.dir('httpRequest');
       console.dir(httpRequest);

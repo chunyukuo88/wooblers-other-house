@@ -44,6 +44,7 @@ export function ImageCard(props: SingleCardProps) {
               index={index}
               photosLength={photosLength}
               albumId={albumId}
+              bucketAlias={bucketAlias}
             />
           ) : null}
         </span>
