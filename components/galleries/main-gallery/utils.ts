@@ -1,12 +1,9 @@
+const separator = '@';
+
 export function createEmptyCaptionsFile(photosLength: number) {
-  const result = [];
-  for (let i = 0; i < photosLength; i++) {
-    result.push('@');
-  }
-  return result;
+  return Array(photosLength).fill(separator);
 }
 
-const separator = '@';
 export function createNewCaptions(
   oldCaptions: string[],
   newCaption: string,
