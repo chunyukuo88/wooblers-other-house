@@ -5,13 +5,14 @@ import { createHttpRequest, putData } from '../../../common/http';
 import { useSession } from 'next-auth/react';
 
 type PencilProps = {
+  albumId: string;
   captions: string[];
   index: number;
   photosLength: number;
 };
 
 export function Pencil(props: PencilProps) {
-  const { captions, index, photosLength } = props;
+  const { captions, index, photosLength, albumId } = props;
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const { data: session } = useSession();
   const inputRef = useRef(null);
@@ -27,9 +28,10 @@ export function Pencil(props: PencilProps) {
       }
       const newCaption = inputRef.current.value;
       const updatedCaptions = createNewCaptions(captionsClone, newCaption, index, photosLength);
-      console.dir('updatedCaptions');
-      console.dir(updatedCaptions);
-      const httpRequest = createHttpRequest('PUT', session.idToken, updatedCaptions);
+      const httpRequest = createHttpRequest('PUT', session.idToken, {
+        captions: updatedCaptions,
+        albumId,
+      });
       console.dir('httpRequest');
       console.dir(httpRequest);
       const url = process.env.NEXT_PUBLIC_PUT_DATA!;

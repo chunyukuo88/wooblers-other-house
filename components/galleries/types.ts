@@ -9,6 +9,7 @@ type ImageCardProps = {
 };
 
 export type SingleCardProps = ImageCardProps & {
+  albumId: string;
   photosLength: number;
   captions: string[];
   file: string;

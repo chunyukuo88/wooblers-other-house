@@ -5,7 +5,8 @@ import { useAdmin } from 'store';
 import { Pencil } from '@/components/galleries/main-gallery';
 
 export function ImageCard(props: SingleCardProps) {
-  const { bucketAlias, captions, caption, file, index, photosLength, red, green, blue } = props;
+  const { bucketAlias, captions, caption, file, index, photosLength, red, green, blue, albumId } =
+    props;
   const displayCaption = caption ? processRawCaption(caption) : '';
   const { data: session, status } = useSession();
   const isAdmin = useAdmin(session, status);
@@ -38,7 +39,12 @@ export function ImageCard(props: SingleCardProps) {
         ) : null}
         <span>
           {isAdmin ? (
-            <Pencil captions={captions} index={index} photosLength={photosLength} />
+            <Pencil
+              captions={captions}
+              index={index}
+              photosLength={photosLength}
+              albumId={albumId}
+            />
           ) : null}
         </span>
       </div>
