@@ -83,10 +83,12 @@ export const ImageGallery = (props: ImageGalleryProps) => {
               style={{ background: `rgb(${red} ${green} ${blue})` }}
             >
               <ImageCard
+                albumId={current.name}
                 file={file}
                 index={index}
                 caption={caption}
                 captions={current.captions}
+                photosLength={current.photos.length}
                 bucketAlias={bucketAlias}
                 red={red}
                 green={green}
