@@ -87,6 +87,7 @@ export const ImageGallery = (props: ImageGalleryProps) => {
                 index={index}
                 caption={caption}
                 captions={current.captions}
+                photosLength={current.photos.length}
                 bucketAlias={bucketAlias}
                 red={red}
                 green={green}

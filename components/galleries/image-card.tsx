@@ -5,7 +5,7 @@ import { useAdmin } from 'store';
 import { Pencil } from '@/components/galleries/main-gallery';
 
 export function ImageCard(props: SingleCardProps) {
-  const { bucketAlias, captions, caption, file, index, red, green, blue } = props;
+  const { bucketAlias, captions, caption, file, index, photosLength, red, green, blue } = props;
   const displayCaption = caption ? processRawCaption(caption) : '';
   const { data: session, status } = useSession();
   const isAdmin = useAdmin(session, status);
@@ -14,6 +14,7 @@ export function ImageCard(props: SingleCardProps) {
   const { background, captionFontColor } = getCaptionColor({ red, green, blue });
 
   const eagerLoad = index < 3;
+
   return (
     <>
       <div
@@ -33,9 +34,13 @@ export function ImageCard(props: SingleCardProps) {
         {displayCaption ? (
           <div className="woh__caption" data-testid="display-caption">
             {displayCaption}{' '}
-            <span>{isAdmin ? <Pencil captions={captions} index={index} /> : null}</span>
           </div>
         ) : null}
+        <span>
+          {isAdmin ? (
+            <Pencil captions={captions} index={index} photosLength={photosLength} />
+          ) : null}
+        </span>
       </div>
     </>
   );

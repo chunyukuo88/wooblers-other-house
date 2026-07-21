@@ -1,13 +1,26 @@
-export function updateWithNewCaption(
+export function createEmptyCaptionsFile(photosLength: number) {
+  const result = [];
+  for (let i = 0; i < photosLength; i++) {
+    result.push('@');
+  }
+  return result;
+}
+
+const separator = '@';
+export function createNewCaptions(
   oldCaptions: string[],
   newCaption: string,
   index: number,
+  photosLength: number,
 ): string[] {
-  const targetOldCaption = oldCaptions[index];
-  const captionAsArray = targetOldCaption.split('@');
-  captionAsArray.pop();
-  captionAsArray.push(newCaption);
-  const updatedCaption = captionAsArray.join('@');
-  oldCaptions.splice(index, 1, updatedCaption);
-  return oldCaptions;
+  const allCaptionsForThisAlbum = oldCaptions.length
+    ? oldCaptions
+    : createEmptyCaptionsFile(photosLength);
+  const targetCaption = allCaptionsForThisAlbum[index];
+  const targetCaptionAsArray = targetCaption.split(separator);
+  targetCaptionAsArray.pop();
+  targetCaptionAsArray.push(newCaption);
+  const updated = targetCaptionAsArray.join(separator);
+  allCaptionsForThisAlbum.splice(index, 1, updated);
+  return allCaptionsForThisAlbum;
 }
