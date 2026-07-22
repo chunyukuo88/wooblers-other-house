@@ -27,8 +27,10 @@ export function Pencil(props: PencilProps) {
       if (!inputRef || inputRef.current === null) {
         return;
       }
+      // @ts-ignore
       const newCaption = inputRef.current.value;
       const updatedCaptions = createNewCaptions(captionsClone, newCaption, index, photosLength);
+      // @ts-ignore
       const httpRequest = createHttpRequest('PUT', session.idToken, {
         captions: updatedCaptions,
         albumId,
