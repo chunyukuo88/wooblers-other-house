@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { MutableRefObject, ReactElement, useRef, useState } from 'react';
 import { createNewCaptions } from '@/components/galleries/main-gallery/utils';
 import { createHttpRequest, putData } from '../../../../common/http';
 import { useSession } from 'next-auth/react';
@@ -50,25 +50,21 @@ export function Pencil(props: PencilProps) {
 
   const cancellationHandler = () => closeModal();
 
-  function Modal() {
-    return (
-      <div className="woh__pencil-triggered-modal">
-        <div>New caption:</div>
-        <textarea ref={inputRef} />
-        <button onClick={confirmationHandler}>Confirm</button>
-        <button className="woh__modal-cancel-button" onClick={cancellationHandler}>
-          Cancel
-        </button>
-      </div>
-    );
-  }
-
   return (
     <>
       <button className="woh__pencil-button" data-testid="pencil-button" onClick={openModal}>
         ✏
       </button>
-      {modalIsVisible ? <Modal /> : null}
+      {modalIsVisible ? (
+        <div className="woh__pencil-triggered-modal">
+          <div>New caption:</div>
+          <textarea ref={inputRef} />
+          <button onClick={confirmationHandler}>Confirm</button>
+          <button className="woh__modal-cancel-button" onClick={cancellationHandler}>
+            Cancel
+          </button>
+        </div>
+      ) : null}
     </>
   );
 }
