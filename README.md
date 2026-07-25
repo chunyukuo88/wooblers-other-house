@@ -1,3 +1,5 @@
 Bootstrapped with instructions from [Vercel](https://nextjs.org/docs/app/building-your-application/testing/jest#quickstart).
 
-This app automatically deploys to Amplify with every merge to `main`.
+# Deployment
+
+This app uses app-based release channels; it automatically deploys to the Preview environment with every merge to `main`. Deployments to the live site (prod) are deliberately manual.
