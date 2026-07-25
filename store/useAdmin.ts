@@ -7,7 +7,7 @@ export function useAdmin(session: Session | null, status: SessionStatus): boolea
     return false;
   }
   if (session?.user?.email && status === 'authenticated') {
-    return session.user.email === 'alexgochenour@gmail.com';
+    return session.user.email === process.env.NEXT_PUBLIC_ADMIN;
   }
   return false;
 }
