@@ -53,12 +53,7 @@ function Albums(props: AlbumsProps): ReactNode {
     <>
       {folders.map((folder, index) => {
         return (
-          <option
-            className="woh__album-picker__option"
-            key={index}
-            value={folder.friendlyName}
-            selected={folder.name === current.name}
-          >
+          <option className="woh__album-picker__option" key={index} value={folder.friendlyName}>
             {folder.friendlyName || index}
           </option>
         );
