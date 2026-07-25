@@ -1,14 +1,23 @@
 import Image from 'next/image';
 import { trackEvent, GA_EVENTS } from '@/analytics';
 import './scroll-to-top-button.css';
+import { useSession } from 'next-auth/react';
+import { useAdmin } from '../../../../store';
 
 export const ScrollToTopButton = () => {
+  const { data: session, status } = useSession();
+  const isAdmin = useAdmin(session, status);
+
   const scrollToTop = () => {
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       trackEvent(GA_EVENTS.CLICKED_WOOBLER);
     }
   };
+
+  if (isAdmin) {
+    return null;
+  }
 
   return (
     <div
