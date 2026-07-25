@@ -28,7 +28,7 @@ export function Pencil(props: PencilProps) {
         return;
       }
       // @ts-ignore
-      const newCaption = inputRef.current.value;
+      const newCaption = inputRef.current.value.trim();
       const updatedCaptions = createNewCaptions(captionsClone, newCaption, index, photosLength);
       // @ts-ignore
       const httpRequest = createHttpRequest('PUT', session.idToken, {
