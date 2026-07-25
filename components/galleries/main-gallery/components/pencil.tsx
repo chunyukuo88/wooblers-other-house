@@ -1,8 +1,9 @@
 'use client';
 import { useRef, useState } from 'react';
 import { createNewCaptions } from '@/components/galleries/main-gallery/utils';
-import { createHttpRequest, putData } from '../../../common/http';
+import { createHttpRequest, putData } from '../../../../common/http';
 import { useSession } from 'next-auth/react';
+import './pencil.css';
 
 type PencilProps = {
   albumId: string;
@@ -64,7 +65,7 @@ export function Pencil(props: PencilProps) {
 
   return (
     <>
-      <button data-testid="pencil-button" onClick={openModal}>
+      <button className="woh__pencil-button" data-testid="pencil-button" onClick={openModal}>
         ✏
       </button>
       {modalIsVisible ? <Modal /> : null}
