@@ -2,7 +2,7 @@ import { Session } from 'next-auth';
 
 type SessionStatus = 'authenticated' | 'loading' | 'unauthenticated';
 
-export function useAdmin(session: Session | null, status: SessionStatus): boolean {
+export function getIsAdmin(session: Session | null, status: SessionStatus): boolean {
   if (!session || !status) {
     return false;
   }

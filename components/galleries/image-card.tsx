@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
 import { SingleCardProps } from './types';
 import { getCaptionColor, getSrcSet, SIZES } from './utils';
-import { useAdmin } from 'store';
+import { getIsAdmin } from 'store';
 import { Pencil } from '@/components/galleries/main-gallery';
 
 export function ImageCard(props: SingleCardProps) {
@@ -9,7 +9,7 @@ export function ImageCard(props: SingleCardProps) {
     props;
   const displayCaption = caption ? processRawCaption(caption) : '';
   const { data: session, status } = useSession();
-  const isAdmin = useAdmin(session, status);
+  const isAdmin = getIsAdmin(session, status);
 
   const srcSet = getSrcSet(cdn, bucketAlias, file);
   const { background, captionFontColor } = getCaptionColor({ red, green, blue });

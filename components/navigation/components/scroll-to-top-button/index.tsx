@@ -2,11 +2,11 @@ import Image from 'next/image';
 import { trackEvent, GA_EVENTS } from '@/analytics';
 import './scroll-to-top-button.css';
 import { useSession } from 'next-auth/react';
-import { useAdmin } from '../../../../store';
+import { getIsAdmin } from '../../../../store';
 
 export const ScrollToTopButton = () => {
   const { data: session, status } = useSession();
-  const isAdmin = useAdmin(session, status);
+  const isAdmin = getIsAdmin(session, status);
 
   const scrollToTop = () => {
     if (typeof window !== 'undefined') {

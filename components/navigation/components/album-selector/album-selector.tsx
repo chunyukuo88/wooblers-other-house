@@ -41,7 +41,11 @@ export const AlbumSelector = (props: any) => {
   return (
     <>
       <select name="album-picked" id="woh__album-picker" onChange={changeHandler} style={style}>
-        {!folders?.length ? <AlbumsLoading /> : <Albums folders={folders} current={current} />}
+        {!folders?.length ? (
+          <AlbumsLoading />
+        ) : (
+          <Albums folders={folders} current={currentFolder} />
+        )}
       </select>
     </>
   );
@@ -53,7 +57,7 @@ function Albums(props: AlbumsProps): ReactNode {
     <>
       {folders.map((folder, index) => {
         return (
-          <option className="woh__album-picker__option" key={index} value={folder.friendlyName}>
+          <option className="woh__album-picker__option" key={index} value={current.friendlyName}>
             {folder.friendlyName || index}
           </option>
         );
