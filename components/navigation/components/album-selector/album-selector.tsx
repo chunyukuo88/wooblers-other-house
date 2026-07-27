@@ -1,7 +1,7 @@
 import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
-import { useAlbum, useMainImages } from 'store';
-import { emptyFolder, Folder } from 'store/fetched-images/types';
-import { convertFriendlyToQueryParam } from 'store/album/utils';
+import { useMainImages } from 'store';
+import { Folder } from 'store/fetched-images/types';
+import { convertFriendlyToQueryParam } from '../../../../store/utils';
 import { AlbumsProps } from './types';
 import { updateUrl } from './utils';
 import './album-selector.css';
@@ -9,11 +9,8 @@ import './album-selector.css';
 export const AlbumSelector = (props: any) => {
   const { style } = props;
   const { fetchedFolders, currentFolder, updateCurrentFolder } = useMainImages();
-  const { updateAlbumFriendly, updateAlbumUrl } = useAlbum();
 
   const [folders, setFolders] = useState<Folder[]>([]);
-
-  const [current, setCurrent] = useState<Folder>(emptyFolder);
 
   const changeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     const index = event.target.selectedIndex;
@@ -29,11 +26,8 @@ export const AlbumSelector = (props: any) => {
 
   useEffect(() => {
     if (currentFolder?.name) {
-      setCurrent(currentFolder);
       const { friendlyName } = currentFolder;
-      updateAlbumFriendly(friendlyName);
       const asQueryParams = convertFriendlyToQueryParam(friendlyName);
-      updateAlbumUrl(asQueryParams);
       updateUrl(asQueryParams);
     }
   }, [currentFolder]);

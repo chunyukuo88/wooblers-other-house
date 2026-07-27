@@ -4,7 +4,7 @@ import { useColors, useMainImages } from 'store';
 import { ImageCard } from '@/components/galleries/image-card';
 import { emptyFolder, Folder } from 'store/fetched-images/types';
 import { getIntersectionObserver } from '@/components/navigation/components/scroll-to-top-button/utils';
-import { convertAlbumParamToFriendly } from 'store/album/utils';
+import { convertAlbumParamToFriendly } from '../../../store/utils';
 import '../styles.css';
 
 const ScrollToTopButton = lazy(() => import('../../navigation/components/scroll-to-top-button'));
