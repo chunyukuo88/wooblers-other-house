@@ -1,3 +1,4 @@
+'use client';
 import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
 import { useMainImages } from 'store';
 import { Folder } from 'store/fetched-images/types';
@@ -34,24 +35,26 @@ export const AlbumSelector = (props: any) => {
 
   return (
     <>
-      <select name="album-picked" id="woh__album-picker" onChange={changeHandler} style={style}>
-        {!folders?.length ? (
-          <AlbumsLoading />
-        ) : (
-          <Albums folders={folders} current={currentFolder} />
-        )}
+      <select
+        name="album-picked"
+        id="woh__album-picker"
+        onChange={changeHandler}
+        style={style}
+        value={currentFolder.friendlyName}
+      >
+        {!folders?.length ? <AlbumsLoading /> : <Albums folders={folders} />}
       </select>
     </>
   );
 };
 
 function Albums(props: AlbumsProps): ReactNode {
-  const { folders, current } = props;
+  const { folders } = props;
   return (
     <>
       {folders.map((folder, index) => {
         return (
-          <option className="woh__album-picker__option" key={index} value={current.friendlyName}>
+          <option className="woh__album-picker__option" key={index} value={folder.friendlyName}>
             {folder.friendlyName || index}
           </option>
         );
