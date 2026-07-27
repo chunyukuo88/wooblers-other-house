@@ -11,8 +11,9 @@ interface Children {
 }
 
 export function Content({ children }: Children) {
-  const { red, green, blue, sum } = useContext(context);
+  const { red, green, blue } = useContext(context);
 
+  const sum = red + green + blue;
   const gradientStart = `rgb(${red}, ${green}, ${blue})`;
   const style = {
     backgroundImage: `linear-gradient(${gradientStart}, white)`,
