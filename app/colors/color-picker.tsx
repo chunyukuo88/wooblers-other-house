@@ -1,13 +1,12 @@
 'use client';
-import { useContext } from 'react';
-import { BackgroundColorContext } from 'store/background-color/context';
+import { useColors } from 'store/background-color/context';
 import { ConcentricCirclesProps, Event, SliderProps } from './types';
 import { trackEvent } from '../analytics';
 import { GA_EVENTS } from '../analytics/tracked-events';
 import './color-picker.css';
 
 export default function ColorPicker() {
-  const { red, green, blue, setRed, setGreen, setBlue } = useContext(BackgroundColorContext);
+  const { red, green, blue, setRed, setGreen, setBlue } = useColors();
   const redHandler = (e: Event) => {
     setRed(Number(e.target.value));
     trackEvent(GA_EVENTS.ADJUST_COLORS_RED);
