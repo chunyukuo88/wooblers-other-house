@@ -18,8 +18,8 @@ export const AlbumContext = createContext<AlbumsContextType>({
 });
 
 export function AlbumProvider(props: PropsWithChildren): ReactElement {
-  const [currentFriendly, dispatchFriendly] = useReducer(albumFriendlyReducer, initialUrl);
-  const [currentUrl, dispatchUrl] = useReducer(albumUrlReducer, initialFriendly);
+  const [currentFriendly, dispatchFriendly] = useReducer(albumFriendlyReducer, initialFriendly);
+  const [currentUrl, dispatchUrl] = useReducer(albumUrlReducer, initialUrl);
 
   const contextValue: AlbumsContextType = {
     currentAlbumFriendly: currentFriendly,
