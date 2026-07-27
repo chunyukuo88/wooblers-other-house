@@ -15,7 +15,6 @@ export interface ColorState {
   red: number;
   green: number;
   blue: number;
-  sum: number;
 }
 
 export interface ColorAction {

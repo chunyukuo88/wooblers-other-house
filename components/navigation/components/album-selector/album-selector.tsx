@@ -1,7 +1,8 @@
+'use client';
 import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
-import { useAlbum, useMainImages } from 'store';
-import { emptyFolder, Folder } from 'store/fetched-images/types';
-import { convertFriendlyToQueryParam } from 'store/album/utils';
+import { useMainImages } from 'store';
+import { Folder } from 'store/fetched-images/types';
+import { convertFriendlyToQueryParam } from '../../../../store/utils';
 import { AlbumsProps } from './types';
 import { updateUrl } from './utils';
 import './album-selector.css';
@@ -9,11 +10,8 @@ import './album-selector.css';
 export const AlbumSelector = (props: any) => {
   const { style } = props;
   const { fetchedFolders, currentFolder, updateCurrentFolder } = useMainImages();
-  const { updateAlbumFriendly, updateAlbumUrl } = useAlbum();
 
   const [folders, setFolders] = useState<Folder[]>([]);
-
-  const [current, setCurrent] = useState<Folder>(emptyFolder);
 
   const changeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     const index = event.target.selectedIndex;
@@ -29,26 +27,29 @@ export const AlbumSelector = (props: any) => {
 
   useEffect(() => {
     if (currentFolder?.name) {
-      setCurrent(currentFolder);
       const { friendlyName } = currentFolder;
-      updateAlbumFriendly(friendlyName);
       const asQueryParams = convertFriendlyToQueryParam(friendlyName);
-      updateAlbumUrl(asQueryParams);
       updateUrl(asQueryParams);
     }
   }, [currentFolder]);
 
   return (
     <>
-      <select name="album-picked" id="woh__album-picker" onChange={changeHandler} style={style}>
-        {!folders?.length ? <AlbumsLoading /> : <Albums folders={folders} current={current} />}
+      <select
+        name="album-picked"
+        id="woh__album-picker"
+        onChange={changeHandler}
+        style={style}
+        value={currentFolder.friendlyName}
+      >
+        {!folders?.length ? <AlbumsLoading /> : <Albums folders={folders} />}
       </select>
     </>
   );
 };
 
 function Albums(props: AlbumsProps): ReactNode {
-  const { folders, current } = props;
+  const { folders } = props;
   return (
     <>
       {folders.map((folder, index) => {

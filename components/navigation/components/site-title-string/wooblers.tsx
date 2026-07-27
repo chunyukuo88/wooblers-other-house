@@ -1,11 +1,11 @@
 import { useCalendar } from 'store';
 import { useSession } from 'next-auth/react';
-import { useAdmin } from 'store';
+import { getIsAdmin } from 'store';
 
 export function Wooblers() {
   const { currentDate } = useCalendar();
   const { data: session, status } = useSession();
-  const isAdmin = useAdmin(session, status);
+  const isAdmin = getIsAdmin(session, status);
   const month = currentDate.split(' ')[0];
 
   return (
