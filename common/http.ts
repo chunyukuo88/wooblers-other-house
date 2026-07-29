@@ -1,16 +1,17 @@
 import { errorLogger } from './logging';
 
 export async function getMainPageImages(showPrivateImages: boolean) {
-  const mainImagesEndpoint = showPrivateImages
-    ? process.env.NEXT_PUBLIC_IMAGE_SOURCE_PRIVATE!
-    : process.env.NEXT_PUBLIC_IMAGE_SOURCE!;
+  const endpointForBothPublicAndPrivateImages = process.env.NEXT_PUBLIC_IMAGE_SOURCE!;
+  const bucket = showPrivateImages
+    ? process.env.NEXT_PUBLIC_BUCKET_MAIN_PRIVATE!
+    : process.env.NEXT_PUBLIC_BUCKET_MAIN_PUBLIC!;
 
   try {
-    const response = await fetch(mainImagesEndpoint);
+    const response = await fetch(`${endpointForBothPublicAndPrivateImages}?bucket=${bucket}`);
     return await response.json();
   } catch (error) {
     errorLogger(
-      `💣 getMainPageImages()\nmainImagesEndpoint: ${mainImagesEndpoint}\nshowPrivateImages: ${showPrivateImages}\n\t`,
+      `💣 getMainPageImages()\nmainImagesEndpoint: ${endpointForBothPublicAndPrivateImages}\nshowPrivateImages: ${showPrivateImages}\n\t`,
       error,
     );
   }
