@@ -1,27 +1,19 @@
 import { errorLogger } from './logging';
 
 export async function getMainPageImages(showPrivateImages: boolean) {
-  const mainImagesEndpoint = showPrivateImages
-    ? process.env.NEXT_PUBLIC_IMAGE_SOURCE_PRIVATE!
-    : process.env.NEXT_PUBLIC_IMAGE_SOURCE!;
+  const endpointForBothPublicAndPrivateImages = process.env.NEXT_PUBLIC_IMAGE_SOURCE!;
+  const bucket = showPrivateImages
+    ? process.env.NEXT_PUBLIC_BUCKET_MAIN_PRIVATE!
+    : process.env.NEXT_PUBLIC_BUCKET_MAIN_PUBLIC!;
 
+  const url = `${endpointForBothPublicAndPrivateImages}?bucket=${bucket}`;
   try {
-    const response = await fetch(mainImagesEndpoint);
+    const response = await fetch(url);
     return await response.json();
   } catch (error) {
-    errorLogger(
-      `💣 getMainPageImages()\nmainImagesEndpoint: ${mainImagesEndpoint}\nshowPrivateImages: ${showPrivateImages}\n\t`,
-      error,
-    );
+    errorLogger(`💣 getMainPageImages()\nmainImagesEndpoint: ${url}`, error);
   }
 }
-
-export type Folder = {
-  captions: string[];
-  friendlyName: string;
-  name: string;
-  photos: string[];
-};
 
 export async function putData(url: string, data: any) {
   try {
