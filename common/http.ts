@@ -16,13 +16,6 @@ export async function getMainPageImages(showPrivateImages: boolean) {
   }
 }
 
-export type Folder = {
-  captions: string[];
-  friendlyName: string;
-  name: string;
-  photos: string[];
-};
-
 export async function putData(url: string, data: any) {
   try {
     await fetch(url, data);
