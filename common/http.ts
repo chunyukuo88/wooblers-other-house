@@ -6,14 +6,12 @@ export async function getMainPageImages(showPrivateImages: boolean) {
     ? process.env.NEXT_PUBLIC_BUCKET_MAIN_PRIVATE!
     : process.env.NEXT_PUBLIC_BUCKET_MAIN_PUBLIC!;
 
+  const url = `${endpointForBothPublicAndPrivateImages}?bucket=${bucket}`;
   try {
-    const response = await fetch(`${endpointForBothPublicAndPrivateImages}?bucket=${bucket}`);
+    const response = await fetch(url);
     return await response.json();
   } catch (error) {
-    errorLogger(
-      `💣 getMainPageImages()\nmainImagesEndpoint: ${endpointForBothPublicAndPrivateImages}\nshowPrivateImages: ${showPrivateImages}\n\t`,
-      error,
-    );
+    errorLogger(`💣 getMainPageImages()\nmainImagesEndpoint: ${url}`, error);
   }
 }
 
