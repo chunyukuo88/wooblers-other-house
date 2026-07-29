@@ -10,7 +10,7 @@ export interface CurrentFolderAction {
 export interface CurrentFolderState {
   friendlyName: string;
   name: string;
-  photos: string[];
+  photos: Photo[];
   captions: string[];
 }
 
@@ -35,6 +35,11 @@ export const emptyFolder = {
 export type Folder = {
   friendlyName: string;
   name: string;
-  photos: string[];
+  photos: Photo[];
   captions: string[];
+};
+
+export type Photo = {
+  photoUrl: string;
+  isStarred: boolean;
 };

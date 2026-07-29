@@ -1,6 +1,6 @@
 import { getFeatureStatus } from './flags';
 import { getMainPageImages } from '../common/http';
-import { Folder } from 'store/fetched-images/types';
+import { Folder, Photo } from 'store/fetched-images/types';
 
 type GetFoldersResult = {
   displayPrivateImages: boolean;
@@ -22,9 +22,9 @@ const removeThumbnails = (folders: Folder[]) => {
   if (!folders) {
     return [];
   }
-  return folders.map((folder: Folder, i: number) => {
-    const photosSansThumbnail = folder.photos.filter((photo: string) => {
-      const isThumbnail = photo.split('.').find((part) => part.includes('thumbnail'));
+  return folders.map((folder: Folder) => {
+    const photosSansThumbnail = folder.photos.filter((photo: Photo) => {
+      const isThumbnail = photo.photoUrl.split('.').find((part) => part.includes('thumbnail'));
       return !isThumbnail;
     });
     const captionsSansThumbnail = folder.captions.filter((caption: string) => {

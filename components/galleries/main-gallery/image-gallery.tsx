@@ -2,7 +2,7 @@
 import { lazy, useEffect, useState } from 'react';
 import { useColors, useMainImages } from 'store';
 import { ImageCard } from '@/components/galleries/image-card';
-import { emptyFolder, Folder } from 'store/fetched-images/types';
+import { emptyFolder, Folder, Photo } from 'store/fetched-images/types';
 import { getIntersectionObserver } from '@/components/navigation/components/scroll-to-top-button/utils';
 import { convertAlbumParamToFriendly } from '../../../store/utils';
 import '../styles.css';
@@ -74,7 +74,7 @@ export const ImageGallery = (props: ImageGalleryProps) => {
   return (
     <div className="woh__image-gallery">
       <div className="woh__image-grid">
-        {current.photos.map((file: string, index: number) => {
+        {current.photos.map((file: Photo, index: number) => {
           const caption = current.captions[index];
           return (
             <div
@@ -84,7 +84,7 @@ export const ImageGallery = (props: ImageGalleryProps) => {
             >
               <ImageCard
                 albumId={current.name}
-                file={file}
+                file={file.photoUrl}
                 index={index}
                 caption={caption}
                 captions={current.captions}
