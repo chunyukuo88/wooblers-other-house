@@ -9,23 +9,18 @@ function enabledByFeatureFlag(flagValue: string) {
   return flagValue === activationValue;
 }
 
-async function enabledByCookie(queryParamKey: string) {
-  if (!queryParamKey) {
-    return false;
-  }
+const cookieKey = process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY!;
+async function enabledByCookie() {
   const cookieStore = await cookies();
-  const activationCookieValue = cookieStore.get(queryParamKey)?.value;
+  const activationCookieValue = await cookieStore.get(cookieKey)?.value;
   if (!activationCookieValue) {
     return false;
   }
   return activationCookieValue === activationValue;
 }
 
-export async function getFeatureStatus(queryParamKey: string) {
-  if (!queryParamKey) {
-    return false;
-  }
-  const featureEnabledByQueryParams = enabledByFeatureFlag(queryParamKey);
-  const featureEnabledByCookie = enabledByCookie(queryParamKey);
+export async function getFeatureStatus(queryParamValue: string) {
+  const featureEnabledByQueryParams = enabledByFeatureFlag(queryParamValue);
+  const featureEnabledByCookie = await enabledByCookie();
   return featureEnabledByQueryParams || featureEnabledByCookie;
 }

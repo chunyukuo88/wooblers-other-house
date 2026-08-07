@@ -16,7 +16,6 @@ export default async function Page({ searchParams }: Params) {
   const params = await searchParams;
   const privateImageQuery = params[process.env.NEXT_PUBLIC_FF_PRIVATE_IMAGES_KEY!];
   const { displayPrivateImages, folders } = await getFolders(privateImageQuery);
-
   if (!folders.length) {
     return (
       <div id="woh__site-down-for-maintenance">
@@ -26,10 +25,8 @@ export default async function Page({ searchParams }: Params) {
       </div>
     );
   }
-
   const albumQueryParameter = params['album'];
   const preselectedAlbum = convertAlbumParamToFriendly(albumQueryParameter);
-
   return (
     <ImageGallery
       folders={folders}
