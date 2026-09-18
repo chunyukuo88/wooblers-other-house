@@ -1,10 +1,10 @@
-.woh__single-snowflake,
-.woh__single-snowflake .inner {
+.woh__single-rotating-seasonal-object,
+.woh__single-rotating-seasonal-object .inner {
   animation-iteration-count: infinite;
   animation-play-state: running;
 }
 
-.woh__single-snowflake {
+.woh__single-rotating-seasonal-object {
   color: #fff;
   font-size: 1.5em;
   font-family: Arial, sans-serif;
@@ -17,13 +17,13 @@
   user-select: none;
   cursor: default;
   pointer-events: none;
-  animation-name: snowflakes-shake;
+  animation-name: objects-shake;
   animation-duration: 5s;
   animation-timing-function: ease-in-out;
 }
 
-.woh__single-snowflake .inner {
-  animation-name: snowflakes-fall;
+.woh__single-rotating-seasonal-object .inner {
+  animation-name: objects-descend;
   animation-duration: 10s;
   animation-timing-function: linear;
 }
@@ -32,100 +32,100 @@
   animation: spin 2s linear infinite;
 }
 
-.woh__single-snowflake:nth-of-type(0) {
+.woh__single-rotating-seasonal-object:nth-of-type(0) {
   left: 1%;
   animation-delay: 0s;
 }
 
-.woh__single-snowflake:nth-of-type(0) .inner {
+.woh__single-rotating-seasonal-object:nth-of-type(0) .inner {
   animation-delay: 0s;
 }
 
-.woh__single-snowflake:first-of-type {
+.woh__single-rotating-seasonal-object:first-of-type {
   left: 10%;
   animation-delay: 1s;
 }
-.woh__single-snowflake:first-of-type .inner,
-.woh__single-snowflake:nth-of-type(8) .inner {
+.woh__single-rotating-seasonal-object:first-of-type .inner,
+.woh__single-rotating-seasonal-object:nth-of-type(8) .inner {
   animation-delay: 1s;
 }
 
-.woh__single-snowflake:nth-of-type(2) {
+.woh__single-rotating-seasonal-object:nth-of-type(2) {
   left: 20%;
   animation-delay: 0.5s;
 }
 
-.woh__single-snowflake:nth-of-type(2) .inner,
-.woh__single-snowflake:nth-of-type(6) .inner {
+.woh__single-rotating-seasonal-object:nth-of-type(2) .inner,
+.woh__single-rotating-seasonal-object:nth-of-type(6) .inner {
   animation-delay: 6s;
 }
-.woh__single-snowflake:nth-of-type(3) {
+.woh__single-rotating-seasonal-object:nth-of-type(3) {
   left: 30%;
   animation-delay: 2s;
 }
-.woh__single-snowflake:nth-of-type(11) .inner,
-.woh__single-snowflake:nth-of-type(3) .inner {
+.woh__single-rotating-seasonal-object:nth-of-type(11) .inner,
+.woh__single-rotating-seasonal-object:nth-of-type(3) .inner {
   animation-delay: 4s;
 }
 
-.woh__single-snowflake:nth-of-type(4) {
+.woh__single-rotating-seasonal-object:nth-of-type(4) {
   left: 40%;
   animation-delay: 2s;
 }
 
-.woh__single-snowflake:nth-of-type(10) .inner,
-.woh__single-snowflake:nth-of-type(4) .inner {
+.woh__single-rotating-seasonal-object:nth-of-type(10) .inner,
+.woh__single-rotating-seasonal-object:nth-of-type(4) .inner {
   animation-delay: 2s;
 }
 
-.woh__single-snowflake:nth-of-type(5) {
+.woh__single-rotating-seasonal-object:nth-of-type(5) {
   left: 50%;
   animation-delay: 3s;
 }
 
-.woh__single-snowflake:nth-of-type(5) .inner {
+.woh__single-rotating-seasonal-object:nth-of-type(5) .inner {
   animation-delay: 8s;
 }
 
-.woh__single-snowflake:nth-of-type(6) {
+.woh__single-rotating-seasonal-object:nth-of-type(6) {
   left: 60%;
   animation-delay: 2s;
 }
 
-.woh__single-snowflake:nth-of-type(7) {
+.woh__single-rotating-seasonal-object:nth-of-type(7) {
   left: 70%;
   animation-delay: 1s;
 }
 
-.woh__single-snowflake:nth-of-type(7) .inner {
+.woh__single-rotating-seasonal-object:nth-of-type(7) .inner {
   animation-delay: 2.5s;
 }
 
-.woh__single-snowflake:nth-of-type(8) {
+.woh__single-rotating-seasonal-object:nth-of-type(8) {
   left: 80%;
   animation-delay: 0s;
 }
 
-.woh__single-snowflake:nth-of-type(9) {
+.woh__single-rotating-seasonal-object:nth-of-type(9) {
   left: 90%;
   animation-delay: 1.5s;
 }
 
-.woh__single-snowflake:nth-of-type(9) .inner {
+.woh__single-rotating-seasonal-object:nth-of-type(9) .inner {
   animation-delay: 3s;
 }
 
-.woh__single-snowflake:nth-of-type(10) {
+.woh__single-rotating-seasonal-object:nth-of-type(10) {
   left: 25%;
   animation-delay: 0s;
 }
 
-.woh__single-snowflake:nth-of-type(11) {
+.woh__single-rotating-seasonal-object:nth-of-type(11) {
   left: 65%;
   animation-delay: 2.5s;
 }
 
-@keyframes snowflakes-fall {
+@keyframes objects-descend {
   0% {
     transform: translateY(0);
   }
@@ -134,7 +134,7 @@
   }
 }
 
-@keyframes snowflakes-shake {
+@keyframes objects-shake {
   0%,
   100% {
     transform: translateX(0);

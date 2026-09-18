@@ -37,7 +37,7 @@ export function getCurrentSeason(date = new Date()): Season {
     return Season.Spring;
   }
 
-  if ((month === 6 && day >= 21) || month === 7 || month === 8 || (month === 9 && day < 23)) {
+  if ((month === 6 && day >= 21) || month === 7 || month === 8 || (month === 9 && day < 13)) {
     return Season.Summer;
   }
 
