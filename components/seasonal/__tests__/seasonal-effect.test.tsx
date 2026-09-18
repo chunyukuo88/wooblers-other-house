@@ -51,7 +51,7 @@ describe('<SeasonalEffect />', () => {
 
         render(<SeasonalEffect />);
 
-        const leaves = document.querySelector('.woh__autumn-leaf');
+        const leaves = document.querySelector('.woh__autumn-leaves');
 
         expect(leaves).toBeVisible();
       });
