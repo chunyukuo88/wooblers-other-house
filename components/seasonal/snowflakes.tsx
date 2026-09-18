@@ -3,7 +3,7 @@ export function Snowflakes() {
   return (
     <div className="woh__snowflakes" aria-hidden="true">
       {flakes.map((_: number, index: number) => (
-        <div key={index} className="woh__single-snowflake">
+        <div key={index} className="woh__single-rotating-seasonal-object">
           <div className="inner">
             <div className="woh__spin">❅</div>
           </div>

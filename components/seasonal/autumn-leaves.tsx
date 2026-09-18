@@ -3,7 +3,7 @@ export function AutumnLeaves() {
   return (
     <div className="autumn-leaves" aria-hidden="true">
       {leaves.map((_, i) => (
-        <div key={i} className="woh__autumn-leaf">
+        <div key={i} className="woh__single-rotating-seasonal-object">
           <div className="inner">
             <div className="woh__spin">🍁</div>
           </div>
