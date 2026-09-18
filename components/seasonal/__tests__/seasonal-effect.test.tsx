@@ -26,7 +26,7 @@ describe('<SeasonalEffect />', () => {
   describe('GIVEN: it is winter', () => {
     describe('WHEN: the page loads', () => {
       it('THEN: user sees snowflakes', () => {
-        (useCalendar as jest.Mock).mockReturnValue({
+        (useCalendar as jest.Mock).mockReturnValueOnce({
           currentDay: '',
           currentDate: '',
           currentSeason: Season.Winter,
@@ -37,6 +37,23 @@ describe('<SeasonalEffect />', () => {
         const snowflakes = document.querySelector('.woh__snowflakes');
 
         expect(snowflakes).toBeVisible();
+      });
+    });
+  });
+  describe('GIVEN: it is autumn', () => {
+    describe('WHEN: the page loads', () => {
+      it('THEN: user sees falling leaves', () => {
+        (useCalendar as jest.Mock).mockReturnValueOnce({
+          currentDay: '',
+          currentDate: '',
+          currentSeason: Season.Autumn,
+        });
+
+        render(<SeasonalEffect />);
+
+        const leaves = document.querySelector('.woh__autumn-leaf');
+
+        expect(leaves).toBeVisible();
       });
     });
   });
