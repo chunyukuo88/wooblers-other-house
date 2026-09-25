@@ -1,0 +1,17 @@
+{
+  "defaultBehavior": "ask",
+  "allowReadonlyCommands": true,
+  "rules": {
+    "executables": {
+      "rules": [
+        { "prefix": "npx jest", "action": "allow" },
+        { "prefix": "npm test", "action": "allow" },
+        { "prefix": "npm run test", "action": "allow" },
+        { "prefix": "yarn test", "action": "allow" },
+        { "prefix": "npm install", "action": "ask" },
+        { "prefix": "git push", "action": "ask" },
+        { "prefix": "git", "action": "allow" }
+      ]
+    }
+  }
+}
