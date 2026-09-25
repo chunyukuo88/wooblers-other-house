@@ -6,6 +6,23 @@ import { useCalendar } from '../../../store';
 jest.mock('../../../store');
 
 describe('<SeasonalEffect />', () => {
+  describe('GIVEN: it is spring', () => {
+    describe('WHEN: the page loads', () => {
+      it('THEN: user sees snowflakes (same as winter)', () => {
+        (useCalendar as jest.Mock).mockReturnValueOnce({
+          currentDay: '',
+          currentDate: '',
+          currentSeason: Season.Spring,
+        });
+
+        render(<SeasonalEffect />);
+
+        const snowflakes = document.querySelector('.woh__snowflakes');
+
+        expect(snowflakes).toBeVisible();
+      });
+    });
+  });
   describe('GIVEN: season is not available', () => {
     describe('WHEN: the page loads', () => {
       it('THEN: user sees no seasonal effects', () => {
@@ -54,6 +71,23 @@ describe('<SeasonalEffect />', () => {
         const leaves = document.querySelector('.woh__autumn-leaves');
 
         expect(leaves).toBeVisible();
+      });
+    });
+  });
+  describe('GIVEN: it is summer', () => {
+    describe('WHEN: the page loads', () => {
+      it('THEN: user sees no seasonal effects (same as empty)', () => {
+        (useCalendar as jest.Mock).mockReturnValueOnce({
+          currentDay: '',
+          currentDate: '',
+          currentSeason: Season.Summer,
+        });
+
+        render(<SeasonalEffect />);
+
+        const effectElement = document.querySelector('.woh__snowflakes, .woh__autumn-leaves');
+
+        expect(effectElement).toBeNull();
       });
     });
   });
