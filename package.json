@@ -2,6 +2,7 @@
   "leave the gun": "take the cannoli",
   "private": true,
   "scripts": {
+    "aider": "aider --model openai/google/gemma-4-e4b",
     "dev": "next dev",
     "build": "next build --debug && du -sh .next/*",
     "start": "next start",
