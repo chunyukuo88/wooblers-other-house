@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { AutumnLeaves, Snowflakes, SpringFlowers } from '@/components/seasonal';
+import { AutumnLeaves, Snowflakes, SoccerBalls, SpringFlowers } from '.';
 import { useCalendar } from 'store';
 import { Season } from 'store/calendar/types';
 import './seasonal-effect.css';
@@ -15,5 +15,8 @@ export function SeasonalEffect(): ReactNode {
   if (currentSeason === Season.Spring) {
     return <SpringFlowers />;
   }
-  return <></>;
+  if (currentSeason === 'Summer') {
+    return <SoccerBalls />;
+  }
+  return null;
 }
