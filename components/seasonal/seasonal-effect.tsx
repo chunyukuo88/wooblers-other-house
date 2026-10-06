@@ -19,7 +19,7 @@ export function SeasonalEffect(): ReactNode {
   if (currentSeason === Season.Spring) {
     return <SpringFlowers />;
   }
-  if (currentSeason === 'Summer') {
+  if (currentSeason === Season.Summer) {
     return <SoccerBalls />;
   }
   return null;

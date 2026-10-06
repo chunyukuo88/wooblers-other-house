@@ -34,6 +34,9 @@ describe('<SeasonalEffect />', () => {
           currentDate: '',
           currentSeason: Season.Spring,
         });
+        (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
+          seasonalEffectIsActive: true,
+        });
 
         render(<SeasonalEffect />);
 
@@ -50,6 +53,9 @@ describe('<SeasonalEffect />', () => {
           currentDay: '',
           currentDate: '',
           currentSeason: '',
+        });
+        (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
+          seasonalEffectIsActive: true,
         });
 
         render(<SeasonalEffect />);
@@ -68,6 +74,9 @@ describe('<SeasonalEffect />', () => {
           currentDate: '',
           currentSeason: Season.Winter,
         });
+        (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
+          seasonalEffectIsActive: true,
+        });
 
         render(<SeasonalEffect />);
 
@@ -84,6 +93,9 @@ describe('<SeasonalEffect />', () => {
           currentDay: '',
           currentDate: '',
           currentSeason: Season.Autumn,
+        });
+        (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
+          seasonalEffectIsActive: true,
         });
 
         render(<SeasonalEffect />);
@@ -102,6 +114,9 @@ describe('<SeasonalEffect />', () => {
           currentDate: '',
           currentSeason: Season.Summer,
         });
+        (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
+          seasonalEffectIsActive: true,
+        });
 
         render(<SeasonalEffect />);
 
@@ -119,6 +134,9 @@ describe('<SeasonalEffect />', () => {
           currentDate: '',
           currentSeason: Season.Spring,
         });
+        (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
+          seasonalEffectIsActive: true,
+        });
 
         render(<SeasonalEffect />);
 
@@ -134,6 +152,9 @@ describe('<SeasonalEffect />', () => {
         currentDay: '',
         currentDate: '',
         currentSeason: '',
+      });
+      (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
+        seasonalEffectIsActive: true,
       });
 
       render(<SeasonalEffect />);
