@@ -6,6 +6,7 @@ import './seasonal-effect.css';
 
 export function SeasonalEffect(): ReactNode {
   const { currentSeason } = useCalendar();
+  // TODO: plug into useSeasonalEffect. If false, return undefined.
   if (currentSeason === Season.Winter) {
     return <Snowflakes />;
   }
