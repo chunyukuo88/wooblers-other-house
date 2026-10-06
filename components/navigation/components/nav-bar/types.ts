@@ -20,6 +20,6 @@ export type HomeLinkProps = {
 export type AdminLinkProps = {
   pathname: string;
 };
-export type ColorsLinkProps = {
+export type SettingsLinkProps = {
   pathname: string;
 };

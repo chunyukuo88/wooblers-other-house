@@ -12,7 +12,7 @@ const allPaths = {
   HOME: '/',
   LOGIN: '/login',
   PROFILE,
-  COLORS: '/colors',
+  SETTINGS: '/settings',
   TECH: '/tech',
 };
 

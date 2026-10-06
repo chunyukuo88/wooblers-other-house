@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { allPaths } from '../../../../allPaths';
 import { AlbumSelector } from '../album-selector';
-import { ColorsLinkProps, HomeLinkProps, NavBarProps, AdminLinkProps } from './types';
+import { SettingsLinkProps, HomeLinkProps, NavBarProps, AdminLinkProps } from './types';
 import { NavLink } from './nav-link';
 import { getStyle } from './utils';
 import { ShareButton } from '../share-button';
@@ -15,7 +15,7 @@ export function NavBar(props: NavBarProps) {
 
   return (
     <div id="woh__nav-bar" style={style}>
-      <ColorsLink pathname={pathname} />
+      <SettingsLink pathname={pathname} />
       <AdminLink pathname={pathname} />
       <Albums pathname={pathname} style={style} />
       {pathname === allPaths.HOME ? <ShareButton /> : null}
@@ -49,14 +49,14 @@ const AdminLink = (props: AdminLinkProps) => {
   );
 };
 
-const ColorsLink = (props: ColorsLinkProps) => {
+const SettingsLink = (props: SettingsLinkProps) => {
   const { pathname } = props;
   return (
     <div className="woh__nav-bar-string">
-      {pathname === allPaths.COLORS ? (
+      {pathname === allPaths.SETTINGS ? (
         <Link href={allPaths.HOME}>Home</Link>
       ) : (
-        <NavLink href={allPaths.COLORS}>Colors</NavLink>
+        <NavLink href={allPaths.SETTINGS}>Settings</NavLink>
       )}
     </div>
   );

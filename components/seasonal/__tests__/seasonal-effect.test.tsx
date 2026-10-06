@@ -1,11 +1,31 @@
 import { Season } from '../../../store/calendar/types';
 import { render } from '@testing-library/react';
 import { SeasonalEffect } from '@/components/seasonal/seasonal-effect';
-import { useCalendar } from '../../../store';
+import { useCalendar, useSeasonalEffect } from '../../../store';
 
 jest.mock('../../../store');
 
 describe('<SeasonalEffect />', () => {
+  describe('GIVEN: the user has turned off seasonal effects', () => {
+    describe('WHEN: the page loads', () => {
+      it('THEN: does not display any seasonal effects.', () => {
+        (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
+          seasonalEffectIsActive: false,
+        });
+        (useCalendar as jest.Mock).mockReturnValueOnce({
+          currentDay: '',
+          currentDate: '',
+          currentSeason: Season.Summer,
+        });
+
+        render(<SeasonalEffect />);
+
+        const summerEffect = document.querySelector('.woh__soccer-balls');
+
+        expect(summerEffect).toBeNull();
+      });
+    });
+  });
   describe('GIVEN: it is spring', () => {
     describe('WHEN: the page loads', () => {
       it('THEN: user sees snowflakes (same as winter)', () => {
@@ -13,6 +33,9 @@ describe('<SeasonalEffect />', () => {
           currentDay: '',
           currentDate: '',
           currentSeason: Season.Spring,
+        });
+        (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
+          seasonalEffectIsActive: true,
         });
 
         render(<SeasonalEffect />);
@@ -31,6 +54,9 @@ describe('<SeasonalEffect />', () => {
           currentDate: '',
           currentSeason: '',
         });
+        (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
+          seasonalEffectIsActive: true,
+        });
 
         render(<SeasonalEffect />);
 
@@ -47,6 +73,9 @@ describe('<SeasonalEffect />', () => {
           currentDay: '',
           currentDate: '',
           currentSeason: Season.Winter,
+        });
+        (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
+          seasonalEffectIsActive: true,
         });
 
         render(<SeasonalEffect />);
@@ -65,6 +94,9 @@ describe('<SeasonalEffect />', () => {
           currentDate: '',
           currentSeason: Season.Autumn,
         });
+        (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
+          seasonalEffectIsActive: true,
+        });
 
         render(<SeasonalEffect />);
 
@@ -80,7 +112,10 @@ describe('<SeasonalEffect />', () => {
         (useCalendar as jest.Mock).mockReturnValueOnce({
           currentDay: '',
           currentDate: '',
-          currentSeason: 'Summer', // Using string literal for Summer season type consistency if needed, though Season enum might be better if available
+          currentSeason: Season.Summer,
+        });
+        (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
+          seasonalEffectIsActive: true,
         });
 
         render(<SeasonalEffect />);
@@ -99,6 +134,9 @@ describe('<SeasonalEffect />', () => {
           currentDate: '',
           currentSeason: Season.Spring,
         });
+        (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
+          seasonalEffectIsActive: true,
+        });
 
         render(<SeasonalEffect />);
 
@@ -114,6 +152,9 @@ describe('<SeasonalEffect />', () => {
         currentDay: '',
         currentDate: '',
         currentSeason: '',
+      });
+      (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
+        seasonalEffectIsActive: true,
       });
 
       render(<SeasonalEffect />);
