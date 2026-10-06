@@ -2,3 +2,4 @@ export { useColors } from './background-color/context';
 export { useMainImages } from './fetched-images/context';
 export { useCalendar } from './calendar/context';
 export { getIsAdmin } from './getIsAdmin';
+export { useSeasonalEffect } from './seasonal-effect/context';
