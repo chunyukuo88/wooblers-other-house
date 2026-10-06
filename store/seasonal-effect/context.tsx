@@ -5,8 +5,8 @@ import { seasonalEffectReducer } from './reducer';
 import { turnOffSeasonalEffect, turnOnSeasonalEffect } from './actions';
 
 interface SeasonalEffectContextShape extends SeasonalEffectContextValue {
-  turnOn: (value: boolean) => void;
-  turnOff: (value: boolean) => void;
+  turnOn: () => void;
+  turnOff: () => void;
 }
 
 export const initialSeasonalEffectContext = {
@@ -24,8 +24,8 @@ export function SeasonalEffectProvider(props: PropsWithChildren) {
 
   const value = {
     ...state,
-    turnOn: (v: boolean) => dispatch(turnOnSeasonalEffect()),
-    turnOff: (v: boolean) => dispatch(turnOffSeasonalEffect()),
+    turnOn: () => dispatch(turnOnSeasonalEffect()),
+    turnOff: () => dispatch(turnOffSeasonalEffect()),
   };
   return <Context.Provider value={value}>{props.children}</Context.Provider>;
 }

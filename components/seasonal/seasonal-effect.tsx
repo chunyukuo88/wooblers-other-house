@@ -1,3 +1,4 @@
+'use client';
 import { ReactNode } from 'react';
 import { AutumnLeaves, Snowflakes, SoccerBalls, SpringFlowers } from '.';
 import { useCalendar, useSeasonalEffect } from 'store';
