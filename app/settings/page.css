@@ -1,9 +1,9 @@
 .woh__settings-page {
-  margin-top: 3rem;
   width: 100%;
   min-height: 70dvh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-
+  align-items: center;
   overflow: auto;
 }
