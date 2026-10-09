@@ -1,6 +1,6 @@
 export interface WigglySliderProps {
   /** SVG path `d` string describing the track. */
-  path?: string;
+  svgPath?: string;
   /** Optional. Defaults to the path's bounding box plus padding, so any path fits. */
   viewBox?: string;
   /** Controlled value. Omit for an uncontrolled slider. */

@@ -3,15 +3,15 @@ import './WigglySlider.css';
 import { Geometry, Point, WigglySliderProps } from './types';
 
 // Paths run bottom to top, so min is at the bottom and max is at the top.
-export const WAVE_PATH = 'M150 570 C20 500 20 440 150 370 S280 240 150 170 S40 80 150 30';
-export const S_CURVE_PATH = 'M50 550 C30 150 130 50 150 300 S270 550 260 50';
+export const WAVE_PATH = 'M150 570 A90 90 0 0 1 150 390 A90 90 0 0 0 150 210 A90 90 0 0 1 150 30';
+export const S_CURVE_PATH = 'M150 570 A135 135 0 0 0 150 300 A135 135 0 0 1 150 30';
 
 const SAMPLES = 800;
 
 const clamp = (n: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, n));
 
 export default function WigglySlider({
-  path = WAVE_PATH,
+  svgPath = S_CURVE_PATH,
   viewBox,
   value,
   defaultValue = 50,
@@ -36,11 +36,9 @@ export default function WigglySlider({
   const range = max - min || 1;
   const t = (current - min) / range;
 
-  // Keep the latest t available to pointer handlers without re-binding them.
   const tRef = useRef(t);
   tRef.current = t;
 
-  // Sample the path whenever it changes.
   useLayoutEffect(() => {
     const el = trackRef.current;
     if (!el) return;
@@ -52,11 +50,10 @@ export default function WigglySlider({
     }
     setGeometry({ length, points });
 
-    // Fit the frame to the path, leaving room for the stroke and the thumb.
     const box = el.getBBox();
     const pad = 36;
     setAutoViewBox(`${box.x - pad} ${box.y - pad} ${box.width + pad * 2} ${box.height + pad * 2}`);
-  }, [path]);
+  }, [svgPath]);
 
   const commitValue = (next: number) => {
     const snapped = Math.round((next - min) / step) * step + min;
@@ -79,8 +76,6 @@ export default function WigglySlider({
     return { x: p.x, y: p.y };
   };
 
-  // Nearest sampled point. While dragging, only search near the current
-  // position so self-crossing paths (loops, spirals) don't make the handle jump.
   const nearestT = (p: Point, lo: number, hi: number): number => {
     if (!geometry) return tRef.current;
     const a = Math.max(0, Math.floor(lo * SAMPLES));
@@ -152,7 +147,6 @@ export default function WigglySlider({
     }
   };
 
-  // Handle position, interpolated between samples.
   let pos: Point | null = null;
   if (geometry) {
     const f = t * SAMPLES;
@@ -177,10 +171,10 @@ export default function WigglySlider({
       onPointerUp={endDrag}
       onPointerCancel={endDrag}
     >
-      <path ref={trackRef} className="ws-track" d={path} />
+      <path ref={trackRef} className="ws-track" d={svgPath} />
       <path
         className="ws-progress"
-        d={path}
+        d={svgPath}
         style={
           geometry
             ? {
@@ -190,7 +184,7 @@ export default function WigglySlider({
             : undefined
         }
       />
-      <path className="ws-hit" d={path} />
+      <path className="ws-hit" d={svgPath} />
       <g
         ref={handleRef}
         className="ws-handle"
