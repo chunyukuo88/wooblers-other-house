@@ -1,8 +1,8 @@
 'use client';
-import { useColors } from 'store/background-color/context';
+import { useColors } from '../../../store/background-color/context';
 import { ConcentricCirclesProps, Event, SliderProps } from './types';
-import { trackEvent } from '../analytics';
-import { GA_EVENTS } from '../analytics/tracked-events';
+import { trackEvent } from '@/analytics';
+import { GA_EVENTS } from '../../analytics/tracked-events';
 import './color-picker.css';
 
 export default function ColorPicker() {

@@ -1,5 +1,5 @@
 'use client';
-import { useSeasonalEffect } from 'store';
+import { useSeasonalEffect } from '../../../store';
 
 const SeasonalToggle = () => {
   const { turnOn, turnOff, seasonalEffectIsActive } = useSeasonalEffect();

@@ -1,0 +1,88 @@
+/* Theme via custom properties: override on .ws or any ancestor. */
+.ws {
+  --ws-track: #c3d2dd;
+  --ws-progress: #ff4f8b;
+  --ws-knob: #ff4f8b;
+  --ws-knob-border: #eaf1f5;
+  --ws-ring: #14263a;
+  --ws-stroke-width: 10;
+
+  /* Sized by height; width follows the viewBox aspect ratio. */
+  --ws-height: 28rem;
+
+  display: block;
+  height: var(--ws-height);
+  width: auto;
+  flex: none;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ws {
+    --ws-track: #2b4056;
+    --ws-progress: #ff7aa6;
+    --ws-knob: #ff7aa6;
+    --ws-knob-border: #0f1c2b;
+    --ws-ring: #e6eef5;
+  }
+}
+
+.ws-track,
+.ws-progress {
+  fill: none;
+  stroke-width: var(--ws-stroke-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ws-track {
+  stroke: var(--ws-track);
+}
+
+.ws-progress {
+  stroke: var(--ws-progress);
+}
+
+/* Wide invisible stroke so the line is easy to click or tap. */
+.ws-hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 44;
+}
+
+.ws-knob {
+  fill: var(--ws-knob);
+  stroke: var(--ws-knob-border);
+  stroke-width: 4;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.12s ease;
+}
+
+.ws--dragging .ws-knob {
+  transform: scale(1.3);
+}
+
+.ws-handle:focus {
+  outline: none;
+}
+
+.ws-ring {
+  fill: none;
+  stroke: var(--ws-ring);
+  stroke-width: 2;
+  opacity: 0;
+}
+
+.ws-handle:focus-visible .ws-ring {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ws-knob {
+    transition: none;
+  }
+}

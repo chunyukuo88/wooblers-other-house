@@ -1,12 +1,13 @@
-import ColorPicker from './color-picker';
-import SeasonalToggle from './seasonal-toggle';
+'use client';
+import ColorPicker from './components/color-picker';
+import SeasonalToggle from './components/seasonal-toggle';
 import './page.css';
+import WigglySlider from './components/WigglySlider';
 
 export default function Settings() {
   return (
     <div className="woh__settings-page">
-      <SeasonalToggle />
-      <ColorPicker />
+      <WigglySlider />
     </div>
   );
 }
