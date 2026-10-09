@@ -1,6 +1,6 @@
 import { type KeyboardEvent, type PointerEvent, useLayoutEffect, useRef, useState } from 'react';
-import './WigglySlider.css';
-import { Geometry, Point, WigglySliderProps } from './types';
+import './curvy-slider.css';
+import { Geometry, Point, CurvySliderProps } from './types';
 
 // Paths run bottom to top, so min is at the bottom and max is at the top.
 export const WAVE_PATH = 'M150 570 A90 90 0 0 1 150 390 A90 90 0 0 0 150 210 A90 90 0 0 1 150 30';
@@ -10,10 +10,10 @@ const SAMPLES = 800;
 
 const clamp = (n: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, n));
 
-export default function WigglySlider({
+export default function CurvySlider({
   svgPath = WAVE_PATH,
   viewBox,
-  value,
+  controlledValue,
   defaultValue = 50,
   min = 0,
   max = 100,
@@ -21,7 +21,7 @@ export default function WigglySlider({
   onChange,
   label = 'Value',
   className,
-}: WigglySliderProps) {
+}: CurvySliderProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const trackRef = useRef<SVGPathElement>(null);
   const handleRef = useRef<SVGGElement>(null);
@@ -32,7 +32,7 @@ export default function WigglySlider({
   const [geometry, setGeometry] = useState<Geometry | null>(null);
   const [autoViewBox, setAutoViewBox] = useState<string | undefined>();
 
-  const current = clamp(value ?? inner, min, max);
+  const current = clamp(controlledValue ?? inner, min, max);
   const range = max - min || 1;
   const t = (current - min) / range;
 
@@ -59,7 +59,7 @@ export default function WigglySlider({
     const snapped = Math.round((next - min) / step) * step + min;
     const v = clamp(Number(snapped.toFixed(10)), min, max);
     if (v === current) return;
-    if (value === undefined) setInner(v);
+    if (controlledValue === undefined) setInner(v);
     onChange?.(v);
   };
 

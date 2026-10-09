@@ -1,10 +1,8 @@
-export interface WigglySliderProps {
-  /** SVG path `d` string describing the track. */
+export interface CurvySliderProps {
   svgPath?: string;
   /** Defaults to the path's bounding box plus padding, so any path fits. */
   viewBox?: string;
-  /** Controlled value. Omit for an uncontrolled slider. */
-  value?: number;
+  controlledValue?: number;
   defaultValue?: number;
   min?: number;
   max?: number;

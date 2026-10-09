@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import ColorPicker from '../color-picker';
+import ColorPicker from '../color-picker/color-picker';
 import { BackgroundColorContext } from '../../../../store/background-color/context';
 import { trackEvent } from '@/analytics';
 import { GA_EVENTS } from '../../../analytics/tracked-events';

@@ -1,13 +1,13 @@
 'use client';
-import ColorPicker from './components/color-picker';
+import ColorPicker from './components/color-picker/color-picker';
 import SeasonalToggle from './components/seasonal-toggle';
-import WigglySlider from './components/wiggly-slider/WigglySlider';
+import CurvySlider from './components/curvy-slider/curvy-slider';
 import './page.css';
 
 export default function Settings() {
   return (
     <div className="woh__settings-page">
-      <WigglySlider />
+      <CurvySlider />
     </div>
   );
 }
