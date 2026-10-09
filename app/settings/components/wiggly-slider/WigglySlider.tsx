@@ -11,7 +11,7 @@ const SAMPLES = 800;
 const clamp = (n: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, n));
 
 export default function WigglySlider({
-  svgPath = S_CURVE_PATH,
+  svgPath = WAVE_PATH,
   viewBox,
   value,
   defaultValue = 50,
