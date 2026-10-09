@@ -2,7 +2,7 @@
 import ColorPicker from './components/color-picker';
 import SeasonalToggle from './components/seasonal-toggle';
 import './page.css';
-import WigglySlider from './components/WigglySlider';
+import WigglySlider from './components/wiggly-slider/WigglySlider';
 
 export default function Settings() {
   return (

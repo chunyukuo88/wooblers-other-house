@@ -1,36 +1,10 @@
-import { useLayoutEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
+import { type KeyboardEvent, type PointerEvent, useLayoutEffect, useRef, useState } from 'react';
 import './WigglySlider.css';
+import { Geometry, Point, WigglySliderProps } from './types';
 
 // Paths run bottom to top, so min is at the bottom and max is at the top.
 export const WAVE_PATH = 'M150 570 C20 500 20 440 150 370 S280 240 150 170 S40 80 150 30';
 export const S_CURVE_PATH = 'M50 550 C30 150 130 50 150 300 S270 550 260 50';
-
-export interface WigglySliderProps {
-  /** SVG path `d` string describing the track. */
-  path?: string;
-  /** Optional. Defaults to the path's bounding box plus padding, so any path fits. */
-  viewBox?: string;
-  /** Controlled value. Omit for an uncontrolled slider. */
-  value?: number;
-  defaultValue?: number;
-  min?: number;
-  max?: number;
-  step?: number;
-  onChange?: (value: number) => void;
-  /** Accessible name for the slider. */
-  label?: string;
-  className?: string;
-}
-
-interface Point {
-  x: number;
-  y: number;
-}
-
-interface Geometry {
-  length: number;
-  points: Point[];
-}
 
 const SAMPLES = 800;
 
