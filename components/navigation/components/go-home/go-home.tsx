@@ -1,3 +1,15 @@
+'use client';
+import { useColors } from 'store';
+import { calculateFontColor } from '../../../../common/utils';
+
 export const GoHome = () => {
-  return <span id="woh__go-home-cta">So click here to go home.</span>;
+  const { red, green, blue } = useColors();
+  const sum = red + green + blue;
+  const fontColor = calculateFontColor({ sum, red, green, blue });
+
+  return (
+    <span style={{ color: fontColor }} id="woh__go-home-cta">
+      So click here to go home.
+    </span>
+  );
 };
