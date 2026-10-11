@@ -1,11 +1,7 @@
 import { type KeyboardEvent, type PointerEvent, useLayoutEffect, useRef, useState } from 'react';
-import './curvy-slider.css';
 import { Geometry, Point, CurvySliderProps } from './types';
-
-export const S_CURVE_PATH = 'M150 570 A135 135 0 0 0 150 300 A135 135 0 0 1 150 30';
-export const WAVE_PATH = 'M150 570 A90 90 0 0 1 150 390 A90 90 0 0 0 150 210 A90 90 0 0 1 150 30';
-export const LETTER_SLIDER_J =
-  'M 177.483 90.728 C 177.483 100.656 177.465 113.87 181.457 121.854 C 183.202 125.345 180.238 131.894 182.781 134.437 C 184.437 136.093 181.126 142.715 182.781 144.371 C 184.567 146.157 184.106 152.265 184.106 155.629 C 184.106 165.695 183.444 176.311 183.444 185.43 C 183.444 201.007 187.687 218.273 178.146 227.815 C 174.453 231.507 175.174 240.72 171.523 244.371 C 167.189 248.705 160.613 251.97 156.291 256.291 C 153.201 259.382 146.137 258.499 143.046 261.589 C 141.718 262.918 130.467 262.918 129.139 261.589 C 127.047 259.497 122.851 259.275 120.53 256.954 C 116.91 253.334 113.87 247.645 109.934 243.709 C 106.309 240.083 107.947 220.516 107.947 216.556';
+import { WAVE_PATH } from './slider-values';
+import './curvy-slider.css';
 
 const SAMPLES = 800;
 
@@ -163,46 +159,49 @@ export default function CurvySlider({
     .join(' ');
 
   return (
-    <svg
-      ref={svgRef}
-      className={classes}
-      viewBox={viewBox ?? autoViewBox}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={endDrag}
-      onPointerCancel={endDrag}
-    >
-      <path ref={trackRef} className="ws-track" d={svgPath} />
-      <path
-        className="ws-progress"
-        d={svgPath}
-        style={
-          geometry
-            ? {
-                strokeDasharray: `${geometry.length} ${geometry.length}`,
-                strokeDashoffset: geometry.length * (1 - t),
-              }
-            : undefined
-        }
-      />
-      <path className="ws-hit" d={svgPath} />
-      <g
-        ref={handleRef}
-        className="ws-handle"
-        role="slider"
-        tabIndex={0}
-        aria-label={label}
-        aria-orientation="vertical"
-        aria-valuemin={min}
-        aria-valuemax={max}
-        aria-valuenow={current}
-        transform={pos ? `translate(${pos.x} ${pos.y})` : undefined}
-        visibility={pos ? 'visible' : 'hidden'}
-        onKeyDown={onKeyDown}
+    <>
+      <div>{current}</div>
+      <svg
+        ref={svgRef}
+        className={classes}
+        viewBox={viewBox ?? autoViewBox}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
       >
-        <circle className="ws-ring" r={24} />
-        <circle className="ws-knob" r={14} />
-      </g>
-    </svg>
+        <path ref={trackRef} className="ws-track" d={svgPath} />
+        <path
+          className="ws-progress"
+          d={svgPath}
+          style={
+            geometry
+              ? {
+                  strokeDasharray: `${geometry.length} ${geometry.length}`,
+                  strokeDashoffset: geometry.length * (1 - t),
+                }
+              : undefined
+          }
+        />
+        <path className="ws-hit" d={svgPath} />
+        <g
+          ref={handleRef}
+          className="ws-handle"
+          role="slider"
+          tabIndex={0}
+          aria-label={label}
+          aria-orientation="vertical"
+          aria-valuemin={min}
+          aria-valuemax={max}
+          aria-valuenow={current}
+          transform={pos ? `translate(${pos.x} ${pos.y})` : undefined}
+          visibility={pos ? 'visible' : 'hidden'}
+          onKeyDown={onKeyDown}
+        >
+          <circle className="ws-ring" r={24} />
+          <circle className="ws-knob" r={14} />
+        </g>
+      </svg>
+    </>
   );
 }
