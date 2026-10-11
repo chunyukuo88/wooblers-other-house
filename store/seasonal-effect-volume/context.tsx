@@ -1,10 +1,10 @@
 'use client';
 import { createContext, useReducer, useEffect, type PropsWithChildren, useContext } from 'react';
-import { seasonalVolumeDefault } from './types';
+import { seasonalVolumeDefault, type SeasonalVolumeContextValue } from './types';
 import { seasonalVolumeReducer } from './reducer';
 import { adjustSeasonalVolume } from './actions';
 
-interface SeasonalVolumeContextShape {
+interface SeasonalVolumeContextShape extends SeasonalVolumeContextValue {
   setVolume: (value: number) => void;
 }
 
@@ -13,9 +13,7 @@ export const SeasonalVolumeContext = createContext<SeasonalVolumeContextShape>({
   setVolume: () => {},
 });
 
-export function SeasonalVolumeProvider({
-  children,
-}: PropsWithChildren<SeasonalVolumeContextShape>) {
+export function SeasonalVolumeProvider({ children }: PropsWithChildren) {
   const [state, dispatch] = useReducer(seasonalVolumeReducer, seasonalVolumeDefault);
 
   useEffect(() => {
@@ -35,5 +33,6 @@ export function SeasonalVolumeProvider({
 }
 
 export function useSeasonalVolume() {
-  return useContext(SeasonalVolumeContext);
+  const { seasonalVolume, setVolume } = useContext(SeasonalVolumeContext);
+  return { seasonalVolume, setVolume };
 }

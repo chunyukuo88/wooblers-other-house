@@ -3,3 +3,4 @@ export { useMainImages } from './fetched-images/context';
 export { useCalendar } from './calendar/context';
 export { getIsAdmin } from './getIsAdmin';
 export { useSeasonalEffect } from './seasonal-effect-activation/context';
+export { useSeasonalVolume } from './seasonal-effect-volume/context';

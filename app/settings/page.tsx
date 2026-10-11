@@ -9,8 +9,13 @@ import {
   S_CURVE_PATH,
 } from './components/curvy-sliders/slider-values';
 import './page.css';
+import { useSeasonalVolume } from '../../store';
 
 export default function Settings() {
+  const { seasonalVolume } = useSeasonalVolume();
+  console.log(`
+    
+  `);
   return (
     <div className="woh__settings-page">
       <CurvySlider svgPath={LETTER_SLIDER_G} />
