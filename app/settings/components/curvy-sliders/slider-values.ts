@@ -1,3 +1,7 @@
+/**
+ * These were obtained from drawings made in
+ * https://boxy-svg.com/app
+ * */
 export const S_CURVE_PATH = 'M150 570 A135 135 0 0 0 150 300 A135 135 0 0 1 150 30';
 export const WAVE_PATH = 'M150 570 A90 90 0 0 1 150 390 A90 90 0 0 0 150 210 A90 90 0 0 1 150 30';
 export const LETTER_SLIDER_J =
