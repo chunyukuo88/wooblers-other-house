@@ -5,7 +5,7 @@ import { SessionProvider } from 'next-auth/react';
 import { FetchedImagesV2Provider } from './fetched-images/context';
 import { CaptionColorProvider } from './background-color/context';
 import { CalendarContextProvider } from './calendar/context';
-import { SeasonalEffectProvider } from './seasonal-effect/context';
+import { SeasonalEffectProvider } from './seasonal-effect-activation/context';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 interface PageProps {
