@@ -1,11 +1,10 @@
+import { clamp } from '../../../../common/utils';
 import { type KeyboardEvent, type PointerEvent, useLayoutEffect, useRef, useState } from 'react';
-import { Geometry, Point, CurvySliderProps } from './types';
+import { CurvySliderProps, Geometry, Point } from './types';
 import { WAVE_PATH } from './slider-values';
 import './curvy-slider.css';
 
 const SAMPLES = 800;
-
-const clamp = (n: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, n));
 
 export default function CurvySlider({
   svgPath = WAVE_PATH,

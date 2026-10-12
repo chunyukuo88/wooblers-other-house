@@ -1,5 +1,5 @@
 'use client';
-import { useColors } from '../../../../store/background-color/context';
+import { useColors } from 'store';
 import { ConcentricCirclesProps, Event, SliderProps } from '../types';
 import { trackEvent } from '@/analytics';
 import { GA_EVENTS } from '../../../analytics/tracked-events';
