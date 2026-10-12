@@ -20,16 +20,6 @@
   -webkit-user-select: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  .ws {
-    --ws-track: #2b4056;
-    --ws-progress: #ffca7a;
-    --ws-knob: #ff7aa6;
-    --ws-knob-border: #0f1c2b;
-    --ws-ring: #e6eef5;
-  }
-}
-
 .ws-track,
 .ws-progress {
   fill: none;
@@ -55,16 +45,15 @@
 .woh__settings-name__letter path {
   fill: none;
   stroke: black;
-  stroke-width: 6; /* 3x your current value (see note) */
+  stroke-width: 6;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-/* Wide invisible stroke so the line is easy to click or tap. */
 .ws-hit {
   fill: none;
   stroke: transparent;
-  stroke-width: 44;
+  stroke-width: 10;
 }
 
 .ws-knob {
@@ -97,5 +86,16 @@
 @media (prefers-reduced-motion: reduce) {
   .ws-knob {
     transition: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .ws {
+    width: calc(600px * 0.4); /* 240px */
+  }
+  .woh__settings-name__letter {
+    width: 20px;
+    height: auto;
+    overflow: visible;
   }
 }

@@ -5,10 +5,11 @@ import {
   LETTER_SLIDER_G,
   LETTER_SLIDER_M,
   LETTERS_ames,
+  LETTERS_ochenour,
 } from './components/curvy-sliders/slider-values';
-import './page.css';
 import { useColors } from 'store';
 import { LetterSvg } from './components/letter-svg';
+import './page.css';
 
 export default function Settings() {
   const { setRed, setGreen, setBlue } = useColors();
@@ -21,11 +22,14 @@ export default function Settings() {
           <LetterSvg d={letter} />
         ))}
       </div>
-      <div id="woh__settings-name__Michael">
+      <div id="woh__settings-name__middle-initial">
         <CurvySlider svgPath={LETTER_SLIDER_M} onChange={setBlue} knobColor={'blue'} />
       </div>
-      <div id="woh__settings-name__Gochenour">
+      <div id="woh__settings-name__Gochenour" className="woh__settings-name__name">
         <CurvySlider svgPath={LETTER_SLIDER_G} onChange={setGreen} knobColor={'green'} />
+        {LETTERS_ochenour.map((letter) => (
+          <LetterSvg d={letter} />
+        ))}
       </div>
     </div>
   );
