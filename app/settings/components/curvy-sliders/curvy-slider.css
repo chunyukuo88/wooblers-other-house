@@ -42,6 +42,24 @@
   stroke: var(--ws-track);
 }
 
+.woh__settings-name__name {
+  display: flex;
+}
+
+.woh__settings-name__letter {
+  width: 40px;
+  height: auto;
+  overflow: visible;
+}
+
+.woh__settings-name__letter path {
+  fill: none;
+  stroke: black;
+  stroke-width: 6; /* 3x your current value (see note) */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 /* Wide invisible stroke so the line is easy to click or tap. */
 .ws-hit {
   fill: none;

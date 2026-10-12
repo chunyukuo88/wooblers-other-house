@@ -160,7 +160,6 @@ export default function CurvySlider({
 
   return (
     <>
-      <div>{current}</div>
       <svg
         ref={svgRef}
         className={classes}
