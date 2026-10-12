@@ -50,7 +50,6 @@
 }
 
 .ws-knob {
-  /*fill: var(--ws-knob);*/
   stroke: var(--ws-knob-border);
   stroke-width: 4;
   transform-box: fill-box;
