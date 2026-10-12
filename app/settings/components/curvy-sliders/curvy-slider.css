@@ -2,7 +2,7 @@
 .ws {
   --ws-track: #c3d2dd;
   --ws-progress: #ff4f8b;
-  --ws-knob: #ff4f8b;
+  --ws-knob: #7eff4f;
   --ws-knob-border: #eaf1f5;
   --ws-ring: #14263a;
   --ws-stroke-width: 10;
@@ -54,7 +54,7 @@
 }
 
 .ws-knob {
-  fill: var(--ws-knob);
+  /*fill: var(--ws-knob);*/
   stroke: var(--ws-knob-border);
   stroke-width: 4;
   transform-box: fill-box;

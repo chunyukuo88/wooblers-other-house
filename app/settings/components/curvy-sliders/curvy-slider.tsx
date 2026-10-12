@@ -11,6 +11,7 @@ export default function CurvySlider({
   viewBox,
   controlledValue,
   defaultValue = 50,
+  knobColor,
   min = 0,
   max = 100,
   step = 1,
@@ -198,7 +199,7 @@ export default function CurvySlider({
           onKeyDown={onKeyDown}
         >
           <circle className="ws-ring" r={24} />
-          <circle className="ws-knob" r={14} />
+          <circle style={{ fill: knobColor }} className="ws-knob" r={14} />
         </g>
       </svg>
     </>

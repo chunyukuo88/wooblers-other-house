@@ -9,15 +9,17 @@ import {
   S_CURVE_PATH,
 } from './components/curvy-sliders/slider-values';
 import './page.css';
-import { useSeasonalVolume } from '../../store';
+import { useColors, useSeasonalVolume } from '../../store';
 
 export default function Settings() {
+  const { setRed, setGreen, setBlue } = useColors();
+  // TODO: Add GTA tracking
   return (
     <div className="woh__settings-page">
-      <CurvySlider svgPath={S_CURVE_PATH} />
-      <CurvySlider svgPath={LETTER_SLIDER_J} />
-      <CurvySlider svgPath={LETTER_SLIDER_G} />
-      <CurvySlider svgPath={LETTER_SLIDER_M} />
+      <CurvySlider svgPath={S_CURVE_PATH} knobColor={'black'} />
+      <CurvySlider svgPath={LETTER_SLIDER_J} onChange={setRed} knobColor={'red'} />
+      <CurvySlider svgPath={LETTER_SLIDER_G} onChange={setGreen} knobColor={'green'} />
+      <CurvySlider svgPath={LETTER_SLIDER_M} onChange={setBlue} knobColor={'blue'} />
     </div>
   );
 }
