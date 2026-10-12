@@ -1,7 +1,7 @@
 /* Theme via custom properties: override on .ws or any ancestor. */
 .ws {
   --ws-track: #c3d2dd;
-  --ws-progress: #ff4f8b;
+  --ws-progress: #4f78ff;
   --ws-knob: #7eff4f;
   --ws-knob-border: #eaf1f5;
   --ws-ring: #14263a;
@@ -23,7 +23,7 @@
 @media (prefers-color-scheme: dark) {
   .ws {
     --ws-track: #2b4056;
-    --ws-progress: #ff7aa6;
+    --ws-progress: #ffca7a;
     --ws-knob: #ff7aa6;
     --ws-knob-border: #0f1c2b;
     --ws-ring: #e6eef5;
@@ -40,10 +40,6 @@
 
 .ws-track {
   stroke: var(--ws-track);
-}
-
-.ws-progress {
-  stroke: var(--ws-progress);
 }
 
 /* Wide invisible stroke so the line is easy to click or tap. */

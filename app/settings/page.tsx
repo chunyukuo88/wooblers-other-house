@@ -18,8 +18,8 @@ export default function Settings() {
     <div className="woh__settings-page">
       <CurvySlider svgPath={S_CURVE_PATH} knobColor={'black'} />
       <CurvySlider svgPath={LETTER_SLIDER_J} onChange={setRed} knobColor={'red'} />
-      <CurvySlider svgPath={LETTER_SLIDER_G} onChange={setGreen} knobColor={'green'} />
       <CurvySlider svgPath={LETTER_SLIDER_M} onChange={setBlue} knobColor={'blue'} />
+      <CurvySlider svgPath={LETTER_SLIDER_G} onChange={setGreen} knobColor={'green'} />
     </div>
   );
 }

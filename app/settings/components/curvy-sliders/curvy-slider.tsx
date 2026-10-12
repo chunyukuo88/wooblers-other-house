@@ -177,6 +177,7 @@ export default function CurvySlider({
           style={
             geometry
               ? {
+                  stroke: knobColor || 'black',
                   strokeDasharray: `${geometry.length} ${geometry.length}`,
                   strokeDashoffset: geometry.length * (1 - t),
                 }
