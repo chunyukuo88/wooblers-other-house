@@ -2,7 +2,7 @@
   "leave the gun": "take the cannoli",
   "private": true,
   "scripts": {
-    "aider": "aider --model openai/google/gemma-4-e4b",
+    "aider": "aider --model openai/meme-trix-moe-14b-a8b-v2-i1 --openai-api-base http://localhost:1234/v1 --openai-api-key dummy",
     "dev": "next dev",
     "build": "next build --debug && du -sh .next/*",
     "start": "next start",

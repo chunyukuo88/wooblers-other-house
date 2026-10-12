@@ -1,0 +1,101 @@
+/* Theme via custom properties: override on .ws or any ancestor. */
+.ws {
+  --ws-track: #c3d2dd;
+  --ws-progress: #4f78ff;
+  --ws-knob: #7eff4f;
+  --ws-knob-border: #eaf1f5;
+  --ws-ring: #14263a;
+  --ws-stroke-width: 10;
+
+  /* Sized by height; width follows the viewBox aspect ratio. */
+  --ws-height: 28rem;
+
+  display: block;
+  height: var(--ws-height);
+  width: auto;
+  flex: none;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.ws-track,
+.ws-progress {
+  fill: none;
+  stroke-width: var(--ws-stroke-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ws-track {
+  stroke: var(--ws-track);
+}
+
+.woh__settings-name__name {
+  display: flex;
+}
+
+.woh__settings-name__letter {
+  width: 40px;
+  height: auto;
+  overflow: visible;
+}
+
+.woh__settings-name__letter path {
+  fill: none;
+  stroke: black;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ws-hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 10;
+}
+
+.ws-knob {
+  stroke: var(--ws-knob-border);
+  stroke-width: 4;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.12s ease;
+}
+
+.ws--dragging .ws-knob {
+  transform: scale(1.3);
+}
+
+.ws-handle:focus {
+  outline: none;
+}
+
+.ws-ring {
+  fill: none;
+  stroke: var(--ws-ring);
+  stroke-width: 2;
+  opacity: 0;
+}
+
+.ws-handle:focus-visible .ws-ring {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ws-knob {
+    transition: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .ws {
+    width: calc(600px * 0.4); /* 240px */
+  }
+  .woh__settings-name__letter {
+    width: 20px;
+    height: auto;
+    overflow: visible;
+  }
+}
