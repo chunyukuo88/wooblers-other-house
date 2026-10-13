@@ -1,5 +1,11 @@
 /* Theme via custom properties: override on .ws or any ancestor. */
 .ws {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none; /* iOS: no long-press menu */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none; /* iOS: no long-press menu */
+
   --ws-track: #c3d2dd;
   --ws-progress: #4f78ff;
   --ws-knob: #7eff4f;
@@ -68,7 +74,8 @@
   transform: scale(1.3);
 }
 
-.ws-handle:focus {
+.ws-handle:focus,
+.ws-handle:focus:not(:focus-visible) {
   outline: none;
 }
 
