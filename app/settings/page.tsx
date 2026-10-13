@@ -18,8 +18,8 @@ export default function Settings() {
     <div className="woh__settings-page">
       <div id="woh__settings-name__James" className="woh__settings-name__name">
         <CurvySlider svgPath={LETTER_SLIDER_J} onChange={setRed} knobColor={'red'} />
-        {LETTERS_ames.map((letter) => (
-          <LetterSvg d={letter} />
+        {LETTERS_ames.map((letter: string, index: number) => (
+          <LetterSvg d={letter} animationDelay={index} />
         ))}
       </div>
       <div id="woh__settings-name__middle-initial">
@@ -27,8 +27,8 @@ export default function Settings() {
       </div>
       <div id="woh__settings-name__Gochenour" className="woh__settings-name__name">
         <CurvySlider svgPath={LETTER_SLIDER_G} onChange={setGreen} knobColor={'green'} />
-        {LETTERS_ochenour.map((letter) => (
-          <LetterSvg d={letter} />
+        {LETTERS_ochenour.map((letter: string, index: number) => (
+          <LetterSvg d={letter} animationDelay={index} />
         ))}
       </div>
     </div>
