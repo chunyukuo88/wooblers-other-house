@@ -1,5 +1,5 @@
 import { clamp } from '../../../../common/utils';
-import { type KeyboardEvent, type PointerEvent, useLayoutEffect, useRef, useState } from 'react';
+import { type PointerEvent, useLayoutEffect, useRef, useState } from 'react';
 import { CurvySliderProps, Geometry, Point } from './types';
 import { WAVE_PATH } from './slider-values';
 import './curvy-slider.css';
@@ -7,18 +7,18 @@ import './curvy-slider.css';
 const SAMPLES = 800;
 const MAX = 100;
 
-export default function CurvySlider({
-  svgPath = WAVE_PATH,
-  viewBox,
-  controlledValue,
-  defaultValue = 50,
-  knobColor,
-  step = 1,
-  onChange,
-}: CurvySliderProps) {
+export default function CurvySlider(props: CurvySliderProps) {
+  const {
+    svgPath = WAVE_PATH,
+    viewBox,
+    controlledValue,
+    defaultValue = 50,
+    knobColor,
+    step = 1,
+    onChange,
+  } = props;
   const svgRef = useRef<SVGSVGElement>(null);
   const trackRef = useRef<SVGPathElement>(null);
-  const handleRef = useRef<SVGGElement>(null);
   const dragging = useRef(false);
 
   const [inner, setInner] = useState(defaultValue);
@@ -93,7 +93,6 @@ export default function CurvySlider({
     setIsDragging(true);
     e.currentTarget.setPointerCapture(e.pointerId);
     commitT(nearestT(p, 0, 1));
-    handleRef.current?.focus({ preventScroll: true });
     e.preventDefault();
   };
 
@@ -107,37 +106,6 @@ export default function CurvySlider({
   const endDrag = () => {
     dragging.current = false;
     setIsDragging(false);
-  };
-
-  const onKeyDown = (e: KeyboardEvent<SVGGElement>) => {
-    const page = Math.max(step, MAX / 10);
-    let next: number | null = null;
-    switch (e.key) {
-      case 'ArrowRight':
-      case 'ArrowUp':
-        next = current + step;
-        break;
-      case 'ArrowLeft':
-      case 'ArrowDown':
-        next = current - step;
-        break;
-      case 'PageUp':
-        next = current + page;
-        break;
-      case 'PageDown':
-        next = current - page;
-        break;
-      case 'Home':
-        next = 0;
-        break;
-      case 'End':
-        next = MAX;
-        break;
-    }
-    if (next !== null) {
-      commitValue(next);
-      e.preventDefault();
-    }
   };
 
   let pos: Point | null = null;
@@ -179,18 +147,9 @@ export default function CurvySlider({
         />
         <path className="ws-hit" d={svgPath} />
         <g
-          ref={handleRef}
           className="ws-handle"
-          role="slider"
-          tabIndex={0}
-          aria-label="Value"
-          aria-orientation="vertical"
-          aria-valuemin={0}
-          aria-valuemax={MAX}
-          aria-valuenow={current}
           transform={pos ? `translate(${pos.x} ${pos.y})` : undefined}
           visibility={pos ? 'visible' : 'hidden'}
-          onKeyDown={onKeyDown}
         >
           <circle className="ws-ring" r={24} />
           <circle style={{ fill: knobColor }} className="ws-knob" r={14} />
