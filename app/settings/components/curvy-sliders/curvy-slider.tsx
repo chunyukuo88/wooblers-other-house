@@ -3,124 +3,146 @@ import { type PointerEvent, useLayoutEffect, useRef, useState } from 'react';
 import { CurvySliderProps, Geometry, Point } from './types';
 import './curvy-slider.css';
 
-const SAMPLES = 800;
-const MAX = 100;
+const SAMPLE_COUNT = 800;
+const MAX_VALUE = 100;
+const VIEW_BOX_PADDING = 36;
+const DRAG_SEARCH_RADIUS = 0.2;
+const RING_RADIUS = 24;
+const KNOB_RADIUS = 14;
 
 export default function CurvySlider(props: CurvySliderProps) {
   const { svgPath, knobColor, onChange } = props;
-  const svgRef = useRef<SVGSVGElement>(null);
-  const trackRef = useRef<SVGPathElement>(null);
-  const dragging = useRef(false);
+  const svgElementRef = useRef<SVGSVGElement>(null);
+  const trackPathRef = useRef<SVGPathElement>(null);
+  const isDraggingRef = useRef(false);
 
   const [value, setValue] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const [geometry, setGeometry] = useState<Geometry | null>(null);
   const [viewBox, setViewBox] = useState<string | undefined>();
 
-  const t = value / MAX;
+  const progress = value / MAX_VALUE;
 
-  const tRef = useRef(t);
-  tRef.current = t;
+  const progressRef = useRef(progress);
+  progressRef.current = progress;
 
   useLayoutEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    const length = el.getTotalLength();
-    const points: Point[] = [];
-    for (let i = 0; i <= SAMPLES; i++) {
-      const p = el.getPointAtLength((length * i) / SAMPLES);
-      points.push({ x: p.x, y: p.y });
+    const trackPath = trackPathRef.current;
+    if (!trackPath) return;
+    const pathLength = trackPath.getTotalLength();
+    const sampledPoints: Point[] = [];
+    for (let sampleIndex = 0; sampleIndex <= SAMPLE_COUNT; sampleIndex++) {
+      const sampledPoint = trackPath.getPointAtLength((pathLength * sampleIndex) / SAMPLE_COUNT);
+      sampledPoints.push({ x: sampledPoint.x, y: sampledPoint.y });
     }
-    setGeometry({ length, points });
+    setGeometry({ length: pathLength, points: sampledPoints });
 
-    const box = el.getBBox();
-    const pad = 36;
-    setViewBox(`${box.x - pad} ${box.y - pad} ${box.width + pad * 2} ${box.height + pad * 2}`);
+    const boundingBox = trackPath.getBBox();
+    setViewBox(
+      `${boundingBox.x - VIEW_BOX_PADDING} ${boundingBox.y - VIEW_BOX_PADDING} ${
+        boundingBox.width + VIEW_BOX_PADDING * 2
+      } ${boundingBox.height + VIEW_BOX_PADDING * 2}`,
+    );
   }, [svgPath]);
 
-  const commitValue = (next: number) => {
-    const v = clamp(Math.round(next), 0, MAX);
-    if (v === value) return;
-    setValue(v);
-    onChange?.(v);
+  const commitValue = (nextValue: number) => {
+    const roundedValue = clamp(Math.round(nextValue), 0, MAX_VALUE);
+    if (roundedValue === value) return;
+    setValue(roundedValue);
+    onChange?.(roundedValue);
   };
 
-  const commitT = (nextT: number) => commitValue(clamp(nextT, 0, 1) * MAX);
+  const commitProgress = (nextProgress: number) =>
+    commitValue(clamp(nextProgress, 0, 1) * MAX_VALUE);
 
-  const toSvgPoint = (e: PointerEvent): Point | null => {
-    const svg = svgRef.current;
-    const ctm = svg?.getScreenCTM();
-    if (!svg || !ctm) return null;
-    const pt = svg.createSVGPoint();
-    pt.x = e.clientX;
-    pt.y = e.clientY;
-    const p = pt.matrixTransform(ctm.inverse());
-    return { x: p.x, y: p.y };
+  const toSvgPoint = (pointerEvent: PointerEvent): Point | null => {
+    const svgElement = svgElementRef.current;
+    const screenToSvgMatrix = svgElement?.getScreenCTM();
+    if (!svgElement || !screenToSvgMatrix) return null;
+    const screenPoint = svgElement.createSVGPoint();
+    screenPoint.x = pointerEvent.clientX;
+    screenPoint.y = pointerEvent.clientY;
+    const svgPoint = screenPoint.matrixTransform(screenToSvgMatrix.inverse());
+    return { x: svgPoint.x, y: svgPoint.y };
   };
 
-  const nearestT = (p: Point, lo: number, hi: number): number => {
-    if (!geometry) return tRef.current;
-    const a = Math.max(0, Math.floor(lo * SAMPLES));
-    const b = Math.min(SAMPLES, Math.ceil(hi * SAMPLES));
-    let best = a;
-    let bestDist = Infinity;
-    for (let i = a; i <= b; i++) {
-      const q = geometry.points[i];
-      const d = (q.x - p.x) ** 2 + (q.y - p.y) ** 2;
-      if (d < bestDist) {
-        bestDist = d;
-        best = i;
+  const findNearestProgress = (
+    targetPoint: Point,
+    searchRangeStart: number,
+    searchRangeEnd: number,
+  ): number => {
+    if (!geometry) return progressRef.current;
+    const firstIndex = Math.max(0, Math.floor(searchRangeStart * SAMPLE_COUNT));
+    const lastIndex = Math.min(SAMPLE_COUNT, Math.ceil(searchRangeEnd * SAMPLE_COUNT));
+    let nearestIndex = firstIndex;
+    let nearestSquaredDistance = Infinity;
+    for (let candidateIndex = firstIndex; candidateIndex <= lastIndex; candidateIndex++) {
+      const candidatePoint = geometry.points[candidateIndex];
+      const squaredDistance =
+        (candidatePoint.x - targetPoint.x) ** 2 + (candidatePoint.y - targetPoint.y) ** 2;
+      if (squaredDistance < nearestSquaredDistance) {
+        nearestSquaredDistance = squaredDistance;
+        nearestIndex = candidateIndex;
       }
     }
-    return best / SAMPLES;
+    return nearestIndex / SAMPLE_COUNT;
   };
 
-  const onPointerDown = (e: PointerEvent<SVGSVGElement>) => {
-    const p = toSvgPoint(e);
-    if (!p) return;
-    dragging.current = true;
+  const onPointerDown = (event: PointerEvent<SVGSVGElement>) => {
+    const svgPoint = toSvgPoint(event);
+    if (!svgPoint) return;
+    isDraggingRef.current = true;
     setIsDragging(true);
-    e.currentTarget.setPointerCapture(e.pointerId);
-    commitT(nearestT(p, 0, 1));
-    e.preventDefault();
+    event.currentTarget.setPointerCapture(event.pointerId);
+    commitProgress(findNearestProgress(svgPoint, 0, 1));
+    event.preventDefault();
   };
 
-  const onPointerMove = (e: PointerEvent<SVGSVGElement>) => {
-    if (!dragging.current) return;
-    const p = toSvgPoint(e);
-    if (!p) return;
-    commitT(nearestT(p, tRef.current - 0.2, tRef.current + 0.2));
+  const onPointerMove = (event: PointerEvent<SVGSVGElement>) => {
+    if (!isDraggingRef.current) return;
+    const svgPoint = toSvgPoint(event);
+    if (!svgPoint) return;
+    commitProgress(
+      findNearestProgress(
+        svgPoint,
+        progressRef.current - DRAG_SEARCH_RADIUS,
+        progressRef.current + DRAG_SEARCH_RADIUS,
+      ),
+    );
   };
 
   const endDrag = () => {
-    dragging.current = false;
+    isDraggingRef.current = false;
     setIsDragging(false);
   };
 
-  let pos: Point | null = null;
+  let knobPosition: Point | null = null;
   if (geometry) {
-    const f = t * SAMPLES;
-    const i = Math.min(SAMPLES - 1, Math.floor(f));
-    const k = f - i;
-    const a = geometry.points[i];
-    const b = geometry.points[i + 1];
-    pos = { x: a.x + (b.x - a.x) * k, y: a.y + (b.y - a.y) * k };
+    const fractionalIndex = progress * SAMPLE_COUNT;
+    const lowerIndex = Math.min(SAMPLE_COUNT - 1, Math.floor(fractionalIndex));
+    const interpolationFactor = fractionalIndex - lowerIndex;
+    const lowerPoint = geometry.points[lowerIndex];
+    const upperPoint = geometry.points[lowerIndex + 1];
+    knobPosition = {
+      x: lowerPoint.x + (upperPoint.x - lowerPoint.x) * interpolationFactor,
+      y: lowerPoint.y + (upperPoint.y - lowerPoint.y) * interpolationFactor,
+    };
   }
 
-  const classes = isDragging ? 'ws ws--dragging' : 'ws';
+  const className = isDragging ? 'ws ws--dragging' : 'ws';
 
   return (
     <>
       <svg
-        ref={svgRef}
-        className={classes}
+        ref={svgElementRef}
+        className={className}
         viewBox={viewBox}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
       >
-        <path ref={trackRef} className="ws-track" d={svgPath} />
+        <path ref={trackPathRef} className="ws-track" d={svgPath} />
         <path
           className="ws-progress"
           d={svgPath}
@@ -129,7 +151,7 @@ export default function CurvySlider(props: CurvySliderProps) {
               ? {
                   stroke: knobColor || 'black',
                   strokeDasharray: `${geometry.length} ${geometry.length}`,
-                  strokeDashoffset: geometry.length * (1 - t),
+                  strokeDashoffset: geometry.length * (1 - progress),
                 }
               : undefined
           }
@@ -137,11 +159,11 @@ export default function CurvySlider(props: CurvySliderProps) {
         <path className="ws-hit" d={svgPath} />
         <g
           className="ws-handle"
-          transform={pos ? `translate(${pos.x} ${pos.y})` : undefined}
-          visibility={pos ? 'visible' : 'hidden'}
+          transform={knobPosition ? `translate(${knobPosition.x} ${knobPosition.y})` : undefined}
+          visibility={knobPosition ? 'visible' : 'hidden'}
         >
-          <circle className="ws-ring" r={24} />
-          <circle style={{ fill: knobColor }} className="ws-knob" r={14} />
+          <circle className="ws-ring" r={RING_RADIUS} />
+          <circle style={{ fill: knobColor }} className="ws-knob" r={KNOB_RADIUS} />
         </g>
       </svg>
     </>
