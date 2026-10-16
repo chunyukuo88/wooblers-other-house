@@ -79,28 +79,27 @@ export default function CurvySlider(props: CurvySliderProps) {
   const className = isDragging ? 'ws ws--dragging' : 'ws';
 
   return (
-    <>
-      <svg
-        className={className}
-        viewBox={viewBox}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
+    <svg
+      className={className}
+      viewBox={viewBox}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={endDrag}
+      onPointerCancel={endDrag}
+      style={{ visibility: viewBox ? 'visible' : 'hidden' }}
+    >
+      <path ref={trackPathRef} className="ws-track" d={svgPath} />
+      <path className="ws-progress" d={svgPath} style={progressStrokeStyle} />
+      <path className="ws-hit" d={svgPath} />
+      <g
+        className="ws-handle"
+        transform={knobTransform}
+        visibility={knobPosition ? 'visible' : 'hidden'}
       >
-        <path ref={trackPathRef} className="ws-track" d={svgPath} />
-        <path className="ws-progress" d={svgPath} style={progressStrokeStyle} />
-        <path className="ws-hit" d={svgPath} />
-        <g
-          className="ws-handle"
-          transform={knobTransform}
-          visibility={knobPosition ? 'visible' : 'hidden'}
-        >
-          <circle className="ws-ring" r={RING_RADIUS} />
-          <circle style={{ fill: knobColor }} className="ws-knob" r={KNOB_RADIUS} />
-        </g>
-      </svg>
-    </>
+        <circle className="ws-ring" r={RING_RADIUS} />
+        <circle style={{ fill: knobColor }} className="ws-knob" r={KNOB_RADIUS} />
+      </g>
+    </svg>
   );
 }
 
