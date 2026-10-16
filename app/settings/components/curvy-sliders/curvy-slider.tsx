@@ -5,6 +5,7 @@ import { WAVE_PATH } from './slider-values';
 import './curvy-slider.css';
 
 const SAMPLES = 800;
+const MAX = 100;
 
 export default function CurvySlider({
   svgPath = WAVE_PATH,
@@ -12,8 +13,6 @@ export default function CurvySlider({
   controlledValue,
   defaultValue = 50,
   knobColor,
-  min = 0,
-  max = 100,
   step = 1,
   onChange,
   label = 'Value',
@@ -28,9 +27,8 @@ export default function CurvySlider({
   const [geometry, setGeometry] = useState<Geometry | null>(null);
   const [autoViewBox, setAutoViewBox] = useState<string | undefined>();
 
-  const current = clamp(controlledValue ?? inner, min, max);
-  const range = max - min || 1;
-  const t = (current - min) / range;
+  const current = clamp(controlledValue ?? inner, 0, MAX);
+  const t = current / MAX;
 
   const tRef = useRef(t);
   tRef.current = t;
@@ -52,14 +50,14 @@ export default function CurvySlider({
   }, [svgPath]);
 
   const commitValue = (next: number) => {
-    const snapped = Math.round((next - min) / step) * step + min;
-    const v = clamp(Number(snapped.toFixed(10)), min, max);
+    const snapped = Math.round(next / step) * step;
+    const v = clamp(Number(snapped.toFixed(10)), 0, MAX);
     if (v === current) return;
     if (controlledValue === undefined) setInner(v);
     onChange?.(v);
   };
 
-  const commitT = (nextT: number) => commitValue(min + clamp(nextT, 0, 1) * range);
+  const commitT = (nextT: number) => commitValue(clamp(nextT, 0, 1) * MAX);
 
   const toSvgPoint = (e: PointerEvent): Point | null => {
     const svg = svgRef.current;
@@ -113,7 +111,7 @@ export default function CurvySlider({
   };
 
   const onKeyDown = (e: KeyboardEvent<SVGGElement>) => {
-    const page = Math.max(step, range / 10);
+    const page = Math.max(step, MAX / 10);
     let next: number | null = null;
     switch (e.key) {
       case 'ArrowRight':
@@ -131,10 +129,10 @@ export default function CurvySlider({
         next = current - page;
         break;
       case 'Home':
-        next = min;
+        next = 0;
         break;
       case 'End':
-        next = max;
+        next = MAX;
         break;
     }
     if (next !== null) {
@@ -188,8 +186,8 @@ export default function CurvySlider({
           tabIndex={0}
           aria-label={label}
           aria-orientation="vertical"
-          aria-valuemin={min}
-          aria-valuemax={max}
+          aria-valuemin={0}
+          aria-valuemax={MAX}
           aria-valuenow={current}
           transform={pos ? `translate(${pos.x} ${pos.y})` : undefined}
           visibility={pos ? 'visible' : 'hidden'}
