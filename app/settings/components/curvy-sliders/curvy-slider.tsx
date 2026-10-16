@@ -1,25 +1,23 @@
 import { clamp } from '../../../../common/utils';
 import { type PointerEvent, useLayoutEffect, useRef, useState } from 'react';
 import { CurvySliderProps, Geometry, Point } from './types';
-import { WAVE_PATH } from './slider-values';
 import './curvy-slider.css';
 
 const SAMPLES = 800;
 const MAX = 100;
 
 export default function CurvySlider(props: CurvySliderProps) {
-  const { svgPath = WAVE_PATH, controlledValue, defaultValue = 50, knobColor, onChange } = props;
+  const { svgPath, knobColor, onChange } = props;
   const svgRef = useRef<SVGSVGElement>(null);
   const trackRef = useRef<SVGPathElement>(null);
   const dragging = useRef(false);
 
-  const [inner, setInner] = useState(defaultValue);
+  const [value, setValue] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const [geometry, setGeometry] = useState<Geometry | null>(null);
   const [viewBox, setViewBox] = useState<string | undefined>();
 
-  const current = clamp(controlledValue ?? inner, 0, MAX);
-  const t = current / MAX;
+  const t = value / MAX;
 
   const tRef = useRef(t);
   tRef.current = t;
@@ -42,8 +40,8 @@ export default function CurvySlider(props: CurvySliderProps) {
 
   const commitValue = (next: number) => {
     const v = clamp(Math.round(next), 0, MAX);
-    if (v === current) return;
-    if (controlledValue === undefined) setInner(v);
+    if (v === value) return;
+    setValue(v);
     onChange?.(v);
   };
 
