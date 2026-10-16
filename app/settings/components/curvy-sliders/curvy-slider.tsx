@@ -8,15 +8,7 @@ const SAMPLES = 800;
 const MAX = 100;
 
 export default function CurvySlider(props: CurvySliderProps) {
-  const {
-    svgPath = WAVE_PATH,
-    viewBox,
-    controlledValue,
-    defaultValue = 50,
-    knobColor,
-    step = 1,
-    onChange,
-  } = props;
+  const { svgPath = WAVE_PATH, controlledValue, defaultValue = 50, knobColor, onChange } = props;
   const svgRef = useRef<SVGSVGElement>(null);
   const trackRef = useRef<SVGPathElement>(null);
   const dragging = useRef(false);
@@ -24,7 +16,7 @@ export default function CurvySlider(props: CurvySliderProps) {
   const [inner, setInner] = useState(defaultValue);
   const [isDragging, setIsDragging] = useState(false);
   const [geometry, setGeometry] = useState<Geometry | null>(null);
-  const [autoViewBox, setAutoViewBox] = useState<string | undefined>();
+  const [viewBox, setViewBox] = useState<string | undefined>();
 
   const current = clamp(controlledValue ?? inner, 0, MAX);
   const t = current / MAX;
@@ -45,12 +37,11 @@ export default function CurvySlider(props: CurvySliderProps) {
 
     const box = el.getBBox();
     const pad = 36;
-    setAutoViewBox(`${box.x - pad} ${box.y - pad} ${box.width + pad * 2} ${box.height + pad * 2}`);
+    setViewBox(`${box.x - pad} ${box.y - pad} ${box.width + pad * 2} ${box.height + pad * 2}`);
   }, [svgPath]);
 
   const commitValue = (next: number) => {
-    const snapped = Math.round(next / step) * step;
-    const v = clamp(Number(snapped.toFixed(10)), 0, MAX);
+    const v = clamp(Math.round(next), 0, MAX);
     if (v === current) return;
     if (controlledValue === undefined) setInner(v);
     onChange?.(v);
@@ -125,7 +116,7 @@ export default function CurvySlider(props: CurvySliderProps) {
       <svg
         ref={svgRef}
         className={classes}
-        viewBox={viewBox ?? autoViewBox}
+        viewBox={viewBox}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}

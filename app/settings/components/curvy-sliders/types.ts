@@ -2,11 +2,8 @@ export interface CurvySliderProps {
   controlledValue?: number;
   defaultValue?: number;
   knobColor: string;
-  onChange?: (value: number) => void;
-  step?: number;
+  onChange: (value: number) => void;
   svgPath?: string;
-  /** Defaults to the path's bounding box plus padding, so any path fits. */
-  viewBox?: string;
 }
 
 export interface Point {
