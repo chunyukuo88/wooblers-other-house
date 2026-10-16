@@ -15,7 +15,6 @@ export default function CurvySlider({
   knobColor,
   step = 1,
   onChange,
-  label = 'Value',
 }: CurvySliderProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const trackRef = useRef<SVGPathElement>(null);
@@ -184,7 +183,7 @@ export default function CurvySlider({
           className="ws-handle"
           role="slider"
           tabIndex={0}
-          aria-label={label}
+          aria-label="Value"
           aria-orientation="vertical"
           aria-valuemin={0}
           aria-valuemax={MAX}

@@ -2,7 +2,6 @@ export interface CurvySliderProps {
   controlledValue?: number;
   defaultValue?: number;
   knobColor: string;
-  label?: string;
   onChange?: (value: number) => void;
   step?: number;
   svgPath?: string;
