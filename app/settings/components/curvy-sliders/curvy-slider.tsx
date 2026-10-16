@@ -17,7 +17,6 @@ export default function CurvySlider({
   step = 1,
   onChange,
   label = 'Value',
-  className,
 }: CurvySliderProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const trackRef = useRef<SVGPathElement>(null);
@@ -154,9 +153,7 @@ export default function CurvySlider({
     pos = { x: a.x + (b.x - a.x) * k, y: a.y + (b.y - a.y) * k };
   }
 
-  const classes = ['ws', isDragging ? 'ws--dragging' : '', className ?? '']
-    .filter(Boolean)
-    .join(' ');
+  const classes = isDragging ? 'ws ws--dragging' : 'ws';
 
   return (
     <>
