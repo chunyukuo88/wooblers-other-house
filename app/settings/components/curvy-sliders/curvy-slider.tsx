@@ -12,11 +12,11 @@ import {
 import './curvy-slider.css';
 
 export default function CurvySlider(props: CurvySliderProps) {
-  const { svgPath, knobColor, onChange } = props;
+  const { svgPath, knobColor, onChange, valueProp } = props;
   const trackPathRef = useRef<SVGPathElement>(null);
   const isDraggingRef = useRef(false);
 
-  const [value, setValue] = useState(50);
+  const [value, setValue] = useState(valueProp);
   const [isDragging, setIsDragging] = useState(false);
   const [geometry, setGeometry] = useState<Geometry | null>(null);
   const [viewBox, setViewBox] = useState<string | undefined>();

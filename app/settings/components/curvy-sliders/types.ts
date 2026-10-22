@@ -2,6 +2,7 @@ export interface CurvySliderProps {
   knobColor: string;
   onChange: (value: number) => void;
   svgPath: string;
+  valueProp: number;
 }
 
 export interface Point {
