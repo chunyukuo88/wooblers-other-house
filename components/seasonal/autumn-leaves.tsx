@@ -1,5 +1,9 @@
+import { useSeasonalVolume } from 'store';
+
 export function AutumnLeaves() {
-  const leaves = Array.from({ length: 10 }).map((_, i) => i);
+  const { seasonalVolume } = useSeasonalVolume();
+  const numberOfLeaves = Math.round(seasonalVolume / 10);
+  const leaves = Array.from({ length: numberOfLeaves }).map((_, i) => i);
   return (
     <div className="woh__autumn-leaves" aria-hidden="true">
       {leaves.map((_, i) => (
