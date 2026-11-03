@@ -1,7 +1,7 @@
 import { Season } from '../../../store/calendar/types';
 import { render } from '@testing-library/react';
 import { SeasonalEffect } from '@/components/seasonal/seasonal-effect';
-import { useCalendar, useSeasonalEffect } from '../../../store';
+import { useCalendar, useSeasonalEffect, useSeasonalVolume } from '../../../store';
 
 jest.mock('../../../store');
 
@@ -16,6 +16,9 @@ describe('<SeasonalEffect />', () => {
           currentDay: '',
           currentDate: '',
           currentSeason: Season.Summer,
+        });
+        (useSeasonalVolume as jest.Mock).mockReturnValueOnce({
+          seasonalVolume: 7,
         });
 
         render(<SeasonalEffect />);
@@ -37,6 +40,9 @@ describe('<SeasonalEffect />', () => {
         (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
           seasonalEffectIsActive: true,
         });
+        (useSeasonalVolume as jest.Mock).mockReturnValueOnce({
+          seasonalVolume: 7,
+        });
 
         render(<SeasonalEffect />);
 
@@ -56,6 +62,9 @@ describe('<SeasonalEffect />', () => {
         });
         (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
           seasonalEffectIsActive: true,
+        });
+        (useSeasonalVolume as jest.Mock).mockReturnValueOnce({
+          seasonalVolume: 7,
         });
 
         render(<SeasonalEffect />);
@@ -77,6 +86,9 @@ describe('<SeasonalEffect />', () => {
         (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
           seasonalEffectIsActive: true,
         });
+        (useSeasonalVolume as jest.Mock).mockReturnValueOnce({
+          seasonalVolume: 7,
+        });
 
         render(<SeasonalEffect />);
 
@@ -96,6 +108,9 @@ describe('<SeasonalEffect />', () => {
         });
         (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
           seasonalEffectIsActive: true,
+        });
+        (useSeasonalVolume as jest.Mock).mockReturnValueOnce({
+          seasonalVolume: 7,
         });
 
         render(<SeasonalEffect />);
@@ -117,6 +132,9 @@ describe('<SeasonalEffect />', () => {
         (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
           seasonalEffectIsActive: true,
         });
+        (useSeasonalVolume as jest.Mock).mockReturnValueOnce({
+          seasonalVolume: 7,
+        });
 
         render(<SeasonalEffect />);
 
@@ -137,6 +155,9 @@ describe('<SeasonalEffect />', () => {
         (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
           seasonalEffectIsActive: true,
         });
+        (useSeasonalVolume as jest.Mock).mockReturnValueOnce({
+          seasonalVolume: 7,
+        });
 
         render(<SeasonalEffect />);
 
@@ -155,6 +176,9 @@ describe('<SeasonalEffect />', () => {
       });
       (useSeasonalEffect as jest.Mock).mockReturnValueOnce({
         seasonalEffectIsActive: true,
+      });
+      (useSeasonalVolume as jest.Mock).mockReturnValueOnce({
+        seasonalVolume: 7,
       });
 
       render(<SeasonalEffect />);

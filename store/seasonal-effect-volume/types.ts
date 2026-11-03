@@ -1,3 +1,5 @@
+export const LocalStorageVolumeKey = 'woh__volume';
+
 export enum SeasonalVolumeType {
   ADJUST_VOLUME = 'ADJUST_VOLUME',
 }
