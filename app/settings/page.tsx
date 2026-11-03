@@ -6,14 +6,16 @@ import {
   LETTER_SLIDER_M,
   LETTERS_ames,
   LETTERS_ochenour,
+  WAVE_PATH,
 } from './components/curvy-sliders/slider-values';
-import { useColors } from 'store';
+import { useColors, useSeasonalVolume } from 'store';
 import { LetterSvg } from './components/letter-svg';
 import './page.css';
 
 export default function Settings() {
   const { red, green, blue, setRed, setGreen, setBlue } = useColors();
-  // TODO: Add GTA tracking
+  const { seasonalVolume, setVolume } = useSeasonalVolume();
+
   return (
     <div className="woh__settings-page">
       <div id="woh__settings-name__James" className="woh__settings-name__name">
@@ -45,6 +47,14 @@ export default function Settings() {
         {LETTERS_ochenour.map((letter: string, index: number) => (
           <LetterSvg d={letter} animationDelay={index} />
         ))}
+      </div>
+      <div id="woh__settings-name__Volume">
+        <CurvySlider
+          svgPath={WAVE_PATH}
+          onChange={setVolume}
+          knobColor={'black'}
+          valueProp={seasonalVolume}
+        />
       </div>
     </div>
   );
