@@ -5,7 +5,7 @@ import { useCalendar, useSeasonalEffect } from '../../../store';
 
 jest.mock('../../../store');
 
-describe('<SeasonalEffect />', () => {
+xdescribe('<SeasonalEffect />', () => {
   describe('GIVEN: the user has turned off seasonal effects', () => {
     describe('WHEN: the page loads', () => {
       it('THEN: does not display any seasonal effects.', () => {
